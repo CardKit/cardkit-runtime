@@ -1,0 +1,4 @@
+[submodule "Carthage/Checkouts/Freddy"]
+	url = https://github.com/bignerdranch/Freddy.git
+[submodule "Carthage/Checkouts/card-kit"]
+	url = git@github.ibm.com:CMER/card-kit.git

@@ -47,6 +47,18 @@
 		CCE729C61D63BD7F00A347D8 /* ValidationEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE729C21D63BD7F00A347D8 /* ValidationEngineTests.swift */; };
 		CCE729C81D63BD7F00A347D8 /* ValidationEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE729C21D63BD7F00A347D8 /* ValidationEngineTests.swift */; };
 		CCE72A0A1D64930D00A347D8 /* CardKitRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE7D4881D50D1AA008FC492 /* CardKitRuntime.framework */; };
+		CCE72A161D64BA8D00A347D8 /* CardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A141D64BA8D00A347D8 /* CardKit.framework */; };
+		CCE72A171D64BA8D00A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A151D64BA8D00A347D8 /* Freddy.framework */; };
+		CCE72A1C1D64BA9E00A347D8 /* CardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1A1D64BA9E00A347D8 /* CardKit.framework */; };
+		CCE72A1D1D64BA9E00A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1B1D64BA9E00A347D8 /* Freddy.framework */; };
+		CCE72A201D64BAA500A347D8 /* CardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1E1D64BAA500A347D8 /* CardKit.framework */; };
+		CCE72A211D64BAA500A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1F1D64BAA500A347D8 /* Freddy.framework */; };
+		CCE72A251D64BAC400A347D8 /* CardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1E1D64BAA500A347D8 /* CardKit.framework */; };
+		CCE72A261D64BAC400A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1F1D64BAA500A347D8 /* Freddy.framework */; };
+		CCE72A271D64BACA00A347D8 /* CardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A141D64BA8D00A347D8 /* CardKit.framework */; };
+		CCE72A281D64BACA00A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A151D64BA8D00A347D8 /* Freddy.framework */; };
+		CCE72A291D64BAD000A347D8 /* CardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1A1D64BA9E00A347D8 /* CardKit.framework */; };
+		CCE72A2A1D64BAD000A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1B1D64BA9E00A347D8 /* Freddy.framework */; };
 		CCE7D46D1D50D191008FC492 /* CardKitRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = CCE7D46C1D50D191008FC492 /* CardKitRuntime.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CCE7D4741D50D191008FC492 /* CardKitRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE7D4691D50D191008FC492 /* CardKitRuntime.framework */; };
 		CCE7D4791D50D191008FC492 /* CardKitRuntimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4781D50D191008FC492 /* CardKitRuntimeTests.swift */; };
@@ -209,6 +221,12 @@
 		CC9E769B1D58C38800B7C738 /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		CC9E76A21D58E2E700B7C738 /* ValidationEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationEngine.swift; sourceTree = "<group>"; };
 		CCE729C21D63BD7F00A347D8 /* ValidationEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationEngineTests.swift; sourceTree = "<group>"; };
+		CCE72A141D64BA8D00A347D8 /* CardKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CardKit.framework; path = Carthage/Build/iOS/CardKit.framework; sourceTree = "<group>"; };
+		CCE72A151D64BA8D00A347D8 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/iOS/Freddy.framework; sourceTree = "<group>"; };
+		CCE72A1A1D64BA9E00A347D8 /* CardKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CardKit.framework; path = Carthage/Build/Mac/CardKit.framework; sourceTree = "<group>"; };
+		CCE72A1B1D64BA9E00A347D8 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/Mac/Freddy.framework; sourceTree = "<group>"; };
+		CCE72A1E1D64BAA500A347D8 /* CardKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CardKit.framework; path = Carthage/Build/tvOS/CardKit.framework; sourceTree = "<group>"; };
+		CCE72A1F1D64BAA500A347D8 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/tvOS/Freddy.framework; sourceTree = "<group>"; };
 		CCE7D4691D50D191008FC492 /* CardKitRuntime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CardKitRuntime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCE7D46C1D50D191008FC492 /* CardKitRuntime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardKitRuntime.h; sourceTree = "<group>"; };
 		CCE7D46E1D50D191008FC492 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -246,6 +264,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCE72A161D64BA8D00A347D8 /* CardKit.framework in Frameworks */,
+				CCE72A171D64BA8D00A347D8 /* Freddy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +274,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCE7D4741D50D191008FC492 /* CardKitRuntime.framework in Frameworks */,
+				CCE72A281D64BACA00A347D8 /* Freddy.framework in Frameworks */,
+				CCE72A271D64BACA00A347D8 /* CardKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +283,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCE72A1C1D64BA9E00A347D8 /* CardKit.framework in Frameworks */,
+				CCE72A1D1D64BA9E00A347D8 /* Freddy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +293,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCE72A0A1D64930D00A347D8 /* CardKitRuntime.framework in Frameworks */,
+				CCE72A2A1D64BAD000A347D8 /* Freddy.framework in Frameworks */,
+				CCE72A291D64BAD000A347D8 /* CardKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +302,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCE72A201D64BAA500A347D8 /* CardKit.framework in Frameworks */,
+				CCE72A211D64BAA500A347D8 /* Freddy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +312,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCE7D4AE1D50D1BB008FC492 /* CardKitRuntime.framework in Frameworks */,
+				CCE72A261D64BAC400A347D8 /* Freddy.framework in Frameworks */,
+				CCE72A251D64BAC400A347D8 /* CardKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +323,9 @@
 		CC9E767A1D58B4B200B7C738 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CCE72A221D64BAAC00A347D8 /* iOS */,
+				CCE72A231D64BAB300A347D8 /* macOS */,
+				CCE72A241D64BAB700A347D8 /* tvOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -308,6 +341,33 @@
 				CC9E76A21D58E2E700B7C738 /* ValidationEngine.swift */,
 			);
 			path = Validation;
+			sourceTree = "<group>";
+		};
+		CCE72A221D64BAAC00A347D8 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				CCE72A141D64BA8D00A347D8 /* CardKit.framework */,
+				CCE72A151D64BA8D00A347D8 /* Freddy.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		CCE72A231D64BAB300A347D8 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				CCE72A1A1D64BA9E00A347D8 /* CardKit.framework */,
+				CCE72A1B1D64BA9E00A347D8 /* Freddy.framework */,
+			);
+			name = macOS;
+			sourceTree = "<group>";
+		};
+		CCE72A241D64BAB700A347D8 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				CCE72A1E1D64BAA500A347D8 /* CardKit.framework */,
+				CCE72A1F1D64BAA500A347D8 /* Freddy.framework */,
+			);
+			name = tvOS;
 			sourceTree = "<group>";
 		};
 		CCE7D45F1D50D191008FC492 = {
@@ -527,6 +587,7 @@
 				CCE7D46F1D50D191008FC492 /* Sources */,
 				CCE7D4701D50D191008FC492 /* Frameworks */,
 				CCE7D4711D50D191008FC492 /* Resources */,
+				CCE72A2E1D64EE0100A347D8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -566,6 +627,7 @@
 				CCE7D48D1D50D1AA008FC492 /* Sources */,
 				CCE7D48E1D50D1AA008FC492 /* Frameworks */,
 				CCE7D48F1D50D1AA008FC492 /* Resources */,
+				CCE72A2F1D64EE1B00A347D8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -605,6 +667,7 @@
 				CCE7D4A91D50D1BB008FC492 /* Sources */,
 				CCE7D4AA1D50D1BB008FC492 /* Frameworks */,
 				CCE7D4AB1D50D1BB008FC492 /* Resources */,
+				CCE72A301D64EE3800A347D8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -809,7 +872,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage build --platform \"$PLATFORM_NAME\" --project-directory \"$SRCROOT\"";
+			shellScript = "#/usr/local/bin/carthage build --platform \"$PLATFORM_NAME\" --project-directory \"$SRCROOT\"";
 		};
 		CCE72A121D64A4AB00A347D8 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -822,7 +885,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage build --platform \"$PLATFORM_NAME\" --project-directory \"$SRCROOT\"";
+			shellScript = "#/usr/local/bin/carthage build --platform \"$PLATFORM_NAME\" --project-directory \"$SRCROOT\"";
 		};
 		CCE72A131D64A4B300A347D8 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -835,7 +898,52 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage build --platform \"$PLATFORM_NAME\" --project-directory \"$SRCROOT\"";
+			shellScript = "#/usr/local/bin/carthage build --platform \"$PLATFORM_NAME\" --project-directory \"$SRCROOT\"";
+		};
+		CCE72A2E1D64EE0100A347D8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Freddy.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CardKit.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		CCE72A2F1D64EE1B00A347D8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/Freddy.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/CardKit.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		CCE72A301D64EE3800A347D8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/tvOS/Freddy.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/CardKit.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1236,6 +1344,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = CardKitRuntime/Info.plist;
@@ -1261,6 +1370,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = CardKitRuntime/Info.plist;
