@@ -33,5 +33,4 @@ class ValidationEngineTests: XCTestCase {
         
         XCTAssertTrue(errors.count == 0)
     }
-    
 }

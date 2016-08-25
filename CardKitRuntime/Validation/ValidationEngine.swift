@@ -53,6 +53,7 @@ public class ValidationEngine {
     class func executeValidation(validationActions: [ValidationAction]) -> [ValidationError] {
         let queue = dispatch_queue_create("com.ibm.research.CardKit.ValidationEngine", DISPATCH_QUEUE_CONCURRENT)
         
+        let errorSemaphore: dispatch_semaphore_t = dispatch_semaphore_create(1)
         var validationErrors: [ValidationError] = []
         
         dispatch_apply(validationActions.count, queue) {
@@ -60,9 +61,9 @@ public class ValidationEngine {
             let action = validationActions[i]
             let errors = action()
             
-            dispatch_barrier_sync(queue) {
-                validationErrors.appendContentsOf(errors)
-            }
+            dispatch_semaphore_wait(errorSemaphore, DISPATCH_TIME_FOREVER)
+            validationErrors.appendContentsOf(errors)
+            dispatch_semaphore_signal(errorSemaphore)
         }
         
         return validationErrors

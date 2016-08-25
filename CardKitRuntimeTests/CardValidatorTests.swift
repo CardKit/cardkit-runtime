@@ -29,7 +29,7 @@ class CardValidatorTests: XCTestCase {
         
         let noAction = try! ActionCard(json: json)
         
-        var deck = Deck()
+        let deck = Deck()
         let hand = Hand()
         hand.add(noAction)
         deck.add(hand)
