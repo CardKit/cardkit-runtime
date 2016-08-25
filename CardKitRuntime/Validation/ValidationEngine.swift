@@ -51,17 +51,17 @@ public class ValidationEngine {
     }
     
     class func executeValidation(validationActions: [ValidationAction]) -> [ValidationError] {
-        let queue: dispatch_queue_t = dispatch_queue_create("com.ibm.research.CardKit.ValidationEngine", DISPATCH_QUEUE_CONCURRENT)
+        let queue = dispatch_queue_create("com.ibm.research.CardKit.ValidationEngine", DISPATCH_QUEUE_CONCURRENT)
         
         var validationErrors: [ValidationError] = []
         
-        for action in validationActions {
-            dispatch_async(queue) {
-                let errors = action()
-                
-                dispatch_barrier_sync(queue) {
-                    validationErrors.appendContentsOf(errors)
-                }
+        dispatch_apply(validationActions.count, queue) {
+            i in
+            let action = validationActions[i]
+            let errors = action()
+            
+            dispatch_barrier_sync(queue) {
+                validationErrors.appendContentsOf(errors)
             }
         }
         

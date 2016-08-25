@@ -43,11 +43,46 @@
 		CC9E76A61D58E2E700B7C738 /* ValidationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76A21D58E2E700B7C738 /* ValidationEngine.swift */; };
 		CC9E76A71D58E2E700B7C738 /* ValidationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76A21D58E2E700B7C738 /* ValidationEngine.swift */; };
 		CC9E76A81D58E2E700B7C738 /* ValidationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76A21D58E2E700B7C738 /* ValidationEngine.swift */; };
+		CCBB79001D6F51B2003B6458 /* ExecutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB78FF1D6F51B2003B6458 /* ExecutionError.swift */; };
+		CCBB79011D6F51B2003B6458 /* ExecutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB78FF1D6F51B2003B6458 /* ExecutionError.swift */; };
+		CCBB79021D6F51B2003B6458 /* ExecutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB78FF1D6F51B2003B6458 /* ExecutionError.swift */; };
+		CCBB79031D6F51B2003B6458 /* ExecutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB78FF1D6F51B2003B6458 /* ExecutionError.swift */; };
+		CCBB79041D6F51B2003B6458 /* ExecutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB78FF1D6F51B2003B6458 /* ExecutionError.swift */; };
+		CCBB79051D6F51B2003B6458 /* ExecutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB78FF1D6F51B2003B6458 /* ExecutionError.swift */; };
+		CCBB79071D6F6F21003B6458 /* DeckExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79061D6F6F21003B6458 /* DeckExecutor.swift */; };
+		CCBB79081D6F6F21003B6458 /* DeckExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79061D6F6F21003B6458 /* DeckExecutor.swift */; };
+		CCBB79091D6F6F21003B6458 /* DeckExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79061D6F6F21003B6458 /* DeckExecutor.swift */; };
+		CCBB790A1D6F6F21003B6458 /* DeckExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79061D6F6F21003B6458 /* DeckExecutor.swift */; };
+		CCBB790B1D6F6F21003B6458 /* DeckExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79061D6F6F21003B6458 /* DeckExecutor.swift */; };
+		CCBB790C1D6F6F21003B6458 /* DeckExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79061D6F6F21003B6458 /* DeckExecutor.swift */; };
+		CCBB79121D6F735F003B6458 /* CarriesActionCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790E1D6F735F003B6458 /* CarriesActionCardState.swift */; };
+		CCBB79131D6F735F003B6458 /* CarriesActionCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790E1D6F735F003B6458 /* CarriesActionCardState.swift */; };
+		CCBB79141D6F735F003B6458 /* CarriesActionCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790E1D6F735F003B6458 /* CarriesActionCardState.swift */; };
+		CCBB79151D6F735F003B6458 /* CarriesActionCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790E1D6F735F003B6458 /* CarriesActionCardState.swift */; };
+		CCBB79161D6F735F003B6458 /* CarriesActionCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790E1D6F735F003B6458 /* CarriesActionCardState.swift */; };
+		CCBB79171D6F735F003B6458 /* CarriesActionCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790E1D6F735F003B6458 /* CarriesActionCardState.swift */; };
+		CCBB79181D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */; };
+		CCBB79191D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */; };
+		CCBB791A1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */; };
+		CCBB791B1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */; };
+		CCBB791C1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */; };
+		CCBB791D1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */; };
+		CCBB791E1D6F735F003B6458 /* ExecutableActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */; };
+		CCBB791F1D6F735F003B6458 /* ExecutableActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */; };
+		CCBB79201D6F735F003B6458 /* ExecutableActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */; };
+		CCBB79211D6F735F003B6458 /* ExecutableActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */; };
+		CCBB79221D6F735F003B6458 /* ExecutableActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */; };
+		CCBB79231D6F735F003B6458 /* ExecutableActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */; };
+		CCBB79241D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */; };
+		CCBB79251D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */; };
+		CCBB79261D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */; };
+		CCBB79271D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */; };
+		CCBB79281D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */; };
+		CCBB79291D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */; };
 		CCE729C41D63BD7F00A347D8 /* ValidationEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE729C21D63BD7F00A347D8 /* ValidationEngineTests.swift */; };
 		CCE729C61D63BD7F00A347D8 /* ValidationEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE729C21D63BD7F00A347D8 /* ValidationEngineTests.swift */; };
 		CCE729C81D63BD7F00A347D8 /* ValidationEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE729C21D63BD7F00A347D8 /* ValidationEngineTests.swift */; };
 		CCE72A0A1D64930D00A347D8 /* CardKitRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE7D4881D50D1AA008FC492 /* CardKitRuntime.framework */; };
-		CCE72A161D64BA8D00A347D8 /* CardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A141D64BA8D00A347D8 /* CardKit.framework */; };
 		CCE72A171D64BA8D00A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A151D64BA8D00A347D8 /* Freddy.framework */; };
 		CCE72A1C1D64BA9E00A347D8 /* CardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1A1D64BA9E00A347D8 /* CardKit.framework */; };
 		CCE72A1D1D64BA9E00A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1B1D64BA9E00A347D8 /* Freddy.framework */; };
@@ -55,10 +90,20 @@
 		CCE72A211D64BAA500A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1F1D64BAA500A347D8 /* Freddy.framework */; };
 		CCE72A251D64BAC400A347D8 /* CardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1E1D64BAA500A347D8 /* CardKit.framework */; };
 		CCE72A261D64BAC400A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1F1D64BAA500A347D8 /* Freddy.framework */; };
-		CCE72A271D64BACA00A347D8 /* CardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A141D64BA8D00A347D8 /* CardKit.framework */; };
 		CCE72A281D64BACA00A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A151D64BA8D00A347D8 /* Freddy.framework */; };
 		CCE72A291D64BAD000A347D8 /* CardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1A1D64BA9E00A347D8 /* CardKit.framework */; };
 		CCE72A2A1D64BAD000A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1B1D64BA9E00A347D8 /* Freddy.framework */; };
+		CCE72A321D650A7200A347D8 /* ExecutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A311D650A7200A347D8 /* ExecutionEngine.swift */; };
+		CCE72A331D650A7200A347D8 /* ExecutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A311D650A7200A347D8 /* ExecutionEngine.swift */; };
+		CCE72A341D650A7200A347D8 /* ExecutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A311D650A7200A347D8 /* ExecutionEngine.swift */; };
+		CCE72A351D650A7200A347D8 /* ExecutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A311D650A7200A347D8 /* ExecutionEngine.swift */; };
+		CCE72A361D650A7200A347D8 /* ExecutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A311D650A7200A347D8 /* ExecutionEngine.swift */; };
+		CCE72A371D650A7200A347D8 /* ExecutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A311D650A7200A347D8 /* ExecutionEngine.swift */; };
+		CCE72A411D650F1800A347D8 /* CardValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A401D650F1800A347D8 /* CardValidatorTests.swift */; };
+		CCE72A421D650F1800A347D8 /* CardValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A401D650F1800A347D8 /* CardValidatorTests.swift */; };
+		CCE72A431D650F1800A347D8 /* CardValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A401D650F1800A347D8 /* CardValidatorTests.swift */; };
+		CCE72A6A1D6CAF7E00A347D8 /* CardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A141D64BA8D00A347D8 /* CardKit.framework */; };
+		CCE72A6B1D6CAF9700A347D8 /* CardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A141D64BA8D00A347D8 /* CardKit.framework */; };
 		CCE7D46D1D50D191008FC492 /* CardKitRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = CCE7D46C1D50D191008FC492 /* CardKitRuntime.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CCE7D4741D50D191008FC492 /* CardKitRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE7D4691D50D191008FC492 /* CardKitRuntime.framework */; };
 		CCE7D4791D50D191008FC492 /* CardKitRuntimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4781D50D191008FC492 /* CardKitRuntimeTests.swift */; };
@@ -85,108 +130,6 @@
 		CCE7D4EE1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C41D50D309008FC492 /* CKWaitUntilTime.swift */; };
 		CCE7D4EF1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C41D50D309008FC492 /* CKWaitUntilTime.swift */; };
 		CCE7D4F01D50D309008FC492 /* CKWaitUntilTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C41D50D309008FC492 /* CKWaitUntilTime.swift */; };
-		CCE7D4F11D50D309008FC492 /* CKAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C91D50D309008FC492 /* CKAngle.swift */; };
-		CCE7D4F21D50D309008FC492 /* CKAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C91D50D309008FC492 /* CKAngle.swift */; };
-		CCE7D4F31D50D309008FC492 /* CKAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C91D50D309008FC492 /* CKAngle.swift */; };
-		CCE7D4F41D50D309008FC492 /* CKAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C91D50D309008FC492 /* CKAngle.swift */; };
-		CCE7D4F51D50D309008FC492 /* CKAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C91D50D309008FC492 /* CKAngle.swift */; };
-		CCE7D4F61D50D309008FC492 /* CKAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C91D50D309008FC492 /* CKAngle.swift */; };
-		CCE7D4F71D50D309008FC492 /* CKBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CA1D50D309008FC492 /* CKBoundingBox.swift */; };
-		CCE7D4F81D50D309008FC492 /* CKBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CA1D50D309008FC492 /* CKBoundingBox.swift */; };
-		CCE7D4F91D50D309008FC492 /* CKBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CA1D50D309008FC492 /* CKBoundingBox.swift */; };
-		CCE7D4FA1D50D309008FC492 /* CKBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CA1D50D309008FC492 /* CKBoundingBox.swift */; };
-		CCE7D4FB1D50D309008FC492 /* CKBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CA1D50D309008FC492 /* CKBoundingBox.swift */; };
-		CCE7D4FC1D50D309008FC492 /* CKBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CA1D50D309008FC492 /* CKBoundingBox.swift */; };
-		CCE7D4FD1D50D309008FC492 /* CKBoundingBox3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CB1D50D309008FC492 /* CKBoundingBox3D.swift */; };
-		CCE7D4FE1D50D309008FC492 /* CKBoundingBox3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CB1D50D309008FC492 /* CKBoundingBox3D.swift */; };
-		CCE7D4FF1D50D309008FC492 /* CKBoundingBox3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CB1D50D309008FC492 /* CKBoundingBox3D.swift */; };
-		CCE7D5001D50D309008FC492 /* CKBoundingBox3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CB1D50D309008FC492 /* CKBoundingBox3D.swift */; };
-		CCE7D5011D50D309008FC492 /* CKBoundingBox3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CB1D50D309008FC492 /* CKBoundingBox3D.swift */; };
-		CCE7D5021D50D309008FC492 /* CKBoundingBox3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CB1D50D309008FC492 /* CKBoundingBox3D.swift */; };
-		CCE7D5031D50D309008FC492 /* CKCardinalDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CC1D50D309008FC492 /* CKCardinalDirection.swift */; };
-		CCE7D5041D50D309008FC492 /* CKCardinalDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CC1D50D309008FC492 /* CKCardinalDirection.swift */; };
-		CCE7D5051D50D309008FC492 /* CKCardinalDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CC1D50D309008FC492 /* CKCardinalDirection.swift */; };
-		CCE7D5061D50D309008FC492 /* CKCardinalDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CC1D50D309008FC492 /* CKCardinalDirection.swift */; };
-		CCE7D5071D50D309008FC492 /* CKCardinalDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CC1D50D309008FC492 /* CKCardinalDirection.swift */; };
-		CCE7D5081D50D309008FC492 /* CKCardinalDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CC1D50D309008FC492 /* CKCardinalDirection.swift */; };
-		CCE7D5091D50D309008FC492 /* CKDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CD1D50D309008FC492 /* CKDistance.swift */; };
-		CCE7D50A1D50D309008FC492 /* CKDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CD1D50D309008FC492 /* CKDistance.swift */; };
-		CCE7D50B1D50D309008FC492 /* CKDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CD1D50D309008FC492 /* CKDistance.swift */; };
-		CCE7D50C1D50D309008FC492 /* CKDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CD1D50D309008FC492 /* CKDistance.swift */; };
-		CCE7D50D1D50D309008FC492 /* CKDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CD1D50D309008FC492 /* CKDistance.swift */; };
-		CCE7D50E1D50D309008FC492 /* CKDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CD1D50D309008FC492 /* CKDistance.swift */; };
-		CCE7D50F1D50D309008FC492 /* CKLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CE1D50D309008FC492 /* CKLocation.swift */; };
-		CCE7D5101D50D309008FC492 /* CKLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CE1D50D309008FC492 /* CKLocation.swift */; };
-		CCE7D5111D50D309008FC492 /* CKLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CE1D50D309008FC492 /* CKLocation.swift */; };
-		CCE7D5121D50D309008FC492 /* CKLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CE1D50D309008FC492 /* CKLocation.swift */; };
-		CCE7D5131D50D309008FC492 /* CKLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CE1D50D309008FC492 /* CKLocation.swift */; };
-		CCE7D5141D50D309008FC492 /* CKLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CE1D50D309008FC492 /* CKLocation.swift */; };
-		CCE7D5151D50D309008FC492 /* CKPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CF1D50D309008FC492 /* CKPath.swift */; };
-		CCE7D5161D50D309008FC492 /* CKPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CF1D50D309008FC492 /* CKPath.swift */; };
-		CCE7D5171D50D309008FC492 /* CKPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CF1D50D309008FC492 /* CKPath.swift */; };
-		CCE7D5181D50D309008FC492 /* CKPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CF1D50D309008FC492 /* CKPath.swift */; };
-		CCE7D5191D50D309008FC492 /* CKPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CF1D50D309008FC492 /* CKPath.swift */; };
-		CCE7D51A1D50D309008FC492 /* CKPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4CF1D50D309008FC492 /* CKPath.swift */; };
-		CCE7D51B1D50D309008FC492 /* CKPath3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D01D50D309008FC492 /* CKPath3D.swift */; };
-		CCE7D51C1D50D309008FC492 /* CKPath3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D01D50D309008FC492 /* CKPath3D.swift */; };
-		CCE7D51D1D50D309008FC492 /* CKPath3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D01D50D309008FC492 /* CKPath3D.swift */; };
-		CCE7D51E1D50D309008FC492 /* CKPath3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D01D50D309008FC492 /* CKPath3D.swift */; };
-		CCE7D51F1D50D309008FC492 /* CKPath3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D01D50D309008FC492 /* CKPath3D.swift */; };
-		CCE7D5201D50D309008FC492 /* CKPath3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D01D50D309008FC492 /* CKPath3D.swift */; };
-		CCE7D5211D50D309008FC492 /* CKAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D21D50D309008FC492 /* CKAudio.swift */; };
-		CCE7D5221D50D309008FC492 /* CKAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D21D50D309008FC492 /* CKAudio.swift */; };
-		CCE7D5231D50D309008FC492 /* CKAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D21D50D309008FC492 /* CKAudio.swift */; };
-		CCE7D5241D50D309008FC492 /* CKAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D21D50D309008FC492 /* CKAudio.swift */; };
-		CCE7D5251D50D309008FC492 /* CKAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D21D50D309008FC492 /* CKAudio.swift */; };
-		CCE7D5261D50D309008FC492 /* CKAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D21D50D309008FC492 /* CKAudio.swift */; };
-		CCE7D5271D50D309008FC492 /* CKImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D31D50D309008FC492 /* CKImage.swift */; };
-		CCE7D5281D50D309008FC492 /* CKImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D31D50D309008FC492 /* CKImage.swift */; };
-		CCE7D5291D50D309008FC492 /* CKImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D31D50D309008FC492 /* CKImage.swift */; };
-		CCE7D52A1D50D309008FC492 /* CKImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D31D50D309008FC492 /* CKImage.swift */; };
-		CCE7D52B1D50D309008FC492 /* CKImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D31D50D309008FC492 /* CKImage.swift */; };
-		CCE7D52C1D50D309008FC492 /* CKImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D31D50D309008FC492 /* CKImage.swift */; };
-		CCE7D52D1D50D309008FC492 /* CKInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D51D50D309008FC492 /* CKInteger.swift */; };
-		CCE7D52E1D50D309008FC492 /* CKInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D51D50D309008FC492 /* CKInteger.swift */; };
-		CCE7D52F1D50D309008FC492 /* CKInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D51D50D309008FC492 /* CKInteger.swift */; };
-		CCE7D5301D50D309008FC492 /* CKInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D51D50D309008FC492 /* CKInteger.swift */; };
-		CCE7D5311D50D309008FC492 /* CKInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D51D50D309008FC492 /* CKInteger.swift */; };
-		CCE7D5321D50D309008FC492 /* CKInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D51D50D309008FC492 /* CKInteger.swift */; };
-		CCE7D5331D50D309008FC492 /* CKReal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D61D50D309008FC492 /* CKReal.swift */; };
-		CCE7D5341D50D309008FC492 /* CKReal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D61D50D309008FC492 /* CKReal.swift */; };
-		CCE7D5351D50D309008FC492 /* CKReal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D61D50D309008FC492 /* CKReal.swift */; };
-		CCE7D5361D50D309008FC492 /* CKReal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D61D50D309008FC492 /* CKReal.swift */; };
-		CCE7D5371D50D309008FC492 /* CKReal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D61D50D309008FC492 /* CKReal.swift */; };
-		CCE7D5381D50D309008FC492 /* CKReal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D61D50D309008FC492 /* CKReal.swift */; };
-		CCE7D5391D50D309008FC492 /* CKRelativeToLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D81D50D309008FC492 /* CKRelativeToLocation.swift */; };
-		CCE7D53A1D50D309008FC492 /* CKRelativeToLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D81D50D309008FC492 /* CKRelativeToLocation.swift */; };
-		CCE7D53B1D50D309008FC492 /* CKRelativeToLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D81D50D309008FC492 /* CKRelativeToLocation.swift */; };
-		CCE7D53C1D50D309008FC492 /* CKRelativeToLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D81D50D309008FC492 /* CKRelativeToLocation.swift */; };
-		CCE7D53D1D50D309008FC492 /* CKRelativeToLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D81D50D309008FC492 /* CKRelativeToLocation.swift */; };
-		CCE7D53E1D50D309008FC492 /* CKRelativeToLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D81D50D309008FC492 /* CKRelativeToLocation.swift */; };
-		CCE7D53F1D50D309008FC492 /* CKRelativeToObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D91D50D309008FC492 /* CKRelativeToObject.swift */; };
-		CCE7D5401D50D309008FC492 /* CKRelativeToObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D91D50D309008FC492 /* CKRelativeToObject.swift */; };
-		CCE7D5411D50D309008FC492 /* CKRelativeToObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D91D50D309008FC492 /* CKRelativeToObject.swift */; };
-		CCE7D5421D50D309008FC492 /* CKRelativeToObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D91D50D309008FC492 /* CKRelativeToObject.swift */; };
-		CCE7D5431D50D309008FC492 /* CKRelativeToObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D91D50D309008FC492 /* CKRelativeToObject.swift */; };
-		CCE7D5441D50D309008FC492 /* CKRelativeToObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4D91D50D309008FC492 /* CKRelativeToObject.swift */; };
-		CCE7D5451D50D309008FC492 /* CKClockTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4DB1D50D309008FC492 /* CKClockTime.swift */; };
-		CCE7D5461D50D309008FC492 /* CKClockTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4DB1D50D309008FC492 /* CKClockTime.swift */; };
-		CCE7D5471D50D309008FC492 /* CKClockTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4DB1D50D309008FC492 /* CKClockTime.swift */; };
-		CCE7D5481D50D309008FC492 /* CKClockTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4DB1D50D309008FC492 /* CKClockTime.swift */; };
-		CCE7D5491D50D309008FC492 /* CKClockTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4DB1D50D309008FC492 /* CKClockTime.swift */; };
-		CCE7D54A1D50D309008FC492 /* CKClockTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4DB1D50D309008FC492 /* CKClockTime.swift */; };
-		CCE7D54B1D50D309008FC492 /* CKDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4DC1D50D309008FC492 /* CKDuration.swift */; };
-		CCE7D54C1D50D309008FC492 /* CKDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4DC1D50D309008FC492 /* CKDuration.swift */; };
-		CCE7D54D1D50D309008FC492 /* CKDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4DC1D50D309008FC492 /* CKDuration.swift */; };
-		CCE7D54E1D50D309008FC492 /* CKDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4DC1D50D309008FC492 /* CKDuration.swift */; };
-		CCE7D54F1D50D309008FC492 /* CKDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4DC1D50D309008FC492 /* CKDuration.swift */; };
-		CCE7D5501D50D309008FC492 /* CKDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4DC1D50D309008FC492 /* CKDuration.swift */; };
-		CCE7D5511D50D309008FC492 /* CKPeriodicity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4DD1D50D309008FC492 /* CKPeriodicity.swift */; };
-		CCE7D5521D50D309008FC492 /* CKPeriodicity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4DD1D50D309008FC492 /* CKPeriodicity.swift */; };
-		CCE7D5531D50D309008FC492 /* CKPeriodicity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4DD1D50D309008FC492 /* CKPeriodicity.swift */; };
-		CCE7D5541D50D309008FC492 /* CKPeriodicity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4DD1D50D309008FC492 /* CKPeriodicity.swift */; };
-		CCE7D5551D50D309008FC492 /* CKPeriodicity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4DD1D50D309008FC492 /* CKPeriodicity.swift */; };
-		CCE7D5561D50D309008FC492 /* CKPeriodicity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4DD1D50D309008FC492 /* CKPeriodicity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -220,6 +163,12 @@
 		CC9E76941D58C32E00B7C738 /* ValidationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
 		CC9E769B1D58C38800B7C738 /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		CC9E76A21D58E2E700B7C738 /* ValidationEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationEngine.swift; sourceTree = "<group>"; };
+		CCBB78FF1D6F51B2003B6458 /* ExecutionError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionError.swift; sourceTree = "<group>"; };
+		CCBB79061D6F6F21003B6458 /* DeckExecutor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckExecutor.swift; sourceTree = "<group>"; };
+		CCBB790E1D6F735F003B6458 /* CarriesActionCardState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarriesActionCardState.swift; sourceTree = "<group>"; };
+		CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarriesTokenCardState.swift; sourceTree = "<group>"; };
+		CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutableActionCard.swift; sourceTree = "<group>"; };
+		CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutableTokenCard.swift; sourceTree = "<group>"; };
 		CCE729C21D63BD7F00A347D8 /* ValidationEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationEngineTests.swift; sourceTree = "<group>"; };
 		CCE72A141D64BA8D00A347D8 /* CardKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CardKit.framework; path = Carthage/Build/iOS/CardKit.framework; sourceTree = "<group>"; };
 		CCE72A151D64BA8D00A347D8 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/iOS/Freddy.framework; sourceTree = "<group>"; };
@@ -227,6 +176,8 @@
 		CCE72A1B1D64BA9E00A347D8 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/Mac/Freddy.framework; sourceTree = "<group>"; };
 		CCE72A1E1D64BAA500A347D8 /* CardKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CardKit.framework; path = Carthage/Build/tvOS/CardKit.framework; sourceTree = "<group>"; };
 		CCE72A1F1D64BAA500A347D8 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/tvOS/Freddy.framework; sourceTree = "<group>"; };
+		CCE72A311D650A7200A347D8 /* ExecutionEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionEngine.swift; sourceTree = "<group>"; };
+		CCE72A401D650F1800A347D8 /* CardValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardValidatorTests.swift; sourceTree = "<group>"; };
 		CCE7D4691D50D191008FC492 /* CardKitRuntime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CardKitRuntime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCE7D46C1D50D191008FC492 /* CardKitRuntime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardKitRuntime.h; sourceTree = "<group>"; };
 		CCE7D46E1D50D191008FC492 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -240,23 +191,6 @@
 		CCE7D4C21D50D309008FC492 /* CKNoAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKNoAction.swift; sourceTree = "<group>"; };
 		CCE7D4C31D50D309008FC492 /* CKTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKTimer.swift; sourceTree = "<group>"; };
 		CCE7D4C41D50D309008FC492 /* CKWaitUntilTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKWaitUntilTime.swift; sourceTree = "<group>"; };
-		CCE7D4C91D50D309008FC492 /* CKAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKAngle.swift; sourceTree = "<group>"; };
-		CCE7D4CA1D50D309008FC492 /* CKBoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKBoundingBox.swift; sourceTree = "<group>"; };
-		CCE7D4CB1D50D309008FC492 /* CKBoundingBox3D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKBoundingBox3D.swift; sourceTree = "<group>"; };
-		CCE7D4CC1D50D309008FC492 /* CKCardinalDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKCardinalDirection.swift; sourceTree = "<group>"; };
-		CCE7D4CD1D50D309008FC492 /* CKDistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKDistance.swift; sourceTree = "<group>"; };
-		CCE7D4CE1D50D309008FC492 /* CKLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKLocation.swift; sourceTree = "<group>"; };
-		CCE7D4CF1D50D309008FC492 /* CKPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKPath.swift; sourceTree = "<group>"; };
-		CCE7D4D01D50D309008FC492 /* CKPath3D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKPath3D.swift; sourceTree = "<group>"; };
-		CCE7D4D21D50D309008FC492 /* CKAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKAudio.swift; sourceTree = "<group>"; };
-		CCE7D4D31D50D309008FC492 /* CKImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKImage.swift; sourceTree = "<group>"; };
-		CCE7D4D51D50D309008FC492 /* CKInteger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKInteger.swift; sourceTree = "<group>"; };
-		CCE7D4D61D50D309008FC492 /* CKReal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKReal.swift; sourceTree = "<group>"; };
-		CCE7D4D81D50D309008FC492 /* CKRelativeToLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKRelativeToLocation.swift; sourceTree = "<group>"; };
-		CCE7D4D91D50D309008FC492 /* CKRelativeToObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKRelativeToObject.swift; sourceTree = "<group>"; };
-		CCE7D4DB1D50D309008FC492 /* CKClockTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKClockTime.swift; sourceTree = "<group>"; };
-		CCE7D4DC1D50D309008FC492 /* CKDuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKDuration.swift; sourceTree = "<group>"; };
-		CCE7D4DD1D50D309008FC492 /* CKPeriodicity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKPeriodicity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,7 +198,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCE72A161D64BA8D00A347D8 /* CardKit.framework in Frameworks */,
+				CCE72A6A1D6CAF7E00A347D8 /* CardKit.framework in Frameworks */,
 				CCE72A171D64BA8D00A347D8 /* Freddy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,8 +208,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCE7D4741D50D191008FC492 /* CardKitRuntime.framework in Frameworks */,
+				CCE72A6B1D6CAF9700A347D8 /* CardKit.framework in Frameworks */,
 				CCE72A281D64BACA00A347D8 /* Freddy.framework in Frameworks */,
-				CCE72A271D64BACA00A347D8 /* CardKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +275,17 @@
 				CC9E76A21D58E2E700B7C738 /* ValidationEngine.swift */,
 			);
 			path = Validation;
+			sourceTree = "<group>";
+		};
+		CCBB790D1D6F735F003B6458 /* Executable Cards */ = {
+			isa = PBXGroup;
+			children = (
+				CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */,
+				CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */,
+				CCBB790E1D6F735F003B6458 /* CarriesActionCardState.swift */,
+				CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */,
+			);
+			path = "Executable Cards";
 			sourceTree = "<group>";
 		};
 		CCE72A221D64BAAC00A347D8 /* iOS */ = {
@@ -409,6 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				CCE7D4781D50D191008FC492 /* CardKitRuntimeTests.swift */,
+				CCE72A401D650F1800A347D8 /* CardValidatorTests.swift */,
 				CCE729C21D63BD7F00A347D8 /* ValidationEngineTests.swift */,
 				CCE7D47A1D50D191008FC492 /* Info.plist */,
 			);
@@ -419,10 +365,6 @@
 			isa = PBXGroup;
 			children = (
 				CCE7D4C11D50D309008FC492 /* Action */,
-				CCE7D4C51D50D309008FC492 /* Deck */,
-				CCE7D4C61D50D309008FC492 /* Hand */,
-				CCE7D4C71D50D309008FC492 /* Input */,
-				CCE7D4DE1D50D309008FC492 /* Token */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -430,6 +372,10 @@
 		CCE7D4C01D50D2EC008FC492 /* Execution */ = {
 			isa = PBXGroup;
 			children = (
+				CCE72A311D650A7200A347D8 /* ExecutionEngine.swift */,
+				CCBB79061D6F6F21003B6458 /* DeckExecutor.swift */,
+				CCBB78FF1D6F51B2003B6458 /* ExecutionError.swift */,
+				CCBB790D1D6F735F003B6458 /* Executable Cards */,
 			);
 			path = Execution;
 			sourceTree = "<group>";
@@ -442,91 +388,6 @@
 				CCE7D4C41D50D309008FC492 /* CKWaitUntilTime.swift */,
 			);
 			path = Action;
-			sourceTree = "<group>";
-		};
-		CCE7D4C51D50D309008FC492 /* Deck */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Deck;
-			sourceTree = "<group>";
-		};
-		CCE7D4C61D50D309008FC492 /* Hand */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Hand;
-			sourceTree = "<group>";
-		};
-		CCE7D4C71D50D309008FC492 /* Input */ = {
-			isa = PBXGroup;
-			children = (
-				CCE7D4C81D50D309008FC492 /* Location */,
-				CCE7D4D11D50D309008FC492 /* Media */,
-				CCE7D4D41D50D309008FC492 /* Numeric */,
-				CCE7D4D71D50D309008FC492 /* Relative */,
-				CCE7D4DA1D50D309008FC492 /* Time */,
-			);
-			path = Input;
-			sourceTree = "<group>";
-		};
-		CCE7D4C81D50D309008FC492 /* Location */ = {
-			isa = PBXGroup;
-			children = (
-				CCE7D4C91D50D309008FC492 /* CKAngle.swift */,
-				CCE7D4CA1D50D309008FC492 /* CKBoundingBox.swift */,
-				CCE7D4CB1D50D309008FC492 /* CKBoundingBox3D.swift */,
-				CCE7D4CC1D50D309008FC492 /* CKCardinalDirection.swift */,
-				CCE7D4CD1D50D309008FC492 /* CKDistance.swift */,
-				CCE7D4CE1D50D309008FC492 /* CKLocation.swift */,
-				CCE7D4CF1D50D309008FC492 /* CKPath.swift */,
-				CCE7D4D01D50D309008FC492 /* CKPath3D.swift */,
-			);
-			path = Location;
-			sourceTree = "<group>";
-		};
-		CCE7D4D11D50D309008FC492 /* Media */ = {
-			isa = PBXGroup;
-			children = (
-				CCE7D4D21D50D309008FC492 /* CKAudio.swift */,
-				CCE7D4D31D50D309008FC492 /* CKImage.swift */,
-			);
-			path = Media;
-			sourceTree = "<group>";
-		};
-		CCE7D4D41D50D309008FC492 /* Numeric */ = {
-			isa = PBXGroup;
-			children = (
-				CCE7D4D51D50D309008FC492 /* CKInteger.swift */,
-				CCE7D4D61D50D309008FC492 /* CKReal.swift */,
-			);
-			path = Numeric;
-			sourceTree = "<group>";
-		};
-		CCE7D4D71D50D309008FC492 /* Relative */ = {
-			isa = PBXGroup;
-			children = (
-				CCE7D4D81D50D309008FC492 /* CKRelativeToLocation.swift */,
-				CCE7D4D91D50D309008FC492 /* CKRelativeToObject.swift */,
-			);
-			path = Relative;
-			sourceTree = "<group>";
-		};
-		CCE7D4DA1D50D309008FC492 /* Time */ = {
-			isa = PBXGroup;
-			children = (
-				CCE7D4DB1D50D309008FC492 /* CKClockTime.swift */,
-				CCE7D4DC1D50D309008FC492 /* CKDuration.swift */,
-				CCE7D4DD1D50D309008FC492 /* CKPeriodicity.swift */,
-			);
-			path = Time;
-			sourceTree = "<group>";
-		};
-		CCE7D4DE1D50D309008FC492 /* Token */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Token;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -952,31 +813,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCE7D4F71D50D309008FC492 /* CKBoundingBox.swift in Sources */,
-				CCE7D51B1D50D309008FC492 /* CKPath3D.swift in Sources */,
+				CCBB79001D6F51B2003B6458 /* ExecutionError.swift in Sources */,
+				CCBB79241D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */,
 				CCE7D4EB1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */,
-				CCE7D5151D50D309008FC492 /* CKPath.swift in Sources */,
-				CCE7D52D1D50D309008FC492 /* CKInteger.swift in Sources */,
 				CC9E76951D58C32E00B7C738 /* ValidationError.swift in Sources */,
-				CCE7D5451D50D309008FC492 /* CKClockTime.swift in Sources */,
-				CCE7D4F11D50D309008FC492 /* CKAngle.swift in Sources */,
-				CCE7D5271D50D309008FC492 /* CKImage.swift in Sources */,
+				CCBB79071D6F6F21003B6458 /* DeckExecutor.swift in Sources */,
 				CCE7D4DF1D50D309008FC492 /* CKNoAction.swift in Sources */,
-				CCE7D53F1D50D309008FC492 /* CKRelativeToObject.swift in Sources */,
 				CC9E76801D58B82C00B7C738 /* DeckValidator.swift in Sources */,
-				CCE7D5331D50D309008FC492 /* CKReal.swift in Sources */,
-				CCE7D54B1D50D309008FC492 /* CKDuration.swift in Sources */,
 				CC9E768E1D58B83C00B7C738 /* CardValidator.swift in Sources */,
-				CCE7D50F1D50D309008FC492 /* CKLocation.swift in Sources */,
-				CCE7D5091D50D309008FC492 /* CKDistance.swift in Sources */,
-				CCE7D5391D50D309008FC492 /* CKRelativeToLocation.swift in Sources */,
-				CCE7D5211D50D309008FC492 /* CKAudio.swift in Sources */,
-				CCE7D4FD1D50D309008FC492 /* CKBoundingBox3D.swift in Sources */,
 				CC9E76A31D58E2E700B7C738 /* ValidationEngine.swift in Sources */,
-				CCE7D5511D50D309008FC492 /* CKPeriodicity.swift in Sources */,
+				CCBB791E1D6F735F003B6458 /* ExecutableActionCard.swift in Sources */,
+				CCBB79181D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
+				CCE72A321D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
+				CCBB79121D6F735F003B6458 /* CarriesActionCardState.swift in Sources */,
 				CCE7D4E51D50D309008FC492 /* CKTimer.swift in Sources */,
 				CC9E769C1D58C38800B7C738 /* Validator.swift in Sources */,
-				CCE7D5031D50D309008FC492 /* CKCardinalDirection.swift in Sources */,
 				CC9E76871D58B83400B7C738 /* HandValidator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -985,34 +836,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCE7D5101D50D309008FC492 /* CKLocation.swift in Sources */,
 				CC9E76811D58B82C00B7C738 /* DeckValidator.swift in Sources */,
-				CCE7D5281D50D309008FC492 /* CKImage.swift in Sources */,
+				CCBB79251D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */,
 				CC9E76A41D58E2E700B7C738 /* ValidationEngine.swift in Sources */,
-				CCE7D52E1D50D309008FC492 /* CKInteger.swift in Sources */,
 				CC9E769D1D58C38800B7C738 /* Validator.swift in Sources */,
-				CCE7D5401D50D309008FC492 /* CKRelativeToObject.swift in Sources */,
 				CCE7D4E61D50D309008FC492 /* CKTimer.swift in Sources */,
-				CCE7D5041D50D309008FC492 /* CKCardinalDirection.swift in Sources */,
-				CCE7D4F21D50D309008FC492 /* CKAngle.swift in Sources */,
-				CCE7D5521D50D309008FC492 /* CKPeriodicity.swift in Sources */,
-				CCE7D54C1D50D309008FC492 /* CKDuration.swift in Sources */,
-				CCE7D53A1D50D309008FC492 /* CKRelativeToLocation.swift in Sources */,
+				CCE72A331D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
 				CC9E76961D58C32E00B7C738 /* ValidationError.swift in Sources */,
 				CCE729C41D63BD7F00A347D8 /* ValidationEngineTests.swift in Sources */,
+				CCBB79011D6F51B2003B6458 /* ExecutionError.swift in Sources */,
 				CCE7D4E01D50D309008FC492 /* CKNoAction.swift in Sources */,
-				CCE7D50A1D50D309008FC492 /* CKDistance.swift in Sources */,
+				CCBB79081D6F6F21003B6458 /* DeckExecutor.swift in Sources */,
 				CCE7D4EC1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */,
+				CCBB79191D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
 				CC9E768F1D58B83C00B7C738 /* CardValidator.swift in Sources */,
+				CCBB791F1D6F735F003B6458 /* ExecutableActionCard.swift in Sources */,
 				CC9E76881D58B83400B7C738 /* HandValidator.swift in Sources */,
-				CCE7D5341D50D309008FC492 /* CKReal.swift in Sources */,
-				CCE7D4FE1D50D309008FC492 /* CKBoundingBox3D.swift in Sources */,
-				CCE7D5221D50D309008FC492 /* CKAudio.swift in Sources */,
-				CCE7D5461D50D309008FC492 /* CKClockTime.swift in Sources */,
-				CCE7D5161D50D309008FC492 /* CKPath.swift in Sources */,
+				CCBB79131D6F735F003B6458 /* CarriesActionCardState.swift in Sources */,
+				CCE72A411D650F1800A347D8 /* CardValidatorTests.swift in Sources */,
 				CCE7D4791D50D191008FC492 /* CardKitRuntimeTests.swift in Sources */,
-				CCE7D4F81D50D309008FC492 /* CKBoundingBox.swift in Sources */,
-				CCE7D51C1D50D309008FC492 /* CKPath3D.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1020,31 +862,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCE7D4F91D50D309008FC492 /* CKBoundingBox.swift in Sources */,
-				CCE7D51D1D50D309008FC492 /* CKPath3D.swift in Sources */,
+				CCBB79021D6F51B2003B6458 /* ExecutionError.swift in Sources */,
+				CCBB79261D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */,
 				CCE7D4ED1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */,
-				CCE7D5171D50D309008FC492 /* CKPath.swift in Sources */,
-				CCE7D52F1D50D309008FC492 /* CKInteger.swift in Sources */,
 				CC9E76971D58C32E00B7C738 /* ValidationError.swift in Sources */,
-				CCE7D5471D50D309008FC492 /* CKClockTime.swift in Sources */,
-				CCE7D4F31D50D309008FC492 /* CKAngle.swift in Sources */,
-				CCE7D5291D50D309008FC492 /* CKImage.swift in Sources */,
+				CCBB79091D6F6F21003B6458 /* DeckExecutor.swift in Sources */,
 				CCE7D4E11D50D309008FC492 /* CKNoAction.swift in Sources */,
-				CCE7D5411D50D309008FC492 /* CKRelativeToObject.swift in Sources */,
 				CC9E76821D58B82C00B7C738 /* DeckValidator.swift in Sources */,
-				CCE7D5351D50D309008FC492 /* CKReal.swift in Sources */,
-				CCE7D54D1D50D309008FC492 /* CKDuration.swift in Sources */,
 				CC9E76901D58B83C00B7C738 /* CardValidator.swift in Sources */,
-				CCE7D5111D50D309008FC492 /* CKLocation.swift in Sources */,
-				CCE7D50B1D50D309008FC492 /* CKDistance.swift in Sources */,
-				CCE7D53B1D50D309008FC492 /* CKRelativeToLocation.swift in Sources */,
-				CCE7D5231D50D309008FC492 /* CKAudio.swift in Sources */,
-				CCE7D4FF1D50D309008FC492 /* CKBoundingBox3D.swift in Sources */,
 				CC9E76A51D58E2E700B7C738 /* ValidationEngine.swift in Sources */,
-				CCE7D5531D50D309008FC492 /* CKPeriodicity.swift in Sources */,
+				CCBB79201D6F735F003B6458 /* ExecutableActionCard.swift in Sources */,
+				CCBB791A1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
+				CCE72A341D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
+				CCBB79141D6F735F003B6458 /* CarriesActionCardState.swift in Sources */,
 				CCE7D4E71D50D309008FC492 /* CKTimer.swift in Sources */,
 				CC9E769E1D58C38800B7C738 /* Validator.swift in Sources */,
-				CCE7D5051D50D309008FC492 /* CKCardinalDirection.swift in Sources */,
 				CC9E76891D58B83400B7C738 /* HandValidator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1053,34 +885,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCE7D5121D50D309008FC492 /* CKLocation.swift in Sources */,
 				CC9E76831D58B82C00B7C738 /* DeckValidator.swift in Sources */,
-				CCE7D52A1D50D309008FC492 /* CKImage.swift in Sources */,
+				CCBB79271D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */,
 				CC9E76A61D58E2E700B7C738 /* ValidationEngine.swift in Sources */,
-				CCE7D5301D50D309008FC492 /* CKInteger.swift in Sources */,
 				CC9E769F1D58C38800B7C738 /* Validator.swift in Sources */,
-				CCE7D5421D50D309008FC492 /* CKRelativeToObject.swift in Sources */,
 				CCE7D4E81D50D309008FC492 /* CKTimer.swift in Sources */,
-				CCE7D5061D50D309008FC492 /* CKCardinalDirection.swift in Sources */,
-				CCE7D4F41D50D309008FC492 /* CKAngle.swift in Sources */,
-				CCE7D5541D50D309008FC492 /* CKPeriodicity.swift in Sources */,
-				CCE7D54E1D50D309008FC492 /* CKDuration.swift in Sources */,
-				CCE7D53C1D50D309008FC492 /* CKRelativeToLocation.swift in Sources */,
+				CCE72A351D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
 				CC9E76981D58C32E00B7C738 /* ValidationError.swift in Sources */,
 				CCE729C61D63BD7F00A347D8 /* ValidationEngineTests.swift in Sources */,
+				CCBB79031D6F51B2003B6458 /* ExecutionError.swift in Sources */,
 				CCE7D4E21D50D309008FC492 /* CKNoAction.swift in Sources */,
-				CCE7D50C1D50D309008FC492 /* CKDistance.swift in Sources */,
+				CCBB790A1D6F6F21003B6458 /* DeckExecutor.swift in Sources */,
 				CCE7D4EE1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */,
+				CCBB791B1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
 				CC9E76911D58B83C00B7C738 /* CardValidator.swift in Sources */,
+				CCBB79211D6F735F003B6458 /* ExecutableActionCard.swift in Sources */,
 				CC9E768A1D58B83400B7C738 /* HandValidator.swift in Sources */,
-				CCE7D5361D50D309008FC492 /* CKReal.swift in Sources */,
-				CCE7D5001D50D309008FC492 /* CKBoundingBox3D.swift in Sources */,
-				CCE7D5241D50D309008FC492 /* CKAudio.swift in Sources */,
-				CCE7D5481D50D309008FC492 /* CKClockTime.swift in Sources */,
-				CCE7D5181D50D309008FC492 /* CKPath.swift in Sources */,
+				CCBB79151D6F735F003B6458 /* CarriesActionCardState.swift in Sources */,
+				CCE72A421D650F1800A347D8 /* CardValidatorTests.swift in Sources */,
 				CCE7D4BB1D50D1D0008FC492 /* CardKitRuntimeTests.swift in Sources */,
-				CCE7D4FA1D50D309008FC492 /* CKBoundingBox.swift in Sources */,
-				CCE7D51E1D50D309008FC492 /* CKPath3D.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1088,31 +911,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCE7D4FB1D50D309008FC492 /* CKBoundingBox.swift in Sources */,
-				CCE7D51F1D50D309008FC492 /* CKPath3D.swift in Sources */,
+				CCBB79041D6F51B2003B6458 /* ExecutionError.swift in Sources */,
+				CCBB79281D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */,
 				CCE7D4EF1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */,
-				CCE7D5191D50D309008FC492 /* CKPath.swift in Sources */,
-				CCE7D5311D50D309008FC492 /* CKInteger.swift in Sources */,
 				CC9E76991D58C32E00B7C738 /* ValidationError.swift in Sources */,
-				CCE7D5491D50D309008FC492 /* CKClockTime.swift in Sources */,
-				CCE7D4F51D50D309008FC492 /* CKAngle.swift in Sources */,
-				CCE7D52B1D50D309008FC492 /* CKImage.swift in Sources */,
+				CCBB790B1D6F6F21003B6458 /* DeckExecutor.swift in Sources */,
 				CCE7D4E31D50D309008FC492 /* CKNoAction.swift in Sources */,
-				CCE7D5431D50D309008FC492 /* CKRelativeToObject.swift in Sources */,
 				CC9E76841D58B82C00B7C738 /* DeckValidator.swift in Sources */,
-				CCE7D5371D50D309008FC492 /* CKReal.swift in Sources */,
-				CCE7D54F1D50D309008FC492 /* CKDuration.swift in Sources */,
 				CC9E76921D58B83C00B7C738 /* CardValidator.swift in Sources */,
-				CCE7D5131D50D309008FC492 /* CKLocation.swift in Sources */,
-				CCE7D50D1D50D309008FC492 /* CKDistance.swift in Sources */,
-				CCE7D53D1D50D309008FC492 /* CKRelativeToLocation.swift in Sources */,
-				CCE7D5251D50D309008FC492 /* CKAudio.swift in Sources */,
-				CCE7D5011D50D309008FC492 /* CKBoundingBox3D.swift in Sources */,
 				CC9E76A71D58E2E700B7C738 /* ValidationEngine.swift in Sources */,
-				CCE7D5551D50D309008FC492 /* CKPeriodicity.swift in Sources */,
+				CCBB79221D6F735F003B6458 /* ExecutableActionCard.swift in Sources */,
+				CCBB791C1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
+				CCE72A361D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
+				CCBB79161D6F735F003B6458 /* CarriesActionCardState.swift in Sources */,
 				CCE7D4E91D50D309008FC492 /* CKTimer.swift in Sources */,
 				CC9E76A01D58C38800B7C738 /* Validator.swift in Sources */,
-				CCE7D5071D50D309008FC492 /* CKCardinalDirection.swift in Sources */,
 				CC9E768B1D58B83400B7C738 /* HandValidator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1121,34 +934,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCE7D5141D50D309008FC492 /* CKLocation.swift in Sources */,
 				CC9E76851D58B82C00B7C738 /* DeckValidator.swift in Sources */,
-				CCE7D52C1D50D309008FC492 /* CKImage.swift in Sources */,
+				CCBB79291D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */,
 				CC9E76A81D58E2E700B7C738 /* ValidationEngine.swift in Sources */,
-				CCE7D5321D50D309008FC492 /* CKInteger.swift in Sources */,
 				CC9E76A11D58C38800B7C738 /* Validator.swift in Sources */,
-				CCE7D5441D50D309008FC492 /* CKRelativeToObject.swift in Sources */,
 				CCE7D4EA1D50D309008FC492 /* CKTimer.swift in Sources */,
-				CCE7D5081D50D309008FC492 /* CKCardinalDirection.swift in Sources */,
-				CCE7D4F61D50D309008FC492 /* CKAngle.swift in Sources */,
-				CCE7D5561D50D309008FC492 /* CKPeriodicity.swift in Sources */,
-				CCE7D5501D50D309008FC492 /* CKDuration.swift in Sources */,
-				CCE7D53E1D50D309008FC492 /* CKRelativeToLocation.swift in Sources */,
+				CCE72A371D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
 				CC9E769A1D58C32E00B7C738 /* ValidationError.swift in Sources */,
 				CCE729C81D63BD7F00A347D8 /* ValidationEngineTests.swift in Sources */,
+				CCBB79051D6F51B2003B6458 /* ExecutionError.swift in Sources */,
 				CCE7D4E41D50D309008FC492 /* CKNoAction.swift in Sources */,
-				CCE7D50E1D50D309008FC492 /* CKDistance.swift in Sources */,
+				CCBB790C1D6F6F21003B6458 /* DeckExecutor.swift in Sources */,
 				CCE7D4F01D50D309008FC492 /* CKWaitUntilTime.swift in Sources */,
+				CCBB791D1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
 				CC9E76931D58B83C00B7C738 /* CardValidator.swift in Sources */,
+				CCBB79231D6F735F003B6458 /* ExecutableActionCard.swift in Sources */,
 				CC9E768C1D58B83400B7C738 /* HandValidator.swift in Sources */,
-				CCE7D5381D50D309008FC492 /* CKReal.swift in Sources */,
-				CCE7D5021D50D309008FC492 /* CKBoundingBox3D.swift in Sources */,
-				CCE7D5261D50D309008FC492 /* CKAudio.swift in Sources */,
-				CCE7D54A1D50D309008FC492 /* CKClockTime.swift in Sources */,
-				CCE7D51A1D50D309008FC492 /* CKPath.swift in Sources */,
+				CCBB79171D6F735F003B6458 /* CarriesActionCardState.swift in Sources */,
+				CCE72A431D650F1800A347D8 /* CardValidatorTests.swift in Sources */,
 				CCE7D4BC1D50D1D0008FC492 /* CardKitRuntimeTests.swift in Sources */,
-				CCE7D4FC1D50D309008FC492 /* CKBoundingBox.swift in Sources */,
-				CCE7D5201D50D309008FC492 /* CKPath3D.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

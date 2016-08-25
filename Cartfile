@@ -1,2 +1,3 @@
 github "bignerdranch/Freddy" ~> 2.1
-git "git@github.ibm.com:CMER/card-kit.git" "jweisz-refactor"
+git "git@github.ibm.com:CMER/card-kit.git" "master"
+#git "../card-kit/" "master"

@@ -10,9 +10,10 @@ import Foundation
 
 import CardKit
 
-
 //MARK: CKNoAction
 
-public class CKNoAction: ActionCard {
-    
+public class CKNoAction: ExecutableActionCard {
+    public override func main() {
+        // do nothing. return instantly.
+    }
 }
