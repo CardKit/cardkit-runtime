@@ -114,11 +114,6 @@ public class DeckExecutor: NSOperation {
         }
     }
     
-    private func checkHandSatisfaction(satisfiedCards: Set<CardIdentifier>, hand: Hand) -> Bool {
-        // TODO: needs implemented
-        return true
-    }
-    
     public func execute() throws {
         // make sure the deck validates!
         try self.validateDeck()
@@ -180,12 +175,10 @@ public class DeckExecutor: NSOperation {
     /// if the Deck should continue execution with the next hand. Also returns a flag indicating
     /// whether execution should terminate after the current Hand.
     private func executeHand(hand: Hand) throws -> Hand? {
-        let actionCards = hand.actionCards
-        
         // operations to add to the execution queue
         var operations: [NSOperation] = []
         
-        var satisfactionCheck: dispatch_semaphore_t = dispatch_semaphore_create(1)
+        let satisfactionCheck: dispatch_semaphore_t = dispatch_semaphore_create(1)
         var satisfiedCards: Set<CardIdentifier> = Set()
         var isHandSatisfied = false
         var nextHand: Hand? = nil
@@ -206,8 +199,7 @@ public class DeckExecutor: NSOperation {
                     guard let yieldDataValue = self.yieldData[yield] else { continue }
                     executable.inputs[slot] = yieldDataValue
                 default:
-                    // TODO throw an error, validation should have caught this
-                    executable.inputs[slot] = .Unbound
+                    throw ExecutionError.UnboundInputEncountered(card, slot)
                 }
             }
             
@@ -236,7 +228,9 @@ public class DeckExecutor: NSOperation {
                 dispatch_semaphore_wait(satisfactionCheck, DISPATCH_TIME_FOREVER)
                 if !isHandSatisfied {
                     satisfiedCards.insert(card.identifier)
-                    (isHandSatisfied, nextHand) = self.checkHandSatisfaction(satisfiedCards, hand)
+                    let satisfactionResult = hand.satisfactionResult(given: satisfiedCards)
+                    isHandSatisfied = satisfactionResult.0
+                    nextHand = satisfactionResult.1
                 }
                 dispatch_semaphore_signal(satisfactionCheck)
             }
@@ -248,7 +242,6 @@ public class DeckExecutor: NSOperation {
         }
         
         // add all operations to the queue and execute it
-        var opCount = operations.count
         cardExecutionQueue.addOperations(operations, waitUntilFinished: false)
         
         // wait until either the operation queue is finished, or the hand is satisfied

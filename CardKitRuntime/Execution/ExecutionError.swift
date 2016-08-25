@@ -18,5 +18,6 @@ public enum ExecutionError: ErrorType {
     case NoTokenInstanceDefinedForTokenCard(TokenCard)
     case NoTokenCardPresentWithIdentifier(CardIdentifier)
     case TokenSlotBoundToUnboundValue(ActionCard, TokenSlot)
+    case UnboundInputEncountered(ActionCard, InputSlot)
     case ExecutionCancelled
 }
