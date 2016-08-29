@@ -17,7 +17,7 @@ public enum CardValidationError {
     // swiftlint:disable:next type_name
     case CardDescriptorTypeDoesNotMatchInstanceType(CardType, Any.Type)
     
-    /// The TokenSlot has not been bound with a Token card
+    /// The TokenSlot has not been bound with a Token card, or it was bound to an Unbound value
     case TokenSlotNotBound(TokenSlot)
     
     /// The Token card bound to this card was not found in the Deck
@@ -25,9 +25,6 @@ public enum CardValidationError {
     
     /// The TokenSlot was bound to a card that is not a TokenCard (args: the token slot, the identifier of the non-Token card to which it was bound)
     case TokenSlotNotBoundToTokenCard(TokenSlot, CardIdentifier)
-    
-    /// The TokenSlot is bound, but has an Unbound value.
-    case TokenSlotBoundToUnboundValue(TokenSlot)
     
     /// The InputSlot is non-optional but does not have an InputCard bound to it
     case MandatoryInputSlotNotBound(InputSlot)
@@ -78,7 +75,6 @@ class CardValidator: Validator {
         })
         
         // TokenSlotNotBoundToTokenCard
-        // TokenSlotBoundToUnboundValue
         actions.append({
             // only applies to ActionCards
             guard let actionCard = self.card as? ActionCard else { return [] }
@@ -172,8 +168,8 @@ class CardValidator: Validator {
             let binding = card.binding(of: slot)
             switch binding {
             case .Unbound:
-                // should never be the case
-                errors.append(ValidationError.CardError(.Error, deck.identifier, hand.identifier, card.identifier, .TokenSlotBoundToUnboundValue(slot)))
+                // don't throw an error here, we already checked for this
+                continue
             case .BoundToTokenCard(let identifier):
                 // find this card in the deck
                 let found = deck.tokenCards.reduce(false) {

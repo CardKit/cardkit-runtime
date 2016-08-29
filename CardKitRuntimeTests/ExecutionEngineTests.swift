@@ -25,19 +25,23 @@ class ExecutionEngineTests: XCTestCase {
         var deck: Deck? = nil
         var yield: Yield? = nil
         
+        // Calculator token
+        let calcToken = CKCalc.Token.Calculator.makeCard()
+        
         do {
             let two = try (CardKit.Input.Numeric.Real <- 2.0)
             let five = try (CardKit.Input.Numeric.Real <- 5.0)
             let ten = try (CardKit.Input.Numeric.Real <- 10.0)
             
-            let add = try (CKCalc.Action.Math.Add <- five) <- ten
-            let mult = try (CKCalc.Action.Math.Multiply <- (add, add.yields.first!)) <- two
+            let add = try (CKCalc.Action.Math.Add <- five) <- ten <- ("Calculator", calcToken)
+            let mult = try (CKCalc.Action.Math.Multiply <- (add, add.yields.first!)) <- two <- ("Calculator", calcToken)
             yield = mult.yields.first
             
             let handOne = ( add )%
             let handTwo = ( mult )%
             
             deck = ( handOne ==> handTwo )%
+            deck?.add(calcToken)
             
         } catch let error {
             XCTFail("error setting up deck: \(error)")
@@ -59,6 +63,9 @@ class ExecutionEngineTests: XCTestCase {
         engine.setExecutableActionType(CKMultiply.self, for: CKCalc.Action.Math.Multiply)
         engine.setExecutableActionType(CKDivide.self, for: CKCalc.Action.Math.Divide)
         
+        let calculator = CKSlowCalculator(with: calcToken)
+        engine.setTokenInstance(calculator, for: calcToken)
+        
 //        print("\(deck!.toJSON().stringify(true))")
         
         engine.execute() {
@@ -72,6 +79,8 @@ class ExecutionEngineTests: XCTestCase {
             if let error = error {
                 print("error: \(error)")
             }
+            
+            XCTAssertTrue(error == nil)
         }
     }
 

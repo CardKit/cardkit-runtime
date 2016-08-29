@@ -13,7 +13,7 @@ import Foundation
 public struct CKCalc {
     private init() {}
     
-    //MARK:- Action Cards
+    //MARK: Action Cards
     
     /// Contains descriptors for Action cards
     public struct Action {
@@ -32,7 +32,7 @@ public struct CKCalc {
                     InputSlot(name: "A", type: .SwiftDouble, isOptional: false),
                     InputSlot(name: "B", type: .SwiftDouble, isOptional: false)
                 ],
-                tokens: [TokenSlot(identifier: "Calculator", descriptor: CKCalc.Token.Calculator)],
+                tokens: [TokenSlot(name: "Calculator", descriptor: CKCalc.Token.Calculator)],
                 yields: [Yield(type: .SwiftDouble)],
                 yieldDescription: "The sum A + B",
                 ends: true,
@@ -49,7 +49,7 @@ public struct CKCalc {
                     InputSlot(name: "A", type: .SwiftDouble, isOptional: false),
                     InputSlot(name: "B", type: .SwiftDouble, isOptional: false)
                 ],
-                tokens: [TokenSlot(identifier: "Calculator", descriptor: CKCalc.Token.Calculator)],
+                tokens: [TokenSlot(name: "Calculator", descriptor: CKCalc.Token.Calculator)],
                 yields: [Yield(type: .SwiftDouble)],
                 yieldDescription: "The difference A - B",
                 ends: true,
@@ -66,7 +66,7 @@ public struct CKCalc {
                     InputSlot(name: "A", type: .SwiftDouble, isOptional: false),
                     InputSlot(name: "B", type: .SwiftDouble, isOptional: false)
                 ],
-                tokens: [TokenSlot(identifier: "Calculator", descriptor: CKCalc.Token.Calculator)],
+                tokens: [TokenSlot(name: "Calculator", descriptor: CKCalc.Token.Calculator)],
                 yields: [Yield(type: .SwiftDouble)],
                 yieldDescription: "The multiplication A * B",
                 ends: true,
@@ -83,7 +83,7 @@ public struct CKCalc {
                     InputSlot(name: "A", type: .SwiftDouble, isOptional: false),
                     InputSlot(name: "B", type: .SwiftDouble, isOptional: false)
                 ],
-                tokens: [TokenSlot(identifier: "Calculator", descriptor: CKCalc.Token.Calculator)],
+                tokens: [TokenSlot(name: "Calculator", descriptor: CKCalc.Token.Calculator)],
                 yields: [Yield(type: .SwiftDouble)],
                 yieldDescription: "The division A / B",
                 ends: true,
@@ -93,7 +93,7 @@ public struct CKCalc {
         }
     }
     
-    //MARK:- Token Cards
+    //MARK: Token Cards
     
     /// Contains descriptors for Token cards
     public struct Token {
@@ -107,6 +107,8 @@ public struct CKCalc {
             version: 0)
     }
 }
+
+//MARK:- CKAdd
 
 public class CKAdd: ExecutableActionCard {
     public override func main() {
@@ -133,13 +135,25 @@ public class CKAdd: ExecutableActionCard {
             return
         }
         
+        guard let calcSlot = self.actionCard.tokenSlots.slot(named: "Calculator") else {
+            self.error = .ExpectedTokenSlotNotFound(self, "Calculator")
+            return
+        }
+        
+        guard let calc = self.tokens[calcSlot] as? CKCalculator else {
+            self.error = .UnboundTokenSlot(self, calcSlot)
+            return
+        }
+        
         // do the addition!
-        let sum = a + b
+        let sum = calc.add(a, b)
         
         // save the result
         self.yields[yield] = .SwiftDouble(sum)
     }
 }
+
+//MARK:- CKSubtract
 
 public class CKSubtract: ExecutableActionCard {
     public override func main() {
@@ -166,13 +180,25 @@ public class CKSubtract: ExecutableActionCard {
             return
         }
         
+        guard let calcSlot = self.actionCard.tokenSlots.slot(named: "Calculator") else {
+            self.error = .ExpectedTokenSlotNotFound(self, "Calculator")
+            return
+        }
+        
+        guard let calc = self.tokens[calcSlot] as? CKCalculator else {
+            self.error = .UnboundTokenSlot(self, calcSlot)
+            return
+        }
+        
         // do the subtraction!
-        let difference = a - b
+        let difference = calc.subtract(a, b)
         
         // save the result
         self.yields[yield] = .SwiftDouble(difference)
     }
 }
+
+//MARK:- CKMultiply
 
 public class CKMultiply: ExecutableActionCard {
     public override func main() {
@@ -199,13 +225,26 @@ public class CKMultiply: ExecutableActionCard {
             return
         }
         
+        guard let calcSlot = self.actionCard.tokenSlots.slot(named: "Calculator") else {
+            self.error = .ExpectedTokenSlotNotFound(self, "Calculator")
+            return
+        }
+        
+        guard let calc = self.tokens[calcSlot] as? CKCalculator else {
+            self.error = .UnboundTokenSlot(self, calcSlot)
+            return
+        }
+        
         // do the multiplication!
-        let product = a * b
+        let product = calc.multiply(a, b)
         
         // save the result
         self.yields[yield] = .SwiftDouble(product)
     }
 }
+
+
+//MARK:- CKDivide
 
 public class CKDivide: ExecutableActionCard {
     public override func main() {
@@ -232,10 +271,69 @@ public class CKDivide: ExecutableActionCard {
             return
         }
         
+        guard let calcSlot = self.actionCard.tokenSlots.slot(named: "Calculator") else {
+            self.error = .ExpectedTokenSlotNotFound(self, "Calculator")
+            return
+        }
+        
+        guard let calc = self.tokens[calcSlot] as? CKCalculator else {
+            self.error = .UnboundTokenSlot(self, calcSlot)
+            return
+        }
+        
         // do the division!
-        let quotient = a / b
+        let quotient = calc.divide(a, b)
         
         // save the result
         self.yields[yield] = .SwiftDouble(quotient)
+    }
+}
+
+//MARK:- CKCalculator
+
+protocol CKCalculator {
+    func add(lhs: Double, _ rhs: Double) -> Double
+    func subtract(lhs: Double, _ rhs: Double) -> Double
+    func multiply(lhs: Double, _ rhs: Double) -> Double
+    func divide(lhs: Double, _ rhs: Double) -> Double
+}
+
+class CKFastCalculator: ExecutableTokenCard, CKCalculator {
+    func add(lhs: Double, _ rhs: Double) -> Double {
+        return lhs + rhs
+    }
+    
+    func subtract(lhs: Double, _ rhs: Double) -> Double {
+        return lhs - rhs
+    }
+    
+    func multiply(lhs: Double, _ rhs: Double) -> Double {
+        return lhs * rhs
+    }
+    
+    func divide(lhs: Double, _ rhs: Double) -> Double {
+        return lhs / rhs
+    }
+}
+
+class CKSlowCalculator: ExecutableTokenCard, CKCalculator {
+    func add(lhs: Double, _ rhs: Double) -> Double {
+        NSThread.sleepForTimeInterval(5)
+        return lhs + rhs
+    }
+    
+    func subtract(lhs: Double, _ rhs: Double) -> Double {
+        NSThread.sleepForTimeInterval(5)
+        return lhs - rhs
+    }
+    
+    func multiply(lhs: Double, _ rhs: Double) -> Double {
+        NSThread.sleepForTimeInterval(5)
+        return lhs * rhs
+    }
+    
+    func divide(lhs: Double, _ rhs: Double) -> Double {
+        NSThread.sleepForTimeInterval(5)
+        return lhs / rhs
     }
 }
