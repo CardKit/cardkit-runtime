@@ -10,9 +10,9 @@ import Foundation
 
 import CardKit
 
-typealias InputBindings = [InputSlot : InputDataBinding]
-typealias TokenBindings = [TokenSlot : ExecutableTokenCard]
-typealias YieldBindings = [Yield : InputDataBinding]
+public typealias InputBindings = [InputSlot : InputDataBinding]
+public typealias TokenBindings = [TokenSlot : ExecutableTokenCard]
+public typealias YieldBindings = [Yield : InputDataBinding]
 
 /// Appled to classes that implement an executable ActionCard
 protocol CarriesActionCardState {
@@ -29,4 +29,7 @@ protocol CarriesActionCardState {
     
     /// These are the yields produced by the card.
     var yields: YieldBindings { get }
+    
+    /// Retrieve the input value for the named slot
+    func valueForInput(named name: String) -> InputDataBinding?
 }

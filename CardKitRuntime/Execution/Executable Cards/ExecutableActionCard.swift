@@ -22,6 +22,7 @@ public class ExecutableActionCard: NSOperation, CarriesActionCardState {
     var inputs: InputBindings = [:]
     var tokens: TokenBindings = [:]
     var yields: YieldBindings = [:]
+    var error: ActionExecutionError? = nil
     
     // this is 'required' so we can instantiate it from the metatype
     required public init(with card: ActionCard) {
@@ -33,6 +34,11 @@ public class ExecutableActionCard: NSOperation, CarriesActionCardState {
     func setup(inputs: InputBindings, tokens: TokenBindings) {
         self.inputs = inputs
         self.tokens = tokens
+    }
+    
+    func valueForInput(named name: String) -> InputDataBinding? {
+        guard let slot = self.actionCard.descriptor.inputSlots.slot(named: name) else { return nil }
+        return self.inputs[slot]
     }
     
     //MARK: NSOperation

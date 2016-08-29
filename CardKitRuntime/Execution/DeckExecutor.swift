@@ -20,7 +20,7 @@ public class DeckExecutor: NSOperation {
     private var tokenInstances: [TokenCard : ExecutableTokenCard] = [:]
     
     /// Cache of yields produced by ActionCards after their execution
-    private var yieldData: [Yield : InputDataBinding] = [:]
+    public private (set) var yieldData: YieldBindings = [:]
     
     /// Private operation queue for executing ActionCards in a Hand
     private let cardExecutionQueue: NSOperationQueue
@@ -174,9 +174,11 @@ public class DeckExecutor: NSOperation {
     /// Execute the given Hand. Returns the next Hand to be executed (if it's a subhand), or nil
     /// if the Deck should continue execution with the next hand. Also returns a flag indicating
     /// whether execution should terminate after the current Hand.
+    //swiftlint:disable:next function_body_length
     private func executeHand(hand: Hand) throws -> Hand? {
         // operations to add to the execution queue
         var operations: [NSOperation] = []
+        var executableCards: [ExecutableActionCard] = []
         
         let satisfactionCheck: dispatch_semaphore_t = dispatch_semaphore_create(1)
         var satisfiedCards: Set<CardIdentifier> = Set()
@@ -189,12 +191,13 @@ public class DeckExecutor: NSOperation {
             }
             
             let executable = type.init(with: card)
+            executableCards.append(executable)
             
             // copy in InputBindings
             for (slot, binding) in card.inputBindings {
                 switch binding {
                 case .BoundToInputCard(let inputCard):
-                    executable.inputs[slot] = inputCard.inputDataValue()
+                    executable.inputs[slot] = inputCard.boundData
                 case .BoundToYieldingActionCard(_, let yield):
                     guard let yieldDataValue = self.yieldData[yield] else { continue }
                     executable.inputs[slot] = yieldDataValue
@@ -226,6 +229,13 @@ public class DeckExecutor: NSOperation {
             let done = NSBlockOperation() {
                 // wait until any other operation doing a check is done
                 dispatch_semaphore_wait(satisfactionCheck, DISPATCH_TIME_FOREVER)
+                
+                // copy out yielded data
+                for (yield, data) in executable.yields {
+                    self.yieldData[yield] = data
+                }
+                
+                // check for satisfaction
                 if !isHandSatisfied {
                     satisfiedCards.insert(card.identifier)
                     let satisfactionResult = hand.satisfactionResult(given: satisfiedCards)
@@ -250,8 +260,19 @@ public class DeckExecutor: NSOperation {
             // checking if the hand is satisfied? this is a good philosophical question. i'm going to
             // assume checking every second is appropriate, although for more time-sensitive applications
             // this number may need to be reduced.
-            NSThread.sleepForTimeInterval(1)
+//            NSThread.sleepForTimeInterval(1)
         }
+        
+        // check to see if any ExecutableActionCards had errors
+        dispatch_semaphore_wait(satisfactionCheck, DISPATCH_TIME_FOREVER)
+        for executable in executableCards {
+            // only throws the first error encountered...
+            if let error = executable.error {
+                dispatch_semaphore_signal(satisfactionCheck)
+                throw ExecutionError.ActionCardError(error)
+            }
+        }
+        dispatch_semaphore_signal(satisfactionCheck)
         
         return nextHand
     }

@@ -22,11 +22,11 @@ class ValidationEngineTests: XCTestCase {
     }
     
     func testValidationEngineSimple() {
-        let noAction = CardKit.Action.NoAction
+        let add = CKCalc.Action.Math.Add
         
         let deck = (
-            noAction ==>
-            noAction
+            add ==>
+            add
             )%
         
         let errors = ValidationEngine.validate(deck)

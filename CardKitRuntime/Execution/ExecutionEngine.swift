@@ -24,6 +24,10 @@ public class ExecutionEngine {
     
     init(with deck: Deck) {
         self.deck = deck
+        
+        // register these implementation classes because they come bundled with the Runtime
+        self.setExecutableActionType(CKTimer.self, for: CardKit.Action.Trigger.Time.Timer)
+        self.setExecutableActionType(CKWaitUntilTime.self, for: CardKit.Action.Trigger.Time.WaitUntilTime)
     }
     
     //MARK: Instance Methods
@@ -44,7 +48,7 @@ public class ExecutionEngine {
         self.tokenInstances = tokenInstances
     }
     
-    public func execute(completion: (ExecutionError?) -> Void) {
+    public func execute(completion: (YieldBindings, ExecutionError?) -> Void) {
         // create a DeckExecutor
         let deckExecutor = DeckExecutor(with: self.deck)
         deckExecutor.setExecutableActionTypes(self.executableActionTypes)
@@ -65,9 +69,9 @@ public class ExecutionEngine {
             
             // and see if we got any errors
             if let error = deckExecutor.error {
-                completion(error)
+                completion(deckExecutor.yieldData, error)
             } else {
-                completion(nil)
+                completion(deckExecutor.yieldData, nil)
             }
         }
     }

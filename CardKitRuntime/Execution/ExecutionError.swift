@@ -14,10 +14,19 @@ import CardKit
 
 public enum ExecutionError: ErrorType {
     case DeckDoesNotValidate(Deck, [ValidationError])
-    case NoExecutionTypeDefinedForActionCardDescriptor(ActionCardDescriptor)
+    case NoExecutionTypeDefinedForActionCardDescriptor(ActionCardDescriptor) //swiftlint:disable:this type_name
     case NoTokenInstanceDefinedForTokenCard(TokenCard)
     case NoTokenCardPresentWithIdentifier(CardIdentifier)
     case TokenSlotBoundToUnboundValue(ActionCard, TokenSlot)
     case UnboundInputEncountered(ActionCard, InputSlot)
     case ExecutionCancelled
+    case ActionCardError(ActionExecutionError)
+}
+
+//MARK: ActionExecutionError
+
+public enum ActionExecutionError: ErrorType {
+    case NilValueForInput(ExecutableActionCard, String)
+    case TypeMismatchForInput(ExecutableActionCard, String, InputType, InputDataBinding)
+    case ExpectedYieldNotFound(ExecutableActionCard)
 }
