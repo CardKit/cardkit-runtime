@@ -13,7 +13,7 @@ import CardKit
 //MARK: ExecutionError
 
 public enum ExecutionError: ErrorType {
-    case DeckDoesNotValidate(Deck, [ValidationError])
+    case DeckDoesNotValidate([ValidationError])
     case NoExecutionTypeDefinedForActionCardDescriptor(ActionCardDescriptor) //swiftlint:disable:this type_name
     case NoTokenInstanceDefinedForTokenCard(TokenCard)
     case NoTokenCardPresentWithIdentifier(CardIdentifier)

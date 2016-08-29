@@ -55,28 +55,34 @@ public class ExecutionEngine {
         deckExecutor.setTokenInstances(self.tokenInstances)
         
         // create a concurrent dispatch queue for both the DeckExecutor operation
-        // and the dispatch_async that will wait for the queue to finish
+        // and the dispatch_sync that will wait for the queue to finish
         let queue = dispatch_queue_create("com.ibm.research.CardKitRuntime.ExecutionEngine", DISPATCH_QUEUE_CONCURRENT)
         
         self.operationQueue.underlyingQueue = queue
         
-        dispatch_async(queue) {
+        dispatch_sync(queue) {
+            print("ExecutionEngine beginning execution in dispatch queue \(queue.description)")
+            
             // start executing the deck
             self.operationQueue.addOperation(deckExecutor)
             
             // wait until it's done
+            print("ExecutionEngine waiting for execution to finish")
             self.operationQueue.waitUntilAllOperationsAreFinished()
             
             // and see if we got any errors
             if let error = deckExecutor.error {
+                print("ExecutionEngine finished with errors")
                 completion(deckExecutor.yieldData, error)
             } else {
+                print("ExecutionEngine finished")
                 completion(deckExecutor.yieldData, nil)
             }
         }
     }
     
     public func cancelExecution() {
+        print("ExecutionEngine cancelling execution")
         self.operationQueue.cancelAllOperations()
     }
 }

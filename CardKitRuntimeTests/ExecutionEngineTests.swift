@@ -26,36 +26,15 @@ class ExecutionEngineTests: XCTestCase {
         var yield: Yield? = nil
         
         do {
+            let two = try (CardKit.Input.Numeric.Real <- 2.0)
             let five = try (CardKit.Input.Numeric.Real <- 5.0)
             let ten = try (CardKit.Input.Numeric.Real <- 10.0)
             
             let add = try (CKCalc.Action.Math.Add <- five) <- ten
-            let handOne = ( add )%
-            
-            let mult = CKCalc.Action.Math.Multiply.makeCard()
-            
-            guard let addYield = add.descriptor.yields.first else {
-                XCTFail("could not get yield of Add card")
-                return
-            }
-            
-            guard let slotA = mult.inputSlots.slot(named: "A") else {
-                XCTFail("could not get slot A")
-                return
-            }
-            
-            guard let slotB = mult.inputSlots.slot(named: "B") else {
-                XCTFail("could not get slot B")
-                return
-            }
-            
-            mult.bind(with: add, yield: addYield, in: slotA)
-            
-            let two = try (CardKit.Input.Numeric.Real <- 2.0)
-            mult.bind(with: two, in: slotB)
-            
+            let mult = try (CKCalc.Action.Math.Multiply <- (add, add.yields.first!)) <- two
             yield = mult.yields.first
             
+            let handOne = ( add )%
             let handTwo = ( mult )%
             
             deck = ( handOne ==> handTwo )%
@@ -80,10 +59,12 @@ class ExecutionEngineTests: XCTestCase {
         engine.setExecutableActionType(CKMultiply.self, for: CKCalc.Action.Math.Multiply)
         engine.setExecutableActionType(CKDivide.self, for: CKCalc.Action.Math.Divide)
         
-        print("\(deck!.toJSON().stringify(true))")
+//        print("\(deck!.toJSON().stringify(true))")
         
         engine.execute() {
             (yields: YieldBindings, error: ExecutionError?) in
+            
+            print("*******")
             
             if let result = yields[y] {
                 print("result: \(result)")

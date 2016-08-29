@@ -72,7 +72,7 @@ public class DeckExecutor: NSOperation {
     private func validateDeck() throws {
         let errors = ValidationEngine.validate(self.deck)
         if errors.count > 0 {
-            throw ExecutionError.DeckDoesNotValidate(self.deck, errors)
+            throw ExecutionError.DeckDoesNotValidate(errors)
         }
     }
     
@@ -105,7 +105,10 @@ public class DeckExecutor: NSOperation {
     }
     
     private func checkIfExecutionCancelled() throws {
+        print("DeckExecutor checking if execution is cancelled")
         if self.cancelled {
+            print("  it is! cancelling all pending operations")
+            
             // cancel any ExecutableActionCards that are executing
             self.cardExecutionQueue.cancelAllOperations()
             
@@ -116,17 +119,20 @@ public class DeckExecutor: NSOperation {
     
     public func execute() throws {
         // make sure the deck validates!
+        print("DeckExecutor validating deck")
         try self.validateDeck()
+        
+        // make sure we have an execution type for every ActionCard in the deck
+        print("DeckExecutor checking for undefined ActionCard types")
+        try self.checkForUndefinedActionCardTypes()
+        
+        // make sure we have an instance of each token in the deck
+        print("DeckExecutor checking for undefined Token instances")
+        try self.checkForUndefinedTokenInstances()
         
         // figure out if there is a Repeat or Terminate card in the Deck.
         // validation should make sure both cards don't exist simultaneously.
         let repeatDeck: Bool = self.deckRepeats()
-        
-        // make sure we have an execution type for every ActionCard in the deck
-        try self.checkForUndefinedActionCardTypes()
-        
-        // make sure we have an instance of each token in the deck
-        try self.checkForUndefinedTokenInstances()
         
         // everything checks out -- execute the hand!
         repeat {
@@ -185,6 +191,8 @@ public class DeckExecutor: NSOperation {
         var isHandSatisfied = false
         var nextHand: Hand? = nil
         
+        print("DeckExecutor setting up hand \(hand.identifier) for execution")
+        
         for card in hand.actionCards {
             guard let type = self.executableActionTypes[card.descriptor] else {
                 throw ExecutionError.NoExecutionTypeDefinedForActionCardDescriptor(card.descriptor)
@@ -227,13 +235,19 @@ public class DeckExecutor: NSOperation {
             
             // create a dependency operation so we know which card finished executing
             let done = NSBlockOperation() {
+                print("finished execution of card \(executable.actionCard.description)")
+                
                 // wait until any other operation doing a check is done
                 dispatch_semaphore_wait(satisfactionCheck, DISPATCH_TIME_FOREVER)
+                
+                print("  ... copying out yielded data")
                 
                 // copy out yielded data
                 for (yield, data) in executable.yields {
                     self.yieldData[yield] = data
                 }
+                
+                print("  ... checking for hand satisfaction")
                 
                 // check for satisfaction
                 if !isHandSatisfied {
@@ -246,12 +260,15 @@ public class DeckExecutor: NSOperation {
             }
             done.addDependency(executable)
             
+            print(" ... it has a \(executable.actionCard.description) card")
+            
             // add these to the operation queue
             operations.append(executable)
             operations.append(done)
         }
         
         // add all operations to the queue and execute it
+        print("beginning execution of hand")
         cardExecutionQueue.addOperations(operations, waitUntilFinished: false)
         
         // wait until either the operation queue is finished, or the hand is satisfied
@@ -260,19 +277,24 @@ public class DeckExecutor: NSOperation {
             // checking if the hand is satisfied? this is a good philosophical question. i'm going to
             // assume checking every second is appropriate, although for more time-sensitive applications
             // this number may need to be reduced.
-//            NSThread.sleepForTimeInterval(1)
+            print("SLEEPING WHILE WE WAIT FOR ALL CARDS TO FINISH EXECUTION")
+            NSThread.sleepForTimeInterval(1)
         }
         
+        print("hand execution finished, checking if any cards threw errors")
         // check to see if any ExecutableActionCards had errors
         dispatch_semaphore_wait(satisfactionCheck, DISPATCH_TIME_FOREVER)
         for executable in executableCards {
             // only throws the first error encountered...
             if let error = executable.error {
+                print(" ... yep, a card threw an error: \(executable.actionCard.description)")
                 dispatch_semaphore_signal(satisfactionCheck)
                 throw ExecutionError.ActionCardError(error)
             }
         }
         dispatch_semaphore_signal(satisfactionCheck)
+        
+        print("the next hand to be executed will be \(nextHand?.identifier)")
         
         return nextHand
     }
