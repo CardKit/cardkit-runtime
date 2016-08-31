@@ -18,17 +18,20 @@ public typealias YieldBindings = [Yield : InputDataBinding]
 protocol CarriesActionCardState {
     func setup(inputs: InputBindings, tokens: TokenBindings)
     
-    /// This is the ActionCard instance carrying all of the binding data for inputs and yields
+    /// This is the ActionCard instance carrying all of the binding data for inputs and yields. This is an input.
     var actionCard: ActionCard { get }
     
-    /// The specific Input data bound to the card
+    /// The specific Input data bound to the card. This is an input.
     var inputs: InputBindings { get }
     
-    /// The Tokens bound to the card
+    /// The Tokens bound to the card. This is an input.
     var tokens: TokenBindings { get }
     
-    /// These are the yields produced by the card.
+    /// These are the yields produced by the card. This is an output.
     var yields: YieldBindings { get }
+    
+    /// This holds an error produced during execution. This is an output.
+    var error: ActionExecutionError? { get }
     
     /// Retrieve the input value for the named slot
     func valueForInput(named name: String) -> InputDataBinding?

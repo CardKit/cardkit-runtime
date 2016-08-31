@@ -282,8 +282,14 @@ public class DeckExecutor: NSOperation {
         }
         
         print("hand execution finished, checking if any cards threw errors")
-        // check to see if any ExecutableActionCards had errors
+        
+        // obtain the semaphore so no other threads are performing the satisfaction check
         dispatch_semaphore_wait(satisfactionCheck, DISPATCH_TIME_FOREVER)
+        
+        // cancel execution of any outstanding operations in the queue
+        cardExecutionQueue.cancelAllOperations()
+        
+        // check to see if any ExecutableActionCards had errors
         for executable in executableCards {
             // only throws the first error encountered...
             if let error = executable.error {

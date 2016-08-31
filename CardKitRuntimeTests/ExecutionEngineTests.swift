@@ -33,8 +33,8 @@ class ExecutionEngineTests: XCTestCase {
             let five = try (CardKit.Input.Numeric.Real <- 5.0)
             let ten = try (CardKit.Input.Numeric.Real <- 10.0)
             
-            let add = try (CKCalc.Action.Math.Add <- five) <- ten <- ("Calculator", calcToken)
-            let mult = try (CKCalc.Action.Math.Multiply <- (add, add.yields.first!)) <- two <- ("Calculator", calcToken)
+            let add = try CKCalc.Action.Math.Add <- five <- ten <- ("Calculator", calcToken)
+            let mult = try CKCalc.Action.Math.Multiply <- (add, add.yields.first!) <- two <- ("Calculator", calcToken)
             yield = mult.yields.first
             
             let handOne = ( add )%
