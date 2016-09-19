@@ -10,21 +10,21 @@ import Foundation
 
 import CardKit
 
-//MARK: CKWaitUntilTime
+// MARK: CKWaitUntilTime
 
 public class CKWaitUntilTime: ExecutableActionCard {
     public override func main() {
         // wait the given date specified by our ClockTime input
         guard let binding = self.valueForInput(named: "ClockTime") else {
-            self.error = .NilValueForInput(self, "ClockTime")
+            self.error = .nilValueForInput(self, "ClockTime")
             return
         }
-        guard case let .SwiftDate(date) = binding else {
-            self.error = .TypeMismatchForInput(self, "ClockTime", .SwiftDate, binding)
+        guard case let .swiftDate(date) = binding else {
+            self.error = .typeMismatchForInput(self, "ClockTime", .swiftDate, binding)
             return
         }
         
         // wait until the specified date
-        NSThread.sleepUntilDate(date)
+        Thread.sleep(until: date)
     }
 }

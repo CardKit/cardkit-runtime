@@ -10,20 +10,20 @@ import Foundation
 
 import CardKit
 
-public class DeckExecutor: NSOperation {
-    public private (set) var deck: Deck
+public class DeckExecutor: Operation {
+    public fileprivate (set) var deck: Deck
     
     /// Map between ActionCardDescriptor and the type that implements it
-    private var executableActionTypes: [ActionCardDescriptor : ExecutableActionCard.Type] = [:]
+    fileprivate var executableActionTypes: [ActionCardDescriptor : ExecutableActionCard.Type] = [:]
     
     /// Map between TokenCard and the instance that implements it
-    private var tokenInstances: [TokenCard : ExecutableTokenCard] = [:]
+    fileprivate var tokenInstances: [TokenCard : ExecutableTokenCard] = [:]
     
     /// Cache of yields produced by ActionCards after their execution
-    public private (set) var yieldData: YieldBindings = [:]
+    public fileprivate (set) var yieldData: YieldBindings = [:]
     
     /// Private operation queue for executing ActionCards in a Hand
-    private let cardExecutionQueue: NSOperationQueue
+    fileprivate let cardExecutionQueue: OperationQueue
     
     /// Execution error. Only non-nil if execution encountered an error.
     public var error: ExecutionError? = nil
@@ -32,14 +32,14 @@ public class DeckExecutor: NSOperation {
         self.deck = deck
         
         // create the operation queue for executing cards in a hand
-        cardExecutionQueue = NSOperationQueue()
-        cardExecutionQueue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount
+        cardExecutionQueue = OperationQueue()
+        cardExecutionQueue.maxConcurrentOperationCount = OperationQueue.defaultMaxConcurrentOperationCount
     }
     
-    //MARK: NSOperation
+    // MARK: NSOperation
     
     public override func main() {
-        if self.cancelled {
+        if self.isCancelled {
             return
         }
         
@@ -51,32 +51,32 @@ public class DeckExecutor: NSOperation {
         }
     }
     
-    //MARK: Instance Methods
+    // MARK: Instance Methods
     
-    public func setExecutableActionType(type: ExecutableActionCard.Type, for descriptor: ActionCardDescriptor) {
+    public func setExecutableActionType(_ type: ExecutableActionCard.Type, for descriptor: ActionCardDescriptor) {
         self.executableActionTypes[descriptor] = type
     }
     
-    public func setExecutableActionTypes(executionTypes: [ActionCardDescriptor : ExecutableActionCard.Type]) {
+    public func setExecutableActionTypes(_ executionTypes: [ActionCardDescriptor : ExecutableActionCard.Type]) {
         self.executableActionTypes = executionTypes
     }
     
-    public func setTokenInstance(instance: ExecutableTokenCard, for tokenCard: TokenCard) {
+    public func setTokenInstance(_ instance: ExecutableTokenCard, for tokenCard: TokenCard) {
         self.tokenInstances[tokenCard] = instance
     }
     
-    public func setTokenInstances(tokenInstances: [TokenCard : ExecutableTokenCard]) {
+    public func setTokenInstances(_ tokenInstances: [TokenCard : ExecutableTokenCard]) {
         self.tokenInstances = tokenInstances
     }
     
-    private func validateDeck() throws {
+    fileprivate func validateDeck() throws {
         let errors = ValidationEngine.validate(self.deck)
         if errors.count > 0 {
-            throw ExecutionError.DeckDoesNotValidate(errors)
+            throw ExecutionError.deckDoesNotValidate(errors)
         }
     }
     
-    private func deckRepeats() -> Bool {
+    fileprivate func deckRepeats() -> Bool {
         var repeatDeck = false
         for deckCard in deck.deckCards {
             if deckCard.descriptor == CardKit.Deck.Repeat {
@@ -88,32 +88,32 @@ public class DeckExecutor: NSOperation {
         return repeatDeck
     }
     
-    private func checkForUndefinedActionCardTypes() throws {
+    fileprivate func checkForUndefinedActionCardTypes() throws {
         for card in deck.actionCards {
             if self.executableActionTypes[card.descriptor] == nil {
-                throw ExecutionError.NoExecutionTypeDefinedForActionCardDescriptor(card.descriptor)
+                throw ExecutionError.noExecutionTypeDefinedForActionCardDescriptor(card.descriptor)
             }
         }
     }
     
-    private func checkForUndefinedTokenInstances() throws {
+    fileprivate func checkForUndefinedTokenInstances() throws {
         for card in deck.tokenCards {
             if self.tokenInstances[card] == nil {
-                throw ExecutionError.NoTokenInstanceDefinedForTokenCard(card)
+                throw ExecutionError.noTokenInstanceDefinedForTokenCard(card)
             }
         }
     }
     
-    private func checkIfExecutionCancelled() throws {
+    fileprivate func checkIfExecutionCancelled() throws {
         print("DeckExecutor checking if execution is cancelled")
-        if self.cancelled {
+        if self.isCancelled {
             print("  it is! cancelling all pending operations")
             
             // cancel any ExecutableActionCards that are executing
             self.cardExecutionQueue.cancelAllOperations()
             
             // throw an error that we were cancelled
-            throw ExecutionError.ExecutionCancelled
+            throw ExecutionError.executionCancelled
         }
     }
     
@@ -140,7 +140,7 @@ public class DeckExecutor: NSOperation {
             try self.checkIfExecutionCancelled()
             
             // start with the first hand in the deck
-            var deckHands = deck.hands.enumerate().generate()
+            var deckHands = deck.hands.enumerated().makeIterator()
             
             // keep track of the next hand we are supposed to execute
             var nextHand: Hand? = nil
@@ -181,12 +181,12 @@ public class DeckExecutor: NSOperation {
     /// if the Deck should continue execution with the next hand. Also returns a flag indicating
     /// whether execution should terminate after the current Hand.
     //swiftlint:disable:next function_body_length
-    private func executeHand(hand: Hand) throws -> Hand? {
+    fileprivate func executeHand(_ hand: Hand) throws -> Hand? {
         // operations to add to the execution queue
-        var operations: [NSOperation] = []
+        var operations: [Operation] = []
         var executableCards: [ExecutableActionCard] = []
         
-        let satisfactionCheck: dispatch_semaphore_t = dispatch_semaphore_create(1)
+        let satisfactionCheck: DispatchSemaphore = DispatchSemaphore(value: 1)
         var satisfiedCards: Set<CardIdentifier> = Set()
         var isHandSatisfied = false
         var nextHand: Hand? = nil
@@ -195,7 +195,7 @@ public class DeckExecutor: NSOperation {
         
         for card in hand.actionCards {
             guard let type = self.executableActionTypes[card.descriptor] else {
-                throw ExecutionError.NoExecutionTypeDefinedForActionCardDescriptor(card.descriptor)
+                throw ExecutionError.noExecutionTypeDefinedForActionCardDescriptor(card.descriptor)
             }
             
             let executable = type.init(with: card)
@@ -204,41 +204,41 @@ public class DeckExecutor: NSOperation {
             // copy in InputBindings
             for (slot, binding) in card.inputBindings {
                 switch binding {
-                case .BoundToInputCard(let inputCard):
+                case .boundToInputCard(let inputCard):
                     executable.inputs[slot] = inputCard.boundData
-                case .BoundToYieldingActionCard(_, let yield):
+                case .boundToYieldingActionCard(_, let yield):
                     guard let yieldDataValue = self.yieldData[yield] else { continue }
                     executable.inputs[slot] = yieldDataValue
                 default:
-                    throw ExecutionError.UnboundInputEncountered(card, slot)
+                    throw ExecutionError.unboundInputEncountered(card, slot)
                 }
             }
             
             // copy in TokenBindings
             for (slot, binding) in card.tokenBindings {
                 switch binding {
-                case .BoundToTokenCard(let identifier):
+                case .boundToTokenCard(let identifier):
                     guard let tokenCard = deck.tokenCard(with: identifier) else {
-                        throw ExecutionError.NoTokenCardPresentWithIdentifier(identifier)
+                        throw ExecutionError.noTokenCardPresentWithIdentifier(identifier)
                     }
                     
                     guard let instance = self.tokenInstances[tokenCard] else {
-                        throw ExecutionError.NoTokenInstanceDefinedForTokenCard(tokenCard)
+                        throw ExecutionError.noTokenInstanceDefinedForTokenCard(tokenCard)
                     }
                     
                     executable.tokens[slot] = instance
                 default:
                     // shouldn't happen, validation should have caught this
-                    throw ExecutionError.TokenSlotBoundToUnboundValue(card, slot)
+                    throw ExecutionError.tokenSlotBoundToUnboundValue(card, slot)
                 }
             }
             
             // create a dependency operation so we know which card finished executing
-            let done = NSBlockOperation() {
+            let done = BlockOperation() {
                 print("finished execution of card \(executable.actionCard.description)")
                 
                 // wait until any other operation doing a check is done
-                dispatch_semaphore_wait(satisfactionCheck, DISPATCH_TIME_FOREVER)
+                let _ = satisfactionCheck.wait(timeout: DispatchTime.distantFuture)
                 
                 print("  ... copying out yielded data")
                 
@@ -256,7 +256,7 @@ public class DeckExecutor: NSOperation {
                     isHandSatisfied = satisfactionResult.0
                     nextHand = satisfactionResult.1
                 }
-                dispatch_semaphore_signal(satisfactionCheck)
+                satisfactionCheck.signal()
             }
             done.addDependency(executable)
             
@@ -278,13 +278,13 @@ public class DeckExecutor: NSOperation {
             // assume checking every second is appropriate, although for more time-sensitive applications
             // this number may need to be reduced.
             print("SLEEPING WHILE WE WAIT FOR ALL CARDS TO FINISH EXECUTION")
-            NSThread.sleepForTimeInterval(1)
+            Thread.sleep(forTimeInterval: 1)
         }
         
         print("hand execution finished, checking if any cards threw errors")
         
         // obtain the semaphore so no other threads are performing the satisfaction check
-        dispatch_semaphore_wait(satisfactionCheck, DISPATCH_TIME_FOREVER)
+        let _ = satisfactionCheck.wait(timeout: DispatchTime.distantFuture)
         
         // cancel execution of any outstanding operations in the queue
         cardExecutionQueue.cancelAllOperations()
@@ -294,11 +294,11 @@ public class DeckExecutor: NSOperation {
             // only throws the first error encountered...
             if let error = executable.error {
                 print(" ... yep, a card threw an error: \(executable.actionCard.description)")
-                dispatch_semaphore_signal(satisfactionCheck)
-                throw ExecutionError.ActionCardError(error)
+                satisfactionCheck.signal()
+                throw ExecutionError.actionCardError(error)
             }
         }
-        dispatch_semaphore_signal(satisfactionCheck)
+        satisfactionCheck.signal()
         
         print("the next hand to be executed will be \(nextHand?.identifier)")
         

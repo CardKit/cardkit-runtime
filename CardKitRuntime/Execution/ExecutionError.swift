@@ -10,25 +10,25 @@ import Foundation
 
 import CardKit
 
-//MARK: ExecutionError
+// MARK: ExecutionError
 
-public enum ExecutionError: ErrorType {
-    case DeckDoesNotValidate([ValidationError])
-    case NoExecutionTypeDefinedForActionCardDescriptor(ActionCardDescriptor) //swiftlint:disable:this type_name
-    case NoTokenInstanceDefinedForTokenCard(TokenCard)
-    case NoTokenCardPresentWithIdentifier(CardIdentifier)
-    case TokenSlotBoundToUnboundValue(ActionCard, TokenSlot)
-    case UnboundInputEncountered(ActionCard, InputSlot)
-    case ExecutionCancelled
-    case ActionCardError(ActionExecutionError)
+public enum ExecutionError: Error {
+    case deckDoesNotValidate([ValidationError])
+    case noExecutionTypeDefinedForActionCardDescriptor(ActionCardDescriptor) //swiftlint:disable:this type_name
+    case noTokenInstanceDefinedForTokenCard(TokenCard)
+    case noTokenCardPresentWithIdentifier(CardIdentifier)
+    case tokenSlotBoundToUnboundValue(ActionCard, TokenSlot)
+    case unboundInputEncountered(ActionCard, InputSlot)
+    case executionCancelled
+    case actionCardError(ActionExecutionError)
 }
 
-//MARK: ActionExecutionError
+// MARK: ActionExecutionError
 
-public enum ActionExecutionError: ErrorType {
-    case NilValueForInput(ExecutableActionCard, String)
-    case TypeMismatchForInput(ExecutableActionCard, String, InputType, InputDataBinding)
-    case ExpectedYieldNotFound(ExecutableActionCard)
-    case ExpectedTokenSlotNotFound(ExecutableActionCard, String)
-    case UnboundTokenSlot(ExecutableActionCard, TokenSlot)
+public enum ActionExecutionError: Error {
+    case nilValueForInput(ExecutableActionCard, String)
+    case typeMismatchForInput(ExecutableActionCard, String, InputType, InputDataBinding)
+    case expectedYieldNotFound(ExecutableActionCard)
+    case expectedTokenSlotNotFound(ExecutableActionCard, String)
+    case unboundTokenSlot(ExecutableActionCard, TokenSlot)
 }

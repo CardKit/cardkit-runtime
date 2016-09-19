@@ -10,21 +10,21 @@ import Foundation
 
 import CardKit
 
-//MARK: CKTimer
+// MARK: CKTimer
 
 public class CKTimer: ExecutableActionCard {
     public override func main() {
         // wait the number of seconds specified by our Duration input
         guard let binding = self.valueForInput(named: "Duration") else {
-            self.error = .NilValueForInput(self, "Duration")
+            self.error = .nilValueForInput(self, "Duration")
             return
         }
-        guard case let .SwiftDouble(duration) = binding else {
-            self.error = .TypeMismatchForInput(self, "Duration", .SwiftDouble, binding)
+        guard case let .swiftDouble(duration) = binding else {
+            self.error = .typeMismatchForInput(self, "Duration", .swiftDouble, binding)
             return
         }
         
         // wait :duration: seconds
-        NSThread.sleepForTimeInterval(duration)
+        Thread.sleep(forTimeInterval: duration)
     }
 }

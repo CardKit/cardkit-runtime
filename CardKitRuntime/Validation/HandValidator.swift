@@ -10,46 +10,46 @@ import Foundation
 
 import CardKit
 
-//MARK: HandValidationError
+// MARK: HandValidationError
 
 public enum HandValidationError {
     /// No cards were present in the hand
-    case NoCardsInHand
+    case noCardsInHand
     
     /// A bound token was not found in the Deck. (args: TokenCard identifier, ActionCard identifier)
-    case BoundTokenNotFoundInDeck(CardIdentifier, CardIdentifier)
+    case boundTokenNotFoundInDeck(CardIdentifier, CardIdentifier)
     
     /// A consumed token was bound to multiple cards (args: TokenCard identifier, set of card identifiers to which the token was bound)
-    case ConsumedTokenBoundToMultipleCards(CardIdentifier, [CardIdentifier])
+    case consumedTokenBoundToMultipleCards(CardIdentifier, [CardIdentifier])
     
     /// The BranchHandCard did not specify a target Hand to which to branch
-    case BranchTargetNotSpecified(CardIdentifier)
+    case branchTargetNotSpecified(CardIdentifier)
     
     /// The target of the branch was not found in the Deck (args: branch target HandIdentifier)
-    case BranchTargetNotFound(HandIdentifier)
+    case branchTargetNotFound(HandIdentifier)
     
     /// Multiple Hand-level BranchHandCards were found. Hand-level means the CardTreeIdentifier is nil, signifying
     /// that the branch will happen when the entire Hand is satisfied.
-    case MultipleHandLevelBranchesFound([CardIdentifier])
+    case multipleHandLevelBranchesFound([CardIdentifier])
     
     /// Multiple BranchHandCards are attached to the same CardTree (args: CardTree identifier, list of BranchHandCards)
-    case CardTreeContainsMultipleBranches(CardTreeIdentifier, [CardIdentifier])
+    case cardTreeContainsMultipleBranches(CardTreeIdentifier, [CardIdentifier])
     
     /// There is no BranchHandCard that branches to the specified subhand
-    case SubhandUnreachable(HandIdentifier)
+    case subhandUnreachable(HandIdentifier)
     
     /// A circular reference was found. The list of HandIdentifiers contains the reference cycle.
-    case HandContainsCircularReference([HandIdentifier])
+    case handContainsCircularReference([HandIdentifier])
     
     /// The Repeat card specifies an invalid number of repetitions (e.g. negative).
-    case RepeatCardCountInvalid(CardIdentifier, Int)
+    case repeatCardCountInvalid(CardIdentifier, Int)
 }
 
-//MARK: HandValidator
+// MARK: HandValidator
 
 class HandValidator: Validator {
-    private let deck: Deck
-    private let hand: Hand
+    fileprivate let deck: Deck
+    fileprivate let hand: Hand
     
     init(_ deck: Deck, _ hand: Hand) {
         self.deck = deck
@@ -108,18 +108,18 @@ class HandValidator: Validator {
         return actions
     }
     
-    func checkNoCardsInHand(deck: Deck, _ hand: Hand) -> [ValidationError] {
+    func checkNoCardsInHand(_ deck: Deck, _ hand: Hand) -> [ValidationError] {
         var errors: [ValidationError] = []
         
         if hand.cards.count <= 1 {
             // all Hands have an End Rule card, so check if there's something else
-            errors.append(ValidationError.HandError(.Warning, deck.identifier, hand.identifier, .NoCardsInHand))
+            errors.append(ValidationError.handError(.warning, deck.identifier, hand.identifier, .noCardsInHand))
         }
         
         return errors
     }
     
-    func checkTokenBindings(deck: Deck, _ hand: Hand) -> [ValidationError] {
+    func checkTokenBindings(_ deck: Deck, _ hand: Hand) -> [ValidationError] {
         var errors: [ValidationError] = []
         
         var tokenBindings: [CardIdentifier : [CardIdentifier]] = [:]
@@ -140,14 +140,14 @@ class HandValidator: Validator {
                 if tokenCard.descriptor.isConsumed {
                     // make sure only ONE card is bound to this token
                     if bindings.count > 1 {
-                        errors.append(ValidationError.HandError(.Error, deck.identifier, hand.identifier, .ConsumedTokenBoundToMultipleCards(tokenCardIdentifier, bindings)))
+                        errors.append(ValidationError.handError(.error, deck.identifier, hand.identifier, .consumedTokenBoundToMultipleCards(tokenCardIdentifier, bindings)))
                     }
                 }
             } else {
                 // bound Token not found in Deck, throw an error
                 // for every ActionCard that bound to this Token
                 for actionCardIdentifier in bindings {
-                    errors.append(ValidationError.HandError(.Error, deck.identifier, hand.identifier, .BoundTokenNotFoundInDeck(tokenCardIdentifier, actionCardIdentifier)))
+                    errors.append(ValidationError.handError(.error, deck.identifier, hand.identifier, .boundTokenNotFoundInDeck(tokenCardIdentifier, actionCardIdentifier)))
                 }
             }
         }
@@ -155,19 +155,19 @@ class HandValidator: Validator {
         return errors
     }
     
-    func checkBranchTargetNotSpecified(deck: Deck, _ hand: Hand) -> [ValidationError] {
+    func checkBranchTargetNotSpecified(_ deck: Deck, _ hand: Hand) -> [ValidationError] {
         var errors: [ValidationError] = []
         
         for card in hand.branchCards {
             if card.targetHandIdentifier == nil {
-                errors.append(ValidationError.HandError(.Error, deck.identifier, hand.identifier, .BranchTargetNotSpecified(card.identifier)))
+                errors.append(ValidationError.handError(.error, deck.identifier, hand.identifier, .branchTargetNotSpecified(card.identifier)))
             }
         }
         
         return errors
     }
     
-    func checkBranchTargetNotFound(deck: Deck, _ hand: Hand) -> [ValidationError] {
+    func checkBranchTargetNotFound(_ deck: Deck, _ hand: Hand) -> [ValidationError] {
         var errors: [ValidationError] = []
         
         for card in hand.branchCards {
@@ -179,14 +179,14 @@ class HandValidator: Validator {
             }
             
             if !found {
-                errors.append(ValidationError.HandError(.Error, deck.identifier, hand.identifier, .BranchTargetNotFound(branchTarget)))
+                errors.append(ValidationError.handError(.error, deck.identifier, hand.identifier, .branchTargetNotFound(branchTarget)))
             }
         }
         
         return errors
     }
     
-    func checkMultipleHandLevelBranchesFound(deck: Deck, _ hand: Hand) -> [ValidationError] {
+    func checkMultipleHandLevelBranchesFound(_ deck: Deck, _ hand: Hand) -> [ValidationError] {
         var errors: [ValidationError] = []
         
         var handLevelBranches: [CardIdentifier] = []
@@ -198,13 +198,13 @@ class HandValidator: Validator {
         }
         
         if handLevelBranches.count > 1 {
-            errors.append(ValidationError.HandError(.Error, deck.identifier, hand.identifier, .MultipleHandLevelBranchesFound(handLevelBranches)))
+            errors.append(ValidationError.handError(.error, deck.identifier, hand.identifier, .multipleHandLevelBranchesFound(handLevelBranches)))
         }
         
         return errors
     }
     
-    func checkCardTreeContainsMultipleBranches(deck: Deck, _ hand: Hand) -> [ValidationError] {
+    func checkCardTreeContainsMultipleBranches(_ deck: Deck, _ hand: Hand) -> [ValidationError] {
         var errors: [ValidationError] = []
         
         var cardTreeBranches: [CardTreeIdentifier : [CardIdentifier]] = [:]
@@ -220,14 +220,14 @@ class HandValidator: Validator {
         
         for (cardTree, branchTargets) in cardTreeBranches {
             if branchTargets.count > 1 {
-                errors.append(ValidationError.HandError(.Error, deck.identifier, hand.identifier, .CardTreeContainsMultipleBranches(cardTree, branchTargets)))
+                errors.append(ValidationError.handError(.error, deck.identifier, hand.identifier, .cardTreeContainsMultipleBranches(cardTree, branchTargets)))
             }
         }
         
         return errors
     }
     
-    func checkSubhandUnreachable(deck: Deck, _ hand: Hand) -> [ValidationError] {
+    func checkSubhandUnreachable(_ deck: Deck, _ hand: Hand) -> [ValidationError] {
         var errors: [ValidationError] = []
         
         var unbranchedSubhands = Array(hand.subhands)
@@ -242,13 +242,13 @@ class HandValidator: Validator {
         // anything still in unbranchedSubhands didn't have a BranchHandCard
         // targeting it
         for subhand in unbranchedSubhands {
-            errors.append(ValidationError.HandError(.Warning, deck.identifier, hand.identifier, .SubhandUnreachable(subhand.identifier)))
+            errors.append(ValidationError.handError(.warning, deck.identifier, hand.identifier, .subhandUnreachable(subhand.identifier)))
         }
         
         return errors
     }
     
-    func checkHandContainsCircularReference(deck: Deck, _ hand: Hand) -> [ValidationError] {
+    func checkHandContainsCircularReference(_ deck: Deck, _ hand: Hand) -> [ValidationError] {
         var errors: [ValidationError] = []
         
         // do iterative DFS to find circular references
@@ -263,15 +263,15 @@ class HandValidator: Validator {
             if !discoveredHands.contains(h.identifier) {
                 discoveredHands.insert(h.identifier)
                 dfsOrder.append(h.identifier)
-                handStack.appendContentsOf(h.subhands)
+                handStack.append(contentsOf: h.subhands)
             } else {
                 // check for a cycle
-                if let index = dfsOrder.indexOf(h.identifier) {
+                if let index = dfsOrder.index(of: h.identifier) {
                     var cycle = Array(dfsOrder[index...dfsOrder.endIndex])
                     cycle.append(h.identifier)
                     
                     // cycle found
-                    errors.append(ValidationError.HandError(.Error, deck.identifier, hand.identifier, .HandContainsCircularReference(cycle)))
+                    errors.append(ValidationError.handError(.error, deck.identifier, hand.identifier, .handContainsCircularReference(cycle)))
                 }
             }
         }
@@ -279,13 +279,13 @@ class HandValidator: Validator {
         return errors
     }
     
-    func checkRepeatCardCountInvalid(deck: Deck, _ hand: Hand) -> [ValidationError] {
+    func checkRepeatCardCountInvalid(_ deck: Deck, _ hand: Hand) -> [ValidationError] {
         var errors: [ValidationError] = []
         
         guard let repeatCard = hand.repeatCard else { return [] }
         
         if repeatCard.repeatCount < 0 {
-            errors.append(ValidationError.HandError(.Error, deck.identifier, hand.identifier, .RepeatCardCountInvalid(repeatCard.identifier, repeatCard.repeatCount)))
+            errors.append(ValidationError.handError(.error, deck.identifier, hand.identifier, .repeatCardCountInvalid(repeatCard.identifier, repeatCard.repeatCount)))
         }
         
         return errors

@@ -16,7 +16,7 @@ public typealias YieldBindings = [Yield : InputDataBinding]
 
 /// Appled to classes that implement an executable ActionCard
 protocol CarriesActionCardState {
-    func setup(inputs: InputBindings, tokens: TokenBindings)
+    func setup(_ inputs: InputBindings, tokens: TokenBindings)
     
     /// This is the ActionCard instance carrying all of the binding data for inputs and yields. This is an input.
     var actionCard: ActionCard { get }

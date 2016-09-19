@@ -10,28 +10,28 @@ import Foundation
 
 import CardKit
 
-//MARK: ValidationSeverity
+// MARK: ValidationSeverity
 
 public enum ValidationSeverity: String {
-    case Error
-    case Warning
+    case error
+    case warning
 }
 
 extension ValidationSeverity: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .Error:
-            return "Error"
-        case .Warning:
-            return "Warning"
+        case .error:
+            return "error"
+        case .warning:
+            return "warning"
         }
     }
 }
 
-//MARK: ValidationError
+// MARK: ValidationError
 
 public enum ValidationError {
-    case DeckError(ValidationSeverity, DeckIdentifier, DeckValidationError)
-    case HandError(ValidationSeverity, DeckIdentifier, HandIdentifier, HandValidationError)
-    case CardError(ValidationSeverity, DeckIdentifier, HandIdentifier, CardIdentifier, CardValidationError)
+    case deckError(ValidationSeverity, DeckIdentifier, DeckValidationError)
+    case handError(ValidationSeverity, DeckIdentifier, HandIdentifier, HandValidationError)
+    case cardError(ValidationSeverity, DeckIdentifier, HandIdentifier, CardIdentifier, CardValidationError)
 }
