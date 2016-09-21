@@ -12,16 +12,16 @@ import CardKit
 
 public class ValidationEngine {
     /// Validates the entire Deck.
-    public class func validate(deck: Deck) -> [ValidationError] {
+    public class func validate(_ deck: Deck) -> [ValidationError] {
         var validationActions: [ValidationAction] = []
         
-        validationActions.appendContentsOf(DeckValidator(deck).validationActions)
+        validationActions.append(contentsOf: DeckValidator(deck).validationActions)
         
         for hand in deck.hands {
-            validationActions.appendContentsOf(HandValidator(deck, hand).validationActions)
+            validationActions.append(contentsOf: HandValidator(deck, hand).validationActions)
             
             for card in hand.cards {
-                validationActions.appendContentsOf(CardValidator(deck, hand, card).validationActions)
+                validationActions.append(contentsOf: CardValidator(deck, hand, card).validationActions)
             }
         }
         
@@ -29,41 +29,41 @@ public class ValidationEngine {
     }
     
     /// Validates the given Hand in the given Deck.
-    public class func validate(hand: Hand, _ deck: Deck) -> [ValidationError] {
+    public class func validate(_ hand: Hand, _ deck: Deck) -> [ValidationError] {
         var validationActions: [ValidationAction] = []
         
-        validationActions.appendContentsOf(HandValidator(deck, hand).validationActions)
+        validationActions.append(contentsOf: HandValidator(deck, hand).validationActions)
             
         for card in hand.cards {
-            validationActions.appendContentsOf(CardValidator(deck, hand, card).validationActions)
+            validationActions.append(contentsOf: CardValidator(deck, hand, card).validationActions)
         }
         
         return ValidationEngine.executeValidation(validationActions)
     }
     
     /// Validates the given Card in the given Hand in the given Deck.
-    public class func validate(card: Card, _ hand: Hand, _ deck: Deck) -> [ValidationError] {
+    public class func validate(_ card: Card, _ hand: Hand, _ deck: Deck) -> [ValidationError] {
         var validationActions: [ValidationAction] = []
         
-        validationActions.appendContentsOf(CardValidator(deck, hand, card).validationActions)
+        validationActions.append(contentsOf: CardValidator(deck, hand, card).validationActions)
         
         return ValidationEngine.executeValidation(validationActions)
     }
     
-    class func executeValidation(validationActions: [ValidationAction]) -> [ValidationError] {
-        let queue = dispatch_queue_create("com.ibm.research.CardKit.ValidationEngine", DISPATCH_QUEUE_CONCURRENT)
+    class func executeValidation(_ validationActions: [ValidationAction]) -> [ValidationError] {
+//        let queue = DispatchQueue(label: "com.ibm.research.CardKit.ValidationEngine", attributes: DispatchQueue.Attributes.concurrent)
         
-        let errorSemaphore: dispatch_semaphore_t = dispatch_semaphore_create(1)
+        let errorSemaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
         var validationErrors: [ValidationError] = []
         
-        dispatch_apply(validationActions.count, queue) {
+        DispatchQueue.concurrentPerform(iterations: validationActions.count) {
             i in
             let action = validationActions[i]
             let errors = action()
             
-            dispatch_semaphore_wait(errorSemaphore, DISPATCH_TIME_FOREVER)
-            validationErrors.appendContentsOf(errors)
-            dispatch_semaphore_signal(errorSemaphore)
+            let _ = errorSemaphore.wait(timeout: DispatchTime.distantFuture)
+            validationErrors.append(contentsOf: errors)
+            errorSemaphore.signal()
         }
         
         return validationErrors

@@ -22,15 +22,23 @@ class ValidationEngineTests: XCTestCase {
     }
     
     func testValidationEngineSimple() {
+        let calcToken = CKCalc.Token.Calculator.makeCard()
         let add = CKCalc.Action.Math.Add
         
-        let deck = (
-            add ==>
-            add
-            )%
-        
-        let errors = ValidationEngine.validate(deck)
-        
-        XCTAssertTrue(errors.count == 0)
+        do {
+            let five = try CardKit.Input.Numeric.Real <- 5.0
+            
+            let deck = try (
+                add <- ("A", five) <- ("B", five) <- ("Calculator", calcToken) ==>
+                add <- ("A", five) <- ("B", five) <- ("Calculator", calcToken)
+                )%
+            deck.add(calcToken)
+            
+            let errors = ValidationEngine.validate(deck)
+            
+            XCTAssertTrue(errors.count == 0)
+        } catch let error {
+            XCTFail("error: \(error.localizedDescription)")
+        }
     }
 }

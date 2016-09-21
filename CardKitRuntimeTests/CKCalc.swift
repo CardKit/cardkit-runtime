@@ -11,80 +11,80 @@ import Foundation
 
 // swiftlint:disable nesting
 public struct CKCalc {
-    private init() {}
+    fileprivate init() {}
     
-    //MARK: Action Cards
+    // MARK: Action Cards
     
     /// Contains descriptors for Action cards
     public struct Action {
-        private init() {}
+        fileprivate init() {}
         
         /// Contains descriptors for Math cards
         public struct Math {
-            private init() {}
+            fileprivate init() {}
             
-            //MARK: Add
+            // MARK: Add
             /// Descriptor for Add card
             public static let Add = ActionCardDescriptor(
                 name: "Add",
                 subpath: "Math",
                 inputs: [
-                    InputSlot(name: "A", type: .SwiftDouble, isOptional: false),
-                    InputSlot(name: "B", type: .SwiftDouble, isOptional: false)
+                    InputSlot(name: "A", descriptor: CardKit.Input.Numeric.Real, isOptional: false),
+                    InputSlot(name: "B", descriptor: CardKit.Input.Numeric.Real, isOptional: false)
                 ],
                 tokens: [TokenSlot(name: "Calculator", descriptor: CKCalc.Token.Calculator)],
-                yields: [Yield(type: .SwiftDouble)],
+                yields: [Yield(type: .swiftDouble)],
                 yieldDescription: "The sum A + B",
                 ends: true,
                 endsDescription: "Ends when the computation is complete.",
                 assetCatalog: CardAssetCatalog(description: "No action performed."),
                 version: 0)
             
-            //MARK: Subtract
+            // MARK: Subtract
             /// Descriptor for Subtract card
             public static let Subtract = ActionCardDescriptor(
                 name: "Subtract",
                 subpath: "Math",
                 inputs: [
-                    InputSlot(name: "A", type: .SwiftDouble, isOptional: false),
-                    InputSlot(name: "B", type: .SwiftDouble, isOptional: false)
+                    InputSlot(name: "A", descriptor: CardKit.Input.Numeric.Real, isOptional: false),
+                    InputSlot(name: "B", descriptor: CardKit.Input.Numeric.Real, isOptional: false)
                 ],
                 tokens: [TokenSlot(name: "Calculator", descriptor: CKCalc.Token.Calculator)],
-                yields: [Yield(type: .SwiftDouble)],
+                yields: [Yield(type: .swiftDouble)],
                 yieldDescription: "The difference A - B",
                 ends: true,
                 endsDescription: "Ends when the computation is complete.",
                 assetCatalog: CardAssetCatalog(description: "No action performed."),
                 version: 0)
             
-            //MARK: Multiply
+            // MARK: Multiply
             /// Descriptor for Multiply card
             public static let Multiply = ActionCardDescriptor(
                 name: "Multiply",
                 subpath: "Math",
                 inputs: [
-                    InputSlot(name: "A", type: .SwiftDouble, isOptional: false),
-                    InputSlot(name: "B", type: .SwiftDouble, isOptional: false)
+                    InputSlot(name: "A", descriptor: CardKit.Input.Numeric.Real, isOptional: false),
+                    InputSlot(name: "B", descriptor: CardKit.Input.Numeric.Real, isOptional: false)
                 ],
                 tokens: [TokenSlot(name: "Calculator", descriptor: CKCalc.Token.Calculator)],
-                yields: [Yield(type: .SwiftDouble)],
+                yields: [Yield(type: .swiftDouble)],
                 yieldDescription: "The multiplication A * B",
                 ends: true,
                 endsDescription: "Ends when the computation is complete.",
                 assetCatalog: CardAssetCatalog(description: "No action performed."),
                 version: 0)
             
-            //MARK: Divide
+            // MARK: Divide
             /// Descriptor for Divide card
             public static let Divide = ActionCardDescriptor(
                 name: "Divide",
                 subpath: "Math",
                 inputs: [
-                    InputSlot(name: "A", type: .SwiftDouble, isOptional: false),
-                    InputSlot(name: "B", type: .SwiftDouble, isOptional: false)
+                    InputSlot(name: "A", descriptor: CardKit.Input.Numeric.Real, isOptional: false),
+                    InputSlot(name: "B", descriptor: CardKit.Input.Numeric.Real, isOptional: false)
                 ],
                 tokens: [TokenSlot(name: "Calculator", descriptor: CKCalc.Token.Calculator)],
-                yields: [Yield(type: .SwiftDouble)],
+                yields: [Yield(type: .swiftDouble)],
                 yieldDescription: "The division A / B",
                 ends: true,
                 endsDescription: "Ends when the computation is complete.",
@@ -93,11 +93,11 @@ public struct CKCalc {
         }
     }
     
-    //MARK: Token Cards
+    // MARK: Token Cards
     
     /// Contains descriptors for Token cards
     public struct Token {
-        private init() {}
+        fileprivate init() {}
         
         public static let Calculator = TokenCardDescriptor(
             name: "Calculator",
@@ -108,40 +108,40 @@ public struct CKCalc {
     }
 }
 
-//MARK:- CKAdd
+// MARK: - CKAdd
 
 public class CKAdd: ExecutableActionCard {
     public override func main() {
         // get our inputs
         guard let bindingA = self.valueForInput(named: "A") else {
-            self.error = .NilValueForInput(self, "A")
+            self.error = .nilValueForInput(self, "A")
             return
         }
         guard let bindingB = self.valueForInput(named: "B") else {
-            self.error = .NilValueForInput(self, "B")
+            self.error = .nilValueForInput(self, "B")
             return
         }
-        guard case let .SwiftDouble(a) = bindingA else {
-            self.error = .TypeMismatchForInput(self, "A", .SwiftDouble, bindingA)
+        guard case let .swiftDouble(a) = bindingA else {
+            self.error = .typeMismatchForInput(self, "A", .swiftDouble, bindingA)
             return
         }
-        guard case let .SwiftDouble(b) = bindingB else {
-            self.error = .TypeMismatchForInput(self, "B", .SwiftDouble, bindingB)
+        guard case let .swiftDouble(b) = bindingB else {
+            self.error = .typeMismatchForInput(self, "B", .swiftDouble, bindingB)
             return
         }
         
         guard let yield = self.actionCard.descriptor.yields.first else {
-            self.error = .ExpectedYieldNotFound(self)
+            self.error = .expectedYieldNotFound(self)
             return
         }
         
         guard let calcSlot = self.actionCard.tokenSlots.slot(named: "Calculator") else {
-            self.error = .ExpectedTokenSlotNotFound(self, "Calculator")
+            self.error = .expectedTokenSlotNotFound(self, "Calculator")
             return
         }
         
         guard let calc = self.tokens[calcSlot] as? CKCalculator else {
-            self.error = .UnboundTokenSlot(self, calcSlot)
+            self.error = .unboundTokenSlot(self, calcSlot)
             return
         }
         
@@ -149,44 +149,44 @@ public class CKAdd: ExecutableActionCard {
         let sum = calc.add(a, b)
         
         // save the result
-        self.yields[yield] = .SwiftDouble(sum)
+        self.yields[yield] = .swiftDouble(sum)
     }
 }
 
-//MARK:- CKSubtract
+// MARK: - CKSubtract
 
 public class CKSubtract: ExecutableActionCard {
     public override func main() {
         // get our inputs
         guard let bindingA = self.valueForInput(named: "A") else {
-            self.error = .NilValueForInput(self, "A")
+            self.error = .nilValueForInput(self, "A")
             return
         }
         guard let bindingB = self.valueForInput(named: "B") else {
-            self.error = .NilValueForInput(self, "B")
+            self.error = .nilValueForInput(self, "B")
             return
         }
-        guard case let .SwiftDouble(a) = bindingA else {
-            self.error = .TypeMismatchForInput(self, "A", .SwiftDouble, bindingA)
+        guard case let .swiftDouble(a) = bindingA else {
+            self.error = .typeMismatchForInput(self, "A", .swiftDouble, bindingA)
             return
         }
-        guard case let .SwiftDouble(b) = bindingB else {
-            self.error = .TypeMismatchForInput(self, "B", .SwiftDouble, bindingB)
+        guard case let .swiftDouble(b) = bindingB else {
+            self.error = .typeMismatchForInput(self, "B", .swiftDouble, bindingB)
             return
         }
         
         guard let yield = self.actionCard.descriptor.yields.first else {
-            self.error = .ExpectedYieldNotFound(self)
+            self.error = .expectedYieldNotFound(self)
             return
         }
         
         guard let calcSlot = self.actionCard.tokenSlots.slot(named: "Calculator") else {
-            self.error = .ExpectedTokenSlotNotFound(self, "Calculator")
+            self.error = .expectedTokenSlotNotFound(self, "Calculator")
             return
         }
         
         guard let calc = self.tokens[calcSlot] as? CKCalculator else {
-            self.error = .UnboundTokenSlot(self, calcSlot)
+            self.error = .unboundTokenSlot(self, calcSlot)
             return
         }
         
@@ -194,44 +194,44 @@ public class CKSubtract: ExecutableActionCard {
         let difference = calc.subtract(a, b)
         
         // save the result
-        self.yields[yield] = .SwiftDouble(difference)
+        self.yields[yield] = .swiftDouble(difference)
     }
 }
 
-//MARK:- CKMultiply
+// MARK: - CKMultiply
 
 public class CKMultiply: ExecutableActionCard {
     public override func main() {
         // get our inputs
         guard let bindingA = self.valueForInput(named: "A") else {
-            self.error = .NilValueForInput(self, "A")
+            self.error = .nilValueForInput(self, "A")
             return
         }
         guard let bindingB = self.valueForInput(named: "B") else {
-            self.error = .NilValueForInput(self, "B")
+            self.error = .nilValueForInput(self, "B")
             return
         }
-        guard case let .SwiftDouble(a) = bindingA else {
-            self.error = .TypeMismatchForInput(self, "A", .SwiftDouble, bindingA)
+        guard case let .swiftDouble(a) = bindingA else {
+            self.error = .typeMismatchForInput(self, "A", .swiftDouble, bindingA)
             return
         }
-        guard case let .SwiftDouble(b) = bindingB else {
-            self.error = .TypeMismatchForInput(self, "B", .SwiftDouble, bindingB)
+        guard case let .swiftDouble(b) = bindingB else {
+            self.error = .typeMismatchForInput(self, "B", .swiftDouble, bindingB)
             return
         }
         
         guard let yield = self.actionCard.descriptor.yields.first else {
-            self.error = .ExpectedYieldNotFound(self)
+            self.error = .expectedYieldNotFound(self)
             return
         }
         
         guard let calcSlot = self.actionCard.tokenSlots.slot(named: "Calculator") else {
-            self.error = .ExpectedTokenSlotNotFound(self, "Calculator")
+            self.error = .expectedTokenSlotNotFound(self, "Calculator")
             return
         }
         
         guard let calc = self.tokens[calcSlot] as? CKCalculator else {
-            self.error = .UnboundTokenSlot(self, calcSlot)
+            self.error = .unboundTokenSlot(self, calcSlot)
             return
         }
         
@@ -239,45 +239,45 @@ public class CKMultiply: ExecutableActionCard {
         let product = calc.multiply(a, b)
         
         // save the result
-        self.yields[yield] = .SwiftDouble(product)
+        self.yields[yield] = .swiftDouble(product)
     }
 }
 
 
-//MARK:- CKDivide
+// MARK: - CKDivide
 
 public class CKDivide: ExecutableActionCard {
     public override func main() {
         // get our inputs
         guard let bindingA = self.valueForInput(named: "A") else {
-            self.error = .NilValueForInput(self, "A")
+            self.error = .nilValueForInput(self, "A")
             return
         }
         guard let bindingB = self.valueForInput(named: "B") else {
-            self.error = .NilValueForInput(self, "B")
+            self.error = .nilValueForInput(self, "B")
             return
         }
-        guard case let .SwiftDouble(a) = bindingA else {
-            self.error = .TypeMismatchForInput(self, "A", .SwiftDouble, bindingA)
+        guard case let .swiftDouble(a) = bindingA else {
+            self.error = .typeMismatchForInput(self, "A", .swiftDouble, bindingA)
             return
         }
-        guard case let .SwiftDouble(b) = bindingB else {
-            self.error = .TypeMismatchForInput(self, "B", .SwiftDouble, bindingB)
+        guard case let .swiftDouble(b) = bindingB else {
+            self.error = .typeMismatchForInput(self, "B", .swiftDouble, bindingB)
             return
         }
         
         guard let yield = self.actionCard.descriptor.yields.first else {
-            self.error = .ExpectedYieldNotFound(self)
+            self.error = .expectedYieldNotFound(self)
             return
         }
         
         guard let calcSlot = self.actionCard.tokenSlots.slot(named: "Calculator") else {
-            self.error = .ExpectedTokenSlotNotFound(self, "Calculator")
+            self.error = .expectedTokenSlotNotFound(self, "Calculator")
             return
         }
         
         guard let calc = self.tokens[calcSlot] as? CKCalculator else {
-            self.error = .UnboundTokenSlot(self, calcSlot)
+            self.error = .unboundTokenSlot(self, calcSlot)
             return
         }
         
@@ -285,55 +285,55 @@ public class CKDivide: ExecutableActionCard {
         let quotient = calc.divide(a, b)
         
         // save the result
-        self.yields[yield] = .SwiftDouble(quotient)
+        self.yields[yield] = .swiftDouble(quotient)
     }
 }
 
-//MARK:- CKCalculator
+// MARK: - CKCalculator
 
 protocol CKCalculator {
-    func add(lhs: Double, _ rhs: Double) -> Double
-    func subtract(lhs: Double, _ rhs: Double) -> Double
-    func multiply(lhs: Double, _ rhs: Double) -> Double
-    func divide(lhs: Double, _ rhs: Double) -> Double
+    func add(_ lhs: Double, _ rhs: Double) -> Double
+    func subtract(_ lhs: Double, _ rhs: Double) -> Double
+    func multiply(_ lhs: Double, _ rhs: Double) -> Double
+    func divide(_ lhs: Double, _ rhs: Double) -> Double
 }
 
 class CKFastCalculator: ExecutableTokenCard, CKCalculator {
-    func add(lhs: Double, _ rhs: Double) -> Double {
+    func add(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs + rhs
     }
     
-    func subtract(lhs: Double, _ rhs: Double) -> Double {
+    func subtract(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs - rhs
     }
     
-    func multiply(lhs: Double, _ rhs: Double) -> Double {
+    func multiply(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs * rhs
     }
     
-    func divide(lhs: Double, _ rhs: Double) -> Double {
+    func divide(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs / rhs
     }
 }
 
 class CKSlowCalculator: ExecutableTokenCard, CKCalculator {
-    func add(lhs: Double, _ rhs: Double) -> Double {
-        NSThread.sleepForTimeInterval(5)
+    func add(_ lhs: Double, _ rhs: Double) -> Double {
+        Thread.sleep(forTimeInterval: 5)
         return lhs + rhs
     }
     
-    func subtract(lhs: Double, _ rhs: Double) -> Double {
-        NSThread.sleepForTimeInterval(5)
+    func subtract(_ lhs: Double, _ rhs: Double) -> Double {
+        Thread.sleep(forTimeInterval: 5)
         return lhs - rhs
     }
     
-    func multiply(lhs: Double, _ rhs: Double) -> Double {
-        NSThread.sleepForTimeInterval(5)
+    func multiply(_ lhs: Double, _ rhs: Double) -> Double {
+        Thread.sleep(forTimeInterval: 5)
         return lhs * rhs
     }
     
-    func divide(lhs: Double, _ rhs: Double) -> Double {
-        NSThread.sleepForTimeInterval(5)
+    func divide(_ lhs: Double, _ rhs: Double) -> Double {
+        Thread.sleep(forTimeInterval: 5)
         return lhs / rhs
     }
 }

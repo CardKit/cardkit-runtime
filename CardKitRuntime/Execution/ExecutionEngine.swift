@@ -11,16 +11,16 @@ import Foundation
 import CardKit
 
 public class ExecutionEngine {
-    public private (set) var deck: Deck
+    public fileprivate (set) var deck: Deck
     
     /// Map between ActionCardDescriptor and the type that implements it
-    private var executableActionTypes: [ActionCardDescriptor : ExecutableActionCard.Type] = [:]
+    fileprivate var executableActionTypes: [ActionCardDescriptor : ExecutableActionCard.Type] = [:]
     
     /// Map between TokenCard and the instance that implements it
-    private var tokenInstances: [TokenCard : ExecutableTokenCard] = [:]
+    fileprivate var tokenInstances: [TokenCard : ExecutableTokenCard] = [:]
     
     /// Queue used for running the DeckExecutor
-    private let operationQueue: NSOperationQueue = NSOperationQueue()
+    fileprivate let operationQueue: OperationQueue = OperationQueue()
     
     init(with deck: Deck) {
         self.deck = deck
@@ -30,25 +30,25 @@ public class ExecutionEngine {
         self.setExecutableActionType(CKWaitUntilTime.self, for: CardKit.Action.Trigger.Time.WaitUntilTime)
     }
     
-    //MARK: Instance Methods
+    // MARK: Instance Methods
     
-    public func setExecutableActionType(type: ExecutableActionCard.Type, for descriptor: ActionCardDescriptor) {
+    public func setExecutableActionType(_ type: ExecutableActionCard.Type, for descriptor: ActionCardDescriptor) {
         self.executableActionTypes[descriptor] = type
     }
     
-    public func setExecutableActionTypes(executionTypes: [ActionCardDescriptor : ExecutableActionCard.Type]) {
+    public func setExecutableActionTypes(_ executionTypes: [ActionCardDescriptor : ExecutableActionCard.Type]) {
         self.executableActionTypes = executionTypes
     }
     
-    public func setTokenInstance(instance: ExecutableTokenCard, for tokenCard: TokenCard) {
+    public func setTokenInstance(_ instance: ExecutableTokenCard, for tokenCard: TokenCard) {
         self.tokenInstances[tokenCard] = instance
     }
     
-    public func setTokenInstances(tokenInstances: [TokenCard : ExecutableTokenCard]) {
+    public func setTokenInstances(_ tokenInstances: [TokenCard : ExecutableTokenCard]) {
         self.tokenInstances = tokenInstances
     }
     
-    public func execute(completion: (YieldBindings, ExecutionError?) -> Void) {
+    public func execute(_ completion: (YieldBindings, ExecutionError?) -> Void) {
         // create a DeckExecutor
         let deckExecutor = DeckExecutor(with: self.deck)
         deckExecutor.setExecutableActionTypes(self.executableActionTypes)
@@ -56,11 +56,11 @@ public class ExecutionEngine {
         
         // create a concurrent dispatch queue for both the DeckExecutor operation
         // and the dispatch_sync that will wait for the queue to finish
-        let queue = dispatch_queue_create("com.ibm.research.CardKitRuntime.ExecutionEngine", DISPATCH_QUEUE_CONCURRENT)
+        let queue = DispatchQueue(label: "com.ibm.research.CardKitRuntime.ExecutionEngine", attributes: DispatchQueue.Attributes.concurrent)
         
         self.operationQueue.underlyingQueue = queue
         
-        dispatch_sync(queue) {
+        queue.sync {
             print("ExecutionEngine beginning execution in dispatch queue \(queue.description)")
             
             // start executing the deck

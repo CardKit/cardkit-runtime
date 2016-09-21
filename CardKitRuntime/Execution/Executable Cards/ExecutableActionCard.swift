@@ -20,7 +20,7 @@ import CardKit
 /// In the event that a Hand becomes satisfied while ExecutableActionCards are still executing, the ExecutionEngine
 /// will cancel all other operations in its queue. Therefore, an ExecutableActionCard may wish to override
 /// cancel() in order to perform cleanup or free resources.
-public class ExecutableActionCard: NSOperation, CarriesActionCardState {
+public class ExecutableActionCard: Operation, CarriesActionCardState {
     // these are "inputs" to the ExecutableActionCard
     var actionCard: ActionCard
     var inputs: InputBindings = [:]
@@ -35,9 +35,9 @@ public class ExecutableActionCard: NSOperation, CarriesActionCardState {
         self.actionCard = card
     }
     
-    //MARK: CarriesActionCardState
+    // MARK: CarriesActionCardState
     
-    func setup(inputs: InputBindings, tokens: TokenBindings) {
+    func setup(_ inputs: InputBindings, tokens: TokenBindings) {
         self.inputs = inputs
         self.tokens = tokens
     }
@@ -47,7 +47,7 @@ public class ExecutableActionCard: NSOperation, CarriesActionCardState {
         return self.inputs[slot]
     }
     
-    //MARK: NSOperation
+    // MARK: Operation
     
     public override func main() {
         // subclasses must override main() to perform their executable actions
