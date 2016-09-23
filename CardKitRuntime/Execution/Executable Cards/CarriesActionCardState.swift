@@ -8,6 +8,7 @@
 
 import Foundation
 
+import Freddy
 import CardKit
 
 public typealias InputBindings = [InputSlot : InputDataBinding]
@@ -33,6 +34,9 @@ protocol CarriesActionCardState {
     /// This holds an error produced during execution. This is an output.
     var error: ActionExecutionError? { get }
     
-    /// Retrieve the input value for the named slot
-    func valueForInput(named name: String) -> InputDataBinding?
+    /// Retrieve the input binding for the named slot
+    func binding(forInput name: String) -> InputDataBinding?
+    
+    /// Retried the input value for the named slot
+    func value<T>(forInput name: String) -> T? where T : JSONDecodable
 }

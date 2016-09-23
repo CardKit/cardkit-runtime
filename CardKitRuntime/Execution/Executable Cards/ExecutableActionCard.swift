@@ -1,6 +1,6 @@
 //
 //  ExecutableActionCard.swift
-//  CardKit
+//  CardKit Runtime
 //
 //  Created by Justin Weisz on 7/28/16.
 //  Copyright © 2016 IBM. All rights reserved.
@@ -8,6 +8,7 @@
 
 import Foundation
 
+import Freddy
 import CardKit
 
 /// ExecutableActionCard performs the actual, executable action of an ActionCard. This class is meant to
@@ -42,9 +43,22 @@ public class ExecutableActionCard: Operation, CarriesActionCardState {
         self.tokens = tokens
     }
     
-    func valueForInput(named name: String) -> InputDataBinding? {
+    func binding(forInput name: String) -> InputDataBinding? {
         guard let slot = self.actionCard.descriptor.inputSlots.slot(named: name) else { return nil }
         return self.inputs[slot]
+    }
+    
+    func value<T>(forInput name: String) -> T? where T : JSONDecodable {
+        guard let binding = self.binding(forInput: name) else { return nil }
+        guard case let .bound(json) = binding else { return nil }
+        
+        // convert type JSON to type T
+        do {
+            let val = try T(json: json)
+            return val
+        } catch {
+            return nil
+        }
     }
     
     // MARK: Operation

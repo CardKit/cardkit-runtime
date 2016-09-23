@@ -27,7 +27,6 @@ public enum ExecutionError: Error {
 
 public enum ActionExecutionError: Error {
     case nilValueForInput(ExecutableActionCard, String)
-    case typeMismatchForInput(ExecutableActionCard, String, InputType, InputDataBinding)
     case expectedYieldNotFound(ExecutableActionCard)
     case expectedTokenSlotNotFound(ExecutableActionCard, String)
     case unboundTokenSlot(ExecutableActionCard, TokenSlot)
