@@ -63,12 +63,12 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     
     // MARK: Operation
     
-    public override func main() {
+    open override func main() {
         // subclasses must override main() to perform their executable actions
         fatalError("main() method cannot be executed on ExecutableActionCard, it must be overridden in a subclass")
     }
     
-    public override func cancel() {
+    open override func cancel() {
         // subclasses should override cancel() in order to clean up / free resources
         fatalError("cancel() method cannot be executed on ExecutabletionCa")
     }
