@@ -37,6 +37,9 @@ protocol CarriesActionCardState {
     /// Retrieve the input binding for the named slot
     func binding(forInput name: String) -> InputDataBinding?
     
-    /// Retried the input value for the named slot
+    /// Retrieve the input value for the named slot
     func value<T>(forInput name: String) -> T? where T : JSONDecodable
+    
+    /// Retrieve the token for the named slot
+    func token<T>(named name: String) -> T? where T : ExecutableTokenCard
 }

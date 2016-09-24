@@ -28,8 +28,8 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     var tokens: TokenBindings = [:]
     
     // these are "outputs" from the ExecutableActionCard
-    var yields: YieldBindings = [:]
-    var error: ActionExecutionError? = nil
+    open var yields: YieldBindings = [:]
+    open var error: ActionExecutionError? = nil
     
     // this is 'required' so we can instantiate it from the metatype
     required public init(with card: ActionCard) {
@@ -59,6 +59,18 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
         } catch {
             return nil
         }
+    }
+    
+    func token<T>(named name: String) -> T? where T : ExecutableTokenCard {
+        guard let slot = self.actionCard.tokenSlots.slot(named: name) else {
+            return nil
+        }
+        
+        guard let token = self.tokens[slot] as? T else {
+            return nil
+        }
+        
+        return token
     }
     
     // MARK: Operation
