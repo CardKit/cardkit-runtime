@@ -21,7 +21,7 @@ import CardKit
 /// In the event that a Hand becomes satisfied while ExecutableActionCards are still executing, the ExecutionEngine
 /// will cancel all other operations in its queue. Therefore, an ExecutableActionCard may wish to override
 /// cancel() in order to perform cleanup or free resources.
-public class ExecutableActionCard: Operation, CarriesActionCardState {
+open class ExecutableActionCard: Operation, CarriesActionCardState {
     // these are "inputs" to the ExecutableActionCard
     var actionCard: ActionCard
     var inputs: InputBindings = [:]
