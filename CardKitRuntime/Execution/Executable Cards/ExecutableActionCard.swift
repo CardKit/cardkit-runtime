@@ -29,7 +29,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     
     // these are "outputs" from the ExecutableActionCard
     open var yields: YieldBindings = [:]
-    open var error: ActionExecutionError? = nil
+    open var error: Error? = nil
     
     // this is 'required' so we can instantiate it from the metatype
     required public init(with card: ActionCard) {

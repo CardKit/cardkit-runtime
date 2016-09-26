@@ -137,17 +137,17 @@ public class CKAdd: ExecutableActionCard {
         }
         
         guard let yield = self.actionCard.descriptor.yields.first else {
-            self.error = .expectedYieldNotFound(self)
+            self.error = ActionExecutionError.expectedYieldNotFound(self)
             return
         }
         
         guard let calcSlot = self.actionCard.tokenSlots.slot(named: "Calculator") else {
-            self.error = .expectedTokenSlotNotFound(self, "Calculator")
+            self.error = ActionExecutionError.expectedTokenSlotNotFound(self, "Calculator")
             return
         }
         
         guard let calc = self.tokens[calcSlot] as? CKCalculator else {
-            self.error = .unboundTokenSlot(self, calcSlot)
+            self.error = ActionExecutionError.unboundTokenSlot(self, calcSlot)
             return
         }
         
@@ -188,17 +188,17 @@ public class CKSubtract: ExecutableActionCard {
         }
         
         guard let yield = self.actionCard.descriptor.yields.first else {
-            self.error = .expectedYieldNotFound(self)
+            self.error = ActionExecutionError.expectedYieldNotFound(self)
             return
         }
         
         guard let calcSlot = self.actionCard.tokenSlots.slot(named: "Calculator") else {
-            self.error = .expectedTokenSlotNotFound(self, "Calculator")
+            self.error = ActionExecutionError.expectedTokenSlotNotFound(self, "Calculator")
             return
         }
         
         guard let calc = self.tokens[calcSlot] as? CKCalculator else {
-            self.error = .unboundTokenSlot(self, calcSlot)
+            self.error = ActionExecutionError.unboundTokenSlot(self, calcSlot)
             return
         }
         
@@ -239,17 +239,17 @@ public class CKMultiply: ExecutableActionCard {
         }
         
         guard let yield = self.actionCard.descriptor.yields.first else {
-            self.error = .expectedYieldNotFound(self)
+            self.error = ActionExecutionError.expectedYieldNotFound(self)
             return
         }
         
         guard let calcSlot = self.actionCard.tokenSlots.slot(named: "Calculator") else {
-            self.error = .expectedTokenSlotNotFound(self, "Calculator")
+            self.error = ActionExecutionError.expectedTokenSlotNotFound(self, "Calculator")
             return
         }
         
         guard let calc = self.tokens[calcSlot] as? CKCalculator else {
-            self.error = .unboundTokenSlot(self, calcSlot)
+            self.error = ActionExecutionError.unboundTokenSlot(self, calcSlot)
             return
         }
         
@@ -291,17 +291,17 @@ public class CKDivide: ExecutableActionCard {
         }
         
         guard let yield = self.actionCard.descriptor.yields.first else {
-            self.error = .expectedYieldNotFound(self)
+            self.error = ActionExecutionError.expectedYieldNotFound(self)
             return
         }
         
         guard let calcSlot = self.actionCard.tokenSlots.slot(named: "Calculator") else {
-            self.error = .expectedTokenSlotNotFound(self, "Calculator")
+            self.error = ActionExecutionError.expectedTokenSlotNotFound(self, "Calculator")
             return
         }
         
         guard let calc = self.tokens[calcSlot] as? CKCalculator else {
-            self.error = .unboundTokenSlot(self, calcSlot)
+            self.error = ActionExecutionError.unboundTokenSlot(self, calcSlot)
             return
         }
         
