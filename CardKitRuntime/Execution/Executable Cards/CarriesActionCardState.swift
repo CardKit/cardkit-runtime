@@ -32,7 +32,7 @@ protocol CarriesActionCardState {
     var yields: YieldBindings { get }
     
     /// This holds an error produced during execution. This is an output.
-    var error: Error? { get }
+    var error: ActionExecutionError? { get }
     
     /// Retrieve the input binding for the named slot
     func binding(forInput name: String) -> InputDataBinding?

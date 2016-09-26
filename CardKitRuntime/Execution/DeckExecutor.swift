@@ -295,11 +295,7 @@ public class DeckExecutor: Operation {
             if let error = executable.error {
                 print(" ... yep, a card threw an error: \(executable.actionCard.description)")
                 satisfactionCheck.signal()
-                if let actionError = error as? ActionExecutionError {
-                    throw ExecutionError.actionCardError(actionError)
-                } else {
-                    throw ExecutionError.genericError(error)
-                }
+                throw ExecutionError.actionCardError(error)
             }
         }
         satisfactionCheck.signal()

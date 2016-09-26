@@ -113,13 +113,26 @@ public struct CKCalc {
 public class CKAdd: ExecutableActionCard {
     public override func main() {
         // get our inputs
-        guard let a: Double = self.value(forInput: "A") else {
-            self.error = .nilValueForInput(self, "A")
+        var a: Double
+        var b: Double
+        
+        do {
+            let aValue: Double = try self.value(forInput: "A")
+            a = aValue
+        } catch let error as ActionExecutionError {
+            self.error = error
+            return
+        } catch {
             return
         }
         
-        guard let b: Double = self.value(forInput: "B") else {
-            self.error = .nilValueForInput(self, "B")
+        do {
+            let bValue: Double = try self.value(forInput: "B")
+            b = bValue
+        } catch let error as ActionExecutionError {
+            self.error = error
+            return
+        } catch {
             return
         }
         
@@ -151,13 +164,26 @@ public class CKAdd: ExecutableActionCard {
 public class CKSubtract: ExecutableActionCard {
     public override func main() {
         // get our inputs
-        guard let a: Double = self.value(forInput: "A") else {
-            self.error = .nilValueForInput(self, "A")
+        var a: Double
+        var b: Double
+        
+        do {
+            let aValue: Double = try self.value(forInput: "A")
+            a = aValue
+        } catch let error as ActionExecutionError {
+            self.error = error
+            return
+        } catch {
             return
         }
         
-        guard let b: Double = self.value(forInput: "B") else {
-            self.error = .nilValueForInput(self, "B")
+        do {
+            let bValue: Double = try self.value(forInput: "B")
+            b = bValue
+        } catch let error as ActionExecutionError {
+            self.error = error
+            return
+        } catch {
             return
         }
         
@@ -189,13 +215,26 @@ public class CKSubtract: ExecutableActionCard {
 public class CKMultiply: ExecutableActionCard {
     public override func main() {
         // get our inputs
-        guard let a: Double = self.value(forInput: "A") else {
-            self.error = .nilValueForInput(self, "A")
+        var a: Double
+        var b: Double
+        
+        do {
+            let aValue: Double = try self.value(forInput: "A")
+            a = aValue
+        } catch let error as ActionExecutionError {
+            self.error = error
+            return
+        } catch {
             return
         }
         
-        guard let b: Double = self.value(forInput: "B") else {
-            self.error = .nilValueForInput(self, "B")
+        do {
+            let bValue: Double = try self.value(forInput: "B")
+            b = bValue
+        } catch let error as ActionExecutionError {
+            self.error = error
+            return
+        } catch {
             return
         }
         
@@ -228,13 +267,26 @@ public class CKMultiply: ExecutableActionCard {
 public class CKDivide: ExecutableActionCard {
     public override func main() {
         // get our inputs
-        guard let a: Double = self.value(forInput: "A") else {
-            self.error = .nilValueForInput(self, "A")
+        var a: Double
+        var b: Double
+        
+        do {
+            let aValue: Double = try self.value(forInput: "A")
+            a = aValue
+        } catch let error as ActionExecutionError {
+            self.error = error
+            return
+        } catch {
             return
         }
         
-        guard let b: Double = self.value(forInput: "B") else {
-            self.error = .nilValueForInput(self, "B")
+        do {
+            let bValue: Double = try self.value(forInput: "B")
+            b = bValue
+        } catch let error as ActionExecutionError {
+            self.error = error
+            return
+        } catch {
             return
         }
         

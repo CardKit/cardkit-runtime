@@ -29,7 +29,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     
     // these are "outputs" from the ExecutableActionCard
     open var yields: YieldBindings = [:]
-    open var error: Error? = nil
+    open var error: ActionExecutionError? = nil
     
     // this is 'required' so we can instantiate it from the metatype
     required public init(with card: ActionCard) {
@@ -43,12 +43,15 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
         self.tokens = tokens
     }
     
-    func binding(forInput name: String) -> InputDataBinding? {
+    public func binding(forInput name: String) -> InputDataBinding? {
         guard let slot = self.actionCard.descriptor.inputSlots.slot(named: name) else { return nil }
         return self.inputs[slot]
     }
     
-    func value<T>(forInput name: String) throws -> T where T : JSONDecodable {
+    /// Obtain the bound value for the given input slot. Returns the bound value or nil if the
+    /// slot is unbound. Also retuns an error in case a slot with the given name is not found, 
+    /// or if the bound value is not convertible to the expected type T.
+    public func value<T>(forInput name: String) throws -> T where T : JSONDecodable {
         guard let binding = self.binding(forInput: name) else {
             throw ActionExecutionError.expectedInputSlotNotFound(self, name)
         }
@@ -65,7 +68,9 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
         }
     }
     
-    func token<T>(named name: String) throws -> T where T : ExecutableTokenCard {
+    /// Obtain the bound token for the given token slot. Throws an error if a slot
+    /// with the given name is not found, or if the token slot is unbound.
+    public func token<T>(named name: String) throws -> T where T : ExecutableTokenCard {
         guard let slot = self.actionCard.tokenSlots.slot(named: name) else {
             throw ActionExecutionError.expectedTokenSlotNotFound(self, name)
         }

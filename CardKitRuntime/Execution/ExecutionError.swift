@@ -23,7 +23,6 @@ public enum ExecutionError: Error {
     case unboundInputEncountered(ActionCard, InputSlot)
     case executionCancelled
     case actionCardError(ActionExecutionError)
-    case genericError(Error)
 }
 
 // MARK: ActionExecutionError
