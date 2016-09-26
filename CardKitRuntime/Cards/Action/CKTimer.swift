@@ -15,8 +15,12 @@ import CardKit
 public class CKTimer: ExecutableActionCard {
     public override func main() {
         // wait the number of seconds specified by our Duration input
-        guard let duration: Double = self.value(forInput: "Duration") else {
-            self.error = .nilValueForInput(self, "Duration")
+        var duration: Double = 1.0
+        
+        do {
+            duration = try self.value(forInput: "Duration")
+        } catch let error {
+            self.error = error
             return
         }
         

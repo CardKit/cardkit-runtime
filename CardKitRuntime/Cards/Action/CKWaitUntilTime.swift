@@ -15,8 +15,12 @@ import CardKit
 public class CKWaitUntilTime: ExecutableActionCard {
     public override func main() {
         // wait the given date specified by our ClockTime input
-        guard let date: Date = self.value(forInput: "ClockTime") else {
-            self.error = .nilValueForInput(self, "ClockTime")
+        var date: Date = Date()
+        
+        do {
+            date = try self.value(forInput: "ClockTime")
+        } catch let error {
+            self.error = error
             return
         }
         

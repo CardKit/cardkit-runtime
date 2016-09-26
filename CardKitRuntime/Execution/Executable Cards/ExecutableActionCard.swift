@@ -29,7 +29,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     
     // these are "outputs" from the ExecutableActionCard
     open var yields: YieldBindings = [:]
-    open var error: ActionExecutionError? = nil
+    open var error: Error? = nil
     
     // this is 'required' so we can instantiate it from the metatype
     required public init(with card: ActionCard) {
@@ -48,26 +48,30 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
         return self.inputs[slot]
     }
     
-    func value<T>(forInput name: String) -> T? where T : JSONDecodable {
-        guard let binding = self.binding(forInput: name) else { return nil }
-        guard case let .bound(json) = binding else { return nil }
+    func value<T>(forInput name: String) throws -> T where T : JSONDecodable {
+        guard let binding = self.binding(forInput: name) else {
+            throw ActionExecutionError.expectedInputSlotNotFound(self, name)
+        }
+        guard case let .bound(json) = binding else {
+            throw ActionExecutionError.nilValueForInput(self, name)
+        }
         
         // convert type JSON to type T
         do {
             let val = try T(json: json)
             return val
         } catch {
-            return nil
+            throw ActionExecutionError.boundInputNotConvertibleToExpectedType(self, name, json, T.self)
         }
     }
     
-    func token<T>(named name: String) -> T? where T : ExecutableTokenCard {
+    func token<T>(named name: String) throws -> T where T : ExecutableTokenCard {
         guard let slot = self.actionCard.tokenSlots.slot(named: name) else {
-            return nil
+            throw ActionExecutionError.expectedTokenSlotNotFound(self, name)
         }
         
         guard let token = self.tokens[slot] as? T else {
-            return nil
+            throw ActionExecutionError.unboundTokenSlot(self, slot)
         }
         
         return token
