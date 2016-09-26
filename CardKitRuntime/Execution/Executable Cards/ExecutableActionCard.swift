@@ -49,7 +49,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     }
     
     /// Obtain the bound value for the given input slot. Returns the bound value or nil if the
-    /// slot is unbound. Also retuns an error in case a slot with the given name is not found, 
+    /// slot is unbound. Throws an error in case a slot with the given name is not found
     /// or if the bound value is not convertible to the expected type T.
     public func value<T>(forInput name: String) throws -> T where T : JSONDecodable {
         guard let binding = self.binding(forInput: name) else {
@@ -65,6 +65,26 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
             return val
         } catch {
             throw ActionExecutionError.boundInputNotConvertibleToExpectedType(self, name, json, T.self)
+        }
+    }
+    
+    /// Obtain the bound value for the given input slot. Returns nil if the slot is not found,
+    /// if the slot is unbound, or if the value in the slot is not convertible to the expected
+    /// type T.
+    public func optionalValue<T>(forInput name: String) -> T? where T : JSONDecodable {
+        guard let binding = self.binding(forInput: name) else {
+            return nil
+        }
+        guard case let .bound(json) = binding else {
+            return nil
+        }
+        
+        // convert type JSON to type T
+        do {
+            let val = try T(json: json)
+            return val
+        } catch {
+            return nil
         }
     }
     
