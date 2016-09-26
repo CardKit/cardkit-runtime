@@ -72,17 +72,9 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     /// if the slot is unbound, or if the value in the slot is not convertible to the expected
     /// type T.
     public func optionalValue<T>(forInput name: String) -> T? where T : JSONDecodable {
-        guard let binding = self.binding(forInput: name) else {
-            return nil
-        }
-        guard case let .bound(json) = binding else {
-            return nil
-        }
-        
-        // convert type JSON to type T
         do {
-            let val = try T(json: json)
-            return val
+            let value: T = try self.value(forInput: name)
+            return value
         } catch {
             return nil
         }
