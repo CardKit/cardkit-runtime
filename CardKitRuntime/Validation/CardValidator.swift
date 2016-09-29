@@ -33,7 +33,7 @@ public enum CardValidationError {
     case inputSlotBoundToUnboundValue(InputSlot)
     
     /// The InputSlot expected a different type of input than that provided by the InputCard (args: slot, expected type, bound InputCard identifier, provided type)
-    case inputSlotBoundToUnexpectedType(InputSlot, InputType, CardIdentifier, InputType)
+    case inputSlotBoundToUnexpectedType(InputSlot, String, CardIdentifier, String)
     
     /// The InputSlot was bound to an invalid Card type (Deck, Hand, or Token)
     case inputSlotBoundToInvalidCardType(InputSlot, InputType, CardIdentifier, CardType)

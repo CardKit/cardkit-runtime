@@ -8,6 +8,8 @@
 
 import Foundation
 
+import Freddy
+
 import CardKit
 
 // MARK: ExecutionError
@@ -20,15 +22,16 @@ public enum ExecutionError: Error {
     case tokenSlotBoundToUnboundValue(ActionCard, TokenSlot)
     case unboundInputEncountered(ActionCard, InputSlot)
     case executionCancelled
-    case actionCardError(ActionExecutionError)
+    case actionCardError(Error)
 }
 
 // MARK: ActionExecutionError
 
 public enum ActionExecutionError: Error {
+    case expectedInputSlotNotFound(ExecutableActionCard, String)
     case nilValueForInput(ExecutableActionCard, String)
-    case typeMismatchForInput(ExecutableActionCard, String, InputType, InputDataBinding)
-    case expectedYieldNotFound(ExecutableActionCard)
+    case boundInputNotConvertibleToExpectedType(ExecutableActionCard, String, JSON, Any.Type)
     case expectedTokenSlotNotFound(ExecutableActionCard, String)
     case unboundTokenSlot(ExecutableActionCard, TokenSlot)
+    case expectedYieldNotFound(ExecutableActionCard)
 }

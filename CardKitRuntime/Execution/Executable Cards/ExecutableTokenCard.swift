@@ -10,7 +10,7 @@ import Foundation
 
 import CardKit
 
-public class ExecutableTokenCard: CarriesTokenCardState {
+open class ExecutableTokenCard: CarriesTokenCardState {
     var tokenCard: TokenCard
     
     init(with card: TokenCard) {
