@@ -38,7 +38,7 @@ protocol CarriesActionCardState {
     func binding(forInput name: String) -> InputDataBinding?
     
     /// Retrieve the input value for the named slot
-    func value<T>(forInput name: String) throws -> T where T : JSONDecodable
+    func value<T>(forInput name: String) -> T? where T : JSONDecodable
     
     /// Retrieve the input value for the named slot, or nil if the slot is unbound
     func optionalValue<T>(forInput name: String) -> T? where T : JSONDecodable

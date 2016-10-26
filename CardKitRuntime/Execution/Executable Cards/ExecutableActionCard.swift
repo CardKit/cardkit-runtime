@@ -48,15 +48,17 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
         return self.inputs[slot]
     }
     
-    /// Obtain the bound value for the given input slot. Returns the bound value or nil if the
-    /// slot is unbound. Throws an error in case a slot with the given name is not found
-    /// or if the bound value is not convertible to the expected type T.
-    public func value<T>(forInput name: String) throws -> T where T : JSONDecodable {
+    /// Obtain the bound value for the given input slot. Returns the bound value or nil if an
+    /// error occurred, such as if a slot with the given name is not found or if the bound value
+    /// is not convertible to the expected type T. The error is stored in self.error.
+    public func value<T>(forInput name: String) -> T? where T : JSONDecodable {
         guard let binding = self.binding(forInput: name) else {
-            throw ActionExecutionError.expectedInputSlotNotFound(self, name)
+            self.error = ActionExecutionError.expectedInputSlotNotFound(self, name)
+            return nil
         }
         guard case let .bound(json) = binding else {
-            throw ActionExecutionError.nilValueForInput(self, name)
+            self.error = ActionExecutionError.nilValueForInput(self, name)
+            return nil
         }
         
         // convert type JSON to type T
@@ -64,7 +66,8 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
             let val = try T(json: json)
             return val
         } catch {
-            throw ActionExecutionError.boundInputNotConvertibleToExpectedType(self, name, json, T.self)
+            self.error = ActionExecutionError.boundInputNotConvertibleToExpectedType(self, name, json, T.self)
+            return nil
         }
     }
     
@@ -72,12 +75,11 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     /// if the slot is unbound, or if the value in the slot is not convertible to the expected
     /// type T.
     public func optionalValue<T>(forInput name: String) -> T? where T : JSONDecodable {
-        do {
-            let value: T = try self.value(forInput: name)
-            return value
-        } catch {
+        guard let value: T = self.value(forInput: name) else {
             return nil
         }
+        
+        return value
     }
     
     /// Obtain the bound token for the given token slot. Throws an error if a slot
