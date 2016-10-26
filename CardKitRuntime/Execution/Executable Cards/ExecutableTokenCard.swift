@@ -13,7 +13,7 @@ import CardKit
 open class ExecutableTokenCard: CarriesTokenCardState {
     var tokenCard: TokenCard
     
-    required public init(with card: TokenCard) {
+    open init(with card: TokenCard) {
         self.tokenCard = card
     }
 }
