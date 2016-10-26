@@ -44,5 +44,5 @@ protocol CarriesActionCardState {
     func optionalValue<T>(forInput name: String) -> T? where T : JSONDecodable
     
     /// Retrieve the token for the named slot
-    func token<T>(named name: String) throws -> T where T : ExecutableTokenCard
+    func token<T>(named name: String) -> T? where T : ExecutableTokenCard
 }

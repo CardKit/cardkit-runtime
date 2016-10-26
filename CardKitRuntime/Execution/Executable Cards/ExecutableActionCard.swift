@@ -82,15 +82,18 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
         return value
     }
     
-    /// Obtain the bound token for the given token slot. Throws an error if a slot
-    /// with the given name is not found, or if the token slot is unbound.
-    public func token<T>(named name: String) throws -> T where T : ExecutableTokenCard {
+    /// Obtain the bound token for the given token slot. Returns nil if a slot
+    /// with the given name is not found, or if the token slot is unbound. The error
+    /// is stored in self.error.
+    public func token<T>(named name: String) -> T? where T : ExecutableTokenCard {
         guard let slot = self.actionCard.tokenSlots.slot(named: name) else {
-            throw ActionExecutionError.expectedTokenSlotNotFound(self, name)
+            self.error = ActionExecutionError.expectedTokenSlotNotFound(self, name)
+            return nil
         }
         
         guard let token = self.tokens[slot] as? T else {
-            throw ActionExecutionError.unboundTokenSlot(self, slot)
+            self.error = ActionExecutionError.unboundTokenSlot(self, slot)
+            return nil
         }
         
         return token
