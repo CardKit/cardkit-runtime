@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "CAA449FE015D93E5CCEAF955F604D6B28C2AEE27",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "CAA449FE015D93E5CCEAF955F604D6B28C2AEE27" : 9223372036854775807,
+    "697D6D019C667A7F357F5BB879F79A2824CA12EB" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "04BB160E-1BCB-421F-821E-65242B8CB60B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "CAA449FE015D93E5CCEAF955F604D6B28C2AEE27" : "card-kit-runtime\/",
+    "697D6D019C667A7F357F5BB879F79A2824CA12EB" : "card-kit\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CardKitRuntime",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "CardKitRuntime.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.ibm.com:CMER\/card-kit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "697D6D019C667A7F357F5BB879F79A2824CA12EB"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.ibm.com:CMER\/card-kit-runtime.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CAA449FE015D93E5CCEAF955F604D6B28C2AEE27"
+    }
+  ]
+}
