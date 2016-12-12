@@ -7,7 +7,9 @@
 //
 
 import XCTest
+
 @testable import CardKit
+@testable import CardKitRuntime
 
 class ValidationEngineTests: XCTestCase {
     

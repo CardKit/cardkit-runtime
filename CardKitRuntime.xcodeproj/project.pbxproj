@@ -8,77 +8,41 @@
 
 /* Begin PBXBuildFile section */
 		CC9E76801D58B82C00B7C738 /* DeckValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E767F1D58B82C00B7C738 /* DeckValidator.swift */; };
-		CC9E76811D58B82C00B7C738 /* DeckValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E767F1D58B82C00B7C738 /* DeckValidator.swift */; };
 		CC9E76821D58B82C00B7C738 /* DeckValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E767F1D58B82C00B7C738 /* DeckValidator.swift */; };
-		CC9E76831D58B82C00B7C738 /* DeckValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E767F1D58B82C00B7C738 /* DeckValidator.swift */; };
 		CC9E76841D58B82C00B7C738 /* DeckValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E767F1D58B82C00B7C738 /* DeckValidator.swift */; };
-		CC9E76851D58B82C00B7C738 /* DeckValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E767F1D58B82C00B7C738 /* DeckValidator.swift */; };
 		CC9E76871D58B83400B7C738 /* HandValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76861D58B83400B7C738 /* HandValidator.swift */; };
-		CC9E76881D58B83400B7C738 /* HandValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76861D58B83400B7C738 /* HandValidator.swift */; };
 		CC9E76891D58B83400B7C738 /* HandValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76861D58B83400B7C738 /* HandValidator.swift */; };
-		CC9E768A1D58B83400B7C738 /* HandValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76861D58B83400B7C738 /* HandValidator.swift */; };
 		CC9E768B1D58B83400B7C738 /* HandValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76861D58B83400B7C738 /* HandValidator.swift */; };
-		CC9E768C1D58B83400B7C738 /* HandValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76861D58B83400B7C738 /* HandValidator.swift */; };
 		CC9E768E1D58B83C00B7C738 /* CardValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E768D1D58B83C00B7C738 /* CardValidator.swift */; };
-		CC9E768F1D58B83C00B7C738 /* CardValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E768D1D58B83C00B7C738 /* CardValidator.swift */; };
 		CC9E76901D58B83C00B7C738 /* CardValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E768D1D58B83C00B7C738 /* CardValidator.swift */; };
-		CC9E76911D58B83C00B7C738 /* CardValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E768D1D58B83C00B7C738 /* CardValidator.swift */; };
 		CC9E76921D58B83C00B7C738 /* CardValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E768D1D58B83C00B7C738 /* CardValidator.swift */; };
-		CC9E76931D58B83C00B7C738 /* CardValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E768D1D58B83C00B7C738 /* CardValidator.swift */; };
 		CC9E76951D58C32E00B7C738 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76941D58C32E00B7C738 /* ValidationError.swift */; };
-		CC9E76961D58C32E00B7C738 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76941D58C32E00B7C738 /* ValidationError.swift */; };
 		CC9E76971D58C32E00B7C738 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76941D58C32E00B7C738 /* ValidationError.swift */; };
-		CC9E76981D58C32E00B7C738 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76941D58C32E00B7C738 /* ValidationError.swift */; };
 		CC9E76991D58C32E00B7C738 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76941D58C32E00B7C738 /* ValidationError.swift */; };
-		CC9E769A1D58C32E00B7C738 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76941D58C32E00B7C738 /* ValidationError.swift */; };
 		CC9E769C1D58C38800B7C738 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E769B1D58C38800B7C738 /* Validator.swift */; };
-		CC9E769D1D58C38800B7C738 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E769B1D58C38800B7C738 /* Validator.swift */; };
 		CC9E769E1D58C38800B7C738 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E769B1D58C38800B7C738 /* Validator.swift */; };
-		CC9E769F1D58C38800B7C738 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E769B1D58C38800B7C738 /* Validator.swift */; };
 		CC9E76A01D58C38800B7C738 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E769B1D58C38800B7C738 /* Validator.swift */; };
-		CC9E76A11D58C38800B7C738 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E769B1D58C38800B7C738 /* Validator.swift */; };
 		CC9E76A31D58E2E700B7C738 /* ValidationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76A21D58E2E700B7C738 /* ValidationEngine.swift */; };
-		CC9E76A41D58E2E700B7C738 /* ValidationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76A21D58E2E700B7C738 /* ValidationEngine.swift */; };
 		CC9E76A51D58E2E700B7C738 /* ValidationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76A21D58E2E700B7C738 /* ValidationEngine.swift */; };
-		CC9E76A61D58E2E700B7C738 /* ValidationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76A21D58E2E700B7C738 /* ValidationEngine.swift */; };
 		CC9E76A71D58E2E700B7C738 /* ValidationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76A21D58E2E700B7C738 /* ValidationEngine.swift */; };
-		CC9E76A81D58E2E700B7C738 /* ValidationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E76A21D58E2E700B7C738 /* ValidationEngine.swift */; };
 		CCBB79001D6F51B2003B6458 /* ExecutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB78FF1D6F51B2003B6458 /* ExecutionError.swift */; };
-		CCBB79011D6F51B2003B6458 /* ExecutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB78FF1D6F51B2003B6458 /* ExecutionError.swift */; };
 		CCBB79021D6F51B2003B6458 /* ExecutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB78FF1D6F51B2003B6458 /* ExecutionError.swift */; };
-		CCBB79031D6F51B2003B6458 /* ExecutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB78FF1D6F51B2003B6458 /* ExecutionError.swift */; };
 		CCBB79041D6F51B2003B6458 /* ExecutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB78FF1D6F51B2003B6458 /* ExecutionError.swift */; };
-		CCBB79051D6F51B2003B6458 /* ExecutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB78FF1D6F51B2003B6458 /* ExecutionError.swift */; };
 		CCBB79071D6F6F21003B6458 /* DeckExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79061D6F6F21003B6458 /* DeckExecutor.swift */; };
-		CCBB79081D6F6F21003B6458 /* DeckExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79061D6F6F21003B6458 /* DeckExecutor.swift */; };
 		CCBB79091D6F6F21003B6458 /* DeckExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79061D6F6F21003B6458 /* DeckExecutor.swift */; };
-		CCBB790A1D6F6F21003B6458 /* DeckExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79061D6F6F21003B6458 /* DeckExecutor.swift */; };
 		CCBB790B1D6F6F21003B6458 /* DeckExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79061D6F6F21003B6458 /* DeckExecutor.swift */; };
-		CCBB790C1D6F6F21003B6458 /* DeckExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79061D6F6F21003B6458 /* DeckExecutor.swift */; };
 		CCBB79121D6F735F003B6458 /* CarriesActionCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790E1D6F735F003B6458 /* CarriesActionCardState.swift */; };
-		CCBB79131D6F735F003B6458 /* CarriesActionCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790E1D6F735F003B6458 /* CarriesActionCardState.swift */; };
 		CCBB79141D6F735F003B6458 /* CarriesActionCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790E1D6F735F003B6458 /* CarriesActionCardState.swift */; };
-		CCBB79151D6F735F003B6458 /* CarriesActionCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790E1D6F735F003B6458 /* CarriesActionCardState.swift */; };
 		CCBB79161D6F735F003B6458 /* CarriesActionCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790E1D6F735F003B6458 /* CarriesActionCardState.swift */; };
-		CCBB79171D6F735F003B6458 /* CarriesActionCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790E1D6F735F003B6458 /* CarriesActionCardState.swift */; };
 		CCBB79181D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */; };
-		CCBB79191D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */; };
 		CCBB791A1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */; };
-		CCBB791B1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */; };
 		CCBB791C1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */; };
-		CCBB791D1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */; };
 		CCBB791E1D6F735F003B6458 /* ExecutableActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */; };
-		CCBB791F1D6F735F003B6458 /* ExecutableActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */; };
 		CCBB79201D6F735F003B6458 /* ExecutableActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */; };
-		CCBB79211D6F735F003B6458 /* ExecutableActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */; };
 		CCBB79221D6F735F003B6458 /* ExecutableActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */; };
-		CCBB79231D6F735F003B6458 /* ExecutableActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */; };
 		CCBB79241D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */; };
-		CCBB79251D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */; };
 		CCBB79261D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */; };
-		CCBB79271D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */; };
 		CCBB79281D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */; };
-		CCBB79291D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */; };
 		CCBB792F1D746A5C003B6458 /* CKCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB792E1D746A5C003B6458 /* CKCalc.swift */; };
 		CCBB79301D746A5C003B6458 /* CKCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB792E1D746A5C003B6458 /* CKCalc.swift */; };
 		CCBB79311D746A5C003B6458 /* CKCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB792E1D746A5C003B6458 /* CKCalc.swift */; };
@@ -100,11 +64,8 @@
 		CCE72A291D64BAD000A347D8 /* CardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1A1D64BA9E00A347D8 /* CardKit.framework */; };
 		CCE72A2A1D64BAD000A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1B1D64BA9E00A347D8 /* Freddy.framework */; };
 		CCE72A321D650A7200A347D8 /* ExecutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A311D650A7200A347D8 /* ExecutionEngine.swift */; };
-		CCE72A331D650A7200A347D8 /* ExecutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A311D650A7200A347D8 /* ExecutionEngine.swift */; };
 		CCE72A341D650A7200A347D8 /* ExecutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A311D650A7200A347D8 /* ExecutionEngine.swift */; };
-		CCE72A351D650A7200A347D8 /* ExecutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A311D650A7200A347D8 /* ExecutionEngine.swift */; };
 		CCE72A361D650A7200A347D8 /* ExecutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A311D650A7200A347D8 /* ExecutionEngine.swift */; };
-		CCE72A371D650A7200A347D8 /* ExecutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A311D650A7200A347D8 /* ExecutionEngine.swift */; };
 		CCE72A411D650F1800A347D8 /* CardValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A401D650F1800A347D8 /* CardValidatorTests.swift */; };
 		CCE72A421D650F1800A347D8 /* CardValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A401D650F1800A347D8 /* CardValidatorTests.swift */; };
 		CCE72A431D650F1800A347D8 /* CardValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A401D650F1800A347D8 /* CardValidatorTests.swift */; };
@@ -119,17 +80,11 @@
 		CCE7D4BD1D50D1D5008FC492 /* CardKitRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = CCE7D46C1D50D191008FC492 /* CardKitRuntime.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CCE7D4BE1D50D1D5008FC492 /* CardKitRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = CCE7D46C1D50D191008FC492 /* CardKitRuntime.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CCE7D4E51D50D309008FC492 /* CKTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C31D50D309008FC492 /* CKTimer.swift */; };
-		CCE7D4E61D50D309008FC492 /* CKTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C31D50D309008FC492 /* CKTimer.swift */; };
 		CCE7D4E71D50D309008FC492 /* CKTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C31D50D309008FC492 /* CKTimer.swift */; };
-		CCE7D4E81D50D309008FC492 /* CKTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C31D50D309008FC492 /* CKTimer.swift */; };
 		CCE7D4E91D50D309008FC492 /* CKTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C31D50D309008FC492 /* CKTimer.swift */; };
-		CCE7D4EA1D50D309008FC492 /* CKTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C31D50D309008FC492 /* CKTimer.swift */; };
 		CCE7D4EB1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C41D50D309008FC492 /* CKWaitUntilTime.swift */; };
-		CCE7D4EC1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C41D50D309008FC492 /* CKWaitUntilTime.swift */; };
 		CCE7D4ED1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C41D50D309008FC492 /* CKWaitUntilTime.swift */; };
-		CCE7D4EE1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C41D50D309008FC492 /* CKWaitUntilTime.swift */; };
 		CCE7D4EF1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C41D50D309008FC492 /* CKWaitUntilTime.swift */; };
-		CCE7D4F01D50D309008FC492 /* CKWaitUntilTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7D4C41D50D309008FC492 /* CKWaitUntilTime.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -843,24 +798,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC9E76811D58B82C00B7C738 /* DeckValidator.swift in Sources */,
-				CCBB79251D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */,
-				CC9E76A41D58E2E700B7C738 /* ValidationEngine.swift in Sources */,
-				CC9E769D1D58C38800B7C738 /* Validator.swift in Sources */,
-				CCE7D4E61D50D309008FC492 /* CKTimer.swift in Sources */,
-				CCE72A331D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
-				CC9E76961D58C32E00B7C738 /* ValidationError.swift in Sources */,
 				CCE729C41D63BD7F00A347D8 /* ValidationEngineTests.swift in Sources */,
-				CCBB79011D6F51B2003B6458 /* ExecutionError.swift in Sources */,
-				CCBB79081D6F6F21003B6458 /* DeckExecutor.swift in Sources */,
-				CCE7D4EC1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */,
-				CCBB79191D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
 				CCBB79371D746B82003B6458 /* ExecutionEngineTests.swift in Sources */,
-				CC9E768F1D58B83C00B7C738 /* CardValidator.swift in Sources */,
-				CCBB791F1D6F735F003B6458 /* ExecutableActionCard.swift in Sources */,
-				CC9E76881D58B83400B7C738 /* HandValidator.swift in Sources */,
 				CCBB792F1D746A5C003B6458 /* CKCalc.swift in Sources */,
-				CCBB79131D6F735F003B6458 /* CarriesActionCardState.swift in Sources */,
 				CCE72A411D650F1800A347D8 /* CardValidatorTests.swift in Sources */,
 				CCE7D4791D50D191008FC492 /* CardKitRuntimeTests.swift in Sources */,
 			);
@@ -892,24 +832,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC9E76831D58B82C00B7C738 /* DeckValidator.swift in Sources */,
-				CCBB79271D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */,
-				CC9E76A61D58E2E700B7C738 /* ValidationEngine.swift in Sources */,
-				CC9E769F1D58C38800B7C738 /* Validator.swift in Sources */,
-				CCE7D4E81D50D309008FC492 /* CKTimer.swift in Sources */,
-				CCE72A351D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
-				CC9E76981D58C32E00B7C738 /* ValidationError.swift in Sources */,
 				CCE729C61D63BD7F00A347D8 /* ValidationEngineTests.swift in Sources */,
-				CCBB79031D6F51B2003B6458 /* ExecutionError.swift in Sources */,
-				CCBB790A1D6F6F21003B6458 /* DeckExecutor.swift in Sources */,
-				CCE7D4EE1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */,
-				CCBB791B1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
 				CCBB79381D746B82003B6458 /* ExecutionEngineTests.swift in Sources */,
-				CC9E76911D58B83C00B7C738 /* CardValidator.swift in Sources */,
-				CCBB79211D6F735F003B6458 /* ExecutableActionCard.swift in Sources */,
-				CC9E768A1D58B83400B7C738 /* HandValidator.swift in Sources */,
 				CCBB79301D746A5C003B6458 /* CKCalc.swift in Sources */,
-				CCBB79151D6F735F003B6458 /* CarriesActionCardState.swift in Sources */,
 				CCE72A421D650F1800A347D8 /* CardValidatorTests.swift in Sources */,
 				CCE7D4BB1D50D1D0008FC492 /* CardKitRuntimeTests.swift in Sources */,
 			);
@@ -941,24 +866,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC9E76851D58B82C00B7C738 /* DeckValidator.swift in Sources */,
-				CCBB79291D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */,
-				CC9E76A81D58E2E700B7C738 /* ValidationEngine.swift in Sources */,
-				CC9E76A11D58C38800B7C738 /* Validator.swift in Sources */,
-				CCE7D4EA1D50D309008FC492 /* CKTimer.swift in Sources */,
-				CCE72A371D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
-				CC9E769A1D58C32E00B7C738 /* ValidationError.swift in Sources */,
 				CCE729C81D63BD7F00A347D8 /* ValidationEngineTests.swift in Sources */,
-				CCBB79051D6F51B2003B6458 /* ExecutionError.swift in Sources */,
-				CCBB790C1D6F6F21003B6458 /* DeckExecutor.swift in Sources */,
-				CCE7D4F01D50D309008FC492 /* CKWaitUntilTime.swift in Sources */,
-				CCBB791D1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
 				CCBB79391D746B82003B6458 /* ExecutionEngineTests.swift in Sources */,
-				CC9E76931D58B83C00B7C738 /* CardValidator.swift in Sources */,
-				CCBB79231D6F735F003B6458 /* ExecutableActionCard.swift in Sources */,
-				CC9E768C1D58B83400B7C738 /* HandValidator.swift in Sources */,
 				CCBB79311D746A5C003B6458 /* CKCalc.swift in Sources */,
-				CCBB79171D6F735F003B6458 /* CarriesActionCardState.swift in Sources */,
 				CCE72A431D650F1800A347D8 /* CardValidatorTests.swift in Sources */,
 				CCE7D4BC1D50D1D0008FC492 /* CardKitRuntimeTests.swift in Sources */,
 			);

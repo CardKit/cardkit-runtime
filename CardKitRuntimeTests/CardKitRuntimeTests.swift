@@ -7,6 +7,7 @@
 //
 
 import XCTest
+
 @testable import CardKitRuntime
 
 class CardKitRuntimeTests: XCTestCase {

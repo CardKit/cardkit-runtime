@@ -7,7 +7,9 @@
 //
 
 import Foundation
+
 @testable import CardKit
+@testable import CardKitRuntime
 
 // swiftlint:disable nesting
 public struct CKCalc {
