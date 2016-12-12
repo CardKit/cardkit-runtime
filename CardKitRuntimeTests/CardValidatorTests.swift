@@ -7,8 +7,10 @@
 //
 
 import XCTest
+
 @testable import Freddy
 @testable import CardKit
+@testable import CardKitRuntime
 
 class CardValidatorTests: XCTestCase {
 
