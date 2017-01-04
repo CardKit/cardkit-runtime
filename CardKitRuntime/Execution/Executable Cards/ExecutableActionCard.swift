@@ -31,6 +31,14 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     open var yields: YieldBindings = [:]
     open var error: Error? = nil
     
+    public var shouldExecute: Bool {
+        return !isCancelled && error == nil
+    }
+    
+    public var shouldCancel: Bool {
+        return !isCancelled && error != nil
+    }
+    
     // this is 'required' so we can instantiate it from the metatype
     required public init(with card: ActionCard) {
         self.actionCard = card
