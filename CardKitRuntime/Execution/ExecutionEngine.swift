@@ -22,7 +22,7 @@ public class ExecutionEngine {
     /// Queue used for running the DeckExecutor
     fileprivate let operationQueue: OperationQueue = OperationQueue()
     
-    init(with deck: Deck) {
+    public init(with deck: Deck) {
         self.deck = deck
         
         // register these implementation classes because they come bundled with the Runtime
