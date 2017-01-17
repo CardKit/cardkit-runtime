@@ -70,8 +70,7 @@ class ExecutionEngineTests: XCTestCase {
         
 //        print("\(deck!.toJSON().stringify(true))")
         
-        engine.execute() {
-            (yields: YieldBindings, error: ExecutionError?) in
+        engine.execute { (yields: YieldBindings, error: ExecutionError?) in
             
             print("*******")
             
