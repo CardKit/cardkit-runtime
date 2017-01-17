@@ -148,9 +148,7 @@ class CardValidator: Validator {
             guard let identifier = card.cardIdentifierBound(to: tokenSlot) else { break }
             
             // make sure that token is part of the Deck's tokenCards
-            let found = deck.tokenCards.reduce(false) {
-                (ret, token) in ret || token.identifier == identifier
-            }
+            let found = deck.tokenCards.reduce(false) { (ret, token) in ret || token.identifier == identifier }
             
             if !found {
                 errors.append(ValidationError.cardError(.error, deck.identifier, hand.identifier, card.identifier, .boundTokenCardNotPresentInDeck(identifier)))
@@ -172,9 +170,7 @@ class CardValidator: Validator {
                 continue
             case .boundToTokenCard(let identifier):
                 // find this card in the deck
-                let found = deck.tokenCards.reduce(false) {
-                    (ret, token) in ret || token.identifier == identifier
-                }
+                let found = deck.tokenCards.reduce(false) { (ret, token) in ret || token.identifier == identifier }
                 
                 if !found {
                     errors.append(ValidationError.cardError(.error, deck.identifier, hand.identifier, card.identifier, .tokenSlotNotBoundToTokenCard(slot, identifier)))

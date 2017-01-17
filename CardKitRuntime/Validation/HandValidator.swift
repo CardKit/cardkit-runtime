@@ -174,9 +174,7 @@ class HandValidator: Validator {
             guard let branchTarget = card.targetHandIdentifier else { continue }
             
             // find it in hand.subhands
-            let found = hand.subhands.map { $0.identifier == branchTarget }.reduce(false) {
-                (ret, result) in ret || result
-            }
+            let found = hand.subhands.map { $0.identifier == branchTarget }.reduce(false) { (ret, result) in ret || result }
             
             if !found {
                 errors.append(ValidationError.handError(.error, deck.identifier, hand.identifier, .branchTargetNotFound(branchTarget)))

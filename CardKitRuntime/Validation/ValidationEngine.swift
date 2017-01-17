@@ -56,8 +56,7 @@ public class ValidationEngine {
         let errorSemaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
         var validationErrors: [ValidationError] = []
         
-        DispatchQueue.concurrentPerform(iterations: validationActions.count) {
-            i in
+        DispatchQueue.concurrentPerform(iterations: validationActions.count) { i in
             let action = validationActions[i]
             let errors = action()
             

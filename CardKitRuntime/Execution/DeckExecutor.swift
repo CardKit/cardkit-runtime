@@ -234,7 +234,7 @@ public class DeckExecutor: Operation {
             }
             
             // create a dependency operation so we know which card finished executing
-            let done = BlockOperation() {
+            let done = BlockOperation {
                 print("finished execution of card \(executable.actionCard.description)")
                 
                 // wait until any other operation doing a check is done
