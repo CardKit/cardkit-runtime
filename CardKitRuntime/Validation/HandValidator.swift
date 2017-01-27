@@ -16,6 +16,9 @@ public enum HandValidationError {
     /// No cards were present in the hand
     case noCardsInHand
     
+    /// An ActionCard that doesn't end was bound to a LogicHandCard (args: ActionCard identifier, LogicHandCard identifier)
+    case nonEndingActionCardBoundToLogicHandCard(CardIdentifier, CardIdentifier)
+    
     /// A bound token was not found in the Deck. (args: TokenCard identifier, ActionCard identifier)
     case boundTokenNotFoundInDeck(CardIdentifier, CardIdentifier)
     
@@ -62,6 +65,11 @@ class HandValidator: Validator {
         // NoCardsInHand
         actions.append({
             return self.checkNoCardsInHand(self.deck, self.hand)
+        })
+        
+        // nonEndingActionCardBoundToLogicHandCard
+        actions.append({
+            return self.checkLogicHandCardBindings(self.deck, self.hand)
         })
         
         // BoundTokenNotFoundInDeck
@@ -114,6 +122,24 @@ class HandValidator: Validator {
         if hand.cards.count <= 1 {
             // all Hands have an End Rule card, so check if there's something else
             errors.append(ValidationError.handError(.warning, deck.identifier, hand.identifier, .noCardsInHand))
+        }
+        
+        return errors
+    }
+    
+    func checkLogicHandCardBindings(_ deck: Deck, _ hand: Hand) -> [ValidationError] {
+        var errors: [ValidationError] = []
+        
+        // check that each ActionCard with a LogicHandCard parent is actually satisfiable (ends == true)
+        for card in hand.actionCards {
+            if let logicalParent = hand.logicalParent(of: card) {
+                // is the card satisfiable?
+                if card.descriptor.ends == false {
+                    // nope, card will never end so the logic will probably never satisfy
+                    // hence, we throw a validation warning
+                    errors.append(ValidationError.handError(.warning, deck.identifier, hand.identifier, .nonEndingActionCardBoundToLogicHandCard(card.identifier, logicalParent.identifier)))
+                }
+            }
         }
         
         return errors
