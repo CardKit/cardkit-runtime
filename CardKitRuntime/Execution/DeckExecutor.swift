@@ -26,7 +26,7 @@ public class DeckExecutor: Operation {
     fileprivate let cardExecutionQueue: OperationQueue
     
     /// Execution error. Only non-nil if execution encountered an error.
-    public var error: ExecutionError? = nil
+    public var error: ExecutionError?
     
     init(with deck: Deck) {
         self.deck = deck
