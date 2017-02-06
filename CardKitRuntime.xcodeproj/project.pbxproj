@@ -513,6 +513,7 @@
 					};
 					CCE7D4721D50D191008FC492 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 76CMF53Q35;
 						LastSwiftMigration = 0800;
 					};
 					CCE7D4871D50D1AA008FC492 = {
@@ -1040,6 +1041,7 @@
 		CCE7D4811D50D191008FC492 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 76CMF53Q35;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1055,6 +1057,7 @@
 		CCE7D4821D50D191008FC492 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 76CMF53Q35;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
