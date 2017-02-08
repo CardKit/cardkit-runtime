@@ -16,7 +16,7 @@ import CardKit
 
 public enum ExecutionError: Error {
     case deckDoesNotValidate([ValidationError])
-    case noExecutionTypeDefinedForActionCardDescriptor(ActionCardDescriptor) //swiftlint:disable:this type_name
+    case noExecutionTypeDefinedForActionCardDescriptor(ActionCardDescriptor)
     case noTokenInstanceDefinedForTokenCard(TokenCard)
     case noTokenCardPresentWithIdentifier(CardIdentifier)
     case tokenSlotBoundToUnboundValue(ActionCard, TokenSlot)
