@@ -385,8 +385,8 @@
 				CCE7D4651D50D191008FC492 /* Frameworks */,
 				CCE7D4661D50D191008FC492 /* Headers */,
 				CCE7D4671D50D191008FC492 /* Resources */,
-				CC83BC661D510A2A0045F3A7 /* ShellScript */,
-				CCE72A111D64A49B00A347D8 /* ShellScript */,
+				CC83BC661D510A2A0045F3A7 /* Swift Lint */,
+				CCE72A111D64A49B00A347D8 /* Carthage Build */,
 				CCE72A061D6490C200A347D8 /* ShellScript */,
 			);
 			buildRules = (
@@ -602,18 +602,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		CC83BC661D510A2A0045F3A7 /* ShellScript */ = {
+		CC83BC661D510A2A0045F3A7 /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Swift Lint";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "export PATH=\"/usr/local/bin:$PATH\"\nif which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		CC83BC671D510A320045F3A7 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -686,13 +687,14 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
-		CCE72A111D64A49B00A347D8 /* ShellScript */ = {
+		CCE72A111D64A49B00A347D8 /* Carthage Build */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Carthage Build";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
