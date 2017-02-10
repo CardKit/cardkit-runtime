@@ -14,7 +14,6 @@ import CardKit
 
 public enum CardValidationError {
     /// The type of the Card Descriptor does not match the type of the Card Instance (args: expected type, actual type)
-    // swiftlint:disable:next type_name
     case cardDescriptorTypeDoesNotMatchInstanceType(CardType, Any.Type)
     
     /// The TokenSlot has not been bound with a Token card, or it was bound to an Unbound value
