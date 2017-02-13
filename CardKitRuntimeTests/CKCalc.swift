@@ -39,8 +39,7 @@ public struct CKCalc {
                 yieldDescription: "The sum A + B",
                 ends: true,
                 endsDescription: "Ends when the computation is complete.",
-                assetCatalog: CardAssetCatalog(description: "No action performed."),
-                version: 0)
+                assetCatalog: CardAssetCatalog(description: "No action performed."))
             
             // MARK: Subtract
             /// Descriptor for Subtract card
@@ -56,8 +55,7 @@ public struct CKCalc {
                 yieldDescription: "The difference A - B",
                 ends: true,
                 endsDescription: "Ends when the computation is complete.",
-                assetCatalog: CardAssetCatalog(description: "No action performed."),
-                version: 0)
+                assetCatalog: CardAssetCatalog(description: "No action performed."))
             
             // MARK: Multiply
             /// Descriptor for Multiply card
@@ -73,8 +71,7 @@ public struct CKCalc {
                 yieldDescription: "The multiplication A * B",
                 ends: true,
                 endsDescription: "Ends when the computation is complete.",
-                assetCatalog: CardAssetCatalog(description: "No action performed."),
-                version: 0)
+                assetCatalog: CardAssetCatalog(description: "No action performed."))
             
             // MARK: Divide
             /// Descriptor for Divide card
@@ -90,8 +87,7 @@ public struct CKCalc {
                 yieldDescription: "The division A / B",
                 ends: true,
                 endsDescription: "Ends when the computation is complete.",
-                assetCatalog: CardAssetCatalog(description: "No action performed."),
-                version: 0)
+                assetCatalog: CardAssetCatalog(description: "No action performed."))
         }
     }
     
@@ -105,8 +101,7 @@ public struct CKCalc {
             name: "Calculator",
             subpath: nil,
             isConsumed: false,
-            assetCatalog: CardAssetCatalog(),
-            version: 0)
+            assetCatalog: CardAssetCatalog())
     }
 }
 
