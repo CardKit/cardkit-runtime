@@ -205,10 +205,10 @@ public class DeckExecutor: Operation {
             for (slot, binding) in card.inputBindings {
                 switch binding {
                 case .boundToInputCard(let inputCard):
-                    executable.inputs[slot] = inputCard.boundData
+                    executable.inputBindings[slot] = inputCard.boundData
                 case .boundToYieldingActionCard(_, let yield):
                     guard let yieldDataValue = self.yieldData[yield] else { continue }
-                    executable.inputs[slot] = yieldDataValue
+                    executable.inputBindings[slot] = yieldDataValue
                 default:
                     throw ExecutionError.unboundInputEncountered(card, slot)
                 }
@@ -226,7 +226,7 @@ public class DeckExecutor: Operation {
                         throw ExecutionError.noTokenInstanceDefinedForTokenCard(tokenCard)
                     }
                     
-                    executable.tokens[slot] = instance
+                    executable.tokenBindings[slot] = instance
                 default:
                     // shouldn't happen, validation should have caught this
                     throw ExecutionError.tokenSlotBoundToUnboundValue(card, slot)
@@ -243,7 +243,7 @@ public class DeckExecutor: Operation {
                 print("  ... copying out yielded data")
                 
                 // copy out yielded data
-                for (yield, data) in executable.yields {
+                for (yield, data) in executable.yieldBindings {
                     self.yieldData[yield] = data
                 }
                 
@@ -292,7 +292,7 @@ public class DeckExecutor: Operation {
         // check to see if any ExecutableActionCards had errors
         for executable in executableCards {
             // only throws the first error encountered...
-            if let error = executable.error {
+            if let error = executable.errors.first {
                 print(" ... yep, a card threw an error: \(executable.actionCard.description)")
                 satisfactionCheck.signal()
                 throw ExecutionError.actionCardError(error)

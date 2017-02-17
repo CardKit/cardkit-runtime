@@ -36,7 +36,13 @@ class ExecutionEngineTests: XCTestCase {
             let ten = try (CardKit.Input.Numeric.Real <- 10.0)
             
             let add = try CKCalc.Action.Math.Add <- five <- ten <- ("Calculator", calcToken)
-            let mult = try CKCalc.Action.Math.Multiply <- (add, add.yields.first!) <- two <- ("Calculator", calcToken)
+            
+            guard let addYield = add.yields.first else {
+                XCTFail("error getting the yield of the add card")
+                return
+            }
+            
+            let mult = try CKCalc.Action.Math.Multiply <- (add, addYield) <- two <- ("Calculator", calcToken)
             yield = mult.yields.first
             
             let handOne = ( add )%
@@ -71,7 +77,6 @@ class ExecutionEngineTests: XCTestCase {
 //        print("\(deck!.toJSON().stringify(true))")
         
         engine.execute { (yields: YieldBindings, error: ExecutionError?) in
-            
             print("*******")
             
             if let result = yields[y] {
