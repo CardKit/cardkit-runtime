@@ -81,7 +81,7 @@ class ExecutionEngineTests: XCTestCase {
                 print("error: \(error)")
             }
             
-            XCTAssertTrue(error == nil)
+            XCTAssertNil(error)
         }
     }
 
