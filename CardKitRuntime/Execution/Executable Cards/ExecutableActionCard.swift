@@ -38,11 +38,11 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     
     // MARK: CarriesActionCardState
     
-    func error(_ error: Error) {
+    public func error(_ error: Error) {
         self.errors.append(error)
     }
     
-    func setup(inputBindings: InputBindings, tokenBindings: TokenBindings) {
+    public func setup(inputBindings: InputBindings, tokenBindings: TokenBindings) {
         self.inputBindings = inputBindings
         self.tokenBindings = tokenBindings
     }

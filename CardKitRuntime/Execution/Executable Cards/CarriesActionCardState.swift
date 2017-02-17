@@ -32,7 +32,7 @@ protocol CarriesActionCardState {
     /// This holds any errors produced during execution. This is an output.
     var errors: [Error] { get }
     
-    /// Store the given error.
+    /// Store the given error. Any error encountered should be stored using this method.
     func error(_ error: Error)
     
     /// Set the card up with the given input and token bindings.
