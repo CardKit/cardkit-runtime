@@ -38,6 +38,10 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     
     // MARK: CarriesActionCardState
     
+    func error(_ error: Error) {
+        self.errors.append(error)
+    }
+    
     func setup(inputBindings: InputBindings, tokenBindings: TokenBindings) {
         self.inputBindings = inputBindings
         self.tokenBindings = tokenBindings
@@ -53,11 +57,11 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     /// is not convertible to the expected type T. The error is stored in self.error.
     public func value<T>(forInput name: String) -> T? where T : JSONDecodable {
         guard let binding = self.binding(forInput: name) else {
-            self.errors.append(ActionExecutionError.expectedInputSlotNotFound(self, name))
+            self.error(ActionExecutionError.expectedInputSlotNotFound(self, name))
             return nil
         }
         guard case let .bound(json) = binding else {
-            self.errors.append(ActionExecutionError.nilValueForInput(self, name))
+            self.error(ActionExecutionError.nilValueForInput(self, name))
             return nil
         }
         
@@ -66,7 +70,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
             let val = try T(json: json)
             return val
         } catch {
-            self.errors.append(ActionExecutionError.boundInputNotConvertibleToExpectedType(self, name, json, T.self))
+            self.error(ActionExecutionError.boundInputNotConvertibleToExpectedType(self, name, json, T.self))
             return nil
         }
     }
@@ -87,12 +91,12 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     /// is stored in self.error.
     public func token<T>(named name: String) -> T? where T : ExecutableTokenCard {
         guard let slot = self.actionCard.tokenSlots.slot(named: name) else {
-            self.errors.append(ActionExecutionError.expectedTokenSlotNotFound(self, name))
+            self.error(ActionExecutionError.expectedTokenSlotNotFound(self, name))
             return nil
         }
         
         guard let token = self.tokenBindings[slot] as? T else {
-            self.errors.append(ActionExecutionError.unboundTokenSlot(self, slot))
+            self.error(ActionExecutionError.unboundTokenSlot(self, slot))
             return nil
         }
         
@@ -103,7 +107,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     /// Useful because Yields are not named like Inputs are named.
     public func yield(atIndex index: Int) -> Yield? {
         if index > self.actionCard.yields.count {
-            self.errors.append(ActionExecutionError.yieldAtIndexNotFound(self, index))
+            self.error(ActionExecutionError.yieldAtIndexNotFound(self, index))
             return nil
         }
         return self.actionCard.yields[index]
@@ -113,14 +117,14 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     public func store<T>(data: T, forYield yield: Yield) where T : JSONEncodable {
         // make sure the given Yield exists for this card
         if !self.actionCard.yields.contains(yield) {
-            self.errors.append(ActionExecutionError.attemptToStoreDataForInvalidYield(self, yield, data.toJSON()))
+            self.error(ActionExecutionError.attemptToStoreDataForInvalidYield(self, yield, data.toJSON()))
             return
         }
         
         // make sure the data types match
         if !yield.matchesType(of: data) {
             let dataType = String(describing: type(of: data))
-            self.errors.append(ActionExecutionError.attemptToStoreDataOfUnexpectedType(self, yield, yield.type, dataType))
+            self.error(ActionExecutionError.attemptToStoreDataOfUnexpectedType(self, yield, yield.type, dataType))
             return
         }
         
@@ -131,7 +135,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     /// Store the given data as a Yield of this card in the Yield with the given index.
     public func store<T>(data: T, forYieldIndex index: Int) where T : JSONEncodable {
         guard let yield = self.yield(atIndex: index) else {
-            self.errors.append(ActionExecutionError.yieldAtIndexNotFound(self, index))
+            self.error(ActionExecutionError.yieldAtIndexNotFound(self, index))
             return
         }
         
@@ -143,7 +147,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     public func value<T>(forYield yield: Yield) -> T? where T : JSONDecodable {
         // if the given yield is not a valid yield for this card, return nil
         if !self.actionCard.yields.contains(yield) {
-            self.errors.append(ActionExecutionError.attemptToRetrieveDataForInvalidYield(self, yield))
+            self.error(ActionExecutionError.attemptToRetrieveDataForInvalidYield(self, yield))
             return nil
         }
         
@@ -156,7 +160,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
         // if the yield is bound, but the value is not .bound, this is probably
         // an error
         guard case let .bound(json) = binding else {
-            self.errors.append(ActionExecutionError.nilValueForYield(self, yield))
+            self.error(ActionExecutionError.nilValueForYield(self, yield))
             return nil
         }
         
@@ -165,7 +169,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
             let val = try T(json: json)
             return val
         } catch {
-            self.errors.append(ActionExecutionError.boundYieldNotConvertibleToExpectedType(self, yield, json, T.self))
+            self.error(ActionExecutionError.boundYieldNotConvertibleToExpectedType(self, yield, json, T.self))
             return nil
         }
     }
@@ -173,7 +177,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     /// Retrieve the data for the yield specified by the given index.
     public func value<T>(forYieldIndex index: Int) -> T? where T : JSONDecodable {
         guard let yield = self.yield(atIndex: index) else {
-            self.errors.append(ActionExecutionError.yieldAtIndexNotFound(self, index))
+            self.error(ActionExecutionError.yieldAtIndexNotFound(self, index))
             return nil
         }
         

@@ -17,8 +17,6 @@ public typealias YieldBindings = [Yield : DataBinding]
 
 /// Appled to classes that implement an executable ActionCard
 protocol CarriesActionCardState {
-    func setup(inputBindings: InputBindings, tokenBindings: TokenBindings)
-    
     /// This is the ActionCard instance carrying all of the binding data for inputs and yields. This is an input.
     var actionCard: ActionCard { get }
     
@@ -33,6 +31,12 @@ protocol CarriesActionCardState {
     
     /// This holds any errors produced during execution. This is an output.
     var errors: [Error] { get }
+    
+    /// Store the given error.
+    func error(_ error: Error)
+    
+    /// Set the card up with the given input and token bindings.
+    func setup(inputBindings: InputBindings, tokenBindings: TokenBindings)
     
     /// Retrieve the input binding for the named slot
     func binding(forInput name: String) -> DataBinding?
