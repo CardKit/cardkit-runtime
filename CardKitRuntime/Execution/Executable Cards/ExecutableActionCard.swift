@@ -28,7 +28,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     var tokenBindings: TokenBindings = [:]
     
     // these are "outputs" from the ExecutableActionCard
-    var yieldBindings: YieldBindings = [:]
+    var yieldData: [YieldData] = []
     var errors: [Error] = []
     
     // this is 'required' so we can instantiate it from the metatype
@@ -129,7 +129,8 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
         }
         
         // capture the yielded data
-        self.yieldBindings[yield] = .bound(data.toJSON())
+        let newYield = YieldData(cardIdentifier: self.actionCard.identifier, yield: yield, data: data.toJSON())
+        self.yieldData.append(newYield)
     }
     
     /// Store the given data as a Yield of this card in the Yield with the given index.
@@ -153,23 +154,16 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
         
         // if the yield is not bound, then just return nil (this is not necessarily an error
         // because the yield may not have been produced yet)
-        guard let binding = self.yieldBindings[yield] else {
-            return nil
-        }
-        
-        // if the yield is bound, but the value is not .bound, this is probably
-        // an error
-        guard case let .bound(json) = binding else {
-            self.error(ActionExecutionError.nilValueForYield(self, yield))
+        guard let yieldData = self.yieldData.filter({ $0.yield == yield }).first else {
             return nil
         }
         
         // convert type JSON to type T
         do {
-            let val = try T(json: json)
+            let val = try T(json: yieldData.data)
             return val
         } catch {
-            self.error(ActionExecutionError.boundYieldNotConvertibleToExpectedType(self, yield, json, T.self))
+            self.error(ActionExecutionError.boundYieldNotConvertibleToExpectedType(self, yield, yieldData.data, T.self))
             return nil
         }
     }

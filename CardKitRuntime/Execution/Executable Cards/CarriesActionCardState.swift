@@ -13,7 +13,13 @@ import CardKit
 
 public typealias InputBindings = [InputSlot : DataBinding]
 public typealias TokenBindings = [TokenSlot : ExecutableTokenCard]
-public typealias YieldBindings = [Yield : DataBinding]
+
+/// Carries data yielded by an ActionCard.
+public struct YieldData {
+    public let cardIdentifier: CardIdentifier
+    public let yield: Yield
+    public let data: JSON
+}
 
 /// Appled to classes that implement an executable ActionCard
 protocol CarriesActionCardState {
@@ -27,7 +33,7 @@ protocol CarriesActionCardState {
     var tokenBindings: TokenBindings { get }
     
     /// These are the yields produced by the card. This is an output.
-    var yieldBindings: YieldBindings { get }
+    var yieldData: [YieldData] { get }
     
     /// This holds any errors produced during execution. This is an output.
     var errors: [Error] { get }

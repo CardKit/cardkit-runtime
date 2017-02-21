@@ -20,7 +20,7 @@ public class DeckExecutor: Operation {
     fileprivate var tokenInstances: [TokenCard : ExecutableTokenCard] = [:]
     
     /// Cache of yields produced by ActionCards after their execution
-    public fileprivate (set) var yieldData: YieldBindings = [:]
+    public fileprivate (set) var yieldData: [Yield : YieldData] = [:]
     
     /// Private operation queue for executing ActionCards in a Hand
     fileprivate let cardExecutionQueue: OperationQueue
@@ -207,8 +207,8 @@ public class DeckExecutor: Operation {
                 case .boundToInputCard(let inputCard):
                     executable.inputBindings[slot] = inputCard.boundData
                 case .boundToYieldingActionCard(_, let yield):
-                    guard let yieldDataValue = self.yieldData[yield] else { continue }
-                    executable.inputBindings[slot] = yieldDataValue
+                    guard let yieldData = self.yieldData[yield] else { continue }
+                    executable.inputBindings[slot] = .bound(yieldData.data)
                 default:
                     throw ExecutionError.unboundInputEncountered(card, slot)
                 }
@@ -243,8 +243,8 @@ public class DeckExecutor: Operation {
                 print("  ... copying out yielded data")
                 
                 // copy out yielded data
-                for (yield, data) in executable.yieldBindings {
-                    self.yieldData[yield] = data
+                for yield in executable.yieldData {
+                    self.yieldData[yield.yield] = YieldData(cardIdentifier: executable.actionCard.identifier, yield: yield.yield, data: yield.data)
                 }
                 
                 print("  ... checking for hand satisfaction")

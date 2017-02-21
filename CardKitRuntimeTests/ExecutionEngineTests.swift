@@ -76,12 +76,16 @@ class ExecutionEngineTests: XCTestCase {
         
 //        print("\(deck!.toJSON().stringify(true))")
         
-        engine.execute { (yields: YieldBindings, error: ExecutionError?) in
+        engine.execute { (yields: [YieldData], error: ExecutionError?) in
             print("*******")
             
-            if let result = yields[y] {
-                print("result: \(result)")
+            guard let result = yields.filter({ $0.yield == y }).first else {
+                XCTFail("could not find yielded result")
+                return
             }
+            
+            print("result: \(result.data)")
+            
             if let error = error {
                 print("error: \(error)")
             }
