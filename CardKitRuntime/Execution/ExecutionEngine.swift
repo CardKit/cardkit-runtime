@@ -71,7 +71,7 @@ public class ExecutionEngine {
             self.operationQueue.waitUntilAllOperationsAreFinished()
             
             // capture yields
-            let yields = Array(deckExecutor.yieldData.values)
+            let yields: [YieldData] = Array(deckExecutor.yieldData.values)
             
             // and see if we got any errors
             if let error = deckExecutor.error {
