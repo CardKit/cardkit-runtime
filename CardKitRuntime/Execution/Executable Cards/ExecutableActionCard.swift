@@ -106,7 +106,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     /// Retrieve a Yield by its index (e.g. 1st yield, 2nd yield, etc.)
     /// Useful because Yields are not named like Inputs are named.
     public func yield(atIndex index: Int) -> Yield? {
-        if index > self.actionCard.yields.count {
+        guard index < self.actionCard.yields.count else {
             self.error(ActionExecutionError.yieldAtIndexNotFound(self, index))
             return nil
         }
@@ -116,13 +116,13 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     /// Store the given data as a Yield of this card.
     public func store<T>(data: T, forYield yield: Yield) where T : JSONEncodable {
         // make sure the given Yield exists for this card
-        if !self.actionCard.yields.contains(yield) {
+        guard self.actionCard.yields.contains(yield) else {
             self.error(ActionExecutionError.attemptToStoreDataForInvalidYield(self, yield, data.toJSON()))
             return
         }
         
         // make sure the data types match
-        if !yield.matchesType(of: data) {
+        guard yield.matchesType(of: data) else {
             let dataType = String(describing: type(of: data))
             self.error(ActionExecutionError.attemptToStoreDataOfUnexpectedType(self, yield, yield.type, dataType))
             return
@@ -147,7 +147,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     /// Retrieve the data for the given yield.
     public func value<T>(forYield yield: Yield) -> T? where T : JSONDecodable {
         // if the given yield is not a valid yield for this card, return nil
-        if !self.actionCard.yields.contains(yield) {
+        guard self.actionCard.yields.contains(yield) else {
             self.error(ActionExecutionError.attemptToRetrieveDataForInvalidYield(self, yield))
             return nil
         }
