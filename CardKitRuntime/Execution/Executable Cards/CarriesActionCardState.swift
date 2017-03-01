@@ -47,6 +47,11 @@ protocol CarriesActionCardState {
     /// Set the card up with the given input and token bindings.
     func setup(inputBindings: InputBindings, tokenBindings: TokenBindings)
     
+    /// Set the card up with the given input and token bindings, given via mappings between
+    /// the String slot names and the data to be bound. Keys that don't match any available
+    /// slots will be ignored.
+    func setup(inputBindings: [String : JSONEncodable], tokenBindings: [String : ExecutableTokenCard])
+    
     /// Retrieve the input binding for the named slot
     func binding(forInput name: String) -> DataBinding?
     

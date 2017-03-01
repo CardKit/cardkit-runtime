@@ -57,12 +57,14 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     
     /// Convenience method for setting up input and token bindings. Used for setting up an ExecutableTokenCard
     /// outside the context of the ExecutionEngine (e.g. for running tests).
-    public func setup(inputBindings: [String : DataBinding], tokenBindings: [String : ExecutableTokenCard]) {
+    public func setup(inputBindings: [String : JSONEncodable], tokenBindings: [String : ExecutableTokenCard]) {
         // bind inputs
-        for (slotName, binding) in inputBindings {
+        for (slotName, encodable) in inputBindings {
             // silently ignore slots that don't exist
             guard let slot = self.actionCard.inputSlots.slot(named: slotName) else { continue }
-            self.inputBindings[slot] = binding
+            
+            // convert to a DataBinding & bind it
+            self.inputBindings[slot] = .bound(encodable.toJSON())
         }
         
         // bind tokens
