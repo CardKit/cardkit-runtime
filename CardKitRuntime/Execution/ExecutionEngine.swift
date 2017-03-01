@@ -48,7 +48,7 @@ public class ExecutionEngine {
         self.tokenInstances = tokenInstances
     }
     
-    public func execute(_ completion: (YieldBindings, ExecutionError?) -> Void) {
+    public func execute(_ completion: ([YieldData], ExecutionError?) -> Void) {
         // create a DeckExecutor
         let deckExecutor = DeckExecutor(with: self.deck)
         deckExecutor.setExecutableActionTypes(self.executableActionTypes)
@@ -70,13 +70,16 @@ public class ExecutionEngine {
             print("ExecutionEngine waiting for execution to finish")
             self.operationQueue.waitUntilAllOperationsAreFinished()
             
+            // capture yields
+            let yields: [YieldData] = Array(deckExecutor.yieldData.values)
+            
             // and see if we got any errors
             if let error = deckExecutor.error {
                 print("ExecutionEngine finished with errors")
-                completion(deckExecutor.yieldData, error)
+                completion(yields, error)
             } else {
                 print("ExecutionEngine finished")
-                completion(deckExecutor.yieldData, nil)
+                completion(yields, nil)
             }
         }
     }

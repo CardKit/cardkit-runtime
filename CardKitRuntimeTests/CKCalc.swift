@@ -118,18 +118,7 @@ public class CKAdd: ExecutableActionCard {
             return
         }
         
-        guard let yield = self.actionCard.descriptor.yields.first else {
-            self.error = ActionExecutionError.expectedYieldNotFound(self)
-            return
-        }
-        
-        guard let calcSlot = self.actionCard.tokenSlots.slot(named: "Calculator") else {
-            self.error = ActionExecutionError.expectedTokenSlotNotFound(self, "Calculator")
-            return
-        }
-        
-        guard let calc = self.tokens[calcSlot] as? CKCalculator else {
-            self.error = ActionExecutionError.unboundTokenSlot(self, calcSlot)
+        guard let calc: CKCalculator = self.token(named: "Calculator") as? CKCalculator else {
             return
         }
         
@@ -137,7 +126,7 @@ public class CKAdd: ExecutableActionCard {
         let sum = calc.add(a, b)
         
         // save the result
-        self.yields[yield] = .bound(sum.toJSON())
+        self.store(data: sum, forYieldIndex: 0)
     }
 }
 
@@ -154,18 +143,7 @@ public class CKSubtract: ExecutableActionCard {
             return
         }
         
-        guard let yield = self.actionCard.descriptor.yields.first else {
-            self.error = ActionExecutionError.expectedYieldNotFound(self)
-            return
-        }
-        
-        guard let calcSlot = self.actionCard.tokenSlots.slot(named: "Calculator") else {
-            self.error = ActionExecutionError.expectedTokenSlotNotFound(self, "Calculator")
-            return
-        }
-        
-        guard let calc = self.tokens[calcSlot] as? CKCalculator else {
-            self.error = ActionExecutionError.unboundTokenSlot(self, calcSlot)
+        guard let calc: CKCalculator = self.token(named: "Calculator") as? CKCalculator else {
             return
         }
         
@@ -173,7 +151,7 @@ public class CKSubtract: ExecutableActionCard {
         let difference = calc.subtract(a, b)
         
         // save the result
-        self.yields[yield] = .bound(difference.toJSON())
+        self.store(data: difference, forYieldIndex: 0)
     }
 }
 
@@ -190,18 +168,7 @@ public class CKMultiply: ExecutableActionCard {
             return
         }
         
-        guard let yield = self.actionCard.descriptor.yields.first else {
-            self.error = ActionExecutionError.expectedYieldNotFound(self)
-            return
-        }
-        
-        guard let calcSlot = self.actionCard.tokenSlots.slot(named: "Calculator") else {
-            self.error = ActionExecutionError.expectedTokenSlotNotFound(self, "Calculator")
-            return
-        }
-        
-        guard let calc = self.tokens[calcSlot] as? CKCalculator else {
-            self.error = ActionExecutionError.unboundTokenSlot(self, calcSlot)
+        guard let calc: CKCalculator = self.token(named: "Calculator") as? CKCalculator else {
             return
         }
         
@@ -209,7 +176,7 @@ public class CKMultiply: ExecutableActionCard {
         let product = calc.multiply(a, b)
         
         // save the result
-        self.yields[yield] = .bound(product.toJSON())
+        self.store(data: product, forYieldIndex: 0)
     }
 }
 
@@ -226,18 +193,7 @@ public class CKDivide: ExecutableActionCard {
             return
         }
         
-        guard let yield = self.actionCard.descriptor.yields.first else {
-            self.error = ActionExecutionError.expectedYieldNotFound(self)
-            return
-        }
-        
-        guard let calcSlot = self.actionCard.tokenSlots.slot(named: "Calculator") else {
-            self.error = ActionExecutionError.expectedTokenSlotNotFound(self, "Calculator")
-            return
-        }
-        
-        guard let calc = self.tokens[calcSlot] as? CKCalculator else {
-            self.error = ActionExecutionError.unboundTokenSlot(self, calcSlot)
+        guard let calc: CKCalculator = self.token(named: "Calculator") as? CKCalculator else {
             return
         }
         
@@ -245,7 +201,7 @@ public class CKDivide: ExecutableActionCard {
         let quotient = calc.divide(a, b)
         
         // save the result
-        self.yields[yield] = .bound(quotient.toJSON())
+        self.store(data: quotient, forYieldIndex: 0)
     }
 }
 

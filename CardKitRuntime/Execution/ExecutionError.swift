@@ -33,5 +33,10 @@ public enum ActionExecutionError: Error {
     case boundInputNotConvertibleToExpectedType(ExecutableActionCard, String, JSON, Any.Type)
     case expectedTokenSlotNotFound(ExecutableActionCard, String)
     case unboundTokenSlot(ExecutableActionCard, TokenSlot)
-    case expectedYieldNotFound(ExecutableActionCard)
+    case yieldAtIndexNotFound(ExecutableActionCard, Int)
+    case attemptToStoreDataForInvalidYield(ExecutableActionCard, Yield, JSON)
+    case attemptToStoreDataOfUnexpectedType(ExecutableActionCard, Yield, String, String)
+    case attemptToRetrieveDataForInvalidYield(ExecutableActionCard, Yield)
+    case nilValueForYield(ExecutableActionCard, Yield)
+    case boundYieldNotConvertibleToExpectedType(ExecutableActionCard, Yield, JSON, Any.Type)
 }

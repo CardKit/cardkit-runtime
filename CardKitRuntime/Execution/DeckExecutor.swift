@@ -20,7 +20,7 @@ public class DeckExecutor: Operation {
     fileprivate var tokenInstances: [TokenCard : ExecutableTokenCard] = [:]
     
     /// Cache of yields produced by ActionCards after their execution
-    public fileprivate (set) var yieldData: YieldBindings = [:]
+    public fileprivate (set) var yieldData: [Yield : YieldData] = [:]
     
     /// Private operation queue for executing ActionCards in a Hand
     fileprivate let cardExecutionQueue: OperationQueue
@@ -205,10 +205,10 @@ public class DeckExecutor: Operation {
             for (slot, binding) in card.inputBindings {
                 switch binding {
                 case .boundToInputCard(let inputCard):
-                    executable.inputs[slot] = inputCard.boundData
+                    executable.inputBindings[slot] = inputCard.boundData
                 case .boundToYieldingActionCard(_, let yield):
-                    guard let yieldDataValue = self.yieldData[yield] else { continue }
-                    executable.inputs[slot] = yieldDataValue
+                    guard let yieldData = self.yieldData[yield] else { continue }
+                    executable.inputBindings[slot] = .bound(yieldData.data)
                 default:
                     throw ExecutionError.unboundInputEncountered(card, slot)
                 }
@@ -226,7 +226,7 @@ public class DeckExecutor: Operation {
                         throw ExecutionError.noTokenInstanceDefinedForTokenCard(tokenCard)
                     }
                     
-                    executable.tokens[slot] = instance
+                    executable.tokenBindings[slot] = instance
                 default:
                     // shouldn't happen, validation should have caught this
                     throw ExecutionError.tokenSlotBoundToUnboundValue(card, slot)
@@ -239,13 +239,6 @@ public class DeckExecutor: Operation {
                 
                 // wait until any other operation doing a check is done
                 let _ = satisfactionCheck.wait(timeout: DispatchTime.distantFuture)
-                
-                print("  ... copying out yielded data")
-                
-                // copy out yielded data
-                for (yield, data) in executable.yields {
-                    self.yieldData[yield] = data
-                }
                 
                 print("  ... checking for hand satisfaction")
                 
@@ -281,7 +274,9 @@ public class DeckExecutor: Operation {
             Thread.sleep(forTimeInterval: 1)
         }
         
-        print("hand execution finished, checking if any cards threw errors")
+        print("hand execution finished")
+        
+        print(" ... checking if any cards threw errors")
         
         // obtain the semaphore so no other threads are performing the satisfaction check
         let _ = satisfactionCheck.wait(timeout: DispatchTime.distantFuture)
@@ -292,13 +287,23 @@ public class DeckExecutor: Operation {
         // check to see if any ExecutableActionCards had errors
         for executable in executableCards {
             // only throws the first error encountered...
-            if let error = executable.error {
+            if let error = executable.errors.first {
                 print(" ... yep, a card threw an error: \(executable.actionCard.description)")
                 satisfactionCheck.signal()
                 throw ExecutionError.actionCardError(error)
             }
         }
         satisfactionCheck.signal()
+        
+        print(" ... copying out yielded data")
+        
+        // copy out yielded data
+        for executable in executableCards {
+            print(" > \(executable.actionCard.descriptor.name) produced \(executable.yieldData.count) yields")
+            for yield in executable.yieldData {
+                self.yieldData[yield.yield] = YieldData(cardIdentifier: executable.actionCard.identifier, yield: yield.yield, data: yield.data)
+            }
+        }
         
         print("the next hand to be executed will be \(nextHand?.identifier)")
         

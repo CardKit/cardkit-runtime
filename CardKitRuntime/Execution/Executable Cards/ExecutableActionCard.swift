@@ -23,13 +23,19 @@ import CardKit
 /// cancel() in order to perform cleanup or free resources.
 open class ExecutableActionCard: Operation, CarriesActionCardState {
     // these are "inputs" to the ExecutableActionCard
-    var actionCard: ActionCard
-    var inputs: InputBindings = [:]
-    var tokens: TokenBindings = [:]
+    // note that inputBindings and tokenBindings will be set by DeckExecutor based on
+    // the bindings present in actionCard -- e.g. when calling init() with an ActionCard
+    // that has bound inputs, inputBindings will remain nil until DeckExecutor copies
+    // those bindings in. which means, when writing tests that don't use DeckExecutor, 
+    // don't bind inputs to the ActionCard, bind them to the ExecutableActionCard via
+    // setup()
+    public var actionCard: ActionCard
+    var inputBindings: InputBindings = [:]
+    var tokenBindings: TokenBindings = [:]
     
     // these are "outputs" from the ExecutableActionCard
-    open var yields: YieldBindings = [:]
-    open var error: Error?
+    var yieldData: [YieldData] = []
+    public var errors: [Error] = []
     
     // this is 'required' so we can instantiate it from the metatype
     required public init(with card: ActionCard) {
@@ -38,14 +44,40 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     
     // MARK: CarriesActionCardState
     
-    func setup(_ inputs: InputBindings, tokens: TokenBindings) {
-        self.inputs = inputs
-        self.tokens = tokens
+    public func error(_ error: Error) {
+        self.errors.append(error)
     }
     
-    public func binding(forInput name: String) -> InputDataBinding? {
+    /// Convenience method for setting up input and token bindings. Used for setting up an ExecutableTokenCard
+    /// outside the context of the ExecutionEngine (e.g. for running tests).
+    public func setup(inputBindings: InputBindings, tokenBindings: TokenBindings) {
+        self.inputBindings = inputBindings
+        self.tokenBindings = tokenBindings
+    }
+    
+    /// Convenience method for setting up input and token bindings. Used for setting up an ExecutableTokenCard
+    /// outside the context of the ExecutionEngine (e.g. for running tests).
+    public func setup(inputBindings: [String : JSONEncodable], tokenBindings: [String : ExecutableTokenCard]) {
+        // bind inputs
+        for (slotName, encodable) in inputBindings {
+            // silently ignore slots that don't exist
+            guard let slot = self.actionCard.inputSlots.slot(named: slotName) else { continue }
+            
+            // convert to a DataBinding & bind it
+            self.inputBindings[slot] = .bound(encodable.toJSON())
+        }
+        
+        // bind tokens
+        for (slotName, binding) in tokenBindings {
+            // silently ignore slots that don't exist
+            guard let slot = self.actionCard.tokenSlots.slot(named: slotName) else { continue }
+            self.tokenBindings[slot] = binding
+        }
+    }
+    
+    public func binding(forInput name: String) -> DataBinding? {
         guard let slot = self.actionCard.descriptor.inputSlots.slot(named: name) else { return nil }
-        return self.inputs[slot]
+        return self.inputBindings[slot]
     }
     
     /// Obtain the bound value for the given input slot. Returns the bound value or nil if an
@@ -53,11 +85,11 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     /// is not convertible to the expected type T. The error is stored in self.error.
     public func value<T>(forInput name: String) -> T? where T : JSONDecodable {
         guard let binding = self.binding(forInput: name) else {
-            self.error = ActionExecutionError.expectedInputSlotNotFound(self, name)
+            self.error(ActionExecutionError.expectedInputSlotNotFound(self, name))
             return nil
         }
         guard case let .bound(json) = binding else {
-            self.error = ActionExecutionError.nilValueForInput(self, name)
+            self.error(ActionExecutionError.nilValueForInput(self, name))
             return nil
         }
         
@@ -66,7 +98,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
             let val = try T(json: json)
             return val
         } catch {
-            self.error = ActionExecutionError.boundInputNotConvertibleToExpectedType(self, name, json, T.self)
+            self.error(ActionExecutionError.boundInputNotConvertibleToExpectedType(self, name, json, T.self))
             return nil
         }
     }
@@ -87,16 +119,92 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     /// is stored in self.error.
     public func token<T>(named name: String) -> T? where T : ExecutableTokenCard {
         guard let slot = self.actionCard.tokenSlots.slot(named: name) else {
-            self.error = ActionExecutionError.expectedTokenSlotNotFound(self, name)
+            self.error(ActionExecutionError.expectedTokenSlotNotFound(self, name))
             return nil
         }
         
-        guard let token = self.tokens[slot] as? T else {
-            self.error = ActionExecutionError.unboundTokenSlot(self, slot)
+        guard let token = self.tokenBindings[slot] as? T else {
+            self.error(ActionExecutionError.unboundTokenSlot(self, slot))
             return nil
         }
         
         return token
+    }
+    
+    /// Retrieve a Yield by its index (e.g. 1st yield, 2nd yield, etc.)
+    /// Useful because Yields are not named like Inputs are named.
+    public func yield(atIndex index: Int) -> Yield? {
+        guard index < self.actionCard.yields.count else {
+            self.error(ActionExecutionError.yieldAtIndexNotFound(self, index))
+            return nil
+        }
+        return self.actionCard.yields[index]
+    }
+    
+    /// Store the given data as a Yield of this card.
+    public func store<T>(data: T, forYield yield: Yield) where T : JSONEncodable {
+        // make sure the given Yield exists for this card
+        guard self.actionCard.yields.contains(yield) else {
+            self.error(ActionExecutionError.attemptToStoreDataForInvalidYield(self, yield, data.toJSON()))
+            return
+        }
+        
+        // make sure the data types match
+        guard yield.matchesType(of: data) else {
+            let dataType = String(describing: type(of: data))
+            self.error(ActionExecutionError.attemptToStoreDataOfUnexpectedType(self, yield, yield.type, dataType))
+            return
+        }
+        
+        // capture the yielded data
+        let newYield = YieldData(cardIdentifier: self.actionCard.identifier, yield: yield, data: data.toJSON())
+        self.yieldData.append(newYield)
+    }
+    
+    /// Store the given data as a Yield of this card in the Yield with the given index.
+    public func store<T>(data: T, forYieldIndex index: Int) where T : JSONEncodable {
+        guard let yield = self.yield(atIndex: index) else {
+            self.error(ActionExecutionError.yieldAtIndexNotFound(self, index))
+            return
+        }
+        
+        // capture the yielded data
+        self.store(data: data, forYield: yield)
+    }
+    
+    /// Retrieve the data for the given yield.
+    public func value<T>(forYield yield: Yield) -> T? where T : JSONDecodable {
+        // if the given yield is not a valid yield for this card, return nil
+        guard self.actionCard.yields.contains(yield) else {
+            self.error(ActionExecutionError.attemptToRetrieveDataForInvalidYield(self, yield))
+            return nil
+        }
+        
+        // if the yield is not bound, then just return nil (this is not necessarily an error
+        // because the yield may not have been produced yet)
+        guard let yieldData = self.yieldData.filter({ $0.yield == yield }).first else {
+            return nil
+        }
+        
+        // convert type JSON to type T
+        do {
+            let val = try T(json: yieldData.data)
+            return val
+        } catch {
+            self.error(ActionExecutionError.boundYieldNotConvertibleToExpectedType(self, yield, yieldData.data, T.self))
+            return nil
+        }
+    }
+    
+    /// Retrieve the data for the yield specified by the given index.
+    public func value<T>(forYieldIndex index: Int) -> T? where T : JSONDecodable {
+        guard let yield = self.yield(atIndex: index) else {
+            self.error(ActionExecutionError.yieldAtIndexNotFound(self, index))
+            return nil
+        }
+        
+        // retrieve the yielded data
+        return self.value(forYield: yield)
     }
     
     // MARK: Operation
@@ -108,6 +216,6 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     
     open override func cancel() {
         // subclasses should override cancel() in order to clean up / free resources
-        fatalError("cancel() method cannot be executed on ExecutabletionCa")
+        // no fatalError() here in case a subclass doesn't override this (maybe they don't need to do anything)
     }
 }
