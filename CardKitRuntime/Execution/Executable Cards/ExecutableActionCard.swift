@@ -216,6 +216,6 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     
     open override func cancel() {
         // subclasses should override cancel() in order to clean up / free resources
-        fatalError("cancel() method cannot be executed on ExecutabletionCa")
+        // no fatalError() here in case a subclass doesn't override this (maybe they don't need to do anything)
     }
 }

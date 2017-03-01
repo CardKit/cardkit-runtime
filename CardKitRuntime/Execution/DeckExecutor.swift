@@ -240,13 +240,6 @@ public class DeckExecutor: Operation {
                 // wait until any other operation doing a check is done
                 let _ = satisfactionCheck.wait(timeout: DispatchTime.distantFuture)
                 
-                print("  ... copying out yielded data")
-                
-                // copy out yielded data
-                for yield in executable.yieldData {
-                    self.yieldData[yield.yield] = YieldData(cardIdentifier: executable.actionCard.identifier, yield: yield.yield, data: yield.data)
-                }
-                
                 print("  ... checking for hand satisfaction")
                 
                 // check for satisfaction
@@ -281,7 +274,9 @@ public class DeckExecutor: Operation {
             Thread.sleep(forTimeInterval: 1)
         }
         
-        print("hand execution finished, checking if any cards threw errors")
+        print("hand execution finished")
+        
+        print(" ... checking if any cards threw errors")
         
         // obtain the semaphore so no other threads are performing the satisfaction check
         let _ = satisfactionCheck.wait(timeout: DispatchTime.distantFuture)
@@ -299,6 +294,16 @@ public class DeckExecutor: Operation {
             }
         }
         satisfactionCheck.signal()
+        
+        print(" ... copying out yielded data")
+        
+        // copy out yielded data
+        for executable in executableCards {
+            print(" > \(executable.actionCard.descriptor.name) produced \(executable.yieldData.count) yields")
+            for yield in executable.yieldData {
+                self.yieldData[yield.yield] = YieldData(cardIdentifier: executable.actionCard.identifier, yield: yield.yield, data: yield.data)
+            }
+        }
         
         print("the next hand to be executed will be \(nextHand?.identifier)")
         
