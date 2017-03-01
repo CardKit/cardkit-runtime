@@ -23,13 +23,19 @@ import CardKit
 /// cancel() in order to perform cleanup or free resources.
 open class ExecutableActionCard: Operation, CarriesActionCardState {
     // these are "inputs" to the ExecutableActionCard
+    // note that inputBindings and tokenBindings will be set by DeckExecutor based on
+    // the bindings present in actionCard -- e.g. when calling init() with an ActionCard
+    // that has bound inputs, inputBindings will remain nil until DeckExecutor copies
+    // those bindings in. which means, when writing tests that don't use DeckExecutor, 
+    // don't bind inputs to the ActionCard, bind them to the ExecutableActionCard via
+    // setup()
     public var actionCard: ActionCard
     var inputBindings: InputBindings = [:]
     var tokenBindings: TokenBindings = [:]
     
     // these are "outputs" from the ExecutableActionCard
     var yieldData: [YieldData] = []
-    var errors: [Error] = []
+    public var errors: [Error] = []
     
     // this is 'required' so we can instantiate it from the metatype
     required public init(with card: ActionCard) {
@@ -42,9 +48,29 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
         self.errors.append(error)
     }
     
+    /// Convenience method for setting up input and token bindings. Used for setting up an ExecutableTokenCard
+    /// outside the context of the ExecutionEngine (e.g. for running tests).
     public func setup(inputBindings: InputBindings, tokenBindings: TokenBindings) {
         self.inputBindings = inputBindings
         self.tokenBindings = tokenBindings
+    }
+    
+    /// Convenience method for setting up input and token bindings. Used for setting up an ExecutableTokenCard
+    /// outside the context of the ExecutionEngine (e.g. for running tests).
+    public func setup(inputBindings: [String : DataBinding], tokenBindings: [String : ExecutableTokenCard]) {
+        // bind inputs
+        for (slotName, binding) in inputBindings {
+            // silently ignore slots that don't exist
+            guard let slot = self.actionCard.inputSlots.slot(named: slotName) else { continue }
+            self.inputBindings[slot] = binding
+        }
+        
+        // bind tokens
+        for (slotName, binding) in tokenBindings {
+            // silently ignore slots that don't exist
+            guard let slot = self.actionCard.tokenSlots.slot(named: slotName) else { continue }
+            self.tokenBindings[slot] = binding
+        }
     }
     
     public func binding(forInput name: String) -> DataBinding? {

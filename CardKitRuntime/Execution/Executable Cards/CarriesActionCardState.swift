@@ -27,12 +27,15 @@ protocol CarriesActionCardState {
     var actionCard: ActionCard { get }
     
     /// The specific Input data bound to the card. This is an input.
+    /// Input bindings should be set via one of the setup() methods.
     var inputBindings: InputBindings { get }
     
     /// The Tokens bound to the card. This is an input.
+    /// Token bindings should be set via one of the setup() methods.
     var tokenBindings: TokenBindings { get }
     
     /// These are the yields produced by the card. This is an output.
+    /// Yields should be accessed via the yield(atIndex:) method.
     var yieldData: [YieldData] { get }
     
     /// This holds any errors produced during execution. This is an output.
