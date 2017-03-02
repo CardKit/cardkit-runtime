@@ -110,7 +110,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
         // don't use self.value(forInput:) here because it may set an error that we don't really
         // want; e.g. if we are requesting the value for an optional input which isn't bound,
         // we do not want to self.error(.expectedInputSlotNotBound).
-        guard let binding = self.binding(value(forInput: name)) else { return nil }
+        guard let binding = self.binding(forInput: name) else { return nil }
         guard case let .bound(json) = binding else { return nil }
         
         // convert type JSON to type T
