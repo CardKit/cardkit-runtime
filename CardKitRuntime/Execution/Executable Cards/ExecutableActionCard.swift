@@ -85,7 +85,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     /// is not convertible to the expected type T. The error is stored in self.error.
     public func value<T>(forInput name: String) -> T? where T : JSONDecodable {
         guard let binding = self.binding(forInput: name) else {
-            self.error(ActionExecutionError.expectedInputSlotNotFound(self, name))
+            self.error(ActionExecutionError.unboundInputSlot(self, name))
             return nil
         }
         guard case let .bound(json) = binding else {
@@ -107,11 +107,19 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     /// if the slot is unbound, or if the value in the slot is not convertible to the expected
     /// type T.
     public func optionalValue<T>(forInput name: String) -> T? where T : JSONDecodable {
-        guard let value: T = self.value(forInput: name) else {
+        // don't use self.value(forInput:) here because it may set an error that we don't really
+        // want; e.g. if we are requesting the value for an optional input which isn't bound,
+        // we do not want to self.error(.expectedInputSlotNotBound).
+        guard let binding = self.binding(value(forInput: name)) else { return nil }
+        guard case let .bound(json) = binding else { return nil }
+        
+        // convert type JSON to type T
+        do {
+            let val = try T(json: json)
+            return val
+        } catch {
             return nil
         }
-        
-        return value
     }
     
     /// Obtain the bound token for the given token slot. Returns nil if a slot

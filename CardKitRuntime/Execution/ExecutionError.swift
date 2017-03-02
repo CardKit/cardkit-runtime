@@ -28,7 +28,7 @@ public enum ExecutionError: Error {
 // MARK: ActionExecutionError
 
 public enum ActionExecutionError: Error {
-    case expectedInputSlotNotFound(ExecutableActionCard, String)
+    case unboundInputSlot(ExecutableActionCard, String)
     case nilValueForInput(ExecutableActionCard, String)
     case boundInputNotConvertibleToExpectedType(ExecutableActionCard, String, JSON, Any.Type)
     case expectedTokenSlotNotFound(ExecutableActionCard, String)
