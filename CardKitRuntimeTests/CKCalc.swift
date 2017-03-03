@@ -263,7 +263,6 @@ class CKPrimeSieve: ExecutableActionCard {
     
     public override func cancel() {
         // yield
-        print("cancel called, storing the prime list with \(primeList.primes.count) elements")
         self.store(data: primeList, forYieldIndex: 0)
     }
 }
