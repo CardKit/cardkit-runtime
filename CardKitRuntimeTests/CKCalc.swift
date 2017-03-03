@@ -8,6 +8,8 @@
 
 import Foundation
 
+import Freddy
+
 @testable import CardKit
 @testable import CardKitRuntime
 
@@ -39,7 +41,7 @@ public struct CKCalc {
                 yieldDescription: "The sum A + B",
                 ends: true,
                 endsDescription: "Ends when the computation is complete.",
-                assetCatalog: CardAssetCatalog(description: "No action performed."))
+                assetCatalog: CardAssetCatalog(description: "Add"))
             
             // MARK: Subtract
             /// Descriptor for Subtract card
@@ -55,7 +57,7 @@ public struct CKCalc {
                 yieldDescription: "The difference A - B",
                 ends: true,
                 endsDescription: "Ends when the computation is complete.",
-                assetCatalog: CardAssetCatalog(description: "No action performed."))
+                assetCatalog: CardAssetCatalog(description: "Subtract"))
             
             // MARK: Multiply
             /// Descriptor for Multiply card
@@ -71,7 +73,7 @@ public struct CKCalc {
                 yieldDescription: "The multiplication A * B",
                 ends: true,
                 endsDescription: "Ends when the computation is complete.",
-                assetCatalog: CardAssetCatalog(description: "No action performed."))
+                assetCatalog: CardAssetCatalog(description: "Multiply"))
             
             // MARK: Divide
             /// Descriptor for Divide card
@@ -87,7 +89,20 @@ public struct CKCalc {
                 yieldDescription: "The division A / B",
                 ends: true,
                 endsDescription: "Ends when the computation is complete.",
-                assetCatalog: CardAssetCatalog(description: "No action performed."))
+                assetCatalog: CardAssetCatalog(description: "Divide"))
+            
+            // MARK: PrimeSieve
+            /// Descriptor for PrimeSieve card
+            public static let PrimeSieve = ActionCardDescriptor(
+                name: "Sieve of Eratosthenes",
+                subpath: "Math",
+                inputs: nil,
+                tokens: [TokenSlot(name: "Sieve", descriptor: CKCalc.Token.Sieve)],
+                yields: [Yield(type: PrimeList.self)],
+                yieldDescription: "Prime numbers",
+                ends: false,
+                endsDescription: nil,
+                assetCatalog: CardAssetCatalog(description: "Prime Sieve"))
         }
     }
     
@@ -99,6 +114,12 @@ public struct CKCalc {
         
         public static let Calculator = TokenCardDescriptor(
             name: "Calculator",
+            subpath: nil,
+            isConsumed: false,
+            assetCatalog: CardAssetCatalog())
+        
+        public static let Sieve = TokenCardDescriptor(
+            name: "Sieve",
             subpath: nil,
             isConsumed: false,
             assetCatalog: CardAssetCatalog())
@@ -205,6 +226,48 @@ public class CKDivide: ExecutableActionCard {
     }
 }
 
+// MARK: - CKPrimeSieve
+
+struct PrimeList: JSONEncodable, JSONDecodable {
+    var primes: [Int] = []
+    
+    init() {
+    }
+    
+    init(json: JSON) throws {
+        self.primes = try json.decodedArray(at: "primes", type: Int.self)
+    }
+    
+    func toJSON() -> JSON {
+        return .dictionary([
+            "primes": primes.toJSON()
+            ])
+    }
+}
+
+class CKPrimeSieve: ExecutableActionCard {
+    var primeList = PrimeList()
+    
+    public override func main() {
+        // get the sieve token
+        guard let sieve: CKSieveOfEratosthenes = self.token(named: "Sieve") as? CKSieveOfEratosthenes else {
+            return
+        }
+        
+        // generate primes from the sieve until the cows come home
+        repeat {
+            let next = sieve.nextPrime()
+            self.primeList.primes.append(next)
+        } while !isCancelled
+    }
+    
+    public override func cancel() {
+        // yield
+        print("cancel called, storing the prime list with \(primeList.primes.count) elements")
+        self.store(data: primeList, forYieldIndex: 0)
+    }
+}
+
 // MARK: - CKCalculator
 
 protocol CKCalculator {
@@ -233,23 +296,66 @@ class CKFastCalculator: ExecutableTokenCard, CKCalculator {
 }
 
 class CKSlowCalculator: ExecutableTokenCard, CKCalculator {
+    public var delay: TimeInterval = 3
+    
     func add(_ lhs: Double, _ rhs: Double) -> Double {
-        Thread.sleep(forTimeInterval: 5)
+        Thread.sleep(forTimeInterval: self.delay)
         return lhs + rhs
     }
     
     func subtract(_ lhs: Double, _ rhs: Double) -> Double {
-        Thread.sleep(forTimeInterval: 5)
+        Thread.sleep(forTimeInterval: self.delay)
         return lhs - rhs
     }
     
     func multiply(_ lhs: Double, _ rhs: Double) -> Double {
-        Thread.sleep(forTimeInterval: 5)
+        Thread.sleep(forTimeInterval: self.delay)
         return lhs * rhs
     }
     
     func divide(_ lhs: Double, _ rhs: Double) -> Double {
-        Thread.sleep(forTimeInterval: 5)
+        Thread.sleep(forTimeInterval: self.delay)
         return lhs / rhs
+    }
+}
+
+// MARK: - CKSieveOfEratosthenes
+
+class CKSieveOfEratosthenes: ExecutableTokenCard {
+    private struct EratosthenesIterator: IteratorProtocol {
+        //swiftlint:disable variable_name
+        let n: Int
+        var composite: [Bool]
+        var current = 2
+        
+        init(upTo n: Int) {
+            self.n = n
+            self.composite = [Bool](repeating: false, count: n + 1)
+        }
+        
+        mutating func next() -> Int? {
+            while current <= self.n {
+                if !composite[current] {
+                    let prime = current
+                    for multiple in stride(from: current * current, through: self.n, by: current) {
+                        composite[multiple] = true
+                    }
+                    current += 1
+                    return prime
+                }
+                current += 1
+            }
+            return nil
+        }
+    }
+    
+    private var sieve = EratosthenesIterator(upTo: 10_000_000)
+    private var primes: [Int] = []
+    
+    func nextPrime() -> Int {
+        // swiftlint:disable:next force_unwrapping
+        guard let next = sieve.next() else { return primes.last! }
+        primes.append(next)
+        return next
     }
 }
