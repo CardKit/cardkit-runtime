@@ -352,8 +352,12 @@ class CKSieveOfEratosthenes: ExecutableTokenCard {
     private var primes: [Int] = []
     
     func nextPrime() -> Int {
-        // swiftlint:disable:next force_unwrapping
-        guard let next = sieve.next() else { return primes.last! }
+        guard let next = sieve.next() else {
+            if let last = primes.last {
+                return last
+            } else {
+                return 2
+            }}
         primes.append(next)
         return next
     }
