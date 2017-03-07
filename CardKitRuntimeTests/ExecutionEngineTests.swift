@@ -93,5 +93,82 @@ class ExecutionEngineTests: XCTestCase {
             XCTAssertNil(error)
         }
     }
+    
+    func testYieldsFromNonEndingCard() {
+        // token cards
+        let sieveCard = CKCalc.Token.Sieve.makeCard()
+        let calcCard = CKCalc.Token.Calculator.makeCard()
+        
+        // action cards
+        var primeSieve = CKCalc.Action.Math.PrimeSieve.makeCard()
+        var add = CKCalc.Action.Math.Add.makeCard()
+        
+        // bind tokens
+        do {
+            primeSieve = try primeSieve <- ("Sieve", sieveCard)
+            add = try add <- ("Calculator", calcCard)
+        } catch let error {
+            XCTFail("error binding token cards: \(error)")
+        }
+        
+        // bind inputs
+        do {
+            let a = try CardKit.Input.Numeric.Real <- 3000.0
+            let b = try CardKit.Input.Numeric.Real <- 100.0
+            add = try add <- ("A", a)
+            add = try add <- ("B", b)
+        } catch let error {
+            XCTFail("error binding inputs: \(error)")
+        }
+        
+        // set up the deck
+        let deck = ( add ++ primeSieve )%
+        
+        // add tokens to the deck
+        deck.add(sieveCard)
+        deck.add(calcCard)
+        
+        // set up the execution engine
+        let engine = ExecutionEngine(with: deck)
+        engine.setExecutableActionType(CKPrimeSieve.self, for: CKCalc.Action.Math.PrimeSieve)
+        engine.setExecutableActionType(CKAdd.self, for: CKCalc.Action.Math.Add)
+        
+        // create token instances
+        let calculator = CKSlowCalculator(with: calcCard)
+        let sieve = CKSieveOfEratosthenes(with: sieveCard)
+        
+        engine.setTokenInstance(sieve, for: sieveCard)
+        engine.setTokenInstance(calculator, for: calcCard)
+        
+        // execute
+        engine.execute({ (yields: [YieldData], error: ExecutionError?) in
+            XCTAssertNil(error)
+            
+            // two yields -- one from add, one from the sieve
+            XCTAssertTrue(yields.count == 2)
+            
+            for yield in yields {
+                switch yield.cardIdentifier {
+                case add.identifier:
+                    do {
+                        let sum = try yield.data.decode(type: Double.self)
+                        XCTAssertTrue(sum == 3100.0)
+                    } catch let error {
+                        XCTFail("expected a yield of type Double, error: \(error)")
+                    }
+                case primeSieve.identifier:
+                    do {
+                        let primeList = try yield.data.decode(type: PrimeList.self)
+                        let primes = primeList.primes
+                        XCTAssertTrue(primes.count > 0)
+                    } catch let error {
+                        XCTFail("expected a yield of type PrimeList, error: \(error)")
+                    }
+                default:
+                    XCTFail("encountered a Yield that wasn't produced by the Add or PrimeSieve card")
+                }
+            }
+        })
 
+    }
 }
