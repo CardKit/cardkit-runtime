@@ -14,10 +14,10 @@ public class DeckExecutor: Operation {
     public fileprivate (set) var deck: Deck
     
     /// Map between ActionCardDescriptor and the type that implements it
-    fileprivate var executableActionTypes: [ActionCardDescriptor : ExecutableActionCard.Type] = [:]
+    fileprivate var executableActionTypes: [ActionCardDescriptor : ExecutableAction.Type] = [:]
     
     /// Map between TokenCard and the instance that implements it
-    fileprivate var tokenInstances: [TokenCard : ExecutableTokenCard] = [:]
+    fileprivate var tokenInstances: [TokenCard : ExecutableToken] = [:]
     
     /// Cache of yields produced by ActionCards after their execution
     public fileprivate (set) var yieldData: [Yield : YieldData] = [:]
@@ -53,19 +53,19 @@ public class DeckExecutor: Operation {
     
     // MARK: Instance Methods
     
-    public func setExecutableActionType(_ type: ExecutableActionCard.Type, for descriptor: ActionCardDescriptor) {
+    public func setExecutableActionType(_ type: ExecutableAction.Type, for descriptor: ActionCardDescriptor) {
         self.executableActionTypes[descriptor] = type
     }
     
-    public func setExecutableActionTypes(_ executionTypes: [ActionCardDescriptor : ExecutableActionCard.Type]) {
+    public func setExecutableActionTypes(_ executionTypes: [ActionCardDescriptor : ExecutableAction.Type]) {
         self.executableActionTypes = executionTypes
     }
     
-    public func setTokenInstance(_ instance: ExecutableTokenCard, for tokenCard: TokenCard) {
+    public func setTokenInstance(_ instance: ExecutableToken, for tokenCard: TokenCard) {
         self.tokenInstances[tokenCard] = instance
     }
     
-    public func setTokenInstances(_ tokenInstances: [TokenCard : ExecutableTokenCard]) {
+    public func setTokenInstances(_ tokenInstances: [TokenCard : ExecutableToken]) {
         self.tokenInstances = tokenInstances
     }
     
@@ -109,7 +109,7 @@ public class DeckExecutor: Operation {
         if self.isCancelled {
             print("  it is! cancelling all pending operations")
             
-            // cancel any ExecutableActionCards that are executing
+            // cancel any ExecutableActions that are executing
             self.cardExecutionQueue.cancelAllOperations()
             
             // throw an error that we were cancelled
@@ -184,7 +184,7 @@ public class DeckExecutor: Operation {
     fileprivate func executeHand(_ hand: Hand) throws -> Hand? {
         // operations to add to the execution queue
         var operations: [Operation] = []
-        var executableCards: [ExecutableActionCard] = []
+        var executableCards: [ExecutableAction] = []
         
         let satisfactionCheck: DispatchSemaphore = DispatchSemaphore(value: 1)
         var satisfiedCards: Set<CardIdentifier> = Set()
@@ -284,7 +284,7 @@ public class DeckExecutor: Operation {
         // cancel execution of any outstanding operations in the queue
         cardExecutionQueue.cancelAllOperations()
         
-        // check to see if any ExecutableActionCards had errors
+        // check to see if any ExecutableActions had errors
         for executable in executableCards {
             // only throws the first error encountered...
             if let error = executable.errors.first {

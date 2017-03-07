@@ -12,7 +12,7 @@ import CardKit
 
 // MARK: CKTimer
 
-public class CKTimer: ExecutableActionCard {
+public class CKTimer: ExecutableAction {
     public override func main() {
         guard let duration: Double = self.value(forInput: "Duration") else {
             return
