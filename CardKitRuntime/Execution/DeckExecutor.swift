@@ -6,6 +6,8 @@
 //  Copyright © 2016 IBM. All rights reserved.
 //
 
+// swiftlint:disable cyclomatic_complexity
+
 import Foundation
 
 import CardKit
@@ -180,7 +182,7 @@ public class DeckExecutor: Operation {
     /// Execute the given Hand. Returns the next Hand to be executed (if it's a subhand), or nil
     /// if the Deck should continue execution with the next hand. Also returns a flag indicating
     /// whether execution should terminate after the current Hand.
-    //swiftlint:disable:next function_body_length
+    // swiftlint:disable:next function_body_length
     fileprivate func executeHand(_ hand: Hand) throws -> Hand? {
         // operations to add to the execution queue
         var operations: [Operation] = []

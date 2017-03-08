@@ -23,6 +23,7 @@ class ExecutionEngineTests: XCTestCase {
         super.tearDown()
     }
     
+    // swiftlint:disable:next function_body_length
     func testCalculator() {
         var deck: Deck? = nil
         var yield: Yield? = nil
@@ -94,6 +95,7 @@ class ExecutionEngineTests: XCTestCase {
         }
     }
     
+    // swiftlint:disable:next function_body_length
     func testYieldsFromNonEndingCard() {
         // token cards
         let sieveCard = CKCalc.Token.Sieve.makeCard()
