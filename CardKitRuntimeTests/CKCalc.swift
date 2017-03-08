@@ -245,7 +245,7 @@ struct PrimeList: JSONEncodable, JSONDecodable {
     }
 }
 
-class CKPrimeSieve: ExecutableActionCard {
+class CKPrimeSieve: ExecutableAction {
     var primeList = PrimeList()
     
     public override func main() {
@@ -320,7 +320,7 @@ class CKSlowCalculator: ExecutableToken, CKCalculator {
 
 // MARK: - CKSieveOfEratosthenes
 
-class CKSieveOfEratosthenes: ExecutableTokenCard {
+class CKSieveOfEratosthenes: ExecutableToken {
     private struct EratosthenesIterator: IteratorProtocol {
         //swiftlint:disable variable_name
         let n: Int
