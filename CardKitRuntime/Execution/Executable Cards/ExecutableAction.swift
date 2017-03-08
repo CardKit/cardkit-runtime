@@ -21,7 +21,7 @@ import CardKit
 /// In the event that a Hand becomes satisfied while ExecutableActions are still executing, the ExecutionEngine
 /// will cancel all other operations in its queue. Therefore, an ExecutableAction may wish to override
 /// cancel() in order to perform cleanup or free resources.
-open class ExecutableAction: Operation, CarriesActionCardState {
+open class ExecutableAction: Operation {
     // these are "inputs" to the ExecutableAction
     // note that inputBindings and tokenBindings will be set by DeckExecutor based on
     // the bindings present in actionCard -- e.g. when calling init() with an ActionCard
@@ -42,8 +42,22 @@ open class ExecutableAction: Operation, CarriesActionCardState {
         self.actionCard = card
     }
     
-    // MARK: CarriesActionCardState
+    // MARK: Operation
     
+    open override func main() {
+        // subclasses must override main() to perform their executable actions
+        fatalError("main() method cannot be executed on ExecutableAction, it must be overridden in a subclass")
+    }
+    
+    open override func cancel() {
+        // subclasses should override cancel() in order to clean up / free resources
+        // no fatalError() here in case a subclass doesn't override this (maybe they don't need to do anything)
+    }
+}
+
+// MARK: CarriesActionCardState
+
+extension ExecutableAction: CarriesActionCardState {
     public func error(_ error: Error) {
         self.errors.append(error)
     }
@@ -214,16 +228,20 @@ open class ExecutableAction: Operation, CarriesActionCardState {
         // retrieve the yielded data
         return self.value(forYield: yield)
     }
-    
-    // MARK: Operation
-    
-    open override func main() {
-        // subclasses must override main() to perform their executable actions
-        fatalError("main() method cannot be executed on ExecutableAction, it must be overridden in a subclass")
-    }
-    
-    open override func cancel() {
-        // subclasses should override cancel() in order to clean up / free resources
-        // no fatalError() here in case a subclass doesn't override this (maybe they don't need to do anything)
+}
+
+extension ExecutableAction: SignalsEmergencyStop {
+    /// `ExecutableAction` subclasses should call this method from `main()` to trigger
+    /// an Emergency Stop event. This event will cascade up to the DeckExecutor, triggering a hand
+    /// satisfaction check, and then an error check. When the DeckExecutor sees an
+    /// `ActionExecutionError.emergencyStop`, it will cancel execution of all other cards in the 
+    /// hand, and trigger `emergencyStop()` calls for all of its `tokenInstances`. Calling 
+    /// `emergencyStop()` will result in a call to `cancel()`, hence, do not call this
+    /// method from `cancel()`.
+    public func emergencyStop(errors: [Error]) {
+        // request the emergency stop by storing the errors and cancelling the operation.
+        // this will trigger the 'done' satisfaction check and test for errors.
+        errors.forEach { self.error(ActionExecutionError.emergencyStop($0)) }
+        self.cancel()
     }
 }

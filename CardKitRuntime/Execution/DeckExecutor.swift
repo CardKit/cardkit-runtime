@@ -191,6 +191,7 @@ public class DeckExecutor: Operation {
         let satisfactionCheck: DispatchSemaphore = DispatchSemaphore(value: 1)
         var satisfiedCards: Set<CardIdentifier> = Set()
         var isHandSatisfied = false
+        var stopExecution = false
         var nextHand: Hand? = nil
         
         print("DeckExecutor setting up hand \(hand.identifier) for execution")
@@ -242,6 +243,14 @@ public class DeckExecutor: Operation {
                 // wait until any other operation doing a check is done
                 let _ = satisfactionCheck.wait(timeout: DispatchTime.distantFuture)
                 
+                // check for errors
+                print("  ... checking if the card threw errors")
+                if executable.errors.count > 0 {
+                    stopExecution = true
+                    print("  > it did")
+                }
+                
+                // check for hand satisfaction
                 print("  ... checking for hand satisfaction")
                 
                 // check for satisfaction
@@ -250,6 +259,9 @@ public class DeckExecutor: Operation {
                     let satisfactionResult = hand.satisfactionResult(given: satisfiedCards)
                     isHandSatisfied = satisfactionResult.0
                     nextHand = satisfactionResult.1
+                    if isHandSatisfied {
+                        print("  > it is")
+                    }
                 }
                 satisfactionCheck.signal()
             }
@@ -266,19 +278,18 @@ public class DeckExecutor: Operation {
         print("beginning execution of hand")
         cardExecutionQueue.addOperations(operations, waitUntilFinished: false)
         
-        // wait until either the operation queue is finished, or the hand is satisfied
-        while cardExecutionQueue.operationCount > 0 && !isHandSatisfied {
+        // wait until either the operation queue is finished, the hand is satisfied, or 
+        // execution should be stopped for any other reason (e-stop, errors thrown)
+        while cardExecutionQueue.operationCount > 0 && !isHandSatisfied && !stopExecution {
             // give some processing time. what's the right amount of time we should sleep for before
             // checking if the hand is satisfied? this is a good philosophical question. i'm going to
             // assume checking every second is appropriate, although for more time-sensitive applications
             // this number may need to be reduced.
-            print("SLEEPING WHILE WE WAIT FOR ALL CARDS TO FINISH EXECUTION")
+            print("SLEEPING WHILE WE WAIT FOR HAND EXECUTION TO FINISH")
             Thread.sleep(forTimeInterval: 1)
         }
         
         print("hand execution finished")
-        
-        print(" ... checking if any cards threw errors")
         
         // obtain the semaphore so no other threads are performing the satisfaction check
         let _ = satisfactionCheck.wait(timeout: DispatchTime.distantFuture)
@@ -287,19 +298,21 @@ public class DeckExecutor: Operation {
         cardExecutionQueue.cancelAllOperations()
         
         // check to see if any ExecutableActions had errors
+        print(" ... checking if any cards threw errors")
         for executable in executableCards {
-            // only throws the first error encountered...
-            if let error = executable.errors.first {
-                print(" ... yep, a card threw an error: \(executable.actionCard.description)")
+            if executable.errors.count > 0 {
+                print(" ... yep, \(executable.actionCard.description) threw errors: \(executable.errors)")
+                
+                // signal the tokens for an emergency stop
+                print(" ... signaling tokens to perform their emergency stop procedures")
+                let results = self.signalTokensForEmergencyStop(errors: executable.errors)
                 satisfactionCheck.signal()
-                throw ExecutionError.actionCardError(error)
+                throw ExecutionError.actionCardErrorsTriggeredEmergencyStop(executable.errors, results)
             }
         }
-        satisfactionCheck.signal()
-        
-        print(" ... copying out yielded data")
         
         // copy out yielded data
+        print(" ... copying out yielded data")
         for executable in executableCards {
             print(" > \(executable.actionCard.descriptor.name) produced \(executable.yieldData.count) yields")
             for yield in executable.yieldData {
@@ -307,8 +320,28 @@ public class DeckExecutor: Operation {
             }
         }
         
+        // signal on the satisfactionCheck because we're finished; in case anything was
+        // waiting to perform a satisfactionCheck, this will unblock them
+        satisfactionCheck.signal()
+        
         print("the next hand to be executed will be \(nextHand?.identifier)")
         
         return nextHand
+    }
+    
+    fileprivate func signalTokensForEmergencyStop(errors: [Error]) -> [TokenCard : EmergencyStopResult] {
+        // trigger all tokens in parallel to perform the emergency stop
+        // and then wait until all of them have completed it
+        let group = DispatchGroup()
+        var results: [TokenCard : EmergencyStopResult] = [:]
+        for (_, token) in self.tokenInstances {
+            group.enter()
+            token.handleEmergencyStop(errors: errors) { result in
+                results[token.tokenCard] = result
+                group.leave()
+            }
+        }
+        group.wait()
+        return results
     }
 }
