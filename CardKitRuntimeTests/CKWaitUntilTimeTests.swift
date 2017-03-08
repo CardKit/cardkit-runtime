@@ -50,14 +50,15 @@ class CKWaitUntilTimeTests: XCTestCase {
                 XCTFail("error: \(error)")
             }
             
+            let threshold: TimeInterval = 1
             let currentDate = Date()
             let timeElapsed = currentDate.timeIntervalSince(cardStartTime)
             
             //if the seconds to wait is negative, then time elapsed should be around 0
             //if seconds to wait is zero or positive, and the difference between secondsToWait and
             //time elapsed is greater than one, then the card did not wait until the correct time
-            if (secondsToWait < 0 && timeElapsed > 1) ||
-                (secondsToWait >= 0 && abs(secondsToWait - timeElapsed) > 1) {
+            if (secondsToWait < 0 && timeElapsed > threshold) ||
+                (secondsToWait >= 0 && abs(secondsToWait - timeElapsed) > threshold) {
                 XCTFail("Card did not wait until the specified time. cardStartTime: \(cardStartTime), secondsToWait: \(secondsToWait), Time Elapsed: \(timeElapsed), endTime: \(currentDate)")
             }
         }
