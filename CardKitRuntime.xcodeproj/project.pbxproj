@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6861C2E61E6F7A9D00503691 /* CKWaitUntilTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */; };
+		6861C2E71E6F7A9D00503691 /* CKWaitUntilTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */; };
+		6861C2E81E6F7A9D00503691 /* CKWaitUntilTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */; };
 		CC9E76801D58B82C00B7C738 /* DeckValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E767F1D58B82C00B7C738 /* DeckValidator.swift */; };
 		CC9E76821D58B82C00B7C738 /* DeckValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E767F1D58B82C00B7C738 /* DeckValidator.swift */; };
 		CC9E76841D58B82C00B7C738 /* DeckValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E767F1D58B82C00B7C738 /* DeckValidator.swift */; };
@@ -112,6 +115,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKWaitUntilTimeTests.swift; sourceTree = "<group>"; };
 		CC9E767F1D58B82C00B7C738 /* DeckValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckValidator.swift; sourceTree = "<group>"; };
 		CC9E76861D58B83400B7C738 /* HandValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandValidator.swift; sourceTree = "<group>"; };
 		CC9E768D1D58B83C00B7C738 /* CardValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardValidator.swift; sourceTree = "<group>"; };
@@ -210,6 +214,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6861C2E41E6F7A8C00503691 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */,
+			);
+			name = Cards;
+			sourceTree = "<group>";
+		};
 		CC9E767A1D58B4B200B7C738 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,6 +321,7 @@
 		CCE7D4771D50D191008FC492 /* CardKitRuntimeTests */ = {
 			isa = PBXGroup;
 			children = (
+				6861C2E41E6F7A8C00503691 /* Cards */,
 				CCE7D4781D50D191008FC492 /* CardKitRuntimeTests.swift */,
 				CCE72A401D650F1800A347D8 /* CardValidatorTests.swift */,
 				CCBB792E1D746A5C003B6458 /* CKCalc.swift */,
@@ -801,6 +814,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6861C2E61E6F7A9D00503691 /* CKWaitUntilTimeTests.swift in Sources */,
 				CCE729C41D63BD7F00A347D8 /* ValidationEngineTests.swift in Sources */,
 				CCBB79371D746B82003B6458 /* ExecutionEngineTests.swift in Sources */,
 				CCBB792F1D746A5C003B6458 /* CKCalc.swift in Sources */,
@@ -835,6 +849,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6861C2E71E6F7A9D00503691 /* CKWaitUntilTimeTests.swift in Sources */,
 				CCE729C61D63BD7F00A347D8 /* ValidationEngineTests.swift in Sources */,
 				CCBB79381D746B82003B6458 /* ExecutionEngineTests.swift in Sources */,
 				CCBB79301D746A5C003B6458 /* CKCalc.swift in Sources */,
@@ -869,6 +884,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6861C2E81E6F7A9D00503691 /* CKWaitUntilTimeTests.swift in Sources */,
 				CCE729C81D63BD7F00A347D8 /* ValidationEngineTests.swift in Sources */,
 				CCBB79391D746B82003B6458 /* ExecutionEngineTests.swift in Sources */,
 				CCBB79311D746A5C003B6458 /* CKCalc.swift in Sources */,

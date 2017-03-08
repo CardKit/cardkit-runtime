@@ -12,6 +12,8 @@ import XCTest
 
 class CardKitRuntimeTests: XCTestCase {
     
+    public static let expectationTimeout: TimeInterval = 20
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
