@@ -37,12 +37,12 @@
 		CCBB79181D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */; };
 		CCBB791A1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */; };
 		CCBB791C1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */; };
-		CCBB791E1D6F735F003B6458 /* ExecutableActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */; };
-		CCBB79201D6F735F003B6458 /* ExecutableActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */; };
-		CCBB79221D6F735F003B6458 /* ExecutableActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */; };
-		CCBB79241D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */; };
-		CCBB79261D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */; };
-		CCBB79281D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */; };
+		CCBB791E1D6F735F003B6458 /* ExecutableAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79101D6F735F003B6458 /* ExecutableAction.swift */; };
+		CCBB79201D6F735F003B6458 /* ExecutableAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79101D6F735F003B6458 /* ExecutableAction.swift */; };
+		CCBB79221D6F735F003B6458 /* ExecutableAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79101D6F735F003B6458 /* ExecutableAction.swift */; };
+		CCBB79241D6F735F003B6458 /* ExecutableToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79111D6F735F003B6458 /* ExecutableToken.swift */; };
+		CCBB79261D6F735F003B6458 /* ExecutableToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79111D6F735F003B6458 /* ExecutableToken.swift */; };
+		CCBB79281D6F735F003B6458 /* ExecutableToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB79111D6F735F003B6458 /* ExecutableToken.swift */; };
 		CCBB792F1D746A5C003B6458 /* CKCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB792E1D746A5C003B6458 /* CKCalc.swift */; };
 		CCBB79301D746A5C003B6458 /* CKCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB792E1D746A5C003B6458 /* CKCalc.swift */; };
 		CCBB79311D746A5C003B6458 /* CKCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB792E1D746A5C003B6458 /* CKCalc.swift */; };
@@ -122,8 +122,8 @@
 		CCBB79061D6F6F21003B6458 /* DeckExecutor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckExecutor.swift; sourceTree = "<group>"; };
 		CCBB790E1D6F735F003B6458 /* CarriesActionCardState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarriesActionCardState.swift; sourceTree = "<group>"; };
 		CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarriesTokenCardState.swift; sourceTree = "<group>"; };
-		CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutableActionCard.swift; sourceTree = "<group>"; };
-		CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutableTokenCard.swift; sourceTree = "<group>"; };
+		CCBB79101D6F735F003B6458 /* ExecutableAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutableAction.swift; sourceTree = "<group>"; };
+		CCBB79111D6F735F003B6458 /* ExecutableToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutableToken.swift; sourceTree = "<group>"; };
 		CCBB792E1D746A5C003B6458 /* CKCalc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKCalc.swift; sourceTree = "<group>"; };
 		CCBB79361D746B82003B6458 /* ExecutionEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionEngineTests.swift; sourceTree = "<group>"; };
 		CCE729C21D63BD7F00A347D8 /* ValidationEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationEngineTests.swift; sourceTree = "<group>"; };
@@ -236,8 +236,8 @@
 		CCBB790D1D6F735F003B6458 /* Executable Cards */ = {
 			isa = PBXGroup;
 			children = (
-				CCBB79101D6F735F003B6458 /* ExecutableActionCard.swift */,
-				CCBB79111D6F735F003B6458 /* ExecutableTokenCard.swift */,
+				CCBB79101D6F735F003B6458 /* ExecutableAction.swift */,
+				CCBB79111D6F735F003B6458 /* ExecutableToken.swift */,
 				CCBB790E1D6F735F003B6458 /* CarriesActionCardState.swift */,
 				CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */,
 			);
@@ -780,14 +780,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCBB79001D6F51B2003B6458 /* ExecutionError.swift in Sources */,
-				CCBB79241D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */,
+				CCBB79241D6F735F003B6458 /* ExecutableToken.swift in Sources */,
 				CCE7D4EB1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */,
 				CC9E76951D58C32E00B7C738 /* ValidationError.swift in Sources */,
 				CCBB79071D6F6F21003B6458 /* DeckExecutor.swift in Sources */,
 				CC9E76801D58B82C00B7C738 /* DeckValidator.swift in Sources */,
 				CC9E768E1D58B83C00B7C738 /* CardValidator.swift in Sources */,
 				CC9E76A31D58E2E700B7C738 /* ValidationEngine.swift in Sources */,
-				CCBB791E1D6F735F003B6458 /* ExecutableActionCard.swift in Sources */,
+				CCBB791E1D6F735F003B6458 /* ExecutableAction.swift in Sources */,
 				CCBB79181D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
 				CCE72A321D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
 				CCBB79121D6F735F003B6458 /* CarriesActionCardState.swift in Sources */,
@@ -814,14 +814,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCBB79021D6F51B2003B6458 /* ExecutionError.swift in Sources */,
-				CCBB79261D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */,
+				CCBB79261D6F735F003B6458 /* ExecutableToken.swift in Sources */,
 				CCE7D4ED1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */,
 				CC9E76971D58C32E00B7C738 /* ValidationError.swift in Sources */,
 				CCBB79091D6F6F21003B6458 /* DeckExecutor.swift in Sources */,
 				CC9E76821D58B82C00B7C738 /* DeckValidator.swift in Sources */,
 				CC9E76901D58B83C00B7C738 /* CardValidator.swift in Sources */,
 				CC9E76A51D58E2E700B7C738 /* ValidationEngine.swift in Sources */,
-				CCBB79201D6F735F003B6458 /* ExecutableActionCard.swift in Sources */,
+				CCBB79201D6F735F003B6458 /* ExecutableAction.swift in Sources */,
 				CCBB791A1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
 				CCE72A341D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
 				CCBB79141D6F735F003B6458 /* CarriesActionCardState.swift in Sources */,
@@ -848,14 +848,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCBB79041D6F51B2003B6458 /* ExecutionError.swift in Sources */,
-				CCBB79281D6F735F003B6458 /* ExecutableTokenCard.swift in Sources */,
+				CCBB79281D6F735F003B6458 /* ExecutableToken.swift in Sources */,
 				CCE7D4EF1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */,
 				CC9E76991D58C32E00B7C738 /* ValidationError.swift in Sources */,
 				CCBB790B1D6F6F21003B6458 /* DeckExecutor.swift in Sources */,
 				CC9E76841D58B82C00B7C738 /* DeckValidator.swift in Sources */,
 				CC9E76921D58B83C00B7C738 /* CardValidator.swift in Sources */,
 				CC9E76A71D58E2E700B7C738 /* ValidationEngine.swift in Sources */,
-				CCBB79221D6F735F003B6458 /* ExecutableActionCard.swift in Sources */,
+				CCBB79221D6F735F003B6458 /* ExecutableAction.swift in Sources */,
 				CCBB791C1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
 				CCE72A361D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
 				CCBB79161D6F735F003B6458 /* CarriesActionCardState.swift in Sources */,
