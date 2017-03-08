@@ -6,6 +6,8 @@
 //  Copyright © 2016 IBM. All rights reserved.
 //
 
+// swiftlint:disable nesting
+
 import Foundation
 
 import Freddy
@@ -13,7 +15,6 @@ import Freddy
 @testable import CardKit
 @testable import CardKitRuntime
 
-// swiftlint:disable nesting
 public struct CKCalc {
     fileprivate init() {}
     
@@ -321,8 +322,8 @@ class CKSlowCalculator: ExecutableToken, CKCalculator {
 // MARK: - CKSieveOfEratosthenes
 
 class CKSieveOfEratosthenes: ExecutableToken {
+    // swiftlint:disable variable_name
     private struct EratosthenesIterator: IteratorProtocol {
-        //swiftlint:disable variable_name
         let n: Int
         var composite: [Bool]
         var current = 2
@@ -347,6 +348,7 @@ class CKSieveOfEratosthenes: ExecutableToken {
             return nil
         }
     }
+    // swiftlint:enable variable_name
     
     private var sieve = EratosthenesIterator(upTo: 10_000_000)
     private var primes: [Int] = []
