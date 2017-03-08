@@ -14,10 +14,10 @@ public class ExecutionEngine {
     public fileprivate (set) var deck: Deck
     
     /// Map between ActionCardDescriptor and the type that implements it
-    fileprivate var executableActionTypes: [ActionCardDescriptor : ExecutableActionCard.Type] = [:]
+    fileprivate var executableActionTypes: [ActionCardDescriptor : ExecutableAction.Type] = [:]
     
     /// Map between TokenCard and the instance that implements it
-    fileprivate var tokenInstances: [TokenCard : ExecutableTokenCard] = [:]
+    fileprivate var tokenInstances: [TokenCard : ExecutableToken] = [:]
     
     /// Queue used for running the DeckExecutor
     fileprivate let operationQueue: OperationQueue = OperationQueue()
@@ -32,19 +32,19 @@ public class ExecutionEngine {
     
     // MARK: Instance Methods
     
-    public func setExecutableActionType(_ type: ExecutableActionCard.Type, for descriptor: ActionCardDescriptor) {
+    public func setExecutableActionType(_ type: ExecutableAction.Type, for descriptor: ActionCardDescriptor) {
         self.executableActionTypes[descriptor] = type
     }
     
-    public func setExecutableActionTypes(_ executionTypes: [ActionCardDescriptor : ExecutableActionCard.Type]) {
+    public func setExecutableActionTypes(_ executionTypes: [ActionCardDescriptor : ExecutableAction.Type]) {
         self.executableActionTypes = executionTypes
     }
     
-    public func setTokenInstance(_ instance: ExecutableTokenCard, for tokenCard: TokenCard) {
+    public func setTokenInstance(_ instance: ExecutableToken, for tokenCard: TokenCard) {
         self.tokenInstances[tokenCard] = instance
     }
     
-    public func setTokenInstances(_ tokenInstances: [TokenCard : ExecutableTokenCard]) {
+    public func setTokenInstances(_ tokenInstances: [TokenCard : ExecutableToken]) {
         self.tokenInstances = tokenInstances
     }
     

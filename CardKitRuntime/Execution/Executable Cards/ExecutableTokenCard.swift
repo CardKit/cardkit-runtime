@@ -1,5 +1,5 @@
 //
-//  ExecutableTokenCard.swift
+//  ExecutableToken.swift
 //  CardKitRuntime
 //
 //  Created by Justin Weisz on 8/22/16.
@@ -10,7 +10,7 @@ import Foundation
 
 import CardKit
 
-open class ExecutableTokenCard: CarriesTokenCardState {
+open class ExecutableToken: CarriesTokenCardState {
     var tokenCard: TokenCard
     
     public init(with card: TokenCard) {

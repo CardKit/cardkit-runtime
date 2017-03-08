@@ -28,15 +28,15 @@ public enum ExecutionError: Error {
 // MARK: ActionExecutionError
 
 public enum ActionExecutionError: Error {
-    case unboundInputSlot(ExecutableActionCard, String)
-    case nilValueForInput(ExecutableActionCard, String)
-    case boundInputNotConvertibleToExpectedType(ExecutableActionCard, String, JSON, Any.Type)
-    case expectedTokenSlotNotFound(ExecutableActionCard, String)
-    case unboundTokenSlot(ExecutableActionCard, TokenSlot)
-    case yieldAtIndexNotFound(ExecutableActionCard, Int)
-    case attemptToStoreDataForInvalidYield(ExecutableActionCard, Yield, JSON)
-    case attemptToStoreDataOfUnexpectedType(ExecutableActionCard, Yield, String, String)
-    case attemptToRetrieveDataForInvalidYield(ExecutableActionCard, Yield)
-    case nilValueForYield(ExecutableActionCard, Yield)
-    case boundYieldNotConvertibleToExpectedType(ExecutableActionCard, Yield, JSON, Any.Type)
+    case unboundInputSlot(ExecutableAction, String)
+    case nilValueForInput(ExecutableAction, String)
+    case boundInputNotConvertibleToExpectedType(ExecutableAction, String, JSON, Any.Type)
+    case expectedTokenSlotNotFound(ExecutableAction, String)
+    case unboundTokenSlot(ExecutableAction, TokenSlot)
+    case yieldAtIndexNotFound(ExecutableAction, Int)
+    case attemptToStoreDataForInvalidYield(ExecutableAction, Yield, JSON)
+    case attemptToStoreDataOfUnexpectedType(ExecutableAction, Yield, String, String)
+    case attemptToRetrieveDataForInvalidYield(ExecutableAction, Yield)
+    case nilValueForYield(ExecutableAction, Yield)
+    case boundYieldNotConvertibleToExpectedType(ExecutableAction, Yield, JSON, Any.Type)
 }

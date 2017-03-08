@@ -12,7 +12,7 @@ import CardKit
 
 // MARK: CKWaitUntilTime
 
-public class CKWaitUntilTime: ExecutableActionCard {
+public class CKWaitUntilTime: ExecutableAction {
     public override func main() {
         // wait the given date specified by our ClockTime input
         guard let date: Date = self.value(forInput: "ClockTime") else {
