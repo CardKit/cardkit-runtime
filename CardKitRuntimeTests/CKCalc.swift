@@ -128,7 +128,7 @@ public struct CKCalc {
 
 // MARK: - CKAdd
 
-public class CKAdd: ExecutableActionCard {
+public class CKAdd: ExecutableAction {
     public override func main() {
         // get our inputs
         guard let a: Double = self.value(forInput: "A") else {
@@ -153,7 +153,7 @@ public class CKAdd: ExecutableActionCard {
 
 // MARK: - CKSubtract
 
-public class CKSubtract: ExecutableActionCard {
+public class CKSubtract: ExecutableAction {
     public override func main() {
         // get our inputs
         guard let a: Double = self.value(forInput: "A") else {
@@ -178,7 +178,7 @@ public class CKSubtract: ExecutableActionCard {
 
 // MARK: - CKMultiply
 
-public class CKMultiply: ExecutableActionCard {
+public class CKMultiply: ExecutableAction {
     public override func main() {
         // get our inputs
         guard let a: Double = self.value(forInput: "A") else {
@@ -203,7 +203,7 @@ public class CKMultiply: ExecutableActionCard {
 
 // MARK: - CKDivide
 
-public class CKDivide: ExecutableActionCard {
+public class CKDivide: ExecutableAction {
     public override func main() {
         // get our inputs
         guard let a: Double = self.value(forInput: "A") else {
@@ -245,7 +245,7 @@ struct PrimeList: JSONEncodable, JSONDecodable {
     }
 }
 
-class CKPrimeSieve: ExecutableActionCard {
+class CKPrimeSieve: ExecutableAction {
     var primeList = PrimeList()
     
     public override func main() {
@@ -276,7 +276,7 @@ protocol CKCalculator {
     func divide(_ lhs: Double, _ rhs: Double) -> Double
 }
 
-class CKFastCalculator: ExecutableTokenCard, CKCalculator {
+class CKFastCalculator: ExecutableToken, CKCalculator {
     func add(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs + rhs
     }
@@ -294,7 +294,7 @@ class CKFastCalculator: ExecutableTokenCard, CKCalculator {
     }
 }
 
-class CKSlowCalculator: ExecutableTokenCard, CKCalculator {
+class CKSlowCalculator: ExecutableToken, CKCalculator {
     public var delay: TimeInterval = 3
     
     func add(_ lhs: Double, _ rhs: Double) -> Double {
@@ -320,7 +320,7 @@ class CKSlowCalculator: ExecutableTokenCard, CKCalculator {
 
 // MARK: - CKSieveOfEratosthenes
 
-class CKSieveOfEratosthenes: ExecutableTokenCard {
+class CKSieveOfEratosthenes: ExecutableToken {
     private struct EratosthenesIterator: IteratorProtocol {
         //swiftlint:disable variable_name
         let n: Int

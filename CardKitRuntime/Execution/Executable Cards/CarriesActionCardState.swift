@@ -12,7 +12,7 @@ import Freddy
 import CardKit
 
 public typealias InputBindings = [InputSlot : DataBinding]
-public typealias TokenBindings = [TokenSlot : ExecutableTokenCard]
+public typealias TokenBindings = [TokenSlot : ExecutableToken]
 
 /// Carries data yielded by an ActionCard.
 public struct YieldData {
@@ -50,7 +50,7 @@ protocol CarriesActionCardState {
     /// Set the card up with the given input and token bindings, given via mappings between
     /// the String slot names and the data to be bound. Keys that don't match any available
     /// slots will be ignored.
-    func setup(inputBindings: [String : JSONEncodable], tokenBindings: [String : ExecutableTokenCard])
+    func setup(inputBindings: [String : JSONEncodable], tokenBindings: [String : ExecutableToken])
     
     /// Retrieve the input binding for the named slot
     func binding(forInput name: String) -> DataBinding?
@@ -62,7 +62,7 @@ protocol CarriesActionCardState {
     func optionalValue<T>(forInput name: String) -> T? where T : JSONDecodable
     
     /// Retrieve the token for the named slot
-    func token<T>(named name: String) -> T? where T : ExecutableTokenCard
+    func token<T>(named name: String) -> T? where T : ExecutableToken
     
     /// Retrieve a Yield by its index (e.g. 1st yield, 2nd yield, etc.)
     /// Useful because Yields are not named like Inputs are named.

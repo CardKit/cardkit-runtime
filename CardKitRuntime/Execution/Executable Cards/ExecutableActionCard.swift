@@ -1,5 +1,5 @@
 //
-//  ExecutableActionCard.swift
+//  ExecutableAction.swift
 //  CardKit Runtime
 //
 //  Created by Justin Weisz on 7/28/16.
@@ -11,29 +11,29 @@ import Foundation
 import Freddy
 import CardKit
 
-/// ExecutableActionCard performs the actual, executable action of an ActionCard. This class is meant to
+/// ExecutableAction performs the actual, executable action of an ActionCard. This class is meant to
 /// be subclassed. Subclasses must override the main() method to provide their executable functioanlity.
 /// This method will be called on a background thread so operations used by this method may block if desired,
 /// without blocking the main app thread. This method may also spawn additional background threads, e.g.
 /// using dispatch_async(). However, upon return of main(), the ExecutionEngine will consider this card
 /// as having finished its execution. Therefore, you may need to block returning until background threads have
 /// completed executing, e.g. using dispatch_semaphore_wait or dispatch_group_wait or other mechanics.
-/// In the event that a Hand becomes satisfied while ExecutableActionCards are still executing, the ExecutionEngine
-/// will cancel all other operations in its queue. Therefore, an ExecutableActionCard may wish to override
+/// In the event that a Hand becomes satisfied while ExecutableActions are still executing, the ExecutionEngine
+/// will cancel all other operations in its queue. Therefore, an ExecutableAction may wish to override
 /// cancel() in order to perform cleanup or free resources.
-open class ExecutableActionCard: Operation, CarriesActionCardState {
-    // these are "inputs" to the ExecutableActionCard
+open class ExecutableAction: Operation, CarriesActionCardState {
+    // these are "inputs" to the ExecutableAction
     // note that inputBindings and tokenBindings will be set by DeckExecutor based on
     // the bindings present in actionCard -- e.g. when calling init() with an ActionCard
     // that has bound inputs, inputBindings will remain nil until DeckExecutor copies
     // those bindings in. which means, when writing tests that don't use DeckExecutor, 
-    // don't bind inputs to the ActionCard, bind them to the ExecutableActionCard via
+    // don't bind inputs to the ActionCard, bind them to the ExecutableAction via
     // setup()
     public var actionCard: ActionCard
     var inputBindings: InputBindings = [:]
     var tokenBindings: TokenBindings = [:]
     
-    // these are "outputs" from the ExecutableActionCard
+    // these are "outputs" from the ExecutableAction
     var yieldData: [YieldData] = []
     public var errors: [Error] = []
     
@@ -48,16 +48,16 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
         self.errors.append(error)
     }
     
-    /// Convenience method for setting up input and token bindings. Used for setting up an ExecutableTokenCard
+    /// Convenience method for setting up input and token bindings. Used for setting up an ExecutableToken
     /// outside the context of the ExecutionEngine (e.g. for running tests).
     public func setup(inputBindings: InputBindings, tokenBindings: TokenBindings) {
         self.inputBindings = inputBindings
         self.tokenBindings = tokenBindings
     }
     
-    /// Convenience method for setting up input and token bindings. Used for setting up an ExecutableTokenCard
+    /// Convenience method for setting up input and token bindings. Used for setting up an ExecutableToken
     /// outside the context of the ExecutionEngine (e.g. for running tests).
-    public func setup(inputBindings: [String : JSONEncodable], tokenBindings: [String : ExecutableTokenCard]) {
+    public func setup(inputBindings: [String : JSONEncodable], tokenBindings: [String : ExecutableToken]) {
         // bind inputs
         for (slotName, encodable) in inputBindings {
             // silently ignore slots that don't exist
@@ -125,7 +125,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     /// Obtain the bound token for the given token slot. Returns nil if a slot
     /// with the given name is not found, or if the token slot is unbound. The error
     /// is stored in self.error.
-    public func token<T>(named name: String) -> T? where T : ExecutableTokenCard {
+    public func token<T>(named name: String) -> T? where T : ExecutableToken {
         guard let slot = self.actionCard.tokenSlots.slot(named: name) else {
             self.error(ActionExecutionError.expectedTokenSlotNotFound(self, name))
             return nil
@@ -219,7 +219,7 @@ open class ExecutableActionCard: Operation, CarriesActionCardState {
     
     open override func main() {
         // subclasses must override main() to perform their executable actions
-        fatalError("main() method cannot be executed on ExecutableActionCard, it must be overridden in a subclass")
+        fatalError("main() method cannot be executed on ExecutableAction, it must be overridden in a subclass")
     }
     
     open override func cancel() {
