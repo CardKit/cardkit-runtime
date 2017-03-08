@@ -14,7 +14,7 @@ import Foundation
 import XCTest
 
 class CKWaitUntilTimeTests: XCTestCase {
-    public static let expectationTimeout: TimeInterval = 20
+    public let expectationTimeout: TimeInterval = 8
     
     func testWaitUntilTimeExecutable() {
         // test a range of seconds, 3 as the standard case and 0, -5 for the edge cases
@@ -45,7 +45,7 @@ class CKWaitUntilTimeTests: XCTestCase {
             myExpectation.fulfill()
         }
         
-        waitForExpectations(timeout: CardKitRuntimeTests.expectationTimeout) { error in
+        waitForExpectations(timeout: expectationTimeout) { error in
             if let error = error {
                 XCTFail("error: \(error)")
             }
