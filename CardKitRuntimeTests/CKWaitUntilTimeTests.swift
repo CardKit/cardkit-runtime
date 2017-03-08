@@ -17,14 +17,15 @@ class CKWaitUntilTimeTests: XCTestCase {
     public static let expectationTimeout: TimeInterval = 20
     
     func testWaitUntilTimeExecutable() {
-        let inputsToTest: [TimeInterval] = [0, 5, -5]
+        // test a range of seconds, 3 as the standard case and 0, -5 for the edge cases
+        let inputsToTest: [TimeInterval] = [0, 3, -5]
         
-        for input in inputsToTest {
-            executeWaitUntilTime(input)
+        for secondsInput in inputsToTest {
+            executeWaitUntilTime(addSeconds: secondsInput)
         }
     }
     
-    func executeWaitUntilTime(_ seconds: TimeInterval) {
+    func executeWaitUntilTime(addSeconds seconds: TimeInterval) {
         //executableInstance
         let waitUntilTimeExecutable = CKWaitUntilTime(with: CardKit.Action.Trigger.Time.WaitUntilTime.makeCard())
         
@@ -57,7 +58,7 @@ class CKWaitUntilTimeTests: XCTestCase {
             //time elapsed is greater than one, then the card did not wait until the correct time
             if (secondsToWait < 0 && timeElapsed > 1) ||
                 (secondsToWait >= 0 && abs(secondsToWait - timeElapsed) > 1) {
-                XCTFail("Card did not wait until the specified time. cardStartTime: \(cardStartTime), secondsToWait: \(secondsToWait), Time Elapsed: \(timeElapsed)")
+                XCTFail("Card did not wait until the specified time. cardStartTime: \(cardStartTime), secondsToWait: \(secondsToWait), Time Elapsed: \(timeElapsed), endTime: \(currentDate)")
             }
         }
     }
