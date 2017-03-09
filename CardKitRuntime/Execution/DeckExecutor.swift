@@ -53,6 +53,24 @@ public class DeckExecutor: Operation {
         }
     }
     
+    public override func cancel() {
+        // tell all of the tokens to emergencyStop(), in parallel
+        // so one token doesn't block another
+        let tokens = Array(self.tokenInstances.values)
+        
+        DispatchQueue.concurrentPerform(iterations: tokens.count) { index in
+            let token = tokens[index]
+            
+            // NOTE: we're not capturing any errors that the token may throw in
+            // its emergencyStop() procedure. in the future we may need to find
+            // a way to save these.
+            let _ = token.emergencyStop(error: ExecutionError.executionCancelled)
+        }
+        
+        // we were cancelled, so set our error
+        self.error = ExecutionError.executionCancelled
+    }
+    
     // MARK: Instance Methods
     
     public func setExecutableActionType(_ type: ExecutableAction.Type, for descriptor: ActionCardDescriptor) {

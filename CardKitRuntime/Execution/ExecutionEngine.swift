@@ -48,6 +48,7 @@ public class ExecutionEngine {
         self.tokenInstances = tokenInstances
     }
     
+    /// Execute the Deck
     public func execute(_ completion: ([YieldData], ExecutionError?) -> Void) {
         // create a DeckExecutor
         let deckExecutor = DeckExecutor(with: self.deck)
@@ -84,8 +85,9 @@ public class ExecutionEngine {
         }
     }
     
-    public func cancelExecution() {
-        print("ExecutionEngine cancelling execution")
+    /// Halts execution of the Deck
+    public func halt() {
+        print("ExecutionEngine halting execution")
         self.operationQueue.cancelAllOperations()
     }
 }
