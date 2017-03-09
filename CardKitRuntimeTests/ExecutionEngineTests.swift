@@ -173,7 +173,7 @@ class ExecutionEngineTests: XCTestCase {
         })
     }
     
-    func testEmergencyStop() {
+    func testEmergencyStopFromActionCard() {
         // token cards
         let sieveCard = CKCalc.Token.Sieve.makeCard()
         
@@ -260,5 +260,64 @@ class ExecutionEngineTests: XCTestCase {
                 XCTFail("expected an ExecutionError.actionCardErrorsTriggeredEmergencyStop")
             }
         })
+    }
+    
+    func testHaltOfDeckExecutor() {
+        // token cards
+        let sieveCard = CKCalc.Token.Sieve.makeCard()
+        
+        // action cards
+        var primeSieve = CKCalc.Action.Math.PrimeSieve.makeCard()
+        
+        // bind tokens
+        do {
+            primeSieve = try primeSieve <- ("Sieve", sieveCard)
+        } catch let error {
+            XCTFail("error binding token cards: \(error)")
+        }
+        
+        // set up the deck
+        let deck = ( ( primeSieve )% )%
+        
+        // add tokens to the deck
+        deck.add(sieveCard)
+        
+        // set up the execution engine
+        let engine = ExecutionEngine(with: deck)
+        engine.setExecutableActionType(CKPrimeSieve.self, for: CKCalc.Action.Math.PrimeSieve)
+        
+        // create token instances
+        let sieve = CKSieveOfEratosthenes(with: sieveCard)
+        
+        engine.setTokenInstance(sieve, for: sieveCard)
+        
+        // execute
+        engine.execute({ (_, _) in
+            XCTFail("execution of this deck should never finish")
+        })
+        
+        // wait 3 seconds
+        Thread.sleep(forTimeInterval: 3)
+        
+        // halt execution
+        engine.halt()
+        
+        // wait 3 more seconds just to see if the halt() triggers the callback
+        // on execute
+        Thread.sleep(forTimeInterval: 3)
+        
+        // expect that the emergencyStop() method was called on the token
+        guard let emergencyStopError = sieve.emergencyStopError else {
+            XCTFail("expected that emergencyStop() was called on the sieve token")
+            return
+        }
+        
+        // expect that the error is ExecutionError.executionCancelled
+        switch emergencyStopError {
+        case ExecutionError.executionCancelled:
+            break
+        default:
+            XCTFail("expected the emergencyStop error to be ExecutionError.executionCancelled, instead it was \(emergencyStopError)")
+        }
     }
 }

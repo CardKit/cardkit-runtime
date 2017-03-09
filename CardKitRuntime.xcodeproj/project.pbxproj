@@ -328,8 +328,8 @@
 			children = (
 				6861C2E41E6F7A8C00503691 /* Cards */,
 				CCE7D4781D50D191008FC492 /* CardKitRuntimeTests.swift */,
-				CCE72A401D650F1800A347D8 /* CardValidatorTests.swift */,
 				CCBB792E1D746A5C003B6458 /* CKCalc.swift */,
+				CCE72A401D650F1800A347D8 /* CardValidatorTests.swift */,
 				CCBB79361D746B82003B6458 /* ExecutionEngineTests.swift */,
 				CCE729C21D63BD7F00A347D8 /* ValidationEngineTests.swift */,
 				CCE7D47A1D50D191008FC492 /* Info.plist */,

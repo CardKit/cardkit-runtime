@@ -63,7 +63,7 @@ public class DeckExecutor: Operation {
             
             // NOTE: we're not capturing any errors that the token may throw in
             // its emergencyStop() procedure. in the future we may need to find
-            // a way to save these.
+            // a way to save these, which might be tricky because of the concurrency.
             let _ = token.emergencyStop(error: ExecutionError.executionCancelled)
         }
         

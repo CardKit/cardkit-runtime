@@ -409,4 +409,13 @@ class CKSieveOfEratosthenes: ExecutableToken {
         primes.append(next)
         return next
     }
+    
+    // used for testing emergencyStop()
+    var emergencyStopError: Error?
+    override func handleEmergencyStop(errors: [Error], _ completion: ((EmergencyStopResult) -> Void)) {
+        if let error = errors.first {
+            self.emergencyStopError = error
+        }
+        completion(.success)
+    }
 }
