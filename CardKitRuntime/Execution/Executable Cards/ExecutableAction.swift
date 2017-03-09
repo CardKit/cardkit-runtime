@@ -237,11 +237,22 @@ extension ExecutableAction: SignalsEmergencyStop {
     /// `ActionExecutionError.emergencyStop`, it will cancel execution of all other cards in the 
     /// hand, and trigger `emergencyStop()` calls for all of its `tokenInstances`. Calling 
     /// `emergencyStop()` will result in a call to `cancel()`, hence, do not call this
-    /// method from `cancel()`.
+    /// method from `cancel()`. This method is used when multiple errors trigger an emergency stop.
     public func emergencyStop(errors: [Error]) {
         // request the emergency stop by storing the errors and cancelling the operation.
         // this will trigger the 'done' satisfaction check and test for errors.
         errors.forEach { self.error(ActionExecutionError.emergencyStop($0)) }
         self.cancel()
+    }
+    
+    /// `ExecutableAction` subclasses should call this method from `main()` to trigger
+    /// an Emergency Stop event. This event will cascade up to the DeckExecutor, triggering a hand
+    /// satisfaction check, and then an error check. When the DeckExecutor sees an
+    /// `ActionExecutionError.emergencyStop`, it will cancel execution of all other cards in the
+    /// hand, and trigger `emergencyStop()` calls for all of its `tokenInstances`. Calling
+    /// `emergencyStop()` will result in a call to `cancel()`, hence, do not call this
+    /// method from `cancel()`. This method is used when a single error triggers an emergency stop.
+    public func emergencyStop(error: Error) {
+        self.emergencyStop(errors: [error])
     }
 }

@@ -6,6 +6,8 @@
 //  Copyright © 2016 IBM. All rights reserved.
 //
 
+// swiftlint:disable function_body_length cyclomatic_complexity
+
 import XCTest
 
 @testable import CardKit
@@ -23,7 +25,6 @@ class ExecutionEngineTests: XCTestCase {
         super.tearDown()
     }
     
-    // swiftlint:disable:next function_body_length
     func testCalculator() {
         var deck: Deck? = nil
         var yield: Yield? = nil
@@ -95,7 +96,6 @@ class ExecutionEngineTests: XCTestCase {
         }
     }
     
-    // swiftlint:disable:next function_body_length
     func testYieldsFromNonEndingCard() {
         // token cards
         let sieveCard = CKCalc.Token.Sieve.makeCard()
@@ -171,6 +171,94 @@ class ExecutionEngineTests: XCTestCase {
                 }
             }
         })
-
+    }
+    
+    func testEmergencyStop() {
+        // token cards
+        let sieveCard = CKCalc.Token.Sieve.makeCard()
+        
+        // action cards
+        var primeSieve = CKCalc.Action.Math.PrimeSieve.makeCard()
+        let doesNotCompute = CKCalc.Action.Math.DoesNotCompute.makeCard()
+        
+        // bind tokens
+        do {
+            primeSieve = try primeSieve <- ("Sieve", sieveCard)
+        } catch let error {
+            XCTFail("error binding token cards: \(error)")
+        }
+        
+        // set up the deck
+        let deck = ( primeSieve ++ doesNotCompute )%
+        
+        // add tokens to the deck
+        deck.add(sieveCard)
+        
+        // set up the execution engine
+        let engine = ExecutionEngine(with: deck)
+        engine.setExecutableActionType(CKPrimeSieve.self, for: CKCalc.Action.Math.PrimeSieve)
+        engine.setExecutableActionType(CKDoesNotCompute.self, for: CKCalc.Action.Math.DoesNotCompute)
+        
+        // create token instances
+        let sieve = CKSieveOfEratosthenes(with: sieveCard)
+        
+        engine.setTokenInstance(sieve, for: sieveCard)
+        
+        // execute
+        engine.execute({ (yields: [YieldData], error: ExecutionError?) in
+            // no yields
+            XCTAssertTrue(yields.count == 0)
+            
+            // should have an error
+            guard let executionError = error else {
+                XCTFail("expected a non-nil error")
+                return
+            }
+            
+            // error should be ExecutionError.actionCardErrorsTriggeredEmergencyStop
+            if case .actionCardErrorsTriggeredEmergencyStop(let actionCardErrors, let results) = executionError {
+                // expecting one error that triggered the emergency stop
+                XCTAssertTrue(actionCardErrors.count == 1)
+                
+                if let actionCardError = actionCardErrors.first {
+                    switch actionCardError {
+                    case ActionExecutionError.emergencyStop(let estopError):
+                        switch estopError {
+                        case CKCalculatorError.doesNotCompute:
+                            break
+                        default:
+                            XCTFail("expected the error that triggered the emergency stop is CKCalculatorError.doesNotCompute")
+                        }
+                    default:
+                        XCTFail("expected the error that triggered the emergency stop is ActionExecutionError.emergencyStop")
+                    }
+                } else {
+                    XCTFail("expected to find the error that triggered the emergency stop")
+                }
+                
+                // expect one token card to have halted execution
+                XCTAssertTrue(results.keys.count == 1)
+                
+                // expect that it was the calculator token
+                XCTAssertNotNil(results[sieveCard])
+                
+                // expect the halt result to be .success
+                guard let result = results[sieveCard] else {
+                    XCTFail("unable to retrieve emergency stop result for the sieveCard")
+                    return
+                }
+                
+                switch result {
+                case .success:
+                    break
+                case .ignored:
+                    XCTFail("expected the emergency stop result for the sieveCard to be .success")
+                case .failure(_):
+                    XCTFail("expected the emergency stop result for the sieveCard to be .success")
+                }
+            } else {
+                XCTFail("expected an ExecutionError.actionCardErrorsTriggeredEmergencyStop")
+            }
+        })
     }
 }

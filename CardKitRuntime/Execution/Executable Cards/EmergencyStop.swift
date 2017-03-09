@@ -13,11 +13,12 @@ protocol SignalsEmergencyStop {
     func emergencyStop(errors: [Error])
 }
 
-extension SignalsEmergencyStop {
-    func emergencyStop(error: Error) {
+// TODO this doesn't seem to work when defined in an extension
+/*extension SignalsEmergencyStop {
+    public func emergencyStop(error: Error) {
         self.emergencyStop(errors: [error])
     }
-}
+}*/
 
 protocol PerformsEmergencyStop {
     /// Performs an Emergency Stop. `errors` are the errors that triggered the Emergency Stop.
@@ -28,11 +29,12 @@ protocol PerformsEmergencyStop {
     func emergencyStop(errors: [Error]) -> EmergencyStopResult
 }
 
-extension PerformsEmergencyStop {
-    func emergencyStop(error: Error) -> EmergencyStopResult {
+// TODO need to test if this works when defined in an extension
+/*extension PerformsEmergencyStop {
+    public func emergencyStop(error: Error) -> EmergencyStopResult {
         return self.emergencyStop(errors: [error])
     }
-}
+}*/
 
 protocol HandlesEmergencyStop {
     /// Perofmrs the Emergency Stop when the trigger is received. `errors` are the errors

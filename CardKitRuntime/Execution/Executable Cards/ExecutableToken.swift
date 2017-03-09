@@ -10,7 +10,10 @@ import Foundation
 
 import CardKit
 
-open class ExecutableToken: CarriesTokenCardState {
+// HandlesEmergencyStop cannot be declared in an extension (yet) because 
+// the `handleEmergencyStop()` method needs to be overridden by subclasses,
+// and swift does not (yet) support overriding methods declared in extensions.
+open class ExecutableToken: CarriesTokenCardState, HandlesEmergencyStop {
     var tokenCard: TokenCard
     
     // used by TriggersEmergencyStop
@@ -20,7 +23,17 @@ open class ExecutableToken: CarriesTokenCardState {
     public init(with card: TokenCard) {
         self.tokenCard = card
     }
+    
+    // MARK: HandlesEmergencyStop
+    /// Performs the Emergency Stop when the trigger is received
+    open func handleEmergencyStop(errors: [Error], _ completion: ((EmergencyStopResult) -> Void)) {
+        // default implementation is to do nothing; subclasses should override this
+        // method to perform token-specific e-stop procedures.
+        completion(.success)
+    }
 }
+
+// MARK: PerformsEmergencyStop
 
 extension ExecutableToken: PerformsEmergencyStop {
     /// Triggers an Emergency Stop on the token. It is possible that multiple
@@ -45,13 +58,12 @@ extension ExecutableToken: PerformsEmergencyStop {
         }
         return stopResult
     }
-}
-
-extension ExecutableToken: HandlesEmergencyStop {
-    /// Perofmrs the Emergency Stop when the trigger is received
-    open func handleEmergencyStop(errors: [Error], _ completion: ((EmergencyStopResult) -> Void)) {
-        // default implementation is to do nothing; subclasses should override this
-        // method to perform token-specific e-stop procedures.
-        completion(.success)
+    
+    /// Triggers an Emergency Stop on the token. It is possible that multiple
+    /// `ExecutableAction`s will trigger an Emergency Stop on the same token, so
+    /// we use a dispatch queue to enforce that the `handleEmergencyStop()`
+    /// method will only be called once.
+    public func emergencyStop(error: Error) -> EmergencyStopResult {
+        return self.emergencyStop(errors: [error])
     }
 }
