@@ -16,7 +16,7 @@ import XCTest
 class CKTimerTests: XCTestCase {
     public let expectationTimeout: TimeInterval = 8
     
-    func testWaitUntilTimeExecutable() {
+    func testTimerExecutable() {
         // test a range of seconds, 3 as the standard case and 0, -5 for the edge cases
         let inputsToTest: [TimeInterval] = [0, 3, -5]
         
@@ -56,7 +56,7 @@ class CKTimerTests: XCTestCase {
             // following the same logic implemented in CKWaitUntilTimeTests
             if (timerTimeInSeconds < 0 && timeElapsed > threshold) ||
                 (timerTimeInSeconds >= 0 && abs(timerTimeInSeconds - timeElapsed) > threshold) {
-                XCTFail("Card did not set the timer to the specified time. cardStartTime: \(cardStartTime), timerTimeInSeconds: \(timerTimeInSeconds), Time Elapsed: \(timeElapsed), endTime: \(currentDate)")
+                XCTFail("Card did not set the timer for the specified amount of time. cardStartTime: \(cardStartTime), timerTimeInSeconds: \(timerTimeInSeconds), Time Elapsed: \(timeElapsed), endTime: \(currentDate)")
             }
         }
     }
