@@ -55,7 +55,7 @@ open class ExecutableAction: Operation {
     }
 }
 
-// MARK: CarriesActionCardState
+// MARK: - CarriesActionCardState
 
 extension ExecutableAction: CarriesActionCardState {
     public func error(_ error: Error) {
@@ -229,6 +229,8 @@ extension ExecutableAction: CarriesActionCardState {
         return self.value(forYield: yield)
     }
 }
+
+// MARK: - SignalsEmergencyStop
 
 extension ExecutableAction: SignalsEmergencyStop {
     /// `ExecutableAction` subclasses should call this method from `main()` to trigger
