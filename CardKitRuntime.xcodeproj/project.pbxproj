@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44A6C8351E801E9500F3EC8B /* CKTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A6C8341E801E9500F3EC8B /* CKTimerTests.swift */; };
+		44A6C8361E801E9500F3EC8B /* CKTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A6C8341E801E9500F3EC8B /* CKTimerTests.swift */; };
+		44A6C8371E801E9500F3EC8B /* CKTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A6C8341E801E9500F3EC8B /* CKTimerTests.swift */; };
 		6861C2E61E6F7A9D00503691 /* CKWaitUntilTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */; };
 		6861C2E71E6F7A9D00503691 /* CKWaitUntilTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */; };
 		6861C2E81E6F7A9D00503691 /* CKWaitUntilTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */; };
@@ -118,6 +121,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		44A6C8341E801E9500F3EC8B /* CKTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKTimerTests.swift; sourceTree = "<group>"; };
 		6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKWaitUntilTimeTests.swift; sourceTree = "<group>"; };
 		CC2922DD1E709388007858F5 /* EmergencyStop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmergencyStop.swift; sourceTree = "<group>"; };
 		CC9E767F1D58B82C00B7C738 /* DeckValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckValidator.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */,
+				44A6C8341E801E9500F3EC8B /* CKTimerTests.swift */,
 			);
 			name = Cards;
 			sourceTree = "<group>";
@@ -826,6 +831,7 @@
 				CCBB792F1D746A5C003B6458 /* CKCalc.swift in Sources */,
 				CCE72A411D650F1800A347D8 /* CardValidatorTests.swift in Sources */,
 				CCE7D4791D50D191008FC492 /* CardKitRuntimeTests.swift in Sources */,
+				44A6C8351E801E9500F3EC8B /* CKTimerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -862,6 +868,7 @@
 				CCBB79301D746A5C003B6458 /* CKCalc.swift in Sources */,
 				CCE72A421D650F1800A347D8 /* CardValidatorTests.swift in Sources */,
 				CCE7D4BB1D50D1D0008FC492 /* CardKitRuntimeTests.swift in Sources */,
+				44A6C8361E801E9500F3EC8B /* CKTimerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -898,6 +905,7 @@
 				CCBB79311D746A5C003B6458 /* CKCalc.swift in Sources */,
 				CCE72A431D650F1800A347D8 /* CardValidatorTests.swift in Sources */,
 				CCE7D4BC1D50D1D0008FC492 /* CardKitRuntimeTests.swift in Sources */,
+				44A6C8371E801E9500F3EC8B /* CKTimerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
