@@ -13,7 +13,7 @@ import CardKit
 // HandlesEmergencyStop cannot be declared in an extension (yet) because 
 // the `handleEmergencyStop()` method needs to be overridden by subclasses,
 // and swift does not (yet) support overriding methods declared in extensions.
-open class ExecutableToken: CarriesTokenCardState {
+open class ExecutableToken: CarriesTokenCardState, HandlesEmergencyStop {
     var tokenCard: TokenCard
     
     // used by TriggersEmergencyStop
@@ -23,11 +23,8 @@ open class ExecutableToken: CarriesTokenCardState {
     public init(with card: TokenCard) {
         self.tokenCard = card
     }
-}
-
-// MARK: - HandlesEmergencyStop
-
-extension ExecutableToken: HandlesEmergencyStop {
+    
+    // MARK: HandlesEmergencyStop
     /// Performs the Emergency Stop when the trigger is received. Should be overridden by
     /// subclasses to actually perform the actions necessary for an emergency stop.
     open func handleEmergencyStop(errors: [Error], _ completion: ((EmergencyStopResult) -> Void)) {
