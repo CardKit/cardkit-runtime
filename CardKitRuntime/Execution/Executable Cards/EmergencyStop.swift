@@ -23,7 +23,7 @@ protocol PerformsEmergencyStop {
 }
 
 protocol HandlesEmergencyStop {
-    /// Perofmrs the Emergency Stop when the trigger is received. `errors` are the errors
+    /// Performs the Emergency Stop when the trigger is received. `errors` are the errors
     /// that triggered the Emergency Stop.
     func handleEmergencyStop(errors: [Error], _ completion: ((EmergencyStopResult) -> Void))
 }
