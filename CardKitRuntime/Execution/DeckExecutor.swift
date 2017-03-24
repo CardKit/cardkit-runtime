@@ -12,6 +12,8 @@ import Foundation
 
 import CardKit
 
+
+/// Steps involved when executing a deck.
 public enum DeckExecutorStep {
     case validateDeck(Deck)
     
@@ -23,9 +25,38 @@ public enum DeckExecutorStep {
 }
 
 public protocol DeckExecutorDelegate: class {
+    
+    /// This will be called for all steps in DeckExecutorStep except executeCard.
+    /// If false is returned, the engine will stop excuting and output the error
+    /// ExecutionError.executionCancelled.
+    ///
+    /// - Parameter step: the step that should be executed
     func shouldExecute(step: DeckExecutorStep) -> Bool
+    
+    /// This will be called for all steps in DeckExecutorStep.
+    ///
+    /// - Parameter step: the step that is currently executing
     func executing(step: DeckExecutorStep)
+    
+    /// This will be called for all steps in DeckExecutorStep.
+    ///
+    /// - Parameters:
+    ///   - step: the step that just finished executing.
+    ///   - yields: yields data for the step. Only executeDeck, executeHand, and executeCard will have yields data.
     func completed(step: DeckExecutorStep, yields: [Yield: YieldData])
+    
+    /// This will be called when an error occurs in any step in DeckExecutorStep.
+    ///
+    /// If an error occurs in the executeCard step, this function will be called for 
+    /// executeCard, executeHand, and executeDeck as all three execution steps
+    /// will have failed.
+    ///
+    /// If an error occurs in the executeHand step, this function will be called for
+    /// executeHand, and executeDeck as both execution steps will have failed.
+    ///
+    /// - Parameters:
+    ///   - step: <#step description#>
+    ///   - errors: <#errors description#>
     func error(step: DeckExecutorStep, errors: [Error])
 }
 
@@ -378,7 +409,6 @@ public class DeckExecutor: Operation {
             delegate?.error(step: executeHandStep, errors: [error])
             throw error
         }
-        
         
         // add all operations to the queue and execute it
         print("beginning execution of hand")
