@@ -48,9 +48,10 @@ public class ExecutionEngine {
         self.tokenInstances = tokenInstances
     }
     
-    public func execute(_ completion: ([YieldData], ExecutionError?) -> Void) {
+    public func execute(delegate: DeckExecutorDelegate? = nil, completion: (([YieldData], ExecutionError?) -> Void)? = nil) {
         // create a DeckExecutor
         let deckExecutor = DeckExecutor(with: self.deck)
+        deckExecutor.delegate = delegate
         deckExecutor.setExecutableActionTypes(self.executableActionTypes)
         deckExecutor.setTokenInstances(self.tokenInstances)
         
@@ -76,10 +77,10 @@ public class ExecutionEngine {
             // and see if we got any errors
             if let error = deckExecutor.error {
                 print("ExecutionEngine finished with errors")
-                completion(yields, error)
+                completion?(yields, error)
             } else {
                 print("ExecutionEngine finished")
-                completion(yields, nil)
+                completion?(yields, nil)
             }
         }
     }

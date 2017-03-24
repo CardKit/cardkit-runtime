@@ -12,6 +12,23 @@ import Foundation
 
 import CardKit
 
+public enum DeckExecutorStep {
+    case validateDeck(Deck)
+    
+    case prepareHand(Hand)
+    
+    case executeDeck(Deck)
+    case executeHand(Hand)
+    case executeCard(Card)
+}
+
+public protocol DeckExecutorDelegate: class {
+    func shouldExecute(step: DeckExecutorStep) -> Bool
+    func executing(step: DeckExecutorStep)
+    func completed(step: DeckExecutorStep, yields: [Yield: YieldData])
+    func error(step: DeckExecutorStep, errors: [Error])
+}
+
 public class DeckExecutor: Operation {
     public fileprivate (set) var deck: Deck
     
@@ -29,6 +46,8 @@ public class DeckExecutor: Operation {
     
     /// Execution error. Only non-nil if execution encountered an error.
     public var error: ExecutionError?
+    
+    public weak var delegate: DeckExecutorDelegate?
     
     init(with deck: Deck) {
         self.deck = deck
@@ -69,13 +88,6 @@ public class DeckExecutor: Operation {
     
     public func setTokenInstances(_ tokenInstances: [TokenCard : ExecutableToken]) {
         self.tokenInstances = tokenInstances
-    }
-    
-    fileprivate func validateDeck() throws {
-        let errors = ValidationEngine.validate(self.deck)
-        if errors.count > 0 {
-            throw ExecutionError.deckDoesNotValidate(errors)
-        }
     }
     
     fileprivate func deckRepeats() -> Bool {
@@ -120,63 +132,110 @@ public class DeckExecutor: Operation {
     }
     
     public func execute() throws {
-        // make sure the deck validates!
-        print("DeckExecutor validating deck")
-        try self.validateDeck()
+        try validateDeck()
+        try executeDeck()
+    }
+    
+    private func validateDeck() throws {
+        // STEP: Validate Deck
+        let validateStep = DeckExecutorStep.validateDeck(deck)
         
-        // make sure we have an execution type for every ActionCard in the deck
-        print("DeckExecutor checking for undefined ActionCard types")
-        try self.checkForUndefinedActionCardTypes()
+        guard delegate?.shouldExecute(step: validateStep) ?? true else {
+            let error = ExecutionError.executionCancelled
+            delegate?.error(step: validateStep, errors: [error])
+            throw error
+        }
         
-        // make sure we have an instance of each token in the deck
-        print("DeckExecutor checking for undefined Token instances")
-        try self.checkForUndefinedTokenInstances()
+        delegate?.executing(step: validateStep)
+        
+        do {
+            print("DeckExecutor validating deck")
+            
+            let errors = ValidationEngine.validate(self.deck)
+            if errors.count > 0 {
+                throw ExecutionError.deckDoesNotValidate(errors)
+            }
+            
+            // make sure we have an execution type for every ActionCard in the deck
+            print("DeckExecutor checking for undefined ActionCard types")
+            try self.checkForUndefinedActionCardTypes()
+            
+            // make sure we have an instance of each token in the deck
+            print("DeckExecutor checking for undefined Token instances")
+            try self.checkForUndefinedTokenInstances()
+            
+        } catch {
+            delegate?.error(step: validateStep, errors: [error])
+            throw error
+        }
+        
+        delegate?.completed(step: validateStep, yields: [:])
+    }
+    
+    private func executeDeck() throws {
+        // STEP: Execute Deck
+        let executeDeckStep = DeckExecutorStep.executeDeck(deck)
+        
+        guard delegate?.shouldExecute(step: executeDeckStep) ?? true else {
+            let error = ExecutionError.executionCancelled
+            delegate?.error(step: executeDeckStep, errors: [error])
+            throw error
+        }
+        
+        delegate?.executing(step: executeDeckStep)
         
         // figure out if there is a Repeat or Terminate card in the Deck.
         // validation should make sure both cards don't exist simultaneously.
         let repeatDeck: Bool = self.deckRepeats()
         
         // everything checks out -- execute the hand!
-        repeat {
-            // check if we were cancelled
-            try self.checkIfExecutionCancelled()
-            
-            // start with the first hand in the deck
-            var deckHands = deck.hands.enumerated().makeIterator()
-            
-            // keep track of the next hand we are supposed to execute
-            var nextHand: Hand? = nil
-            
-            // once we follow a branch, execution stops when executeHand() returns nil
-            var followedBranch: Bool = false
-            
-            guard let nextDeckHand = deckHands.next() else { break }
-            nextHand = nextDeckHand.1
-            
-            // execute the hand
+        do {
             repeat {
                 // check if we were cancelled
                 try self.checkIfExecutionCancelled()
                 
-                // get the hand we are executing
-                guard let currentHand = nextHand else { break }
+                // start with the first hand in the deck
+                var deckHands = deck.hands.enumerated().makeIterator()
                 
-                // and execute it!
-                let subhand = try self.executeHand(currentHand)
+                // keep track of the next hand we are supposed to execute
+                var nextHand: Hand? = nil
                 
-                // if we haven't yet branched to a subhand, and we aren't going to now, then
-                // the next hand is the next hand in the deck
-                if !followedBranch && subhand == nil {
-                    guard let nextDeckHand = deckHands.next() else { break }
-                    nextHand = nextDeckHand.1
+                // once we follow a branch, execution stops when executeHand() returns nil
+                var followedBranch: Bool = false
+                
+                guard let nextDeckHand = deckHands.next() else { break }
+                nextHand = nextDeckHand.1
+                
+                // execute the hand
+                repeat {
+                    // check if we were cancelled
+                    try self.checkIfExecutionCancelled()
                     
-                } else {
-                    // otherwise, we followed a branch and the next hand is the subhand
-                    followedBranch = true
-                    nextHand = subhand
-                }
-            } while nextHand != nil
-        } while repeatDeck
+                    // get the hand we are executing
+                    guard let currentHand = nextHand else { break }
+                    
+                    // and execute it!
+                    let subhand = try self.executeHand(currentHand)
+                    
+                    // if we haven't yet branched to a subhand, and we aren't going to now, then
+                    // the next hand is the next hand in the deck
+                    if !followedBranch && subhand == nil {
+                        guard let nextDeckHand = deckHands.next() else { break }
+                        nextHand = nextDeckHand.1
+                        
+                    } else {
+                        // otherwise, we followed a branch and the next hand is the subhand
+                        followedBranch = true
+                        nextHand = subhand
+                    }
+                } while nextHand != nil
+            } while repeatDeck
+        } catch {
+            delegate?.error(step: executeDeckStep, errors: [error])
+            throw error
+        }
+        
+        delegate?.completed(step: executeDeckStep, yields: self.yieldData)
     }
     
     /// Execute the given Hand. Returns the next Hand to be executed (if it's a subhand), or nil
@@ -184,6 +243,17 @@ public class DeckExecutor: Operation {
     /// whether execution should terminate after the current Hand.
     // swiftlint:disable:next function_body_length
     fileprivate func executeHand(_ hand: Hand) throws -> Hand? {
+        // STEP: Prepare Hand
+        let prepareHandStep = DeckExecutorStep.prepareHand(hand)
+        
+        guard delegate?.shouldExecute(step: prepareHandStep) ?? true else {
+            let error = ExecutionError.executionCancelled
+            delegate?.error(step: prepareHandStep, errors: [error])
+            throw error
+        }
+        
+        delegate?.executing(step: prepareHandStep)
+        
         // operations to add to the execution queue
         var operations: [Operation] = []
         var executableCards: [ExecutableAction] = []
@@ -235,9 +305,29 @@ public class DeckExecutor: Operation {
                 }
             }
             
+            // create a start operation to notify the delegate we are executing the card
+            let start = BlockOperation {
+                // STEP: Execute Card
+                print("beginning execution of card \(executable.actionCard.description)")
+                self.delegate?.executing(step: DeckExecutorStep.executeCard(executable.actionCard))
+            }
+            
+            executable.addDependency(start)
+            
             // create a dependency operation so we know which card finished executing
             let done = BlockOperation {
                 print("finished execution of card \(executable.actionCard.description)")
+                
+                // copy yields
+                var allYieldsForCard: [Yield: YieldData] = [:]
+                
+                // copy out yielded data
+                print(" > \(executable.actionCard.descriptor.name) produced \(executable.yieldData.count) yields")
+                for yield in executable.yieldData {
+                    allYieldsForCard[yield.yield] = YieldData(cardIdentifier: executable.actionCard.identifier, yield: yield.yield, data: yield.data)
+                }
+                
+                self.delegate?.completed(step: DeckExecutorStep.executeCard(executable.actionCard), yields: allYieldsForCard)
                 
                 // wait until any other operation doing a check is done
                 let _ = satisfactionCheck.wait(timeout: DispatchTime.distantFuture)
@@ -253,14 +343,28 @@ public class DeckExecutor: Operation {
                 }
                 satisfactionCheck.signal()
             }
+            
             done.addDependency(executable)
             
             print(" ... it has a \(executable.actionCard.description) card")
             
             // add these to the operation queue
+            operations.append(start)
             operations.append(executable)
             operations.append(done)
         }
+        
+        delegate?.completed(step: prepareHandStep, yields: [:])
+        
+        // STEP: Execute Hand
+        let executeHandStep = DeckExecutorStep.executeHand(hand)
+        
+        guard delegate?.shouldExecute(step: executeHandStep) ?? true else {
+            let error = ExecutionError.executionCancelled
+            delegate?.error(step: executeHandStep, errors: [error])
+            throw error
+        }
+        
         
         // add all operations to the queue and execute it
         print("beginning execution of hand")
@@ -292,6 +396,7 @@ public class DeckExecutor: Operation {
             if let error = executable.errors.first {
                 print(" ... yep, a card threw an error: \(executable.actionCard.description)")
                 satisfactionCheck.signal()
+                delegate?.error(step: executeHandStep, errors: [error])
                 throw ExecutionError.actionCardError(error)
             }
         }
@@ -299,15 +404,21 @@ public class DeckExecutor: Operation {
         
         print(" ... copying out yielded data")
         
+        var allYieldsForHand: [Yield: YieldData] = [:]
+        
         // copy out yielded data
         for executable in executableCards {
             print(" > \(executable.actionCard.descriptor.name) produced \(executable.yieldData.count) yields")
             for yield in executable.yieldData {
-                self.yieldData[yield.yield] = YieldData(cardIdentifier: executable.actionCard.identifier, yield: yield.yield, data: yield.data)
+                let yieldData = YieldData(cardIdentifier: executable.actionCard.identifier, yield: yield.yield, data: yield.data)
+                allYieldsForHand[yield.yield] = yieldData
+                self.yieldData[yield.yield] = yieldData
             }
         }
         
         print("the next hand to be executed will be \(nextHand?.identifier)")
+        
+        delegate?.completed(step: executeHandStep, yields: allYieldsForHand)
         
         return nextHand
     }
