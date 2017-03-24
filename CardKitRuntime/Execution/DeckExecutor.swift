@@ -404,26 +404,26 @@ public class DeckExecutor: Operation {
         // cancel execution of any outstanding operations in the queue
         cardExecutionQueue.cancelAllOperations()
         
-        var allErrors: [Error] = []
+        var errorsInHand: [Error] = []
         
         // check to see if any ExecutableActions had errors
         for executable in executableCards where executable.errors.count > 0 {
             delegate?.error(step: .executeCard(executable.actionCard), errors: executable.errors)
-            allErrors.append(contentsOf: executable.errors)
+            errorsInHand.append(contentsOf: executable.errors)
         }
         
-        if allErrors.count > 0 {
-            delegate?.error(step: executeHandStep, errors: allErrors)
+        if errorsInHand.count > 0 {
+            delegate?.error(step: executeHandStep, errors: errorsInHand)
         }
         
         // only throws the first error encountered...
-        if let error = allErrors.first {
+        if let error = errorsInHand.first {
             print(" ... yep, a card threw an error")
             satisfactionCheck.signal()
             throw ExecutionError.actionCardError(error)
+        } else {
+            satisfactionCheck.signal()
         }
-        
-        satisfactionCheck.signal()
         
         print(" ... copying out yielded data")
         
