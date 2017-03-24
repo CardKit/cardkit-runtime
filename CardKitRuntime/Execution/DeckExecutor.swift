@@ -303,7 +303,7 @@ public class DeckExecutor: Operation {
                 throw error
             }
             
-            let executable = type.init(with: card)
+            let executable: ExecutableAction = type.init(with: card)
             executableCards.append(executable)
             
             // copy in InputBindings
@@ -348,9 +348,11 @@ public class DeckExecutor: Operation {
             
             // create a start operation to notify the delegate we are executing the card
             let start = BlockOperation {
+                let executeCardStep = DeckExecutorStep.executeCard(executable.actionCard)
+                
                 // STEP: Execute Card
                 print("beginning execution of card \(executable.actionCard.description)")
-                self.delegate?.executing(step: DeckExecutorStep.executeCard(executable.actionCard))
+                self.delegate?.executing(step: executeCardStep)
             }
             
             executable.addDependency(start)
@@ -475,4 +477,5 @@ public class DeckExecutor: Operation {
         
         return nextHand
     }
+    
 }
