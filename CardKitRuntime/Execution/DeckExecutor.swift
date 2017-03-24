@@ -267,7 +267,9 @@ public class DeckExecutor: Operation {
         
         for card in hand.actionCards {
             guard let type = self.executableActionTypes[card.descriptor] else {
-                throw ExecutionError.noExecutionTypeDefinedForActionCardDescriptor(card.descriptor)
+                let error = ExecutionError.noExecutionTypeDefinedForActionCardDescriptor(card.descriptor)
+                delegate?.error(step: prepareHandStep, errors: [error])
+                throw error
             }
             
             let executable = type.init(with: card)
@@ -282,7 +284,9 @@ public class DeckExecutor: Operation {
                     guard let yieldData = self.yieldData[yield] else { continue }
                     executable.inputBindings[slot] = .bound(yieldData.data)
                 default:
-                    throw ExecutionError.unboundInputEncountered(card, slot)
+                    let error = ExecutionError.unboundInputEncountered(card, slot)
+                    delegate?.error(step: prepareHandStep, errors: [error])
+                    throw error
                 }
             }
             
@@ -291,17 +295,23 @@ public class DeckExecutor: Operation {
                 switch binding {
                 case .boundToTokenCard(let identifier):
                     guard let tokenCard = deck.tokenCard(with: identifier) else {
-                        throw ExecutionError.noTokenCardPresentWithIdentifier(identifier)
+                        let error = ExecutionError.noTokenCardPresentWithIdentifier(identifier)
+                        delegate?.error(step: prepareHandStep, errors: [error])
+                        throw error
                     }
                     
                     guard let instance = self.tokenInstances[tokenCard] else {
-                        throw ExecutionError.noTokenInstanceDefinedForTokenCard(tokenCard)
+                        let error = ExecutionError.noTokenInstanceDefinedForTokenCard(tokenCard)
+                        delegate?.error(step: prepareHandStep, errors: [error])
+                        throw error
                     }
                     
                     executable.tokenBindings[slot] = instance
                 default:
                     // shouldn't happen, validation should have caught this
-                    throw ExecutionError.tokenSlotBoundToUnboundValue(card, slot)
+                    let error = ExecutionError.tokenSlotBoundToUnboundValue(card, slot)
+                    delegate?.error(step: prepareHandStep, errors: [error])
+                    throw error
                 }
             }
             
@@ -321,13 +331,17 @@ public class DeckExecutor: Operation {
                 // copy yields
                 var allYieldsForCard: [Yield: YieldData] = [:]
                 
-                // copy out yielded data
-                print(" > \(executable.actionCard.descriptor.name) produced \(executable.yieldData.count) yields")
-                for yield in executable.yieldData {
-                    allYieldsForCard[yield.yield] = YieldData(cardIdentifier: executable.actionCard.identifier, yield: yield.yield, data: yield.data)
-                }
+                let executeCardStep = DeckExecutorStep.executeCard(executable.actionCard)
                 
-                self.delegate?.completed(step: DeckExecutorStep.executeCard(executable.actionCard), yields: allYieldsForCard)
+                if executable.errors.count == 0 {
+                    // copy out yielded data
+                    print(" > \(executable.actionCard.descriptor.name) produced \(executable.yieldData.count) yields")
+                    for yield in executable.yieldData {
+                        allYieldsForCard[yield.yield] = YieldData(cardIdentifier: executable.actionCard.identifier, yield: yield.yield, data: yield.data)
+                    }
+                    
+                    self.delegate?.completed(step: executeCardStep, yields: allYieldsForCard)
+                }
                 
                 // wait until any other operation doing a check is done
                 let _ = satisfactionCheck.wait(timeout: DispatchTime.distantFuture)
@@ -390,16 +404,25 @@ public class DeckExecutor: Operation {
         // cancel execution of any outstanding operations in the queue
         cardExecutionQueue.cancelAllOperations()
         
+        var allErrors: [Error] = []
+        
         // check to see if any ExecutableActions had errors
-        for executable in executableCards {
-            // only throws the first error encountered...
-            if let error = executable.errors.first {
-                print(" ... yep, a card threw an error: \(executable.actionCard.description)")
-                satisfactionCheck.signal()
-                delegate?.error(step: executeHandStep, errors: [error])
-                throw ExecutionError.actionCardError(error)
-            }
+        for executable in executableCards where executable.errors.count > 0 {
+            delegate?.error(step: .executeCard(executable.actionCard), errors: executable.errors)
+            allErrors.append(contentsOf: executable.errors)
         }
+        
+        if allErrors.count > 0 {
+            delegate?.error(step: executeHandStep, errors: allErrors)
+        }
+        
+        // only throws the first error encountered...
+        if let error = allErrors.first {
+            print(" ... yep, a card threw an error")
+            satisfactionCheck.signal()
+            throw ExecutionError.actionCardError(error)
+        }
+        
         satisfactionCheck.signal()
         
         print(" ... copying out yielded data")
