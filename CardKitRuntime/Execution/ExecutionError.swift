@@ -22,7 +22,6 @@ public enum ExecutionError: Error {
     case tokenSlotBoundToUnboundValue(ActionCard, TokenSlot)
     case unboundInputEncountered(ActionCard, InputSlot)
     case executionCancelled
-    case someError
     case actionCardError(Error)
 }
 
