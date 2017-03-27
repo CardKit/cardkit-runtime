@@ -22,6 +22,16 @@ protocol PerformsEmergencyStop {
     func emergencyStop(errors: [Error]) -> EmergencyStopResult
 }
 
+extension PerformsEmergencyStop {
+    /// Triggers an Emergency Stop on the token. It is possible that multiple
+    /// `ExecutableAction`s will trigger an Emergency Stop on the same token, so
+    /// we use a dispatch queue to enforce that the `handleEmergencyStop()`
+    /// method will only be called once.
+    func emergencyStop(error: Error) -> EmergencyStopResult {
+        return self.emergencyStop(errors: [error])
+    }
+}
+
 protocol HandlesEmergencyStop {
     /// Performs the Emergency Stop when the trigger is received. `errors` are the errors
     /// that triggered the Emergency Stop.

@@ -59,12 +59,4 @@ extension ExecutableToken: PerformsEmergencyStop {
         }
         return stopResult
     }
-    
-    /// Triggers an Emergency Stop on the token. It is possible that multiple
-    /// `ExecutableAction`s will trigger an Emergency Stop on the same token, so
-    /// we use a dispatch queue to enforce that the `handleEmergencyStop()`
-    /// method will only be called once.
-    public func emergencyStop(error: Error) -> EmergencyStopResult {
-        return self.emergencyStop(errors: [error])
-    }
 }

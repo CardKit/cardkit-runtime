@@ -303,7 +303,6 @@ public class DeckExecutor: Operation {
             // checking if the hand is satisfied? this is a good philosophical question. i'm going to
             // assume checking every second is appropriate, although for more time-sensitive applications
             // this number may need to be reduced.
-            print("SLEEPING WHILE WE WAIT FOR HAND EXECUTION TO FINISH")
             Thread.sleep(forTimeInterval: 1)
         }
         
