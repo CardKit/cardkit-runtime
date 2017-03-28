@@ -48,7 +48,8 @@ public class ExecutionEngine {
         self.tokenInstances = tokenInstances
     }
     
-    public func execute(_ completion: ([YieldData], ExecutionError?) -> Void) {
+    /// Execute the Deck
+    public func execute(_ completion: @escaping ([YieldData], ExecutionError?) -> Void) {
         // create a DeckExecutor
         let deckExecutor = DeckExecutor(with: self.deck)
         deckExecutor.setExecutableActionTypes(self.executableActionTypes)
@@ -56,17 +57,19 @@ public class ExecutionEngine {
         
         // create a concurrent dispatch queue for both the DeckExecutor operation
         // and the dispatch_sync that will wait for the queue to finish
-        let queue = DispatchQueue(label: "com.ibm.research.CardKitRuntime.ExecutionEngine", attributes: DispatchQueue.Attributes.concurrent)
+        let queue = DispatchQueue(label: "com.ibm.research.CardKitRuntime.ExecutionEngine", attributes: .concurrent)
         
         self.operationQueue.underlyingQueue = queue
         
-        queue.sync {
+        queue.async {
             print("ExecutionEngine beginning execution in dispatch queue \(queue.description)")
             
             // start executing the deck
             self.operationQueue.addOperation(deckExecutor)
             
             // wait until it's done
+            // TODO potential bug: when halt() is called while we are waiting here,
+            // this method doesn't return. which is bad if we want to call execute() again.
             print("ExecutionEngine waiting for execution to finish")
             self.operationQueue.waitUntilAllOperationsAreFinished()
             
@@ -84,8 +87,9 @@ public class ExecutionEngine {
         }
     }
     
-    public func cancelExecution() {
-        print("ExecutionEngine cancelling execution")
+    /// Halts execution of the Deck
+    public func halt() {
+        print("ExecutionEngine halting execution")
         self.operationQueue.cancelAllOperations()
     }
 }

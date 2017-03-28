@@ -13,6 +13,9 @@
 		6861C2E61E6F7A9D00503691 /* CKWaitUntilTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */; };
 		6861C2E71E6F7A9D00503691 /* CKWaitUntilTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */; };
 		6861C2E81E6F7A9D00503691 /* CKWaitUntilTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */; };
+		CC2922DE1E709388007858F5 /* EmergencyStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2922DD1E709388007858F5 /* EmergencyStop.swift */; };
+		CC2922DF1E709388007858F5 /* EmergencyStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2922DD1E709388007858F5 /* EmergencyStop.swift */; };
+		CC2922E01E709388007858F5 /* EmergencyStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2922DD1E709388007858F5 /* EmergencyStop.swift */; };
 		CC9E76801D58B82C00B7C738 /* DeckValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E767F1D58B82C00B7C738 /* DeckValidator.swift */; };
 		CC9E76821D58B82C00B7C738 /* DeckValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E767F1D58B82C00B7C738 /* DeckValidator.swift */; };
 		CC9E76841D58B82C00B7C738 /* DeckValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E767F1D58B82C00B7C738 /* DeckValidator.swift */; };
@@ -120,6 +123,7 @@
 /* Begin PBXFileReference section */
 		44A6C8341E801E9500F3EC8B /* CKTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKTimerTests.swift; sourceTree = "<group>"; };
 		6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKWaitUntilTimeTests.swift; sourceTree = "<group>"; };
+		CC2922DD1E709388007858F5 /* EmergencyStop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmergencyStop.swift; sourceTree = "<group>"; };
 		CC9E767F1D58B82C00B7C738 /* DeckValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckValidator.swift; sourceTree = "<group>"; };
 		CC9E76861D58B83400B7C738 /* HandValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandValidator.swift; sourceTree = "<group>"; };
 		CC9E768D1D58B83C00B7C738 /* CardValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardValidator.swift; sourceTree = "<group>"; };
@@ -257,6 +261,7 @@
 				CCBB79111D6F735F003B6458 /* ExecutableToken.swift */,
 				CCBB790E1D6F735F003B6458 /* CarriesActionCardState.swift */,
 				CCBB790F1D6F735F003B6458 /* CarriesTokenCardState.swift */,
+				CC2922DD1E709388007858F5 /* EmergencyStop.swift */,
 			);
 			path = "Executable Cards";
 			sourceTree = "<group>";
@@ -328,8 +333,8 @@
 			children = (
 				6861C2E41E6F7A8C00503691 /* Cards */,
 				CCE7D4781D50D191008FC492 /* CardKitRuntimeTests.swift */,
-				CCE72A401D650F1800A347D8 /* CardValidatorTests.swift */,
 				CCBB792E1D746A5C003B6458 /* CKCalc.swift */,
+				CCE72A401D650F1800A347D8 /* CardValidatorTests.swift */,
 				CCBB79361D746B82003B6458 /* ExecutionEngineTests.swift */,
 				CCE729C21D63BD7F00A347D8 /* ValidationEngineTests.swift */,
 				CCE7D47A1D50D191008FC492 /* Info.plist */,
@@ -805,6 +810,7 @@
 				CC9E76801D58B82C00B7C738 /* DeckValidator.swift in Sources */,
 				CC9E768E1D58B83C00B7C738 /* CardValidator.swift in Sources */,
 				CC9E76A31D58E2E700B7C738 /* ValidationEngine.swift in Sources */,
+				CC2922DE1E709388007858F5 /* EmergencyStop.swift in Sources */,
 				CCBB791E1D6F735F003B6458 /* ExecutableAction.swift in Sources */,
 				CCBB79181D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
 				CCE72A321D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
@@ -841,6 +847,7 @@
 				CC9E76821D58B82C00B7C738 /* DeckValidator.swift in Sources */,
 				CC9E76901D58B83C00B7C738 /* CardValidator.swift in Sources */,
 				CC9E76A51D58E2E700B7C738 /* ValidationEngine.swift in Sources */,
+				CC2922DF1E709388007858F5 /* EmergencyStop.swift in Sources */,
 				CCBB79201D6F735F003B6458 /* ExecutableAction.swift in Sources */,
 				CCBB791A1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
 				CCE72A341D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
@@ -877,6 +884,7 @@
 				CC9E76841D58B82C00B7C738 /* DeckValidator.swift in Sources */,
 				CC9E76921D58B83C00B7C738 /* CardValidator.swift in Sources */,
 				CC9E76A71D58E2E700B7C738 /* ValidationEngine.swift in Sources */,
+				CC2922E01E709388007858F5 /* EmergencyStop.swift in Sources */,
 				CCBB79221D6F735F003B6458 /* ExecutableAction.swift in Sources */,
 				CCBB791C1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
 				CCE72A361D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
