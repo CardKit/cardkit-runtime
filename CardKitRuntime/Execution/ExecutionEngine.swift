@@ -22,6 +22,8 @@ public class ExecutionEngine {
     /// Queue used for running the DeckExecutor
     fileprivate let operationQueue: OperationQueue = OperationQueue()
     
+    public weak var delegate: DeckExecutorDelegate?
+    
     public init(with deck: Deck) {
         self.deck = deck
         
@@ -48,7 +50,7 @@ public class ExecutionEngine {
         self.tokenInstances = tokenInstances
     }
     
-    public func execute(delegate: DeckExecutorDelegate? = nil, completion: (([YieldData], ExecutionError?) -> Void)? = nil) {
+    public func execute(completion: (([YieldData], ExecutionError?) -> Void)? = nil) {
         // create a DeckExecutor
         let deckExecutor = DeckExecutor(with: self.deck)
         deckExecutor.delegate = delegate
