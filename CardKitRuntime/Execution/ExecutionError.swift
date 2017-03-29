@@ -22,7 +22,7 @@ public enum ExecutionError: Error {
     case tokenSlotBoundToUnboundValue(ActionCard, TokenSlot)
     case unboundInputEncountered(ActionCard, InputSlot)
     case executionCancelled
-    case actionCardError(Error)
+    case actionCardErrorsTriggeredEmergencyStop([Error], [TokenCard : EmergencyStopResult])
 }
 
 // MARK: ActionExecutionError
@@ -39,4 +39,5 @@ public enum ActionExecutionError: Error {
     case attemptToRetrieveDataForInvalidYield(ExecutableAction, Yield)
     case nilValueForYield(ExecutableAction, Yield)
     case boundYieldNotConvertibleToExpectedType(ExecutableAction, Yield, JSON, Any.Type)
+    case emergencyStop(Error)
 }

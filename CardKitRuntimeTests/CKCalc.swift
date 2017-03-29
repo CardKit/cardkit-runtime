@@ -104,6 +104,19 @@ public struct CKCalc {
                 ends: false,
                 endsDescription: nil,
                 assetCatalog: CardAssetCatalog(description: "Prime Sieve"))
+            
+            // MARK: DoesNotCompute
+            /// Descriptor for DoesNotCompute card
+            public static let DoesNotCompute = ActionCardDescriptor(
+                name: "Does Not Compute",
+                subpath: "Math",
+                inputs: nil,
+                tokens: nil,
+                yields: nil,
+                yieldDescription: nil,
+                ends: false,
+                endsDescription: nil,
+                assetCatalog: CardAssetCatalog(description: "Does Not Compute"))
         }
     }
     
@@ -268,6 +281,26 @@ class CKPrimeSieve: ExecutableAction {
     }
 }
 
+// MARK: - CKDoesNotCompute
+
+enum CKCalculatorError: Error {
+    case doesNotCompute
+}
+
+class CKDoesNotCompute: ExecutableAction {
+    public override func main() {
+        // sleep for 3 seconds
+        Thread.sleep(forTimeInterval: 3)
+        
+        // oh noes our calculator blew up!
+        self.emergencyStop(error: CKCalculatorError.doesNotCompute)
+    }
+    
+    public override func cancel() {
+        // nothing to cancel
+    }
+}
+
 // MARK: - CKCalculator
 
 protocol CKCalculator {
@@ -293,6 +326,11 @@ class CKFastCalculator: ExecutableToken, CKCalculator {
     func divide(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs / rhs
     }
+    
+    override func handleEmergencyStop(errors: [Error], _ completion: ((EmergencyStopResult) -> Void)) {
+        // we're done
+        completion(.success)
+    }
 }
 
 class CKSlowCalculator: ExecutableToken, CKCalculator {
@@ -316,6 +354,14 @@ class CKSlowCalculator: ExecutableToken, CKCalculator {
     func divide(_ lhs: Double, _ rhs: Double) -> Double {
         Thread.sleep(forTimeInterval: self.delay)
         return lhs / rhs
+    }
+    
+    override func handleEmergencyStop(errors: [Error], _ completion: ((EmergencyStopResult) -> Void)) {
+        // sleep for `delay`, pretending like we're stopping something
+        Thread.sleep(forTimeInterval: delay)
+        
+        // we're done
+        completion(.success)
     }
 }
 
@@ -362,5 +408,14 @@ class CKSieveOfEratosthenes: ExecutableToken {
             }}
         primes.append(next)
         return next
+    }
+    
+    // used for testing emergencyStop()
+    var emergencyStopError: Error?
+    override func handleEmergencyStop(errors: [Error], _ completion: ((EmergencyStopResult) -> Void)) {
+        if let error = errors.first {
+            self.emergencyStopError = error
+        }
+        completion(.success)
     }
 }
