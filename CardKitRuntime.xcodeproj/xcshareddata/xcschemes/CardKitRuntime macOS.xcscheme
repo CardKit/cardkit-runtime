@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CCE7D4681D50D191008FC492"
+               BlueprintIdentifier = "CCE7D4871D50D1AA008FC492"
                BuildableName = "CardKitRuntime.framework"
-               BlueprintName = "CardKitRuntime iOS"
+               BlueprintName = "CardKitRuntime macOS"
                ReferencedContainer = "container:CardKitRuntime.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,9 +33,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CCE7D4721D50D191008FC492"
-               BuildableName = "CardKitRuntimeTests iOS.xctest"
-               BlueprintName = "CardKitRuntimeTests iOS"
+               BlueprintIdentifier = "CCE7D4901D50D1AA008FC492"
+               BuildableName = "CardKitRuntimeTests macOS.xctest"
+               BlueprintName = "CardKitRuntimeTests macOS"
                ReferencedContainer = "container:CardKitRuntime.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -43,9 +43,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CCE7D4681D50D191008FC492"
+            BlueprintIdentifier = "CCE7D4871D50D1AA008FC492"
             BuildableName = "CardKitRuntime.framework"
-            BlueprintName = "CardKitRuntime iOS"
+            BlueprintName = "CardKitRuntime macOS"
             ReferencedContainer = "container:CardKitRuntime.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -66,9 +66,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CCE7D4681D50D191008FC492"
+            BlueprintIdentifier = "CCE7D4871D50D1AA008FC492"
             BuildableName = "CardKitRuntime.framework"
-            BlueprintName = "CardKitRuntime iOS"
+            BlueprintName = "CardKitRuntime macOS"
             ReferencedContainer = "container:CardKitRuntime.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -84,9 +84,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CCE7D4681D50D191008FC492"
+            BlueprintIdentifier = "CCE7D4871D50D1AA008FC492"
             BuildableName = "CardKitRuntime.framework"
-            BlueprintName = "CardKitRuntime iOS"
+            BlueprintName = "CardKitRuntime macOS"
             ReferencedContainer = "container:CardKitRuntime.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

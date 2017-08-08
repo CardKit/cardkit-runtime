@@ -9,7 +9,6 @@
 @testable import CardKit
 @testable import CardKitRuntime
 
-import Freddy
 import Foundation
 import XCTest
 

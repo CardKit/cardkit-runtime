@@ -56,11 +56,11 @@ public class ValidationEngine {
         let errorSemaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
         var validationErrors: [ValidationError] = []
         
-        DispatchQueue.concurrentPerform(iterations: validationActions.count) { i in
-            let action = validationActions[i]
+        DispatchQueue.concurrentPerform(iterations: validationActions.count) { idx in
+            let action = validationActions[idx]
             let errors = action()
             
-            let _ = errorSemaphore.wait(timeout: DispatchTime.distantFuture)
+            _ = errorSemaphore.wait(timeout: DispatchTime.distantFuture)
             validationErrors.append(contentsOf: errors)
             errorSemaphore.signal()
         }

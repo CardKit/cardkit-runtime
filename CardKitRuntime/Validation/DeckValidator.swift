@@ -41,7 +41,7 @@ public enum DeckValidationError {
     case yieldProducerNotFoundInDeck(CardIdentifier, HandIdentifier, CardIdentifier)
 }
 
-//MARK DeckValidator
+// MARK: DeckValidator
 
 class DeckValidator: Validator {
     fileprivate let deck: Deck

@@ -10,8 +10,6 @@
 
 import Foundation
 
-import Freddy
-
 @testable import CardKit
 @testable import CardKitRuntime
 

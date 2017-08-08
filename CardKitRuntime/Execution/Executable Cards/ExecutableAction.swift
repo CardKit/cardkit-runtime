@@ -8,7 +8,6 @@
 
 import Foundation
 
-import Freddy
 import CardKit
 
 /// ExecutableAction performs the actual, executable action of an ActionCard. This class is meant to
@@ -64,21 +63,21 @@ extension ExecutableAction: CarriesActionCardState {
     
     /// Convenience method for setting up input and token bindings. Used for setting up an ExecutableToken
     /// outside the context of the ExecutionEngine (e.g. for running tests).
-    public func setup(inputBindings: InputBindings, tokenBindings: TokenBindings) {
-        self.inputBindings = inputBindings
-        self.tokenBindings = tokenBindings
-    }
+//    public func setup(inputBindings: InputBindings, tokenBindings: TokenBindings) {
+//        self.inputBindings = inputBindings
+//        self.tokenBindings = tokenBindings
+//    }
     
     /// Convenience method for setting up input and token bindings. Used for setting up an ExecutableToken
     /// outside the context of the ExecutionEngine (e.g. for running tests).
-    public func setup(inputBindings: [String : JSONEncodable], tokenBindings: [String : ExecutableToken]) {
+    public func setup(inputBindings: [String : Data], tokenBindings: [String : ExecutableToken]) {
         // bind inputs
-        for (slotName, encodable) in inputBindings {
+        for (slotName, data) in inputBindings {
             // silently ignore slots that don't exist
             guard let slot = self.actionCard.inputSlots.slot(named: slotName) else { continue }
             
-            // convert to a DataBinding & bind it
-            self.inputBindings[slot] = .bound(encodable.toJSON())
+            // store the data
+            self.inputBindings[slot] = data
         }
         
         // bind tokens
@@ -89,30 +88,27 @@ extension ExecutableAction: CarriesActionCardState {
         }
     }
     
-    public func binding(forInput name: String) -> DataBinding? {
-        guard let slot = self.actionCard.descriptor.inputSlots.slot(named: name) else { return nil }
-        return self.inputBindings[slot]
-    }
-    
     /// Obtain the bound value for the given input slot. Returns the bound value or nil if an
     /// error occurred, such as if a slot with the given name is not found or if the bound value
     /// is not convertible to the expected type T. The error is stored in self.error.
-    public func value<T>(forInput name: String) -> T? where T : JSONDecodable {
-        guard let binding = self.binding(forInput: name) else {
-            self.error(ActionExecutionError.unboundInputSlot(self, name))
-            return nil
-        }
-        guard case let .bound(json) = binding else {
-            self.error(ActionExecutionError.nilValueForInput(self, name))
+    public func value<T>(forInput name: String) -> T? where T : Codable {
+        guard let slot = self.actionCard.descriptor.inputSlots.slot(named: name) else {
+            self.error(ActionExecutionError.expectedInputSlotNotFound(self, name))
             return nil
         }
         
-        // convert type JSON to type T
+        guard let data = self.inputBindings[slot] else {
+            self.error(ActionExecutionError.unboundInputSlot(self, name))
+            return nil
+        }
+        
+        // deserialize data
+        let decoder = JSONDecoder()
         do {
-            let val = try T(json: json)
+            let val = try decoder.boxDecode(T.self, from: data)
             return val
         } catch {
-            self.error(ActionExecutionError.boundInputNotConvertibleToExpectedType(self, name, json, T.self))
+            self.error(ActionExecutionError.boundInputNotConvertibleToExpectedType(self, name, data, T.self))
             return nil
         }
     }
@@ -120,16 +116,17 @@ extension ExecutableAction: CarriesActionCardState {
     /// Obtain the bound value for the given input slot. Returns nil if the slot is not found,
     /// if the slot is unbound, or if the value in the slot is not convertible to the expected
     /// type T.
-    public func optionalValue<T>(forInput name: String) -> T? where T : JSONDecodable {
+    public func optionalValue<T>(forInput name: String) -> T? where T : Codable {
         // don't use self.value(forInput:) here because it may set an error that we don't really
         // want; e.g. if we are requesting the value for an optional input which isn't bound,
         // we do not want to self.error(.expectedInputSlotNotBound).
-        guard let binding = self.binding(forInput: name) else { return nil }
-        guard case let .bound(json) = binding else { return nil }
+        guard let slot = self.actionCard.descriptor.inputSlots.slot(named: name) else { return nil }
+        guard let data = self.inputBindings[slot] else { return nil }
         
-        // convert type JSON to type T
+        // deserialize data
+        let decoder = JSONDecoder()
         do {
-            let val = try T(json: json)
+            let val = try decoder.boxDecode(T.self, from: data)
             return val
         } catch {
             return nil
@@ -164,41 +161,47 @@ extension ExecutableAction: CarriesActionCardState {
     }
     
     /// Store the given data as a Yield of this card.
-    public func store<T>(data: T, forYield yield: Yield) where T : JSONEncodable {
+    public func store<T>(_ object: T, forYield yield: Yield) where T : Codable {
         // make sure the given Yield exists for this card
         guard self.actionCard.yields.contains(yield) else {
-            self.error(ActionExecutionError.attemptToStoreDataForInvalidYield(self, yield, data.toJSON()))
+            self.error(ActionExecutionError.attemptToStoreInvalidYield(self, yield))
             return
         }
         
         // make sure the data types match
-        guard yield.matchesType(of: data) else {
-            let dataType = String(describing: type(of: data))
-            self.error(ActionExecutionError.attemptToStoreDataOfUnexpectedType(self, yield, yield.type, dataType))
+        guard yield.matchesType(of: object) else {
+            let dataType = String(describing: Swift.type(of: object))
+            self.error(ActionExecutionError.attemptToStoreYieldOfUnexpectedType(self, yield, yield.type, dataType))
             return
         }
         
         // capture the yielded data
-        let newYield = YieldData(cardIdentifier: self.actionCard.identifier, yield: yield, data: data.toJSON())
-        self.yieldData.append(newYield)
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.boxEncode(object)
+            let newYield = YieldData(cardIdentifier: self.actionCard.identifier, yield: yield, data: data)
+            self.yieldData.append(newYield)
+        } catch {
+            return
+        }
     }
     
     /// Store the given data as a Yield of this card in the Yield with the given index.
-    public func store<T>(data: T, forYieldIndex index: Int) where T : JSONEncodable {
+    public func store<T>(_ object: T, forYieldIndex index: Int) where T : Codable {
         guard let yield = self.yield(atIndex: index) else {
             self.error(ActionExecutionError.yieldAtIndexNotFound(self, index))
             return
         }
         
         // capture the yielded data
-        self.store(data: data, forYield: yield)
+        self.store(object, forYield: yield)
     }
     
     /// Retrieve the data for the given yield.
-    public func value<T>(forYield yield: Yield) -> T? where T : JSONDecodable {
+    public func value<T>(forYield yield: Yield) -> T? where T : Codable {
         // if the given yield is not a valid yield for this card, return nil
         guard self.actionCard.yields.contains(yield) else {
-            self.error(ActionExecutionError.attemptToRetrieveDataForInvalidYield(self, yield))
+            self.error(ActionExecutionError.attemptToRetrieveInvalidYield(self, yield))
             return nil
         }
         
@@ -209,8 +212,9 @@ extension ExecutableAction: CarriesActionCardState {
         }
         
         // convert type JSON to type T
+        let decoder = JSONDecoder()
         do {
-            let val = try T(json: yieldData.data)
+            let val = try decoder.boxDecode(T.self, from: yieldData.data)
             return val
         } catch {
             self.error(ActionExecutionError.boundYieldNotConvertibleToExpectedType(self, yield, yieldData.data, T.self))
@@ -219,7 +223,7 @@ extension ExecutableAction: CarriesActionCardState {
     }
     
     /// Retrieve the data for the yield specified by the given index.
-    public func value<T>(forYieldIndex index: Int) -> T? where T : JSONDecodable {
+    public func value<T>(forYieldIndex index: Int) -> T? where T : Codable {
         guard let yield = self.yield(atIndex: index) else {
             self.error(ActionExecutionError.yieldAtIndexNotFound(self, index))
             return nil

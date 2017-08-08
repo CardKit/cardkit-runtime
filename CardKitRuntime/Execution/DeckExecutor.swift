@@ -82,7 +82,7 @@ public class DeckExecutor: Operation {
             // NOTE: we're not capturing any errors that the token may throw in
             // its emergencyStop() procedure. in the future we may need to find
             // a way to save these, which might be tricky because of the concurrency.
-            let _ = token.emergencyStop(error: ExecutionError.executionCancelled)
+            _ = token.emergencyStop(error: ExecutionError.executionCancelled)
         }
         
         // we were cancelled, so set our error
@@ -275,7 +275,7 @@ public class DeckExecutor: Operation {
                     executable.inputBindings[slot] = inputCard.boundData
                 case .boundToYieldingActionCard(_, let yield):
                     guard let yieldData = self.yieldData[yield] else { continue }
-                    executable.inputBindings[slot] = .bound(yieldData.data)
+                    executable.inputBindings[slot] = yieldData.data
                 default:
                     let error = ExecutionError.unboundInputEncountered(card, slot)
                     delegate?.error([error])
@@ -326,7 +326,7 @@ public class DeckExecutor: Operation {
                 }
                 
                 // wait until any other operation doing a check is done
-                let _ = satisfactionCheck.wait(timeout: DispatchTime.distantFuture)
+                _ = satisfactionCheck.wait(timeout: DispatchTime.distantFuture)
                 
                 // check for errors
                 print("  ... checking if the card threw errors")
@@ -385,12 +385,12 @@ public class DeckExecutor: Operation {
         print("hand execution finished")
         
         // obtain the semaphore so no other threads are performing the satisfaction check
-        let _ = satisfactionCheck.wait(timeout: DispatchTime.distantFuture)
+        _ = satisfactionCheck.wait(timeout: DispatchTime.distantFuture)
         
         // cancel execution of any outstanding operations in the queue
         cardExecutionQueue.cancelAllOperations()
         
-        var errorsInHand: [Error] = []
+        let errorsInHand: [Error] = []
         
         // check to see if any ExecutableActions had errors
         print(" ... checking if any cards threw errors")
@@ -428,7 +428,11 @@ public class DeckExecutor: Operation {
         // waiting to perform a satisfactionCheck, this will unblock them
         satisfactionCheck.signal()
         
-        print("the next hand to be executed will be \(nextHand?.identifier)")
+        if let nextHand = nextHand {
+            print("the next hand to be executed will be \(nextHand.identifier)")
+        } else {
+            print("there is no next hand to be executed")
+        }
         
         delegate?.didExecute(hand, yields: allYieldsForHand)
         

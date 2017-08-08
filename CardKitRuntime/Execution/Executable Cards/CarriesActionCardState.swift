@@ -8,17 +8,16 @@
 
 import Foundation
 
-import Freddy
 import CardKit
 
-public typealias InputBindings = [InputSlot : DataBinding]
+public typealias InputBindings = [InputSlot : Data]
 public typealias TokenBindings = [TokenSlot : ExecutableToken]
 
 /// Carries data yielded by an ActionCard.
 public struct YieldData {
     public let cardIdentifier: CardIdentifier
     public let yield: Yield
-    public let data: JSON
+    public let data: Data
 }
 
 /// Appled to classes that implement an executable ActionCard
@@ -45,21 +44,22 @@ protocol CarriesActionCardState {
     func error(_ error: Error)
     
     /// Set the card up with the given input and token bindings.
-    func setup(inputBindings: InputBindings, tokenBindings: TokenBindings)
+//    func setup(inputBindings: InputBindings, tokenBindings: TokenBindings)
     
     /// Set the card up with the given input and token bindings, given via mappings between
     /// the String slot names and the data to be bound. Keys that don't match any available
     /// slots will be ignored.
-    func setup(inputBindings: [String : JSONEncodable], tokenBindings: [String : ExecutableToken])
+    func setup(inputBindings: [String : Data], tokenBindings: [String : ExecutableToken])
     
-    /// Retrieve the input binding for the named slot
-    func binding(forInput name: String) -> DataBinding?
+    /// Retrieve the input value for the named slot, or nil if the slot is unbound.
+    /// Stores an error if the input slot is unbound or if the expected type does not
+    /// match the type of the stored data.
+    func value<T>(forInput name: String) -> T? where T : Codable
     
-    /// Retrieve the input value for the named slot
-    func value<T>(forInput name: String) -> T? where T : JSONDecodable
-    
-    /// Retrieve the input value for the named slot, or nil if the slot is unbound
-    func optionalValue<T>(forInput name: String) -> T? where T : JSONDecodable
+    /// Retrieve the input value for the named slot, or nil if the slot is unbound.
+    /// Does not store an error if the input slot is unbound or if the expected type
+    /// does not match the type of the stored data.
+    func optionalValue<T>(forInput name: String) -> T? where T : Codable
     
     /// Retrieve the token for the named slot
     func token<T>(named name: String) -> T? where T : ExecutableToken
@@ -69,10 +69,10 @@ protocol CarriesActionCardState {
     func yield(atIndex index: Int) -> Yield?
     
     /// Store yielded data
-    func store<T>(data: T, forYield yield: Yield) where T : JSONEncodable
-    func store<T>(data: T, forYieldIndex index: Int) where T : JSONEncodable
+    func store<T>(_ object: T, forYield yield: Yield) where T : Codable
+    func store<T>(_ object: T, forYieldIndex index: Int) where T : Codable
     
     /// Retrieve yielded data
-    func value<T>(forYield yield: Yield) -> T? where T : JSONDecodable
-    func value<T>(forYieldIndex index: Int) -> T? where T : JSONDecodable
+    func value<T>(forYield yield: Yield) -> T? where T : Codable
+    func value<T>(forYieldIndex index: Int) -> T? where T : Codable
 }

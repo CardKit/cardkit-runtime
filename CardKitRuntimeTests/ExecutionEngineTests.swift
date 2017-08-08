@@ -253,7 +253,7 @@ class ExecutionEngineTests: XCTestCase {
                     break
                 case .ignored:
                     XCTFail("expected the emergency stop result for the sieveCard to be .success")
-                case .failure(_):
+                case .failure:
                     XCTFail("expected the emergency stop result for the sieveCard to be .success")
                 }
             } else {
