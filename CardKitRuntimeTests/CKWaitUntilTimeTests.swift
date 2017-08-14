@@ -25,15 +25,20 @@ class CKWaitUntilTimeTests: XCTestCase {
     }
     
     func executeWaitUntilTime(addSeconds seconds: TimeInterval) {
-        //executableInstance
+        // create executable instance
         let waitUntilTimeExecutable = CKWaitUntilTime(with: CardKit.Action.Trigger.Time.WaitUntilTime.makeCard())
         
         // bind inputs and tokens
         let cardStartTime = Date()
         let secondsToWait: TimeInterval = seconds
         let cardStartTimePlusSeconds = cardStartTime.addingTimeInterval(secondsToWait)
-    
-        let inputBindings: [String : JSONEncodable] = ["ClockTime": cardStartTimePlusSeconds]
+        
+        guard let clockTime = cardStartTimePlusSeconds.boxedEncoding() else {
+            XCTFail("could not get boxed encoding of cardStartTimePlusSeconds")
+            return
+        }
+        
+        let inputBindings: [String : Data] = ["ClockTime": clockTime]
         waitUntilTimeExecutable.setup(inputBindings: inputBindings, tokenBindings: [:])
         
         // execute

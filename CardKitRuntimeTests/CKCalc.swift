@@ -159,7 +159,7 @@ public class CKAdd: ExecutableAction {
         let sum = calc.add(a, b)
         
         // save the result
-        self.store(data: sum, forYieldIndex: 0)
+        self.store(sum, forYieldIndex: 0)
     }
 }
 
@@ -184,7 +184,7 @@ public class CKSubtract: ExecutableAction {
         let difference = calc.subtract(a, b)
         
         // save the result
-        self.store(data: difference, forYieldIndex: 0)
+        self.store(difference, forYieldIndex: 0)
     }
 }
 
@@ -209,7 +209,7 @@ public class CKMultiply: ExecutableAction {
         let product = calc.multiply(a, b)
         
         // save the result
-        self.store(data: product, forYieldIndex: 0)
+        self.store(product, forYieldIndex: 0)
     }
 }
 
@@ -234,27 +234,14 @@ public class CKDivide: ExecutableAction {
         let quotient = calc.divide(a, b)
         
         // save the result
-        self.store(data: quotient, forYieldIndex: 0)
+        self.store(quotient, forYieldIndex: 0)
     }
 }
 
 // MARK: - CKPrimeSieve
 
-struct PrimeList: JSONEncodable, JSONDecodable {
+struct PrimeList: Codable {
     var primes: [Int] = []
-    
-    init() {
-    }
-    
-    init(json: JSON) throws {
-        self.primes = try json.decodedArray(at: "primes", type: Int.self)
-    }
-    
-    func toJSON() -> JSON {
-        return .dictionary([
-            "primes": primes.toJSON()
-            ])
-    }
 }
 
 class CKPrimeSieve: ExecutableAction {
@@ -275,7 +262,7 @@ class CKPrimeSieve: ExecutableAction {
     
     public override func cancel() {
         // yield
-        self.store(data: primeList, forYieldIndex: 0)
+        self.store(primeList, forYieldIndex: 0)
     }
 }
 

@@ -103,14 +103,12 @@ extension ExecutableAction: CarriesActionCardState {
         }
         
         // deserialize data
-        let decoder = JSONDecoder()
-        do {
-            let val = try decoder.boxDecode(T.self, from: data)
-            return val
-        } catch {
+        guard let val: T = data.unboxedValue() else {
             self.error(ActionExecutionError.boundInputNotConvertibleToExpectedType(self, name, data, T.self))
             return nil
         }
+        
+        return val
     }
     
     /// Obtain the bound value for the given input slot. Returns nil if the slot is not found,
@@ -124,13 +122,8 @@ extension ExecutableAction: CarriesActionCardState {
         guard let data = self.inputBindings[slot] else { return nil }
         
         // deserialize data
-        let decoder = JSONDecoder()
-        do {
-            let val = try decoder.boxDecode(T.self, from: data)
-            return val
-        } catch {
-            return nil
-        }
+        guard let val: T = data.unboxedValue() else { return nil }
+        return val
     }
     
     /// Obtain the bound token for the given token slot. Returns nil if a slot
@@ -160,7 +153,7 @@ extension ExecutableAction: CarriesActionCardState {
         return self.actionCard.yields[index]
     }
     
-    /// Store the given data as a Yield of this card.
+    /// Store the given object as a Yield of this card.
     public func store<T>(_ object: T, forYield yield: Yield) where T : Codable {
         // make sure the given Yield exists for this card
         guard self.actionCard.yields.contains(yield) else {
@@ -175,18 +168,19 @@ extension ExecutableAction: CarriesActionCardState {
             return
         }
         
-        // capture the yielded data
-        let encoder = JSONEncoder()
-        do {
-            let data = try encoder.boxEncode(object)
-            let newYield = YieldData(cardIdentifier: self.actionCard.identifier, yield: yield, data: data)
-            self.yieldData.append(newYield)
-        } catch {
+        // box the data
+        guard let data = object.boxedEncoding() else {
+            let dataType = String(describing: Swift.type(of: object))
+            self.error(ActionExecutionError.attemptToStoreYieldOfUnexpectedType(self, yield, yield.type, dataType))
             return
         }
+        
+        // capture the yielded data
+        let newYield = YieldData(cardIdentifier: self.actionCard.identifier, yield: yield, data: data)
+        self.yieldData.append(newYield)
     }
     
-    /// Store the given data as a Yield of this card in the Yield with the given index.
+    /// Store the given object as a Yield of this card in the Yield with the given index.
     public func store<T>(_ object: T, forYieldIndex index: Int) where T : Codable {
         guard let yield = self.yield(atIndex: index) else {
             self.error(ActionExecutionError.yieldAtIndexNotFound(self, index))
@@ -197,7 +191,7 @@ extension ExecutableAction: CarriesActionCardState {
         self.store(object, forYield: yield)
     }
     
-    /// Retrieve the data for the given yield.
+    /// Retrieve the object for the given yield.
     public func value<T>(forYield yield: Yield) -> T? where T : Codable {
         // if the given yield is not a valid yield for this card, return nil
         guard self.actionCard.yields.contains(yield) else {
@@ -211,18 +205,16 @@ extension ExecutableAction: CarriesActionCardState {
             return nil
         }
         
-        // convert type JSON to type T
-        let decoder = JSONDecoder()
-        do {
-            let val = try decoder.boxDecode(T.self, from: yieldData.data)
-            return val
-        } catch {
+        // convert the boxed data to type T
+        guard let val: T = yieldData.data.unboxedValue() else {
             self.error(ActionExecutionError.boundYieldNotConvertibleToExpectedType(self, yield, yieldData.data, T.self))
             return nil
         }
+        
+        return val
     }
     
-    /// Retrieve the data for the yield specified by the given index.
+    /// Retrieve the object for the yield specified by the given index.
     public func value<T>(forYieldIndex index: Int) -> T? where T : Codable {
         guard let yield = self.yield(atIndex: index) else {
             self.error(ActionExecutionError.yieldAtIndexNotFound(self, index))

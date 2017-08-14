@@ -410,7 +410,6 @@
 				CCE7D46F1D50D191008FC492 /* Sources */,
 				CCE7D4701D50D191008FC492 /* Frameworks */,
 				CCE7D4711D50D191008FC492 /* Resources */,
-				CCE72A2E1D64EE0100A347D8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -448,7 +447,6 @@
 				CCE7D48D1D50D1AA008FC492 /* Sources */,
 				CCE7D48E1D50D1AA008FC492 /* Frameworks */,
 				CCE7D48F1D50D1AA008FC492 /* Resources */,
-				CCE72A2F1D64EE1B00A347D8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -486,7 +484,6 @@
 				CCE7D4A91D50D1BB008FC492 /* Sources */,
 				CCE7D4AA1D50D1BB008FC492 /* Frameworks */,
 				CCE7D4AB1D50D1BB008FC492 /* Resources */,
-				CCE72A301D64EE3800A347D8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -644,51 +641,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
-		};
-		CCE72A2E1D64EE0100A347D8 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Freddy.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/CardKit.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		CCE72A2F1D64EE1B00A347D8 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/Mac/Freddy.framework",
-				"$(SRCROOT)/Carthage/Build/Mac/CardKit.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		CCE72A301D64EE3800A347D8 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/tvOS/Freddy.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/CardKit.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 

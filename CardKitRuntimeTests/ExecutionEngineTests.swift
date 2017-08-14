@@ -152,20 +152,19 @@ class ExecutionEngineTests: XCTestCase {
             for yield in yields {
                 switch yield.cardIdentifier {
                 case add.identifier:
-                    do {
-                        let sum = try yield.data.decode(type: Double.self)
-                        XCTAssertTrue(sum == 3100.0)
-                    } catch let error {
-                        XCTFail("expected a yield of type Double, error: \(error)")
+                    guard let sum: Double = yield.data.unboxedValue() else {
+                        XCTFail("could not unbox yield data for sum")
+                        return
                     }
+                    XCTAssertTrue(sum == 3100.0)
                 case primeSieve.identifier:
-                    do {
-                        let primeList = try yield.data.decode(type: PrimeList.self)
-                        let primes = primeList.primes
-                        XCTAssertTrue(primes.count > 0)
-                    } catch let error {
-                        XCTFail("expected a yield of type PrimeList, error: \(error)")
+                    guard let primeList: PrimeList = yield.data.unboxedValue() else {
+                        XCTFail("could not unbox yield data for primeList")
+                        return
                     }
+                    
+                    let primes = primeList.primes
+                    XCTAssertTrue(primes.count > 0)
                 default:
                     XCTFail("encountered a Yield that wasn't produced by the Add or PrimeSieve card")
                 }
