@@ -12,24 +12,27 @@ import Foundation
 
 import CardKit
 
-public protocol DeckExecutorDelegate: class {
-    func willValidate(_ deck: Deck)
-    func didValidate(_ deck: Deck)
+// MARK: DeckExecutorDelegate
+
+protocol DeckExecutorDelegate: class {
+    func deckExecutor(_ executor: DeckExecutor, willValidate deck: Deck)
+    func deckExecutor(_ executor: DeckExecutor, didValidate deck: Deck)
     
-    func shouldExecute(_ hand: Hand) -> Bool
+    func deckExecutor(_ executor: DeckExecutor, willExecute deck: Deck)
+    func deckExecutor(_ executor: DeckExecutor, willExecute hand: Hand)
+    func deckExecutor(_ executor: DeckExecutor, willExecute card: Card)
     
-    func willExecute(_ deck: Deck)
-    func willExecute(_ hand: Hand)
+    func deckExecutor(_ executor: DeckExecutor, didExecute deck: Deck, producing yields: [Yield: YieldData]?)
+    func deckExecutor(_ executor: DeckExecutor, didExecute hand: Hand, producing yields: [Yield: YieldData]?)
+    func deckExecutor(_ executor: DeckExecutor, didExecute card: Card, producing yields: [Yield: YieldData]?)
     
-    func didExecute(_ deck: Deck, yields: [Yield: YieldData])
-    func didExecute(_ hand: Hand, yields: [Yield: YieldData])
-    func didExecute(_ card: Card, yields: [Yield: YieldData])
-    
-    func error(_ errors: [Error])
+    func deckExecutor(_ executor: DeckExecutor, hadErrors errors: [Error])
 }
 
-public class DeckExecutor: Operation {
-    public fileprivate (set) var deck: Deck
+// MARK: - DeckExecutor
+
+internal class DeckExecutor: Operation {
+    internal fileprivate (set) var deck: Deck
     
     /// Map between ActionCardDescriptor and the type that implements it
     fileprivate var executableActionTypes: [ActionCardDescriptor : ExecutableAction.Type] = [:]
@@ -38,15 +41,17 @@ public class DeckExecutor: Operation {
     fileprivate var tokenInstances: [TokenCard : ExecutableToken] = [:]
     
     /// Cache of yields produced by ActionCards after their execution
-    public fileprivate (set) var yieldData: [Yield : YieldData] = [:]
+    internal fileprivate (set) var yieldData: [Yield : YieldData] = [:]
     
     /// Private operation queue for executing ActionCards in a Hand
     fileprivate let cardExecutionQueue: OperationQueue
     
     /// Execution error. Only non-nil if execution encountered an error.
-    public var error: ExecutionError?
+    internal var error: ExecutionError?
     
-    public weak var delegate: DeckExecutorDelegate?
+    /// Execution engine delegate receives callbacks when various execution events occur,
+    /// such as validation, execution, and errors.
+    internal weak var delegate: DeckExecutorDelegate?
     
     init(with deck: Deck) {
         self.deck = deck
@@ -91,19 +96,19 @@ public class DeckExecutor: Operation {
     
     // MARK: Instance Methods
     
-    public func setExecutableActionType(_ type: ExecutableAction.Type, for descriptor: ActionCardDescriptor) {
+    internal func setExecutableActionType(_ type: ExecutableAction.Type, for descriptor: ActionCardDescriptor) {
         self.executableActionTypes[descriptor] = type
     }
     
-    public func setExecutableActionTypes(_ executionTypes: [ActionCardDescriptor : ExecutableAction.Type]) {
+    internal func setExecutableActionTypes(_ executionTypes: [ActionCardDescriptor : ExecutableAction.Type]) {
         self.executableActionTypes = executionTypes
     }
     
-    public func setTokenInstance(_ instance: ExecutableToken, for tokenCard: TokenCard) {
+    internal func setTokenInstance(_ instance: ExecutableToken, for tokenCard: TokenCard) {
         self.tokenInstances[tokenCard] = instance
     }
     
-    public func setTokenInstances(_ tokenInstances: [TokenCard : ExecutableToken]) {
+    internal func setTokenInstances(_ tokenInstances: [TokenCard : ExecutableToken]) {
         self.tokenInstances = tokenInstances
     }
     
@@ -145,16 +150,18 @@ public class DeckExecutor: Operation {
             
             // throw an error that we were cancelled
             throw ExecutionError.executionCancelled
+        } else {
+            print("  it isn't")
         }
     }
     
     public func execute() throws {
-        try validateDeck()
-        try executeDeck()
+        try self.validateDeck()
+        try self.executeDeck()
     }
     
     private func validateDeck() throws {
-        delegate?.willValidate(self.deck)
+        self.delegate?.deckExecutor(self, willValidate: self.deck)
         
         do {
             print("DeckExecutor validating deck")
@@ -173,15 +180,15 @@ public class DeckExecutor: Operation {
             try self.checkForUndefinedTokenInstances()
             
         } catch {
-            delegate?.error([error])
+            self.delegate?.deckExecutor(self, hadErrors: [error])
             throw error
         }
         
-        delegate?.didValidate(deck)
+        self.delegate?.deckExecutor(self, didValidate: self.deck)
     }
     
     private func executeDeck() throws {
-        delegate?.willExecute(deck)
+        self.delegate?.deckExecutor(self, willExecute: self.deck)
         
         // figure out if there is a Repeat or Terminate card in the Deck.
         // validation should make sure both cards don't exist simultaneously.
@@ -211,7 +218,7 @@ public class DeckExecutor: Operation {
                     do {
                         try self.checkIfExecutionCancelled()
                     } catch {
-                        delegate?.error([error])
+                        self.delegate?.deckExecutor(self, hadErrors: [error])
                         throw error
                     }
                     
@@ -238,7 +245,7 @@ public class DeckExecutor: Operation {
             throw error
         }
         
-        delegate?.didExecute(deck, yields: self.yieldData)
+        self.delegate?.deckExecutor(self, didExecute: self.deck, producing: self.yieldData)
     }
     
     /// Execute the given Hand. Returns the next Hand to be executed (if it's a subhand), or nil
@@ -261,7 +268,7 @@ public class DeckExecutor: Operation {
         for card in hand.actionCards {
             guard let type = self.executableActionTypes[card.descriptor] else {
                 let error = ExecutionError.noExecutionTypeDefinedForActionCardDescriptor(card.descriptor)
-                delegate?.error([error])
+                self.delegate?.deckExecutor(self, hadErrors: [error])
                 throw error
             }
             
@@ -278,7 +285,7 @@ public class DeckExecutor: Operation {
                     executable.inputBindings[slot] = yieldData.data
                 default:
                     let error = ExecutionError.unboundInputEncountered(card, slot)
-                    delegate?.error([error])
+                    self.delegate?.deckExecutor(self, hadErrors: [error])
                     throw error
                 }
             }
@@ -289,13 +296,13 @@ public class DeckExecutor: Operation {
                 case .boundToTokenCard(let identifier):
                     guard let tokenCard = deck.tokenCard(with: identifier) else {
                         let error = ExecutionError.noTokenCardPresentWithIdentifier(identifier)
-                        delegate?.error([error])
+                        self.delegate?.deckExecutor(self, hadErrors: [error])
                         throw error
                     }
                     
                     guard let instance = self.tokenInstances[tokenCard] else {
                         let error = ExecutionError.noTokenInstanceDefinedForTokenCard(tokenCard)
-                        delegate?.error([error])
+                        self.delegate?.deckExecutor(self, hadErrors: [error])
                         throw error
                     }
                     
@@ -303,7 +310,7 @@ public class DeckExecutor: Operation {
                 default:
                     // shouldn't happen, validation should have caught this
                     let error = ExecutionError.tokenSlotBoundToUnboundValue(card, slot)
-                    delegate?.error([error])
+                    self.delegate?.deckExecutor(self, hadErrors: [error])
                     throw error
                 }
             }
@@ -322,7 +329,7 @@ public class DeckExecutor: Operation {
                         allYieldsForCard[yield.yield] = YieldData(cardIdentifier: executable.actionCard.identifier, yield: yield.yield, data: yield.data)
                     }
                     
-                    self.delegate?.didExecute(card, yields: allYieldsForCard)
+                    self.delegate?.deckExecutor(self, didExecute: card, producing: allYieldsForCard)
                 }
                 
                 // wait until any other operation doing a check is done
@@ -360,16 +367,9 @@ public class DeckExecutor: Operation {
             operations.append(done)
         }
         
-        // STEP: Execute Hand
-        guard delegate?.shouldExecute(hand) ?? true else {
-            let error = ExecutionError.executionCancelled
-            delegate?.error([error])
-            throw error
-        }
-        
         // add all operations to the queue and execute it
         print("beginning execution of hand")
-        delegate?.willExecute(hand)
+        self.delegate?.deckExecutor(self, willExecute: hand)
         cardExecutionQueue.addOperations(operations, waitUntilFinished: false)
         
         // wait until either the operation queue is finished, the hand is satisfied, or 
@@ -406,7 +406,7 @@ public class DeckExecutor: Operation {
         }
         
         if errorsInHand.count > 0 {
-            delegate?.error(errorsInHand)
+            self.delegate?.deckExecutor(self, hadErrors: errorsInHand)
         }
         
         // copy out yielded data
@@ -434,7 +434,8 @@ public class DeckExecutor: Operation {
             print("there is no next hand to be executed")
         }
         
-        delegate?.didExecute(hand, yields: allYieldsForHand)
+        // notify delegate that the hand finished executing
+        self.delegate?.deckExecutor(self, didExecute: hand, producing: allYieldsForHand)
         
         return nextHand
     }

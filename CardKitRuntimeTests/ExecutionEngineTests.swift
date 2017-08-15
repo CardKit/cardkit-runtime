@@ -262,6 +262,36 @@ class ExecutionEngineTests: XCTestCase {
     }
     
     func testHaltOfDeckExecutor() {
+        class EngineDelegate: ExecutionEngineDelegate {
+            func deckExecutor(_ executor: DeckExecutor, willValidate deck: Deck) {
+                print("*** deckExecutor \(executor) willValidate \(deck)")
+            }
+            func deckExecutor(_ executor: DeckExecutor, didValidate deck: Deck) {
+                print("*** deckExecutor \(executor) didValidate \(deck)")
+            }
+            func deckExecutor(_ executor: DeckExecutor, willExecute deck: Deck) {
+                print("*** deckExecutor \(executor) willExecute \(deck)")
+            }
+            func deckExecutor(_ executor: DeckExecutor, willExecute hand: Hand) {
+                print("*** deckExecutor \(executor) willExecute \(hand)")
+            }
+            func deckExecutor(_ executor: DeckExecutor, willExecute card: Card) {
+                print("*** deckExecutor \(executor) willExecute \(card)")
+            }
+            func deckExecutor(_ executor: DeckExecutor, didExecute deck: Deck, producing yields: [Yield : YieldData]?) {
+                print("*** deckExecutor \(executor) didExecute \(deck) producing \(yields)")
+            }
+            func deckExecutor(_ executor: DeckExecutor, didExecute hand: Hand, producing yields: [Yield : YieldData]?) {
+                print("*** deckExecutor \(executor) didExecute \(hand) producing \(yields)")
+            }
+            func deckExecutor(_ executor: DeckExecutor, didExecute card: Card, producing yields: [Yield : YieldData]?) {
+                print("*** deckExecutor \(executor) didExecute \(card) producing \(yields)")
+            }
+            func deckExecutor(_ executor: DeckExecutor, hadErrors errors: [Error]) {
+                print("*** deckExecutor \(executor) hadErrors \(errors)")
+            }
+        }
+        
         // token cards
         let sieveCard = CKCalc.Token.Sieve.makeCard()
         
@@ -287,8 +317,10 @@ class ExecutionEngineTests: XCTestCase {
         
         // create token instances
         let sieve = CKSieveOfEratosthenes(with: sieveCard)
-        
         engine.setTokenInstance(sieve, for: sieveCard)
+        
+        // create delegate
+        engine.delegate = EngineDelegate()
         
         // execute
         engine.execute({ (_, _) in

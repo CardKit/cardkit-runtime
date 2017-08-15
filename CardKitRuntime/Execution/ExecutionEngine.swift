@@ -10,6 +10,40 @@ import Foundation
 
 import CardKit
 
+// MARK: ExecutionEngineDelegate
+
+public protocol ExecutionEngineDelegate: class {
+    func executionEngine(_ engine: ExecutionEngine, willValidate deck: Deck)
+    func executionEngine(_ engine: ExecutionEngine, didValidate deck: Deck)
+    
+    func executionEngine(_ engine: ExecutionEngine, willExecute deck: Deck)
+    func executionEngine(_ engine: ExecutionEngine, willExecute hand: Hand)
+    func executionEngine(_ engine: ExecutionEngine, willExecute card: Card)
+    
+    func executionEngine(_ engine: ExecutionEngine, didExecute deck: Deck, producing yields: [Yield: YieldData]?)
+    func executionEngine(_ engine: ExecutionEngine, didExecute hand: Hand, producing yields: [Yield: YieldData]?)
+    func executionEngine(_ engine: ExecutionEngine, didExecute card: Card, producing yields: [Yield: YieldData]?)
+    
+    func executionEngine(_ engine: ExecutionEngine, hadErrors errors: [Error])
+}
+
+extension ExecutionEngineDelegate {
+    func executionEngine(_ engine: ExecutionEngine, willValidate deck: Deck) {}
+    func executionEngine(_ engine: ExecutionEngine, didValidate deck: Deck) {}
+    
+    func executionEngine(_ engine: ExecutionEngine, willExecute deck: Deck) {}
+    func executionEngine(_ engine: ExecutionEngine, willExecute hand: Hand) {}
+    func executionEngine(_ engine: ExecutionEngine, willExecute card: Card) {}
+    
+    func executionEngine(_ engine: ExecutionEngine, didExecute deck: Deck, producing yields: [Yield: YieldData]?) {}
+    func executionEngine(_ engine: ExecutionEngine, didExecute hand: Hand, producing yields: [Yield: YieldData]?) {}
+    func executionEngine(_ engine: ExecutionEngine, didExecute card: Card, producing yields: [Yield: YieldData]?) {}
+    
+    func executionEngine(_ engine: ExecutionEngine, hadErrors errors: [Error]) {}
+}
+
+// MARK: - ExecutionEngine
+
 public class ExecutionEngine {
     public fileprivate (set) var deck: Deck
     
@@ -22,7 +56,9 @@ public class ExecutionEngine {
     /// Queue used for running the DeckExecutor
     fileprivate let operationQueue: OperationQueue = OperationQueue()
     
-    public weak var delegate: DeckExecutorDelegate?
+    /// Execution engine delegate receives callbacks when various execution events occur,
+    /// such as validation, execution, and errors.
+    public weak var delegate: ExecutionEngineDelegate?
     
     public init(with deck: Deck) {
         self.deck = deck
@@ -54,7 +90,7 @@ public class ExecutionEngine {
     public func execute(_ completion: @escaping ([YieldData], ExecutionError?) -> Void) {
         // create a DeckExecutor
         let deckExecutor = DeckExecutor(with: self.deck)
-        deckExecutor.delegate = delegate
+        deckExecutor.delegate = self
         deckExecutor.setExecutableActionTypes(self.executableActionTypes)
         deckExecutor.setTokenInstances(self.tokenInstances)
         
@@ -71,7 +107,7 @@ public class ExecutionEngine {
             self.operationQueue.addOperation(deckExecutor)
             
             // wait until it's done
-            // TODO potential bug: when halt() is called while we are waiting here,
+            // potential bug: when halt() is called while we are waiting here,
             // this method doesn't return. which is bad if we want to call execute() again.
             print("ExecutionEngine waiting for execution to finish")
             self.operationQueue.waitUntilAllOperationsAreFinished()
@@ -94,5 +130,36 @@ public class ExecutionEngine {
     public func halt() {
         print("ExecutionEngine halting execution")
         self.operationQueue.cancelAllOperations()
+    }
+}
+
+// Pass all notifications from the DeckExecutor up to our own delegate
+extension ExecutionEngine: DeckExecutorDelegate {
+    func deckExecutor(_ executor: DeckExecutor, willValidate deck: Deck) {
+        self.delegate?.executionEngine(self, willValidate: deck)
+    }
+    func deckExecutor(_ executor: DeckExecutor, didValidate deck: Deck) {
+        self.delegate?.executionEngine(self, didValidate: deck)
+    }
+    func deckExecutor(_ executor: DeckExecutor, willExecute card: Card) {
+        self.delegate?.executionEngine(self, willExecute: card)
+    }
+    func deckExecutor(_ executor: DeckExecutor, willExecute hand: Hand) {
+        self.delegate?.executionEngine(self, willExecute: hand)
+    }
+    func deckExecutor(_ executor: DeckExecutor, willExecute deck: Deck) {
+        self.delegate?.executionEngine(self, willExecute: deck)
+    }
+    func deckExecutor(_ executor: DeckExecutor, didExecute card: Card, producing yields: [Yield : YieldData]?) {
+        self.delegate?.executionEngine(self, didExecute: card, producing: yields)
+    }
+    func deckExecutor(_ executor: DeckExecutor, didExecute hand: Hand, producing yields: [Yield : YieldData]?) {
+        self.delegate?.executionEngine(self, didExecute: hand, producing: yields)
+    }
+    func deckExecutor(_ executor: DeckExecutor, didExecute deck: Deck, producing yields: [Yield : YieldData]?) {
+        self.delegate?.executionEngine(self, didExecute: deck, producing: yields)
+    }
+    func deckExecutor(_ executor: DeckExecutor, hadErrors errors: [Error]) {
+        self.delegate?.executionEngine(self, hadErrors: errors)
     }
 }
