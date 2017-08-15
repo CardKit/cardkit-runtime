@@ -63,18 +63,14 @@ extension ExecutableAction: CarriesActionCardState {
     
     /// Convenience method for setting up input and token bindings. Used for setting up an ExecutableToken
     /// outside the context of the ExecutionEngine (e.g. for running tests).
-//    public func setup(inputBindings: InputBindings, tokenBindings: TokenBindings) {
-//        self.inputBindings = inputBindings
-//        self.tokenBindings = tokenBindings
-//    }
-    
-    /// Convenience method for setting up input and token bindings. Used for setting up an ExecutableToken
-    /// outside the context of the ExecutionEngine (e.g. for running tests).
-    public func setup(inputBindings: [String : Data], tokenBindings: [String : ExecutableToken]) {
+    public func setup(inputBindings: [String : Codable], tokenBindings: [String : ExecutableToken]) {
         // bind inputs
-        for (slotName, data) in inputBindings {
+        for (slotName, object) in inputBindings {
             // silently ignore slots that don't exist
             guard let slot = self.actionCard.inputSlots.slot(named: slotName) else { continue }
+            
+            // silently ignore bindings that don't box encode
+            guard let data = object.boxedEncoding() else { continue }
             
             // store the data
             self.inputBindings[slot] = data

@@ -43,13 +43,10 @@ protocol CarriesActionCardState {
     /// Store the given error. Any error encountered should be stored using this method.
     func error(_ error: Error)
     
-    /// Set the card up with the given input and token bindings.
-//    func setup(inputBindings: InputBindings, tokenBindings: TokenBindings)
-    
     /// Set the card up with the given input and token bindings, given via mappings between
-    /// the String slot names and the data to be bound. Keys that don't match any available
-    /// slots will be ignored.
-    func setup(inputBindings: [String : Data], tokenBindings: [String : ExecutableToken])
+    /// the String slot names and the Codable object to be bound. Keys that don't match any
+    /// available slots will be ignored.
+    func setup(inputBindings: [String : Codable], tokenBindings: [String : ExecutableToken])
     
     /// Retrieve the input value for the named slot, or nil if the slot is unbound.
     /// Stores an error if the input slot is unbound or if the expected type does not

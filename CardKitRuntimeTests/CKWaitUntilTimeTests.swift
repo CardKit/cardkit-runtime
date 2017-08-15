@@ -33,12 +33,7 @@ class CKWaitUntilTimeTests: XCTestCase {
         let secondsToWait: TimeInterval = seconds
         let cardStartTimePlusSeconds = cardStartTime.addingTimeInterval(secondsToWait)
         
-        guard let clockTime = cardStartTimePlusSeconds.boxedEncoding() else {
-            XCTFail("could not get boxed encoding of cardStartTimePlusSeconds")
-            return
-        }
-        
-        let inputBindings: [String : Data] = ["ClockTime": clockTime]
+        let inputBindings: [String : Codable] = ["ClockTime": cardStartTimePlusSeconds]
         waitUntilTimeExecutable.setup(inputBindings: inputBindings, tokenBindings: [:])
         
         // execute

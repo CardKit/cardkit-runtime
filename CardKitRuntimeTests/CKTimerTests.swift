@@ -32,12 +32,7 @@ class CKTimerTests: XCTestCase {
         let cardStartTime = Date()
         let timerTimeInSeconds: TimeInterval = seconds
         
-        guard let duration = timerTimeInSeconds.boxedEncoding() else {
-            XCTFail("could not get boxed encoding of timerTimeInSeconds")
-            return
-        }
-        
-        let inputBindings: [String : Data] = ["Duration": duration]
+        let inputBindings: [String : Codable] = ["Duration": timerTimeInSeconds]
         setTimerExecutable.setup(inputBindings: inputBindings, tokenBindings: [:])
     
         // execute
