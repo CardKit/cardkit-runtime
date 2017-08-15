@@ -18,13 +18,16 @@ CardKit Runtime contains a `ValidationEngine` that will validate CardKit program
 
 Execution of a Deck relies heavily on the multi-threading APIs provided by `NSOperation` and GCD.
 
-### Execution Engine and Deck Executor
+### Execution Engine
 
-The `ExecutionEngine` is responsible for the execution of a Deck. `ExecutionEngine` provides a thin wrapper on top of `DeckExecutor`, which performs the actual work of executing a deck. `ExecutionEngine` provides a synchronous `execute()` method which accepts a block that is called when execution is finished. This block accepts two parameters: the `YieldBindings` that have been produced from the execution (a map between `Yield` and `InputDataBinding`), and an `ExecutionError?` specifying whether there was an error during execution.
+The `ExecutionEngine` is responsible for the execution of a Deck. `ExecutionEngine` provides a thin wrapper on top of `DeckExecutor`, which performs the actual work of executing a deck; however, `DeckExecutor` is not intended for direct use.
 
-`DeckExecutor` is responsible for the heavy-lifting of execution. It maintains a mapping between `ActionCardDescriptor`s and the type responsible for executing that Action card (a subclass of `ExecutableActionCard`). `ExecutionEngine` also contains methods which pass the `ExecutableActionCard` types to `DeckExecutor`. Here is an example:
+`ExecutionEngine` provides a synchronous `execute(_:)` method that calls a block when execution is finished. This block accepts two parameters: the `[YieldData]` that were produced from the execution, and an `ExecutionError?` specifying whether there was an error during execution.
+
+`ExecutionEngine` maintains a mapping between `ActionCardDescriptor`s and the type responsible for executing that Action card (a subclass of `ExecutableActionCard`). Here is an example:
 
 ```
+let deck = ...
 let engine = ExecutionEngine(with: deck)
 engine.setExecutableActionType(CKAdd.self, for: CKCalc.Action.Math.Add)
 engine.setExecutableActionType(CKSubtract.self, for: CKCalc.Action.Math.Subtract)
@@ -32,9 +35,9 @@ engine.setExecutableActionType(CKMultiply.self, for: CKCalc.Action.Math.Multiply
 engine.setExecutableActionType(CKDivide.self, for: CKCalc.Action.Math.Divide)
 ```
 
-In this example, we assume `ActionCardDescriptors` exist for a hypothetical calculator's addition, subtraction, multiplication, and division functions. These methods will be implemented by the classes `CKAdd`, `CKSubtract`, `CKMultiply`, and `CKDivide` (these classes all subclass `ExecutableActionCard`). The above code tells the `ExecutionEngine`, as well as its underlying `DeckExecutor`, that these classes should be instantiated when their corresponding Action cards are encountered in the Deck.
+In this example, we assume `ActionCardDescriptors` exist for a hypothetical calculator's addition, subtraction, multiplication, and division functions. These methods will be implemented by the classes `CKAdd`, `CKSubtract`, `CKMultiply`, and `CKDivide`, all of which are subclasses of `ExecutableActionCard`. The above code tells the `ExecutionEngine`, as well as its underlying `DeckExecutor`, that these classes should be instantiated when their corresponding Action cards are encountered in the Deck.
 
-`ExecutionEngine` and `DeckExecutor` also maintain a map between `TokenCard`s and the `ExecutableTokenCard` that implements the tokens. Continuing our example, we define a calculator token `CKCalc.Token.Calculator` and its implementation `CKCalculator : ExecutableTokenCard`, and pass these to the execution engine.
+`ExecutionEngine` also maintains a map between `TokenCard`s and the `ExecutableTokenCard` that implements the tokens. Continuing our example, we define a calculator token `CKCalc.Token.Calculator` and its implementation `CKCalculator : ExecutableTokenCard`, and pass these to the execution engine.
 
 ```
 let calcToken = CKCalc.Token.Calculator.makeCard()
@@ -44,7 +47,7 @@ engine.setTokenInstance(calculator, for: calcToken)
 
 ### Execution Strategy
 
-`DeckExecutor` is a subclass of `NSOperation`, enabling it to function on a background thread managed by an `NSOperationQueue`. `ExecutionEngine` manages an operation queue for `DeckExecutor`, but if finer-grained control over execution is required, `DeckExecutor` may also be used in your own operation queue outside of `ExecutionEngine`.
+`DeckExecutor` performs the heavy lifting of executing a Deck. It is a subclass of `NSOperation`, enabling it to function on a background thread managed by an `NSOperationQueue`. `ExecutionEngine` manages an operation queue for `DeckExecutor`.
 
 `DeckExecutor` begins execution with the first Hand specified in the Deck. It creates an `ExecutableActionCard` instance for each `ActionCard` in the Hand, and provides any required yields produced from prior Hands and required Token implementation instances (`ExecutableTokenCard`). It then creates its own `NSOperationQueue`to execute all cards in a Hand simultaneously. In order to determine when a single card has finished executing, it creates a dependent block operation for each `ExecutableActionCard` to check the Hand's satisfaction state. The `NSOperationQueue` looks like the following, for four `ExecutableActionCard`s:
 
@@ -81,6 +84,11 @@ guard let calc = self.tokens[calcSlot] as? CKCalculator else {
 	return
 }
 ```
+
+### Execution Status
+
+In order to monitor the status of execution, `ExecutionEngine` contains a `delegate` property of type `ExecutionEngineDelegate` that provides an interface for receiving notifications when activities occur around validation, execution, and errors.
+
 
 ## Building
 
