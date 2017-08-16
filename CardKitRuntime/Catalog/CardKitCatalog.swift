@@ -37,6 +37,6 @@ public struct CardKitCatalog: DescriptorCatalog {
     
     public var executableActionTypes: [ActionCardDescriptor : ExecutableAction.Type] = [
         CardKit.Action.Trigger.Time.Timer: CKTimer.self,
-        CardKit.Action.Trigger.Time.WaitUntilTime: CKWaitUntilTime.self,
+        CardKit.Action.Trigger.Time.WaitUntilTime: CKWaitUntilTime.self
     ]
 }
