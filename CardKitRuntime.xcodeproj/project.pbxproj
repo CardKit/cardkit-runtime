@@ -393,6 +393,7 @@
 				CCE7D4661D50D191008FC492 /* Headers */,
 				CCE7D4671D50D191008FC492 /* Resources */,
 				CC83BC661D510A2A0045F3A7 /* Swiftlint */,
+				CC0F5EE21F44804C00B18D10 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -430,6 +431,7 @@
 				CCE7D4851D50D1AA008FC492 /* Headers */,
 				CCE7D4861D50D1AA008FC492 /* Resources */,
 				CC83BC671D510A320045F3A7 /* Swiftlint */,
+				CC0F5EE31F44805400B18D10 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -467,6 +469,7 @@
 				CCE7D4A11D50D1BB008FC492 /* Headers */,
 				CCE7D4A21D50D1BB008FC492 /* Resources */,
 				CC83BC681D510A380045F3A7 /* Swiftlint */,
+				CC0F5EE41F44805C00B18D10 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -600,6 +603,51 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		CC0F5EE21F44804C00B18D10 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/CardKit.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		CC0F5EE31F44805400B18D10 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/CardKit.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		CC0F5EE41F44805C00B18D10 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/CardKit.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 		CC83BC661D510A2A0045F3A7 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
