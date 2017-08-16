@@ -19,7 +19,7 @@ public protocol DescriptorCatalog {
     /// to be implemented by new `DescriptorCatalog` implementors.
     var descriptorsByPath: [String: [CardDescriptor]] { get }
     
-    /// Map between an `ActionCardDescriptor` and it's `ExecutableAction` type.
+    /// Map between an `ActionCardDescriptor` and its `ExecutableAction` type.
     var executableActionTypes: [ActionCardDescriptor : ExecutableAction.Type] { get }
 }
 
