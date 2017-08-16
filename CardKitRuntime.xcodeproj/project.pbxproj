@@ -13,6 +13,12 @@
 		6861C2E61E6F7A9D00503691 /* CKWaitUntilTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */; };
 		6861C2E71E6F7A9D00503691 /* CKWaitUntilTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */; };
 		6861C2E81E6F7A9D00503691 /* CKWaitUntilTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */; };
+		CC0F5EF61F44CB6D00B18D10 /* CardKitCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F5EF51F44CB6D00B18D10 /* CardKitCatalog.swift */; };
+		CC0F5EF71F44CB6D00B18D10 /* CardKitCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F5EF51F44CB6D00B18D10 /* CardKitCatalog.swift */; };
+		CC0F5EF81F44CB6D00B18D10 /* CardKitCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F5EF51F44CB6D00B18D10 /* CardKitCatalog.swift */; };
+		CC0F5EF91F44CB9500B18D10 /* DescriptorCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F5EF41F44CB5300B18D10 /* DescriptorCatalog.swift */; };
+		CC0F5EFA1F44CB9500B18D10 /* DescriptorCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F5EF41F44CB5300B18D10 /* DescriptorCatalog.swift */; };
+		CC0F5EFB1F44CB9600B18D10 /* DescriptorCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F5EF41F44CB5300B18D10 /* DescriptorCatalog.swift */; };
 		CC2922DE1E709388007858F5 /* EmergencyStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2922DD1E709388007858F5 /* EmergencyStop.swift */; };
 		CC2922DF1E709388007858F5 /* EmergencyStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2922DD1E709388007858F5 /* EmergencyStop.swift */; };
 		CC2922E01E709388007858F5 /* EmergencyStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2922DD1E709388007858F5 /* EmergencyStop.swift */; };
@@ -117,6 +123,8 @@
 /* Begin PBXFileReference section */
 		44A6C8341E801E9500F3EC8B /* CKTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKTimerTests.swift; sourceTree = "<group>"; };
 		6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKWaitUntilTimeTests.swift; sourceTree = "<group>"; };
+		CC0F5EF41F44CB5300B18D10 /* DescriptorCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptorCatalog.swift; sourceTree = "<group>"; };
+		CC0F5EF51F44CB6D00B18D10 /* CardKitCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardKitCatalog.swift; sourceTree = "<group>"; };
 		CC2922DD1E709388007858F5 /* EmergencyStop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmergencyStop.swift; sourceTree = "<group>"; };
 		CC9E767F1D58B82C00B7C738 /* DeckValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckValidator.swift; sourceTree = "<group>"; };
 		CC9E76861D58B83400B7C738 /* HandValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandValidator.swift; sourceTree = "<group>"; };
@@ -217,6 +225,15 @@
 			name = Cards;
 			sourceTree = "<group>";
 		};
+		CC0F5EF31F44CB4500B18D10 /* Catalog */ = {
+			isa = PBXGroup;
+			children = (
+				CC0F5EF51F44CB6D00B18D10 /* CardKitCatalog.swift */,
+				CC0F5EF41F44CB5300B18D10 /* DescriptorCatalog.swift */,
+			);
+			path = Catalog;
+			sourceTree = "<group>";
+		};
 		CC9E767A1D58B4B200B7C738 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,6 +322,7 @@
 			children = (
 				CCE7D46C1D50D191008FC492 /* CardKitRuntime.h */,
 				CCE7D46E1D50D191008FC492 /* Info.plist */,
+				CC0F5EF31F44CB4500B18D10 /* Catalog */,
 				CCE7D4BF1D50D264008FC492 /* Cards */,
 				CC9E767E1D58B51400B7C738 /* Validation */,
 				CCE7D4C01D50D2EC008FC492 /* Execution */,
@@ -698,6 +716,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCBB79001D6F51B2003B6458 /* ExecutionError.swift in Sources */,
+				CC0F5EF61F44CB6D00B18D10 /* CardKitCatalog.swift in Sources */,
 				CCBB79241D6F735F003B6458 /* ExecutableToken.swift in Sources */,
 				CCE7D4EB1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */,
 				CC9E76951D58C32E00B7C738 /* ValidationError.swift in Sources */,
@@ -710,6 +729,7 @@
 				CCBB79181D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
 				CCE72A321D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
 				CCBB79121D6F735F003B6458 /* CarriesActionCardState.swift in Sources */,
+				CC0F5EF91F44CB9500B18D10 /* DescriptorCatalog.swift in Sources */,
 				CCE7D4E51D50D309008FC492 /* CKTimer.swift in Sources */,
 				CC9E769C1D58C38800B7C738 /* Validator.swift in Sources */,
 				CC9E76871D58B83400B7C738 /* HandValidator.swift in Sources */,
@@ -735,6 +755,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCBB79021D6F51B2003B6458 /* ExecutionError.swift in Sources */,
+				CC0F5EF71F44CB6D00B18D10 /* CardKitCatalog.swift in Sources */,
 				CCBB79261D6F735F003B6458 /* ExecutableToken.swift in Sources */,
 				CCE7D4ED1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */,
 				CC9E76971D58C32E00B7C738 /* ValidationError.swift in Sources */,
@@ -747,6 +768,7 @@
 				CCBB791A1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
 				CCE72A341D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
 				CCBB79141D6F735F003B6458 /* CarriesActionCardState.swift in Sources */,
+				CC0F5EFA1F44CB9500B18D10 /* DescriptorCatalog.swift in Sources */,
 				CCE7D4E71D50D309008FC492 /* CKTimer.swift in Sources */,
 				CC9E769E1D58C38800B7C738 /* Validator.swift in Sources */,
 				CC9E76891D58B83400B7C738 /* HandValidator.swift in Sources */,
@@ -772,6 +794,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCBB79041D6F51B2003B6458 /* ExecutionError.swift in Sources */,
+				CC0F5EF81F44CB6D00B18D10 /* CardKitCatalog.swift in Sources */,
 				CCBB79281D6F735F003B6458 /* ExecutableToken.swift in Sources */,
 				CCE7D4EF1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */,
 				CC9E76991D58C32E00B7C738 /* ValidationError.swift in Sources */,
@@ -784,6 +807,7 @@
 				CCBB791C1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
 				CCE72A361D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
 				CCBB79161D6F735F003B6458 /* CarriesActionCardState.swift in Sources */,
+				CC0F5EFB1F44CB9600B18D10 /* DescriptorCatalog.swift in Sources */,
 				CCE7D4E91D50D309008FC492 /* CKTimer.swift in Sources */,
 				CC9E76A01D58C38800B7C738 /* Validator.swift in Sources */,
 				CC9E768B1D58B83400B7C738 /* HandValidator.swift in Sources */,

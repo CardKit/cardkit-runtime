@@ -63,19 +63,34 @@ public class ExecutionEngine {
     public init(with deck: Deck) {
         self.deck = deck
         
-        // register these implementation classes because they come bundled with the Runtime
-        self.setExecutableActionType(CKTimer.self, for: CardKit.Action.Trigger.Time.Timer)
-        self.setExecutableActionType(CKWaitUntilTime.self, for: CardKit.Action.Trigger.Time.WaitUntilTime)
+        // register the CardKit descriptors with the engine
+        let cardKit = CardKitCatalog()
+        self.registerDescriptorCatalog(cardKit)
     }
     
     // MARK: Instance Methods
     
+    /// Set the `ExecutableAction` type for a given `ActionCardDescriptor`. The preferred method for registering these
+    /// types is via `registerDescriptorCatalog(_:)`, but this method exists to override a single specified type
+    /// (e.g. for testing alternate implementations of an `ExecutableAction`).
     public func setExecutableActionType(_ type: ExecutableAction.Type, for descriptor: ActionCardDescriptor) {
         self.executableActionTypes[descriptor] = type
     }
     
-    public func setExecutableActionTypes(_ executionTypes: [ActionCardDescriptor : ExecutableAction.Type]) {
-        self.executableActionTypes = executionTypes
+    /// Register the card descriptor catalog with the `ExecutionEngine` so it knows which `ExecutableAction` types
+    /// to instantiate for which `ActionCardDescriptors`.
+    public func registerDescriptorCatalog(_ catalog: DescriptorCatalog) {
+        for descriptor in catalog.descriptors {
+            // only register ActionCardDescriptors
+            if let actionDescriptor = descriptor as? ActionCardDescriptor {
+                // make sure there is a corresponding implementation type -- if we don't have it, we will
+                // ignore it here, but validation will fail
+                guard let executableType = catalog.executableActionTypes[actionDescriptor] else { continue }
+                
+                // save the type
+                self.executableActionTypes[actionDescriptor] = executableType
+            }
+        }
     }
     
     public func setTokenInstance(_ instance: ExecutableToken, for tokenCard: TokenCard) {

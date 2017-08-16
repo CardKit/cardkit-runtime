@@ -96,10 +96,6 @@ internal class DeckExecutor: Operation {
     
     // MARK: Instance Methods
     
-    internal func setExecutableActionType(_ type: ExecutableAction.Type, for descriptor: ActionCardDescriptor) {
-        self.executableActionTypes[descriptor] = type
-    }
-    
     internal func setExecutableActionTypes(_ executionTypes: [ActionCardDescriptor : ExecutableAction.Type]) {
         self.executableActionTypes = executionTypes
     }
