@@ -262,6 +262,7 @@ class ExecutionEngineTests: XCTestCase {
     }
     
     func testHaltOfDeckExecutor() {
+        // swiftlint:disable:next nesting
         class EngineDelegate: ExecutionEngineDelegate {
             func deckExecutor(_ executor: DeckExecutor, willValidate deck: Deck) {
                 print("*** deckExecutor \(executor) willValidate \(deck)")
