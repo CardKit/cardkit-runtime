@@ -1,6 +1,6 @@
 # CardKit Runtime
 
-This is the runtime engine for [CardKit](https://github.ibm.com/CMER/card-kit). It is a separate project to enable a decoupling between the *creation* of CardKit programs and the *execution* of such programs.
+This is the runtime engine for [CardKit](https://github.com/CardKit/card-kit). It is a separate project to enable a decoupling between the *creation* of CardKit programs and the *execution* of such programs.
 
 CardKit Runtime is written in Swift 4 and supports macOS, iOS, and tvOS.
 
