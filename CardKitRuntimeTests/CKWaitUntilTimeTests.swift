@@ -33,7 +33,7 @@ class CKWaitUntilTimeTests: XCTestCase {
         let secondsToWait: TimeInterval = seconds
         let cardStartTimePlusSeconds = cardStartTime.addingTimeInterval(secondsToWait)
         
-        let inputBindings: [String : Codable] = ["ClockTime": cardStartTimePlusSeconds]
+        let inputBindings: [String: Codable] = ["ClockTime": cardStartTimePlusSeconds]
         waitUntilTimeExecutable.setup(inputBindings: inputBindings, tokenBindings: [:])
         
         // execute

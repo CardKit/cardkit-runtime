@@ -148,7 +148,7 @@ class HandValidator: Validator {
     func checkTokenBindings(_ deck: Deck, _ hand: Hand) -> [ValidationError] {
         var errors: [ValidationError] = []
         
-        var tokenBindings: [CardIdentifier : [CardIdentifier]] = [:]
+        var tokenBindings: [CardIdentifier: [CardIdentifier]] = [:]
         
         for card in hand.actionCards {
             for tokenCardIdentifier in card.boundTokenCardIdentifiers {
@@ -231,7 +231,7 @@ class HandValidator: Validator {
     func checkCardTreeContainsMultipleBranches(_ deck: Deck, _ hand: Hand) -> [ValidationError] {
         var errors: [ValidationError] = []
         
-        var cardTreeBranches: [CardTreeIdentifier : [CardIdentifier]] = [:]
+        var cardTreeBranches: [CardTreeIdentifier: [CardIdentifier]] = [:]
         
         for card in hand.branchCards {
             guard let source = card.cardTreeIdentifier else { continue }

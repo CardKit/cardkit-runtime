@@ -279,13 +279,13 @@ class ExecutionEngineTests: XCTestCase {
             func deckExecutor(_ executor: DeckExecutor, willExecute card: Card) {
                 print("*** deckExecutor \(executor) willExecute \(card)")
             }
-            func deckExecutor(_ executor: DeckExecutor, didExecute deck: Deck, producing yields: [Yield : YieldData]?) {
+            func deckExecutor(_ executor: DeckExecutor, didExecute deck: Deck, producing yields: [Yield: YieldData]?) {
                 print("*** deckExecutor \(executor) didExecute \(deck) producing \(yields)")
             }
-            func deckExecutor(_ executor: DeckExecutor, didExecute hand: Hand, producing yields: [Yield : YieldData]?) {
+            func deckExecutor(_ executor: DeckExecutor, didExecute hand: Hand, producing yields: [Yield: YieldData]?) {
                 print("*** deckExecutor \(executor) didExecute \(hand) producing \(yields)")
             }
-            func deckExecutor(_ executor: DeckExecutor, didExecute card: Card, producing yields: [Yield : YieldData]?) {
+            func deckExecutor(_ executor: DeckExecutor, didExecute card: Card, producing yields: [Yield: YieldData]?) {
                 print("*** deckExecutor \(executor) didExecute \(card) producing \(yields)")
             }
             func deckExecutor(_ executor: DeckExecutor, hadErrors errors: [Error]) {

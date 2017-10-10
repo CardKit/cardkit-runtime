@@ -48,10 +48,10 @@ public class ExecutionEngine {
     public fileprivate (set) var deck: Deck
     
     /// Map between ActionCardDescriptor and the type that implements it
-    fileprivate var executableActionTypes: [ActionCardDescriptor : ExecutableAction.Type] = [:]
+    fileprivate var executableActionTypes: [ActionCardDescriptor: ExecutableAction.Type] = [:]
     
     /// Map between TokenCard and the instance that implements it
-    fileprivate var tokenInstances: [TokenCard : ExecutableToken] = [:]
+    fileprivate var tokenInstances: [TokenCard: ExecutableToken] = [:]
     
     /// Queue used for running the DeckExecutor
     fileprivate let operationQueue: OperationQueue = OperationQueue()
@@ -97,7 +97,7 @@ public class ExecutionEngine {
         self.tokenInstances[tokenCard] = instance
     }
     
-    public func setTokenInstances(_ tokenInstances: [TokenCard : ExecutableToken]) {
+    public func setTokenInstances(_ tokenInstances: [TokenCard: ExecutableToken]) {
         self.tokenInstances = tokenInstances
     }
     
@@ -165,13 +165,13 @@ extension ExecutionEngine: DeckExecutorDelegate {
     func deckExecutor(_ executor: DeckExecutor, willExecute deck: Deck) {
         self.delegate?.executionEngine(self, willExecute: deck)
     }
-    func deckExecutor(_ executor: DeckExecutor, didExecute card: Card, producing yields: [Yield : YieldData]?) {
+    func deckExecutor(_ executor: DeckExecutor, didExecute card: Card, producing yields: [Yield: YieldData]?) {
         self.delegate?.executionEngine(self, didExecute: card, producing: yields)
     }
-    func deckExecutor(_ executor: DeckExecutor, didExecute hand: Hand, producing yields: [Yield : YieldData]?) {
+    func deckExecutor(_ executor: DeckExecutor, didExecute hand: Hand, producing yields: [Yield: YieldData]?) {
         self.delegate?.executionEngine(self, didExecute: hand, producing: yields)
     }
-    func deckExecutor(_ executor: DeckExecutor, didExecute deck: Deck, producing yields: [Yield : YieldData]?) {
+    func deckExecutor(_ executor: DeckExecutor, didExecute deck: Deck, producing yields: [Yield: YieldData]?) {
         self.delegate?.executionEngine(self, didExecute: deck, producing: yields)
     }
     func deckExecutor(_ executor: DeckExecutor, hadErrors errors: [Error]) {

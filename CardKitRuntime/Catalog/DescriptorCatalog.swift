@@ -20,12 +20,12 @@ public protocol DescriptorCatalog {
     var descriptorsByPath: [String: [CardDescriptor]] { get }
     
     /// Map between an `ActionCardDescriptor` and its `ExecutableAction` type.
-    var executableActionTypes: [ActionCardDescriptor : ExecutableAction.Type] { get }
+    var executableActionTypes: [ActionCardDescriptor: ExecutableAction.Type] { get }
 }
 
 extension DescriptorCatalog {
-    public var descriptorsByPath: [String : [CardDescriptor]] {
-        var groups: [String : [CardDescriptor]] = [:]
+    public var descriptorsByPath: [String: [CardDescriptor]] {
+        var groups: [String: [CardDescriptor]] = [:]
         
         for descriptor in self.descriptors {
             if groups[descriptor.path.description] == nil {

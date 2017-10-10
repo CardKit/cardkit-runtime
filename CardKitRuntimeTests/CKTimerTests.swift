@@ -32,7 +32,7 @@ class CKTimerTests: XCTestCase {
         let cardStartTime = Date()
         let timerTimeInSeconds: TimeInterval = seconds
         
-        let inputBindings: [String : Codable] = ["Duration": timerTimeInSeconds]
+        let inputBindings: [String: Codable] = ["Duration": timerTimeInSeconds]
         setTimerExecutable.setup(inputBindings: inputBindings, tokenBindings: [:])
     
         // execute

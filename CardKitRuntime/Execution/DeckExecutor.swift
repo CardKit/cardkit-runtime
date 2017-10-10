@@ -35,13 +35,13 @@ internal class DeckExecutor: Operation {
     internal fileprivate (set) var deck: Deck
     
     /// Map between ActionCardDescriptor and the type that implements it
-    fileprivate var executableActionTypes: [ActionCardDescriptor : ExecutableAction.Type] = [:]
+    fileprivate var executableActionTypes: [ActionCardDescriptor: ExecutableAction.Type] = [:]
     
     /// Map between TokenCard and the instance that implements it
-    fileprivate var tokenInstances: [TokenCard : ExecutableToken] = [:]
+    fileprivate var tokenInstances: [TokenCard: ExecutableToken] = [:]
     
     /// Cache of yields produced by ActionCards after their execution
-    internal fileprivate (set) var yieldData: [Yield : YieldData] = [:]
+    internal fileprivate (set) var yieldData: [Yield: YieldData] = [:]
     
     /// Private operation queue for executing ActionCards in a Hand
     fileprivate let cardExecutionQueue: OperationQueue
@@ -96,7 +96,7 @@ internal class DeckExecutor: Operation {
     
     // MARK: Instance Methods
     
-    internal func setExecutableActionTypes(_ executionTypes: [ActionCardDescriptor : ExecutableAction.Type]) {
+    internal func setExecutableActionTypes(_ executionTypes: [ActionCardDescriptor: ExecutableAction.Type]) {
         self.executableActionTypes = executionTypes
     }
     
@@ -104,7 +104,7 @@ internal class DeckExecutor: Operation {
         self.tokenInstances[tokenCard] = instance
     }
     
-    internal func setTokenInstances(_ tokenInstances: [TokenCard : ExecutableToken]) {
+    internal func setTokenInstances(_ tokenInstances: [TokenCard: ExecutableToken]) {
         self.tokenInstances = tokenInstances
     }
     
@@ -436,11 +436,11 @@ internal class DeckExecutor: Operation {
         return nextHand
     }
     
-    fileprivate func signalTokensForEmergencyStop(errors: [Error]) -> [TokenCard : EmergencyStopResult] {
+    fileprivate func signalTokensForEmergencyStop(errors: [Error]) -> [TokenCard: EmergencyStopResult] {
         // trigger all tokens in parallel to perform the emergency stop
         // and then wait until all of them have completed it
         let group = DispatchGroup()
-        var results: [TokenCard : EmergencyStopResult] = [:]
+        var results: [TokenCard: EmergencyStopResult] = [:]
         for (_, token) in self.tokenInstances {
             group.enter()
             token.handleEmergencyStop(errors: errors) { result in
