@@ -9,7 +9,6 @@
 @testable import CardKit
 @testable import CardKitRuntime
 
-import Freddy
 import Foundation
 import XCTest
 
@@ -26,15 +25,15 @@ class CKWaitUntilTimeTests: XCTestCase {
     }
     
     func executeWaitUntilTime(addSeconds seconds: TimeInterval) {
-        //executableInstance
+        // create executable instance
         let waitUntilTimeExecutable = CKWaitUntilTime(with: CardKit.Action.Trigger.Time.WaitUntilTime.makeCard())
         
         // bind inputs and tokens
         let cardStartTime = Date()
         let secondsToWait: TimeInterval = seconds
         let cardStartTimePlusSeconds = cardStartTime.addingTimeInterval(secondsToWait)
-    
-        let inputBindings: [String : JSONEncodable] = ["ClockTime": cardStartTimePlusSeconds]
+        
+        let inputBindings: [String: Codable] = ["ClockTime": cardStartTimePlusSeconds]
         waitUntilTimeExecutable.setup(inputBindings: inputBindings, tokenBindings: [:])
         
         // execute

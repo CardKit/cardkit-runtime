@@ -30,7 +30,7 @@ extension ValidationSeverity: CustomStringConvertible {
 
 // MARK: ValidationError
 
-public enum ValidationError {
+public enum ValidationError: Error {
     case deckError(ValidationSeverity, DeckIdentifier, DeckValidationError)
     case handError(ValidationSeverity, DeckIdentifier, HandIdentifier, HandValidationError)
     case cardError(ValidationSeverity, DeckIdentifier, HandIdentifier, CardIdentifier, CardValidationError)

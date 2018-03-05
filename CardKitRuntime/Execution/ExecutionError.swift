@@ -6,9 +6,9 @@
 //  Copyright © 2016 IBM. All rights reserved.
 //
 
-import Foundation
+// swiftlint:disable identifier_name
 
-import Freddy
+import Foundation
 
 import CardKit
 
@@ -28,16 +28,16 @@ public enum ExecutionError: Error {
 // MARK: ActionExecutionError
 
 public enum ActionExecutionError: Error {
+    case expectedInputSlotNotFound(ExecutableAction, String)
     case unboundInputSlot(ExecutableAction, String)
-    case nilValueForInput(ExecutableAction, String)
-    case boundInputNotConvertibleToExpectedType(ExecutableAction, String, JSON, Any.Type)
+    case boundInputNotConvertibleToExpectedType(ExecutableAction, String, Data, Any.Type)
     case expectedTokenSlotNotFound(ExecutableAction, String)
     case unboundTokenSlot(ExecutableAction, TokenSlot)
     case yieldAtIndexNotFound(ExecutableAction, Int)
-    case attemptToStoreDataForInvalidYield(ExecutableAction, Yield, JSON)
-    case attemptToStoreDataOfUnexpectedType(ExecutableAction, Yield, String, String)
-    case attemptToRetrieveDataForInvalidYield(ExecutableAction, Yield)
+    case attemptToStoreInvalidYield(ExecutableAction, Yield)
+    case attemptToStoreYieldOfUnexpectedType(ExecutableAction, Yield, String, String)
+    case attemptToRetrieveInvalidYield(ExecutableAction, Yield)
     case nilValueForYield(ExecutableAction, Yield)
-    case boundYieldNotConvertibleToExpectedType(ExecutableAction, Yield, JSON, Any.Type)
+    case boundYieldNotConvertibleToExpectedType(ExecutableAction, Yield, Data, Any.Type)
     case emergencyStop(Error)
 }

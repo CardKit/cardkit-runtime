@@ -41,7 +41,7 @@ public enum DeckValidationError {
     case yieldProducerNotFoundInDeck(CardIdentifier, HandIdentifier, CardIdentifier)
 }
 
-//MARK DeckValidator
+// MARK: DeckValidator
 
 class DeckValidator: Validator {
     fileprivate let deck: Deck
@@ -120,7 +120,7 @@ class DeckValidator: Validator {
     func checkMultipleHandsWithSameIdentifier(_ deck: Deck) -> [ValidationError] {
         var errors: [ValidationError] = []
         
-        var identifierCounts: [HandIdentifier : Int] = [:]
+        var identifierCounts: [HandIdentifier: Int] = [:]
         
         for hand in deck.hands {
             let count = identifierCounts[hand.identifier] ?? 0
@@ -139,7 +139,7 @@ class DeckValidator: Validator {
     func checkCardUsedInMultipleHands(_ deck: Deck) -> [ValidationError] {
         var errors: [ValidationError] = []
         
-        var cardInHands: [CardIdentifier : [HandIdentifier]] = [:]
+        var cardInHands: [CardIdentifier: [HandIdentifier]] = [:]
         
         for hand in deck.hands {
             for card in hand.cards {

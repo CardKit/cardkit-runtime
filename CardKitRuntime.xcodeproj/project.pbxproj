@@ -13,6 +13,12 @@
 		6861C2E61E6F7A9D00503691 /* CKWaitUntilTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */; };
 		6861C2E71E6F7A9D00503691 /* CKWaitUntilTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */; };
 		6861C2E81E6F7A9D00503691 /* CKWaitUntilTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */; };
+		CC0F5EF61F44CB6D00B18D10 /* CardKitCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F5EF51F44CB6D00B18D10 /* CardKitCatalog.swift */; };
+		CC0F5EF71F44CB6D00B18D10 /* CardKitCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F5EF51F44CB6D00B18D10 /* CardKitCatalog.swift */; };
+		CC0F5EF81F44CB6D00B18D10 /* CardKitCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F5EF51F44CB6D00B18D10 /* CardKitCatalog.swift */; };
+		CC0F5EF91F44CB9500B18D10 /* DescriptorCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F5EF41F44CB5300B18D10 /* DescriptorCatalog.swift */; };
+		CC0F5EFA1F44CB9500B18D10 /* DescriptorCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F5EF41F44CB5300B18D10 /* DescriptorCatalog.swift */; };
+		CC0F5EFB1F44CB9600B18D10 /* DescriptorCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F5EF41F44CB5300B18D10 /* DescriptorCatalog.swift */; };
 		CC2922DE1E709388007858F5 /* EmergencyStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2922DD1E709388007858F5 /* EmergencyStop.swift */; };
 		CC2922DF1E709388007858F5 /* EmergencyStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2922DD1E709388007858F5 /* EmergencyStop.swift */; };
 		CC2922E01E709388007858F5 /* EmergencyStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2922DD1E709388007858F5 /* EmergencyStop.swift */; };
@@ -62,16 +68,10 @@
 		CCE729C61D63BD7F00A347D8 /* ValidationEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE729C21D63BD7F00A347D8 /* ValidationEngineTests.swift */; };
 		CCE729C81D63BD7F00A347D8 /* ValidationEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE729C21D63BD7F00A347D8 /* ValidationEngineTests.swift */; };
 		CCE72A0A1D64930D00A347D8 /* CardKitRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE7D4881D50D1AA008FC492 /* CardKitRuntime.framework */; };
-		CCE72A171D64BA8D00A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A151D64BA8D00A347D8 /* Freddy.framework */; };
 		CCE72A1C1D64BA9E00A347D8 /* CardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1A1D64BA9E00A347D8 /* CardKit.framework */; };
-		CCE72A1D1D64BA9E00A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1B1D64BA9E00A347D8 /* Freddy.framework */; };
 		CCE72A201D64BAA500A347D8 /* CardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1E1D64BAA500A347D8 /* CardKit.framework */; };
-		CCE72A211D64BAA500A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1F1D64BAA500A347D8 /* Freddy.framework */; };
 		CCE72A251D64BAC400A347D8 /* CardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1E1D64BAA500A347D8 /* CardKit.framework */; };
-		CCE72A261D64BAC400A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1F1D64BAA500A347D8 /* Freddy.framework */; };
-		CCE72A281D64BACA00A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A151D64BA8D00A347D8 /* Freddy.framework */; };
 		CCE72A291D64BAD000A347D8 /* CardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1A1D64BA9E00A347D8 /* CardKit.framework */; };
-		CCE72A2A1D64BAD000A347D8 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE72A1B1D64BA9E00A347D8 /* Freddy.framework */; };
 		CCE72A321D650A7200A347D8 /* ExecutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A311D650A7200A347D8 /* ExecutionEngine.swift */; };
 		CCE72A341D650A7200A347D8 /* ExecutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A311D650A7200A347D8 /* ExecutionEngine.swift */; };
 		CCE72A361D650A7200A347D8 /* ExecutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE72A311D650A7200A347D8 /* ExecutionEngine.swift */; };
@@ -123,6 +123,8 @@
 /* Begin PBXFileReference section */
 		44A6C8341E801E9500F3EC8B /* CKTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKTimerTests.swift; sourceTree = "<group>"; };
 		6861C2E51E6F7A9D00503691 /* CKWaitUntilTimeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKWaitUntilTimeTests.swift; sourceTree = "<group>"; };
+		CC0F5EF41F44CB5300B18D10 /* DescriptorCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptorCatalog.swift; sourceTree = "<group>"; };
+		CC0F5EF51F44CB6D00B18D10 /* CardKitCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardKitCatalog.swift; sourceTree = "<group>"; };
 		CC2922DD1E709388007858F5 /* EmergencyStop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmergencyStop.swift; sourceTree = "<group>"; };
 		CC9E767F1D58B82C00B7C738 /* DeckValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckValidator.swift; sourceTree = "<group>"; };
 		CC9E76861D58B83400B7C738 /* HandValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandValidator.swift; sourceTree = "<group>"; };
@@ -138,13 +140,11 @@
 		CCBB79111D6F735F003B6458 /* ExecutableToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutableToken.swift; sourceTree = "<group>"; };
 		CCBB792E1D746A5C003B6458 /* CKCalc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKCalc.swift; sourceTree = "<group>"; };
 		CCBB79361D746B82003B6458 /* ExecutionEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionEngineTests.swift; sourceTree = "<group>"; };
+		CCD067AF1F3A1CC50075CA41 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CCE729C21D63BD7F00A347D8 /* ValidationEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationEngineTests.swift; sourceTree = "<group>"; };
 		CCE72A141D64BA8D00A347D8 /* CardKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CardKit.framework; path = Carthage/Build/iOS/CardKit.framework; sourceTree = "<group>"; };
-		CCE72A151D64BA8D00A347D8 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/iOS/Freddy.framework; sourceTree = "<group>"; };
 		CCE72A1A1D64BA9E00A347D8 /* CardKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CardKit.framework; path = Carthage/Build/Mac/CardKit.framework; sourceTree = "<group>"; };
-		CCE72A1B1D64BA9E00A347D8 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/Mac/Freddy.framework; sourceTree = "<group>"; };
 		CCE72A1E1D64BAA500A347D8 /* CardKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CardKit.framework; path = Carthage/Build/tvOS/CardKit.framework; sourceTree = "<group>"; };
-		CCE72A1F1D64BAA500A347D8 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/tvOS/Freddy.framework; sourceTree = "<group>"; };
 		CCE72A311D650A7200A347D8 /* ExecutionEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionEngine.swift; sourceTree = "<group>"; };
 		CCE72A401D650F1800A347D8 /* CardValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardValidatorTests.swift; sourceTree = "<group>"; };
 		CCE7D4691D50D191008FC492 /* CardKitRuntime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CardKitRuntime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,7 +167,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCE72A6A1D6CAF7E00A347D8 /* CardKit.framework in Frameworks */,
-				CCE72A171D64BA8D00A347D8 /* Freddy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,7 +176,6 @@
 			files = (
 				CCE7D4741D50D191008FC492 /* CardKitRuntime.framework in Frameworks */,
 				CCE72A6B1D6CAF9700A347D8 /* CardKit.framework in Frameworks */,
-				CCE72A281D64BACA00A347D8 /* Freddy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,7 +184,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCE72A1C1D64BA9E00A347D8 /* CardKit.framework in Frameworks */,
-				CCE72A1D1D64BA9E00A347D8 /* Freddy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,7 +192,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCE72A0A1D64930D00A347D8 /* CardKitRuntime.framework in Frameworks */,
-				CCE72A2A1D64BAD000A347D8 /* Freddy.framework in Frameworks */,
 				CCE72A291D64BAD000A347D8 /* CardKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -205,7 +201,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCE72A201D64BAA500A347D8 /* CardKit.framework in Frameworks */,
-				CCE72A211D64BAA500A347D8 /* Freddy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,7 +209,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCE7D4AE1D50D1BB008FC492 /* CardKitRuntime.framework in Frameworks */,
-				CCE72A261D64BAC400A347D8 /* Freddy.framework in Frameworks */,
 				CCE72A251D64BAC400A347D8 /* CardKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,6 +223,15 @@
 				44A6C8341E801E9500F3EC8B /* CKTimerTests.swift */,
 			);
 			name = Cards;
+			sourceTree = "<group>";
+		};
+		CC0F5EF31F44CB4500B18D10 /* Catalog */ = {
+			isa = PBXGroup;
+			children = (
+				CC0F5EF51F44CB6D00B18D10 /* CardKitCatalog.swift */,
+				CC0F5EF41F44CB5300B18D10 /* DescriptorCatalog.swift */,
+			);
+			path = Catalog;
 			sourceTree = "<group>";
 		};
 		CC9E767A1D58B4B200B7C738 /* Frameworks */ = {
@@ -270,7 +273,6 @@
 			isa = PBXGroup;
 			children = (
 				CCE72A141D64BA8D00A347D8 /* CardKit.framework */,
-				CCE72A151D64BA8D00A347D8 /* Freddy.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -279,7 +281,6 @@
 			isa = PBXGroup;
 			children = (
 				CCE72A1A1D64BA9E00A347D8 /* CardKit.framework */,
-				CCE72A1B1D64BA9E00A347D8 /* Freddy.framework */,
 			);
 			name = macOS;
 			sourceTree = "<group>";
@@ -288,7 +289,6 @@
 			isa = PBXGroup;
 			children = (
 				CCE72A1E1D64BAA500A347D8 /* CardKit.framework */,
-				CCE72A1F1D64BAA500A347D8 /* Freddy.framework */,
 			);
 			name = tvOS;
 			sourceTree = "<group>";
@@ -296,6 +296,7 @@
 		CCE7D45F1D50D191008FC492 = {
 			isa = PBXGroup;
 			children = (
+				CCD067AF1F3A1CC50075CA41 /* README.md */,
 				CCE7D46B1D50D191008FC492 /* CardKitRuntime */,
 				CCE7D4771D50D191008FC492 /* CardKitRuntimeTests */,
 				CC9E767A1D58B4B200B7C738 /* Frameworks */,
@@ -321,6 +322,7 @@
 			children = (
 				CCE7D46C1D50D191008FC492 /* CardKitRuntime.h */,
 				CCE7D46E1D50D191008FC492 /* Info.plist */,
+				CC0F5EF31F44CB4500B18D10 /* Catalog */,
 				CCE7D4BF1D50D264008FC492 /* Cards */,
 				CC9E767E1D58B51400B7C738 /* Validation */,
 				CCE7D4C01D50D2EC008FC492 /* Execution */,
@@ -408,9 +410,8 @@
 				CCE7D4651D50D191008FC492 /* Frameworks */,
 				CCE7D4661D50D191008FC492 /* Headers */,
 				CCE7D4671D50D191008FC492 /* Resources */,
-				CC83BC661D510A2A0045F3A7 /* Swift Lint */,
-				CCE72A111D64A49B00A347D8 /* Carthage Build */,
-				CCE72A061D6490C200A347D8 /* ShellScript */,
+				CC83BC661D510A2A0045F3A7 /* Swiftlint */,
+				CC0F5EE21F44804C00B18D10 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -428,7 +429,6 @@
 				CCE7D46F1D50D191008FC492 /* Sources */,
 				CCE7D4701D50D191008FC492 /* Frameworks */,
 				CCE7D4711D50D191008FC492 /* Resources */,
-				CCE72A2E1D64EE0100A347D8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -448,9 +448,8 @@
 				CCE7D4841D50D1AA008FC492 /* Frameworks */,
 				CCE7D4851D50D1AA008FC492 /* Headers */,
 				CCE7D4861D50D1AA008FC492 /* Resources */,
-				CC83BC671D510A320045F3A7 /* ShellScript */,
-				CCE72A121D64A4AB00A347D8 /* ShellScript */,
-				CCE72A041D64905200A347D8 /* ShellScript */,
+				CC83BC671D510A320045F3A7 /* Swiftlint */,
+				CC0F5EE31F44805400B18D10 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -468,7 +467,6 @@
 				CCE7D48D1D50D1AA008FC492 /* Sources */,
 				CCE7D48E1D50D1AA008FC492 /* Frameworks */,
 				CCE7D48F1D50D1AA008FC492 /* Resources */,
-				CCE72A2F1D64EE1B00A347D8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -488,9 +486,8 @@
 				CCE7D4A01D50D1BB008FC492 /* Frameworks */,
 				CCE7D4A11D50D1BB008FC492 /* Headers */,
 				CCE7D4A21D50D1BB008FC492 /* Resources */,
-				CC83BC681D510A380045F3A7 /* ShellScript */,
-				CCE72A131D64A4B300A347D8 /* ShellScript */,
-				CCE72A071D6490DA00A347D8 /* ShellScript */,
+				CC83BC681D510A380045F3A7 /* Swiftlint */,
+				CC0F5EE41F44805C00B18D10 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -508,7 +505,6 @@
 				CCE7D4A91D50D1BB008FC492 /* Sources */,
 				CCE7D4AA1D50D1BB008FC492 /* Frameworks */,
 				CCE7D4AB1D50D1BB008FC492 /* Resources */,
-				CCE72A301D64EE3800A347D8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -527,7 +523,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = IBM;
 				TargetAttributes = {
 					CCE7D4681D50D191008FC492 = {
@@ -625,175 +621,92 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		CC83BC661D510A2A0045F3A7 /* Swift Lint */ = {
+		CC0F5EE21F44804C00B18D10 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/CardKit.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		CC0F5EE31F44805400B18D10 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/CardKit.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		CC0F5EE41F44805C00B18D10 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/CardKit.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		CC83BC661D510A2A0045F3A7 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = Swiftlint;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"/usr/local/bin:$PATH\"\nif which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		CC83BC671D510A320045F3A7 /* ShellScript */ = {
+		CC83BC671D510A320045F3A7 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = Swiftlint;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		CC83BC681D510A380045F3A7 /* ShellScript */ = {
+		CC83BC681D510A380045F3A7 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = Swiftlint;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
-		};
-		CCE72A041D64905200A347D8 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/Mac/Freddy.framework",
-				"$(SRCROOT)/Carthage/Build/Mac/CardKit.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		CCE72A061D6490C200A347D8 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Freddy.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/CardKit.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		CCE72A071D6490DA00A347D8 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/tvOS/Freddy.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/CardKit.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		CCE72A111D64A49B00A347D8 /* Carthage Build */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Carthage Build";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#/usr/local/bin/carthage build --platform \"$PLATFORM_NAME\" --project-directory \"$SRCROOT\"";
-		};
-		CCE72A121D64A4AB00A347D8 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#/usr/local/bin/carthage build --platform \"$PLATFORM_NAME\" --project-directory \"$SRCROOT\"";
-		};
-		CCE72A131D64A4B300A347D8 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#/usr/local/bin/carthage build --platform \"$PLATFORM_NAME\" --project-directory \"$SRCROOT\"";
-		};
-		CCE72A2E1D64EE0100A347D8 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Freddy.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/CardKit.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		CCE72A2F1D64EE1B00A347D8 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/Mac/Freddy.framework",
-				"$(SRCROOT)/Carthage/Build/Mac/CardKit.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		CCE72A301D64EE3800A347D8 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/tvOS/Freddy.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/CardKit.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -803,6 +716,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCBB79001D6F51B2003B6458 /* ExecutionError.swift in Sources */,
+				CC0F5EF61F44CB6D00B18D10 /* CardKitCatalog.swift in Sources */,
 				CCBB79241D6F735F003B6458 /* ExecutableToken.swift in Sources */,
 				CCE7D4EB1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */,
 				CC9E76951D58C32E00B7C738 /* ValidationError.swift in Sources */,
@@ -815,6 +729,7 @@
 				CCBB79181D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
 				CCE72A321D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
 				CCBB79121D6F735F003B6458 /* CarriesActionCardState.swift in Sources */,
+				CC0F5EF91F44CB9500B18D10 /* DescriptorCatalog.swift in Sources */,
 				CCE7D4E51D50D309008FC492 /* CKTimer.swift in Sources */,
 				CC9E769C1D58C38800B7C738 /* Validator.swift in Sources */,
 				CC9E76871D58B83400B7C738 /* HandValidator.swift in Sources */,
@@ -840,6 +755,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCBB79021D6F51B2003B6458 /* ExecutionError.swift in Sources */,
+				CC0F5EF71F44CB6D00B18D10 /* CardKitCatalog.swift in Sources */,
 				CCBB79261D6F735F003B6458 /* ExecutableToken.swift in Sources */,
 				CCE7D4ED1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */,
 				CC9E76971D58C32E00B7C738 /* ValidationError.swift in Sources */,
@@ -852,6 +768,7 @@
 				CCBB791A1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
 				CCE72A341D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
 				CCBB79141D6F735F003B6458 /* CarriesActionCardState.swift in Sources */,
+				CC0F5EFA1F44CB9500B18D10 /* DescriptorCatalog.swift in Sources */,
 				CCE7D4E71D50D309008FC492 /* CKTimer.swift in Sources */,
 				CC9E769E1D58C38800B7C738 /* Validator.swift in Sources */,
 				CC9E76891D58B83400B7C738 /* HandValidator.swift in Sources */,
@@ -877,6 +794,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCBB79041D6F51B2003B6458 /* ExecutionError.swift in Sources */,
+				CC0F5EF81F44CB6D00B18D10 /* CardKitCatalog.swift in Sources */,
 				CCBB79281D6F735F003B6458 /* ExecutableToken.swift in Sources */,
 				CCE7D4EF1D50D309008FC492 /* CKWaitUntilTime.swift in Sources */,
 				CC9E76991D58C32E00B7C738 /* ValidationError.swift in Sources */,
@@ -889,6 +807,7 @@
 				CCBB791C1D6F735F003B6458 /* CarriesTokenCardState.swift in Sources */,
 				CCE72A361D650A7200A347D8 /* ExecutionEngine.swift in Sources */,
 				CCBB79161D6F735F003B6458 /* CarriesActionCardState.swift in Sources */,
+				CC0F5EFB1F44CB9600B18D10 /* DescriptorCatalog.swift in Sources */,
 				CCE7D4E91D50D309008FC492 /* CKTimer.swift in Sources */,
 				CC9E76A01D58C38800B7C738 /* Validator.swift in Sources */,
 				CC9E768B1D58B83400B7C738 /* HandValidator.swift in Sources */,
@@ -939,14 +858,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -990,14 +915,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1045,7 +976,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.research.CardKitRuntime;
 				PRODUCT_NAME = CardKitRuntime;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1068,7 +999,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.research.CardKitRuntime;
 				PRODUCT_NAME = CardKitRuntime;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1084,7 +1015,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.research.CardKitRuntimeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1100,7 +1031,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.research.CardKitRuntimeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1127,7 +1058,7 @@
 				PRODUCT_NAME = CardKitRuntime;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1154,7 +1085,7 @@
 				PRODUCT_NAME = CardKitRuntime;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1173,7 +1104,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.research.CardKitRuntimeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1192,7 +1123,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.research.CardKitRuntimeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1215,7 +1146,7 @@
 				PRODUCT_NAME = CardKitRuntime;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
@@ -1240,7 +1171,7 @@
 				PRODUCT_NAME = CardKitRuntime;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
@@ -1258,7 +1189,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.research.CardKitRuntimeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
 			name = Debug;
@@ -1275,7 +1206,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.research.CardKitRuntimeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
 			name = Release;

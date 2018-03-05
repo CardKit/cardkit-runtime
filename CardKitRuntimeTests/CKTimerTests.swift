@@ -9,7 +9,6 @@
 @testable import CardKit
 @testable import CardKitRuntime
 
-import Freddy
 import Foundation
 import XCTest
 
@@ -33,9 +32,9 @@ class CKTimerTests: XCTestCase {
         let cardStartTime = Date()
         let timerTimeInSeconds: TimeInterval = seconds
         
-        let inputBindings: [String : JSONEncodable] = ["Duration": timerTimeInSeconds]
+        let inputBindings: [String: Codable] = ["Duration": timerTimeInSeconds]
         setTimerExecutable.setup(inputBindings: inputBindings, tokenBindings: [:])
-        
+    
         // execute
         let myExpectation = expectation(description: "test completion")
         

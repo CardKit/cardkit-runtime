@@ -6,6 +6,8 @@
 //  Copyright © 2016 IBM. All rights reserved.
 //
 
+// swiftlint:disable identifier_name
+
 import Foundation
 
 import CardKit
@@ -99,6 +101,7 @@ class CardValidator: Validator {
         return actions
     }
     
+    // swiftlint:disable unused_optional_binding
     func checkCardDescriptorTypeDoesNotMatchInstanceType(_ deck: Deck, _ hand: Hand, _ card: Card) -> [ValidationError] {
         switch card.cardType {
         case .action:
@@ -126,6 +129,7 @@ class CardValidator: Validator {
         // success!
         return []
     }
+    // swiftlint:enable unused_optional_binding
     
     func checkTokenSlotNotBound(_ deck: Deck, _ hand: Hand, _ card: ActionCard) -> [ValidationError] {
         var errors: [ValidationError] = []

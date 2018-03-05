@@ -152,20 +152,19 @@ class ExecutionEngineTests: XCTestCase {
             for yield in yields {
                 switch yield.cardIdentifier {
                 case add.identifier:
-                    do {
-                        let sum = try yield.data.decode(type: Double.self)
-                        XCTAssertTrue(sum == 3100.0)
-                    } catch let error {
-                        XCTFail("expected a yield of type Double, error: \(error)")
+                    guard let sum: Double = yield.data.unboxedValue() else {
+                        XCTFail("could not unbox yield data for sum")
+                        return
                     }
+                    XCTAssertTrue(sum == 3100.0)
                 case primeSieve.identifier:
-                    do {
-                        let primeList = try yield.data.decode(type: PrimeList.self)
-                        let primes = primeList.primes
-                        XCTAssertTrue(primes.count > 0)
-                    } catch let error {
-                        XCTFail("expected a yield of type PrimeList, error: \(error)")
+                    guard let primeList: PrimeList = yield.data.unboxedValue() else {
+                        XCTFail("could not unbox yield data for primeList")
+                        return
                     }
+                    
+                    let primes = primeList.primes
+                    XCTAssertTrue(primes.count > 0)
                 default:
                     XCTFail("encountered a Yield that wasn't produced by the Add or PrimeSieve card")
                 }
@@ -253,7 +252,7 @@ class ExecutionEngineTests: XCTestCase {
                     break
                 case .ignored:
                     XCTFail("expected the emergency stop result for the sieveCard to be .success")
-                case .failure(_):
+                case .failure:
                     XCTFail("expected the emergency stop result for the sieveCard to be .success")
                 }
             } else {
@@ -263,6 +262,37 @@ class ExecutionEngineTests: XCTestCase {
     }
     
     func testHaltOfDeckExecutor() {
+        // swiftlint:disable:next nesting
+        class EngineDelegate: ExecutionEngineDelegate {
+            func deckExecutor(_ executor: DeckExecutor, willValidate deck: Deck) {
+                print("*** deckExecutor \(executor) willValidate \(deck)")
+            }
+            func deckExecutor(_ executor: DeckExecutor, didValidate deck: Deck) {
+                print("*** deckExecutor \(executor) didValidate \(deck)")
+            }
+            func deckExecutor(_ executor: DeckExecutor, willExecute deck: Deck) {
+                print("*** deckExecutor \(executor) willExecute \(deck)")
+            }
+            func deckExecutor(_ executor: DeckExecutor, willExecute hand: Hand) {
+                print("*** deckExecutor \(executor) willExecute \(hand)")
+            }
+            func deckExecutor(_ executor: DeckExecutor, willExecute card: Card) {
+                print("*** deckExecutor \(executor) willExecute \(card)")
+            }
+            func deckExecutor(_ executor: DeckExecutor, didExecute deck: Deck, producing yields: [Yield: YieldData]?) {
+                print("*** deckExecutor \(executor) didExecute \(deck) producing \(yields)")
+            }
+            func deckExecutor(_ executor: DeckExecutor, didExecute hand: Hand, producing yields: [Yield: YieldData]?) {
+                print("*** deckExecutor \(executor) didExecute \(hand) producing \(yields)")
+            }
+            func deckExecutor(_ executor: DeckExecutor, didExecute card: Card, producing yields: [Yield: YieldData]?) {
+                print("*** deckExecutor \(executor) didExecute \(card) producing \(yields)")
+            }
+            func deckExecutor(_ executor: DeckExecutor, hadErrors errors: [Error]) {
+                print("*** deckExecutor \(executor) hadErrors \(errors)")
+            }
+        }
+        
         // token cards
         let sieveCard = CKCalc.Token.Sieve.makeCard()
         
@@ -288,8 +318,10 @@ class ExecutionEngineTests: XCTestCase {
         
         // create token instances
         let sieve = CKSieveOfEratosthenes(with: sieveCard)
-        
         engine.setTokenInstance(sieve, for: sieveCard)
+        
+        // create delegate
+        engine.delegate = EngineDelegate()
         
         // execute
         engine.execute({ (_, _) in
