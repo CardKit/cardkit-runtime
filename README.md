@@ -1,6 +1,6 @@
 # CardKit Runtime
 
-This is the runtime engine for [CardKit](https://github.com/CardKit/card-kit). It is a separate project to enable a decoupling between the *creation* of CardKit programs and the *execution* of such programs.
+This is the runtime engine for [CardKit](https://github.com/CardKit/cardkit). It is a separate project to enable a decoupling between the *creation* of CardKit programs and the *execution* of such programs.
 
 CardKit Runtime is written in Swift 4 and supports macOS, iOS, and tvOS.
 
@@ -104,6 +104,3 @@ It is also possible to check out CardKit as a submodule using Carthage, as detai
 
 If you would like to contribute to CardKit Runtime, we recommend forking the repository, making your changes, and submitting a pull request.
 
-## Contact
-
-Please contact Justin Weisz (jweisz [at] us.ibm.com) with any questions.

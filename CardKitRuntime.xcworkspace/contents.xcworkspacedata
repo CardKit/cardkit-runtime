@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../card-kit/CardKit.xcodeproj">
+      location = "group:../cardkit/CardKit.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:CardKitRuntime.xcodeproj">
